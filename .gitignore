@@ -52,6 +52,7 @@ public/uploads
 /config/master.key
 /config/credentials.yml.enc
 
+public/assets
 notes
 cmd.txt
 fits.log
