@@ -1,0 +1,12 @@
+development:
+  adapter: redis
+  url: redis://<%= ENV['REDIS_HOST'] || 'localhost' %>:<%= ENV['REDIS_PORT'] || '6379' %>
+  password: <%= ENV['REDIS_PASSWORD'] || Rails.application.credentials.dig(:development, :redis_password) %>
+
+test:
+  adapter: async
+
+production:
+  adapter: redis
+  url: redis://<%= ENV['REDIS_HOST'] || 'localhost' %>:<%= ENV['REDIS_PORT'] || '6379' %>
+  password: <%= ENV['REDIS_PASSWORD'] || Rails.application.credentials.dig(:production, :redis_password) %>

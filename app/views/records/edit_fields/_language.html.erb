@@ -1,0 +1,13 @@
+<% language_authorities = Hyrax::LanguageAuthorities.new %>
+
+<%=
+  f.input key,
+  as: :multi_value,
+  input_html: {
+    class: 'form-control',
+    data: { 'autocomplete-url' => "/authorities/search/loc/languages",
+      'autocomplete' => key }
+  } ,
+  required: f.object.required?(key) %>
+
+<%#= f.input key, collection: language_authorities.select_active_options, label: false %>

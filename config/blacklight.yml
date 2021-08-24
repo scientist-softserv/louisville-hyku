@@ -1,0 +1,9 @@
+development:
+  adapter: solr
+  url: <%= ENV['SOLR_URL'] || Rails.application.credentials.dig(:development, :solr_url) %>
+test: &test
+  adapter: solr
+  url: <%= ENV['SOLR_URL'] ? ENV['SOLR_URL'] + 'hydra-test' : "http://127.0.0.1:#{ENV.fetch('SOLR_TEST_PORT', 8985)}/solr/hydra-test" %>
+production:
+  adapter: solr
+  url: <%= ENV['SOLR_URL'] || Rails.application.credentials.dig(:production, :solr_url) %>
