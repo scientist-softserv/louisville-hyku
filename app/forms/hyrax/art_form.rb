@@ -14,12 +14,12 @@ module Hyrax
                             ]
 
     self.terms -= [
-                    :based_near,
-                    :license
+                    :based_near
                   ]
 
     self.required_fields += [
                              :identifier,
+                             :iqb,
                              :title
                             ]
                   
@@ -27,8 +27,6 @@ module Hyrax
                     :alternative_title,
                     :creator_role,
                     :contributor_role,
-                    #:date_original,
-                    :decade,
                     :resource_type,
                     #:artificial_collection,
                     :collection_information,
@@ -42,7 +40,6 @@ module Hyrax
                    
     self.terms += [
                     :people_represented,
-                    :location,
                     :biography_of_contributor,
                     :cataloguing_note,
                     :condition,
@@ -50,11 +47,10 @@ module Hyrax
                     :contributor_history,
                     :cultural_context,
                     :data_source,
-                    :description_1990,
                     :descriptor,
                     :exhibit_history,
+                    :extent,
                     :honoree,
-                    :inscription,
                     :iqb,
                     :language_script,
                     :location_of_contributor,
@@ -64,15 +60,12 @@ module Hyrax
                     :object_location,
                     :ornamentation,
                     :place_original,
+                    :related_image,
                     :related_material_and_publication_history,
-                    :resource_repository,
                     :style,
                     :technique,
-                    :theme,
                     :transcription_translation,
-                    :translated_title,
-                    :type_of_honoree,
-                    :type_of_work
+                    :type_of_honoree
                   ]
 
   end

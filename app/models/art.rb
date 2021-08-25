@@ -28,29 +28,27 @@ class Art < ActiveFedora::Base
 
   property :collection_information, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_findingAid"), multiple: true
 
-  property :contributor_role, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Contribution"), multiple: true do |index|
-    index.as :stored_searchable
-  end
+  property :contributor_role, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Contribution"), multiple: true
 
-  property :creator_role, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Role"), multiple: true do |index|
-    index.as :stored_searchable
-  end
+  property :creator_role, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Role"), multiple: true
 
   property :date_digital, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_ProvisionActivity"), multiple: false
 
   #property :date_original, predicate: ::RDF::Vocab::DC.date, multiple: false
 
-  property :decade, predicate: ::RDF::Vocab::DC.temporal, multiple: true do |index|
-    index.as :stored_searchable
-  end
+  #property :decade, predicate: ::RDF::Vocab::DC.temporal, multiple: true do |index|
+    #index.as :stored_searchable
+  #end
 
   property :digitization_specification, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_DigitalCharacteristic"), multiple: false
 
-  property :format, predicate: ::RDF::Vocab::DC.format, multiple: false
+  property :extent, predicate: ::RDF::Vocab::DC.extent, multiple: true
+  
+  property :format, predicate: ::RDF::Vocab::DC.format, multiple: true
 
-  property :location, predicate: ::RDF::Vocab::DC.spatial, multiple: true do |index|
-    index.as :stored_searchable
-  end
+  #property :location, predicate: ::RDF::Vocab::DC.spatial, multiple: true do |index|
+    #index.as :stored_searchable
+  #end
 
   property :media_type, predicate: ::RDF::Vocab::DC.MediaType, multiple: true do |index|
     index.as :stored_searchable
@@ -103,7 +101,7 @@ class Art < ActiveFedora::Base
 
   property :data_source, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_references"), multiple: false
 
-  property :description_1990, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_derivedFrom"), multiple: false
+  #property :description_1990, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_derivedFrom"), multiple: false
 
   property :descriptor, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#c_Topic"), multiple: true do |index|
     index.as :stored_searchable
@@ -116,12 +114,10 @@ class Art < ActiveFedora::Base
   property :honoree, predicate: ::RDF::URI.new("https://purl.org/vra/designedFor"), multiple: true do |index|
     index.as :stored_searchable
   end
+  
+  #property :inscription, predicate: ::RDF::URI.new("https://purl.org/vra/Inscription"), multiple: false
 
-  property :inscription, predicate: ::RDF::URI.new("https://purl.org/vra/Inscription"), multiple: false
-
-  property :iqb, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_code"), multiple: false do |index|
-    index.as :stored_searchable
-  end
+  property :iqb, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_code"), multiple: false
 
   #property :image_number, predicate: ::RDF::Vocab::DC.identifier, multiple: false do |index|
     #index.as :stored_searchable
@@ -153,13 +149,13 @@ class Art < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :related_material_and_publication_history, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_referencedBy"), multiple: false do |index|
-    index.as :stored_searchable
-  end
+  property :related_image, predicate: ::RDF::Vocab::DC.temporal, multiple: true
 
-  property :resource_repository, predicate: ::RDF::URI.new("https://purl.org/vra/sourceFor"), multiple: false do |index|
-    index.as :stored_searchable
-  end
+  property :related_material_and_publication_history, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_referencedBy"), multiple: true
+
+  #property :resource_repository, predicate: ::RDF::URI.new("https://purl.org/vra/sourceFor"), multiple: false do |index|
+    #index.as :stored_searchable
+  #end
 
   property :style, predicate: ::RDF::URI.new("https://purl.org/vra/hasStylePeriod"), multiple: true do |index|
     index.as :stored_searchable
@@ -169,25 +165,25 @@ class Art < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :theme, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_subject"), multiple: true do |index|
-    index.as :stored_searchable
-  end
+  #property :theme, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_subject"), multiple: true do |index|
+    #index.as :stored_searchable
+  #end
 
   property :transcription_translation, predicate: ::RDF::URI.new("https://schema.org/workTranslation"), multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :translated_title, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_translationOf"), multiple: false do |index|
-    index.as :stored_searchable
-  end
+  #property :translated_title, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_translationOf"), multiple: false do |index|
+    #index.as :stored_searchable
+  #end
 
   property :type_of_honoree, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#p_hasAffiliation"), multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :type_of_work, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_GenreForm"), multiple: false do |index|
-    index.as :stored_searchable
-  end
+  #property :type_of_work, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_GenreForm"), multiple: false do |index|
+    #index.as :stored_searchable
+  #end
 
 
   # This must be included at the end, because it finalizes the metadata

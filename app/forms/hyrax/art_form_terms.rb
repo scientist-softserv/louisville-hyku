@@ -7,57 +7,54 @@ module Hyrax
     def primary_terms
       super + %i[
                     alternative_title
+                    honoree
+                    type_of_honoree
+                    location_of_honoree
                     creator
                     creator_role
                     contributor
                     contributor_role
-                    description
-                    keyword
-                    subject
-                    people_represented
-                    location
-                    date_created
-                    decade
-                    resource_type
-                    source
-                    collection_information
-                    publisher
-                    format 
-                    rights_statement 
-                    ordering_information
-                    language
-                    resource_query
-                    biography_of_contributor
-                    cataloguing_note
-                    condition
-                    contributor_description
-                    contributor_history
-                    cultural_context
-                    data_source
-                    description_1990
-                    descriptor
-                    exhibit_history
-                    honoree
-                    inscription
-                    iqb
-                    language_script
                     location_of_contributor
-                    location_of_honoree
-                    material
-                    measurement
-                    object_location
-                    ornamentation
-                    place_original
-                    related_material_and_publication_history
-                    related_url
-                    resource_repository
+                    biography_of_contributor
+                    contributor_history
+                    contributor_description
+                    description
+                    transcription_translation
+                    descriptor
+                    subject
                     style
                     technique
-                    theme
-                    transcription_translation
-                    translated_title
-                    type_of_honoree
-                    type_of_work
+                    material
+                    measurement
+                    cultural_context
+                    keyword
+                    language
+                    language_script
+                    people_represented
+                    place_original
+                    date_created
+                    resource_type
+                    ornamentation
+                    related_material_and_publication_history
+                    exhibit_history
+                    data_source
+                    cataloguing_note
+                    object_location
+                    condition
+                    source
+                    related_image
+                    collection_information
+                    publisher
+                    rights_statement 
+                    ordering_information
+                    license
+                    related_url
+                    resource_query
+                    digitization_specification
+                    date_digital
+                    media_type
+                    format 
+                    extent
                 ]
     end
   end
