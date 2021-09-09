@@ -19,7 +19,6 @@ module Hyrax
 
     self.required_fields += [
                              :identifier,
-                             :iqb,
                              :title
                             ]
                   
