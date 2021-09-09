@@ -7,6 +7,7 @@ module Hyrax
     def primary_terms
       super + %i[
                     alternative_title
+                    iqb
                     honoree
                     type_of_honoree
                     location_of_honoree
