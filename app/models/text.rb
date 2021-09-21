@@ -29,7 +29,7 @@ class Text < ActiveFedora::Base
   property :format, predicate: ::RDF::Vocab::DC.format, multiple: false
 
   property :location, predicate: ::RDF::Vocab::DC.spatial, multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :media_type, predicate: ::RDF::Vocab::DC.MediaType, multiple: true do |index|

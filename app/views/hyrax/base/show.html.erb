@@ -1,9 +1,7 @@
-<% content_for(:extra_body_classes, 'works-show ') %>
-
 <% provide :page_title, @presenter.page_title %>
 
 <%= render 'shared/citations' %>
-<%= render './shared/additional_citations' %>
+
 <div class="row work-type">
   <div class="col-xs-12">
     <%= render 'work_type', presenter: @presenter %>
@@ -17,13 +15,13 @@
       <div class="panel-body">
         <div class="row">
           <%= render 'workflow_actions_widget', presenter: @presenter %>
-          <% if @presenter.universal_viewer? %>
+          <% if @presenter.iiif_viewer? %>
             <div class="col-sm-12">
               <%= render 'representative_media', presenter: @presenter, viewer: true %>
             </div>
           <% end %>
           <div class="col-sm-3 text-center">
-            <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.universal_viewer? %>
+            <%= render 'representative_media', presenter: @presenter, viewer: false unless @presenter.iiif_viewer? %>
             <%= render 'citations', presenter: @presenter %>
             <%= render 'social_media' %>
           </div>
@@ -31,6 +29,7 @@
             <%= render 'work_description', presenter: @presenter %>
             <%= render 'metadata', presenter: @presenter %>
           </div>
+          <% if user_signed_in? %>
           <div class="col-sm-12">
             <%= render 'relationships', presenter: @presenter %>
             <%= render 'items', presenter: @presenter %>
@@ -38,9 +37,9 @@
             <%# = render 'sharing_with', presenter: @presenter %>
             <%# = render 'user_activity', presenter: @presenter %>
           </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
-
