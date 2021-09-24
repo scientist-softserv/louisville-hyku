@@ -44,14 +44,16 @@ class Art < ActiveFedora::Base
 
   property :extent, predicate: ::RDF::Vocab::DC.extent, multiple: true
   
-  property :format, predicate: ::RDF::Vocab::DC.format, multiple: true
+  property :format, predicate: ::RDF::Vocab::DC.format, multiple: true do |index|
+    index.as :stored_searchable, :facetable
+  end
 
   property :location, predicate: ::RDF::Vocab::DC.spatial, multiple: true do |index|
     index.as :stored_searchable, :facetable
   end
 
   property :media_type, predicate: ::RDF::Vocab::DC.MediaType, multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   #property :object_type, predicate: ::RDF::Vocab::DC.type, multiple: false do |index|

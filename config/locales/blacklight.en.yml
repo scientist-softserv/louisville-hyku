@@ -4,33 +4,40 @@ en:
     search:
       fields:
         facet:
-          based_near_label_sim: Location
+          location_sim: Location
           creator_sim: Creator
+          contributor_sim: Contributor
           file_format_sim: Format
           generic_type_sim: Type
           depositor_ssim: Depositor
           keyword_sim: Keyword
           language_sim: Language
-          publisher_sim: Publisher
+          media_type_sim: Media Type
+          publisher_sim: Repository
+          resource_type_sim: Object Type
           subject_sim: Subject
         index:
-          based_near_label_tesim: Location
+          location_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
-          date_created_tesim: Date Created
+          date_created_tesim: Date Original
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
           extent_tesim: Extent
           file_format_tesim: File Format
-          identifier_tesim: Identifier
+          identifier_tesim: Item Number
           keyword_tesim: Keyword
           language_tesim: Language
-          publisher_tesim: Publisher
+          license_tesim: License
+          media_type_tesim: Media Type
+          publisher_tesim: Repository
+          resource_type_tesim: Object Type
+          rights_statement_tesim: Rights Statement
           rights_tesim: Rights
           subject_tesim: Subject
         show:
-          based_near_label_tesim: Location
+          location_tesim: Location
           contributor_tesim: Contributor
           creator_tesim: Creator
           date_created_tesim: Date Created
@@ -39,10 +46,10 @@ en:
           description_tesim: Description
           extent_tesim: Extent
           file_format_tesim: File Format
-          identifier_tesim: Identifier
+          identifier_tesim: Item Number
           keyword_tesim: Keyword
           language_tesim: Language
-          publisher_tesim: Publisher
+          publisher_tesim: Repository
           rights_tesim: Rights
           subject_tesim: Subject
           title_tesim: Title

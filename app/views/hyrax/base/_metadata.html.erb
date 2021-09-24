@@ -1,6 +1,6 @@
 <dl class="work-show <%= dom_class(presenter) %>" <%= presenter.microdata_type_to_html %>> 
     <%#= render 'attribute_rows', presenter: presenter %>
-    <%= presenter.attribute_to_html(:identifier, html_dl: true) %>
+    <%= presenter.attribute_to_html(:identifier, html_dl: true, label: "Item number") %>
     <%= presenter.attribute_to_html(:alternative_title, html_dl: true) %>
     <%= presenter.attribute_to_html(:iqb, html_dl: true) %>
     <%= presenter.attribute_to_html(:honoree, html_dl: true) %>
@@ -59,7 +59,7 @@
     <%= presenter.attribute_to_html(:source, html_dl: true) %>
     <%= presenter.attribute_to_html(:related_image, html_dl: true) %>
     <%= presenter.attribute_to_html(:collection_information, html_dl: true) %>
-    <%= presenter.attribute_to_html(:publisher, html_dl: true, label: :Repository) %>
+    <%= presenter.attribute_to_html(:publisher, html_dl: true, label: "Repository") %>
     <%= presenter.attribute_to_html(:rights_statement, html_dl: true) %>
     <%= presenter.attribute_to_html(:ordering_information, html_dl: true) %>
     <%= presenter.attribute_to_html(:license, render_as: :license, html_dl: true) %>

@@ -31,14 +31,16 @@ class Image < ActiveFedora::Base
 
   property :digitization_specification, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_DigitalCharacteristic"), multiple: false
 
-  property :format, predicate: ::RDF::Vocab::DC.format, multiple: true
+  property :format, predicate: ::RDF::Vocab::DC.format, multiple: true do |index|
+    index.as :stored_searchable, :facetable
+  end
 
   property :location, predicate: ::RDF::Vocab::DC.spatial, multiple: true do |index|
     index.as :stored_searchable, :facetable
   end
 
   property :media_type, predicate: ::RDF::Vocab::DC.MediaType, multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :ordering_information, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_UsePolicy"), multiple: false
