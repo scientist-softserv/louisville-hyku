@@ -69,8 +69,9 @@
     <%= presenter.attribute_to_html(:date_digital, html_dl: true) %>
     <%= presenter.attribute_to_html(:media_type, render_as: :faceted, html_dl: true) %>
     <%= presenter.attribute_to_html(:format, html_dl: true) %>
-    <%= presenter.attribute_to_html(:extent, html_dl: true) %>
+    <%= presenter.attribute_to_html(:extent, html_dl: true, label: "Duration") %>
     <%= presenter.attribute_to_html(:embargo_release_date, render_as: :date, html_dl: true) %>
     <%= presenter.attribute_to_html(:lease_expiration_date, render_as: :date, html_dl: true) %>
     <%#= presenter.attribute_to_html(:based_near_label) %>
+    <%= render 'collections', presenter: @presenter %>
  </dl> 

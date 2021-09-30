@@ -135,6 +135,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('media_type', :stored_searchable)
     config.add_show_field solr_name('mesh', :stored_searchable)
     config.add_show_field solr_name('ordering_information', :stored_searchable)
+    config.add_show_field solr_name('collection_information', :stored_searchable)
     config.add_show_field solr_name('people_represented', :stored_searchable)
     config.add_show_field solr_name('resource_query', :stored_searchable)
 

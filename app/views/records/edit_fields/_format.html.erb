@@ -1,2 +1,2 @@
-<%= f.input :format, as: :select, collection: Hyrax::FormatService.select_all_options,
-    input_html: { class: 'form-control' } %>
+<%= f.input :format, as: :select, collection: Hyrax::FormatService.select_options,
+    input_html: { class: 'form-control', multiple: true } %>

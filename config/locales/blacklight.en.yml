@@ -24,7 +24,7 @@ en:
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
-          extent_tesim: Extent
+          extent_tesim: Duration
           file_format_tesim: File Format
           identifier_tesim: Item Number
           keyword_tesim: Keyword
@@ -44,7 +44,7 @@ en:
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
           description_tesim: Description
-          extent_tesim: Extent
+          extent_tesim: Duration
           file_format_tesim: File Format
           identifier_tesim: Item Number
           keyword_tesim: Keyword

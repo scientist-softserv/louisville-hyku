@@ -16,15 +16,25 @@ class Text < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :collection_information, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_findingAid"), multiple: true
+  property :collection_information, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_findingAid"), multiple: true do |index|
+    index.as :stored_searchable
+  end
 
-  property :contributor_role, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Contribution"), multiple: true
+  property :contributor_role, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Contribution"), multiple: true do |index|
+    index.as :stored_searchable
+  end
 
-  property :creator_role, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Role"), multiple: true
+  property :creator_role, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Role"), multiple: true do |index|
+    index.as :stored_searchable
+  end
 
-  property :date_digital, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_ProvisionActivity"), multiple: false
+  property :date_digital, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_ProvisionActivity"), multiple: false do |index|
+    index.as :stored_searchable
+  end
 
-  property :digitization_specification, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_DigitalCharacteristic"), multiple: false
+  property :digitization_specification, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_DigitalCharacteristic"), multiple: false do |index|
+    index.as :stored_searchable
+  end
 
   property :format, predicate: ::RDF::Vocab::DC.format, multiple: false do |index|
     index.as :stored_searchable, :facetable
@@ -42,7 +52,9 @@ class Text < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :ordering_information, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_UsePolicy"), multiple: false
+  property :ordering_information, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_UsePolicy"), multiple: false do |index|
+    index.as :stored_searchable
+  end
 
   property :people_represented, predicate: ::RDF::Vocab::FOAF.name, multiple: true do |index|
     index.as :stored_searchable

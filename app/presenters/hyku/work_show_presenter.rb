@@ -9,7 +9,7 @@ module Hyku
              :building_date, 
              :city, 
              :code,
-             :collection_information,  
+             :collection_information, 
              :condition, 
              :contributor_description,  
              :contributor_history, 
