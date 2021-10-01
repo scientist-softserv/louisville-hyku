@@ -64,6 +64,9 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("subject", :facetable), limit: 5
     # config.add_facet_field 'location_tesim', label: "Location", limit: 5
     config.add_facet_field solr_name("location", :facetable), limit: 5
+    config.add_facet_field solr_name("city", :facetable), limit: 5
+    config.add_facet_field solr_name("street", :facetable), limit: 5
+    config.add_facet_field solr_name("neighborhood", :facetable), limit: 5
     # config.add_facet_field solr_name("language", :facetable), limit: 5
     # config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
     # config.add_facet_field solr_name("publisher", :facetable), limit: 5
