@@ -55,7 +55,7 @@ class Art < ActiveFedora::Base
   property :extent, predicate: ::RDF::Vocab::DC.extent, multiple: true do |index|
     index.as :stored_searchable
   end
-  
+
   property :format, predicate: ::RDF::Vocab::DC.format, multiple: true do |index|
     index.as :stored_searchable, :facetable
   end
@@ -77,7 +77,7 @@ class Art < ActiveFedora::Base
   end
 
   property :people_represented, predicate: ::RDF::Vocab::FOAF.name, multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   #property :people_named, predicate: ::RDF::Vocab::FOAF.name, multiple: true do |index|
@@ -89,7 +89,7 @@ class Art < ActiveFedora::Base
   #end
 
   property :resource_query, predicate: ::RDF::URI.new("https://purl.org/vra/isRelatedTo"), multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
 
@@ -136,7 +136,7 @@ class Art < ActiveFedora::Base
   property :honoree, predicate: ::RDF::URI.new("https://purl.org/vra/designedFor"), multiple: true do |index|
     index.as :stored_searchable
   end
-  
+
   #property :inscription, predicate: ::RDF::URI.new("https://purl.org/vra/Inscription"), multiple: false
 
   property :iqb, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_code"), multiple: false do |index|

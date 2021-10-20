@@ -56,11 +56,11 @@ class Image < ActiveFedora::Base
   end
 
   property :people_represented, predicate: ::RDF::Vocab::FOAF.name, multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :resource_query, predicate: ::RDF::URI.new("https://purl.org/vra/isRelatedTo"), multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
 
@@ -71,7 +71,7 @@ class Image < ActiveFedora::Base
   end
 
   property :city, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#City"), multiple: false do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :code, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_code"), multiple: true do |index|
@@ -79,7 +79,7 @@ class Image < ActiveFedora::Base
   end
 
   property :county, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#County"), multiple: false do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :invoice_information, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_referencedBy"), multiple: false do |index|
@@ -87,7 +87,7 @@ class Image < ActiveFedora::Base
   end
 
   property :neighborhood, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#CitySection"), multiple: false do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :operating_area, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_GeographicCoverage"), multiple: true do |index|
@@ -119,7 +119,7 @@ class Image < ActiveFedora::Base
   end
 
   property :street, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#Address"), multiple: false do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :mesh, predicate: ::RDF::Vocab::DC.MESH, multiple: true do |index|

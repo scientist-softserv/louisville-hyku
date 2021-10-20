@@ -57,11 +57,11 @@ class Text < ActiveFedora::Base
   end
 
   property :people_represented, predicate: ::RDF::Vocab::FOAF.name, multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :resource_query, predicate: ::RDF::URI.new("https://purl.org/vra/isRelatedTo"), multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
 
