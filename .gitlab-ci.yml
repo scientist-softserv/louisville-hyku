@@ -163,27 +163,6 @@ test:
 #   tags:
 #     - kubernetes
 
-hyku.dev:
-  stage: go
-  extends:
-    - .deploy
-  only:
-    refs:
-      - main
-  variables:
-    DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
-    DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
-    WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
-    HELM_EXPERIMENTAL_OCI: 1
-    HELM_EXTRA_ARGS: >
-      --values ops/dev-deploy.yaml
-  script:
-    - export KUBECONFIG=$KUBECONFIG_ADVENTIST
-    - envsubst < ops/dev-deploy.tmpl.yaml > ops/dev-deploy.yaml
-    - ./bin/helm_deploy hyku-dev dev
-  tags:
-    - kubernetes
-
 hyku.staging:
   stage: go
   extends:
@@ -201,32 +180,9 @@ hyku.staging:
   script:
     - export KUBECONFIG=$KUBECONFIG_R2
     - envsubst < ops/staging-deploy.tmpl.yaml > ops/staging-deploy.yaml
-    - ./bin/helm_deploy hyku-staging adl-staging
+    - ./bin/helm_deploy hyku-staging lv-hyku-staging
   tags:
-    - kubernetes
-
-hyku.production:
-  stage: go
-  extends:
-    - .deploy
-  only:
-    refs:
-      - main
-      - production
-  when: manual
-  variables:
-    DEPLOY_IMAGE: $CI_REGISTRY_IMAGE
-    DEPLOY_TAG: $CI_COMMIT_SHORT_SHA
-    WORKER_IMAGE: $CI_REGISTRY_IMAGE/worker
-    HELM_EXPERIMENTAL_OCI: 1
-    HELM_EXTRA_ARGS: >
-      --values ops/production-deploy.yaml
-  script:
-    - export KUBECONFIG=$KUBECONFIG_ADVENTIST
-    - envsubst < ops/production-deploy.tmpl.yaml > ops/production-deploy.yaml
-    - ./bin/helm_deploy hyku-production production
-  tags:
-    - kubernetes
+    - docker
 
 .deploy:
   image: dtzar/helm-kubectl:3.5.3

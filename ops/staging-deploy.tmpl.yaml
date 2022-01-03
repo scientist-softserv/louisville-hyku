@@ -35,20 +35,20 @@ extraVolumeMounts:
 ingress:
   enabled: true
   hosts:
-    - host: adl-hyku-staging.notch8.cloud
+    - host: lv-hyku-staging.notch8.cloud
       paths:
         - path: /
-    - host: "*.adl-hyku-staging.notch8.cloud"
+    - host: "*.lv-hyku-staging.notch8.cloud"
       paths:
         - path: /
 
 extraEnvVars:
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
-    value: adl-hyku-staging.notch8.cloud
+    value: lv-hyku-staging.notch8.cloud
   - name: SETTINGS__MULTITENANCY__ROOT_HOST
-    value: adl-hyku-staging.notch8.cloud
+    value: lv-hyku-staging.notch8.cloud
   - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
-    value: "%{tenant}.adl-hyku-staging.notch8.cloud"
+    value: "%{tenant}.lv-hyku-staging.notch8.cloud"
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
   - name: INITIAL_ADMIN_EMAIL
@@ -104,7 +104,7 @@ extraEnvVars:
   - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
     value: "true"
   - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
-    value: "%{tenant}.adl-hyku-staging.notch8.cloud"
+    value: "%{tenant}.lv-hyku-staging.notch8.cloud"
   - name: SETTINGS__MULTITENANCY__ENABLED
     value: "true"
   - name: SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
@@ -169,11 +169,11 @@ worker:
       subPath: network-files
   extraEnvVars:
   - name: SETTINGS__MULTITENANCY__ADMIN_HOST
-    value: adl-hyku-staging.notch8.cloud
+    value: lv-hyku-staging.notch8.cloud
   - name: SETTINGS__MULTITENANCY__ROOT_HOST
-    value: adl-hyku-staging.notch8.cloud
+    value: lv-hyku-staging.notch8.cloud
   - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
-    value: "%{tenant}.adl-hyku-staging.notch8.cloud"
+    value: "%{tenant}.lv-hyku-staging.notch8.cloud"
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
   - name: INITIAL_ADMIN_EMAIL
@@ -229,7 +229,7 @@ worker:
   - name: SETTINGS__MULTITENANCY__ADMIN_ONLY_TENANT_CREATION
     value: "true"
   - name: SETTINGS__MULTITENANCY__DEFAULT_HOST
-    value: "%{tenant}.adl-hyku-staging.notch8.cloud"
+    value: "%{tenant}.lv-hyku-staging.notch8.cloud"
   - name: SETTINGS__MULTITENANCY__ENABLED
     value: "true"
   - name: SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
