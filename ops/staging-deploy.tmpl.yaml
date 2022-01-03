@@ -60,11 +60,11 @@ extraEnvVars:
   - name: DATABASE_HOST
     value: pg-postgresql.staging-postgres.svc.cluster.local
   - name: DATABASE_NAME
-    value: adventist
+    value: louisville
   - name: DATABASE_USER
     value: postgres
   - name: FCREPO_BASE_PATH
-    value: /adventist
+    value: /louisville
   - name: FCREPO_HOST
     value: fcrepo.staging-fcrepo.svc.cluster.local:8080
   - name: FCREPO_PATH
@@ -78,7 +78,7 @@ extraEnvVars:
   - name: PASSENGER_APP_ENV
     value: production
   - name: RAILS_CACHE_STORE_URL
-    value: redis://:staging@hyku-staging-redis-master:6379/adventist
+    value: redis://:staging@hyku-staging-redis-master:6379/louisville
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
@@ -90,7 +90,7 @@ extraEnvVars:
   - name: REDIS_HOST
     value: hyku-staging-redis-master
   - name: REDIS_URL
-    value: redis://:staging@hyku-staging-redis-master:6379/adventist
+    value: redis://:staging@hyku-staging-redis-master:6379/louisville
   - name: SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER
     value: sidekiq
   - name: SETTINGS__BULKRAX__ENABLED
@@ -108,9 +108,9 @@ extraEnvVars:
   - name: SETTINGS__MULTITENANCY__ENABLED
     value: "true"
   - name: SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
-    value: hyku-adventist
+    value: hyku-louisville
   - name: SETTINGS__SOLR__CONFIGSET
-    value: hyku-adventist
+    value: hyku-louisville
   - name: SETTINGS__SOLR__URL
     value: http://admin:ncGXC5Qjpk@solr.staging-solr:8983/solr/
   - name: SETTINGS__ZOOKEEPER__CONNECTION_STR
@@ -118,9 +118,9 @@ extraEnvVars:
   - name: SOLR_ADMIN_USER
     value: admin
   - name: SOLR_COLLECTION_NAME
-    value: hyku-adventist
+    value: hyku-louisville
   - name: SOLR_CONFIGSET_NAME
-    value: hyku-adventist
+    value: hyku-louisville
   - name: SOLR_HOST
     value: solr.staging-solr
   - name: SOLR_PORT
@@ -185,11 +185,11 @@ worker:
   - name: DATABASE_HOST
     value: pg-postgresql.staging-postgres.svc.cluster.local
   - name: DATABASE_NAME
-    value: adventist
+    value: louisville
   - name: DATABASE_USER
     value: postgres
   - name: FCREPO_BASE_PATH
-    value: /adventist
+    value: /louisville
   - name: FCREPO_HOST
     value: fcrepo.staging-fcrepo.svc.cluster.local:8080
   - name: FCREPO_PATH
@@ -203,7 +203,7 @@ worker:
   - name: PASSENGER_APP_ENV
     value: production
   - name: RAILS_CACHE_STORE_URL
-    value: redis://:staging@hyku-staging-redis-master:6379/adventist
+    value: redis://:staging@hyku-staging-redis-master:6379/louisville
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
@@ -215,7 +215,7 @@ worker:
   - name: REDIS_HOST
     value: hyku-staging-redis-master
   - name: REDIS_URL
-    value: redis://:staging@hyku-staging-redis-master:6379/adventist
+    value: redis://:staging@hyku-staging-redis-master:6379/louisville
   - name: SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER
     value: sidekiq
   - name: SETTINGS__BULKRAX__ENABLED
@@ -233,9 +233,9 @@ worker:
   - name: SETTINGS__MULTITENANCY__ENABLED
     value: "true"
   - name: SETTINGS__SOLR__COLLECTION_OPTIONS__COLLECTION__CONFIG_NAME
-    value: hyku-adventist
+    value: hyku-louisville
   - name: SETTINGS__SOLR__CONFIGSET
-    value: hyku-adventist
+    value: hyku-louisville
   - name: SETTINGS__SOLR__URL
     value: http://admin:ncGXC5Qjpk@solr.staging-solr:8983/solr/
   - name: SETTINGS__ZOOKEEPER__CONNECTION_STR
@@ -243,9 +243,9 @@ worker:
   - name: SOLR_ADMIN_USER
     value: admin
   - name: SOLR_COLLECTION_NAME
-    value: hyku-adventist
+    value: hyku-louisville
   - name: SOLR_CONFIGSET_NAME
-    value: hyku-adventist
+    value: hyku-louisville
   - name: SOLR_HOST
     value: solr.staging-solr
   - name: SOLR_PORT
@@ -303,4 +303,4 @@ externalPostgresql:
 solrExistingSecret: solr-admin-password
 externalSolrHost: solr.staging-solr.svc.cluster.local
 externalSolrUser: admin
-externalSolrCollection: "hyku-adventist"
+externalSolrCollection: "hyku-louisville"
