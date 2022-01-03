@@ -44,6 +44,13 @@ group :development, :test do
   gem 'i18n-tasks'
   gem 'rspec'
   gem 'rspec-rails', '>= 3.6.0'
+  # Pronto adds comments to MRs in gitlab when rubocop offenses are made.
+  gem 'pronto'
+  gem 'pronto-brakeman', require: false
+  gem 'pronto-flay', require: false
+  gem 'pronto-rails_best_practices', require: false
+  gem 'pronto-rails_schema', require: false
+  gem 'pronto-rubocop', require: false
 
   gem 'simplecov', require: false
 
@@ -133,7 +140,5 @@ gem 'sidekiq'
 gem 'tether-rails'
 
 gem 'country_select', '~> 3.1', '>= 3.1.1'
-
-gem 'hyrax-doi', '~> 0.2.0'
 
 gem 'hydra-role-management'

@@ -206,6 +206,10 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
+    bootstrap_form (5.0.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
+    brakeman (5.2.0)
     breadcrumbs_on_rails (3.0.1)
     browse-everything (1.1.2)
       addressable (~> 2.5)
@@ -241,7 +245,7 @@ GEM
     carrierwave-aws (1.4.0)
       aws-sdk-s3 (~> 1.0)
       carrierwave (>= 0.7, < 2.1)
-    childprocess (4.1.0)
+    childprocess (3.0.0)
     citeproc (1.0.10)
       namae (~> 1.0)
     citeproc-ruby (1.1.14)
@@ -249,6 +253,8 @@ GEM
       csl (~> 1.6)
     clipboard-rails (1.7.1)
     cocoon (1.2.15)
+    code_analyzer (0.5.2)
+      sexp_processor
     codemirror-rails (5.16.0)
       railties (>= 3.0, < 6.0)
     coderay (1.1.3)
@@ -262,6 +268,14 @@ GEM
     colorize (0.8.1)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
+    countries (2.1.4)
+      i18n_data (~> 0.8.0)
+      money (~> 6.9)
+      sixarm_ruby_unaccent (~> 1.1)
+      unicode_utils (~> 1.4)
+    country_select (3.1.1)
+      countries (~> 2.0)
+      sort_alphabetical (~> 1.0)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -370,6 +384,7 @@ GEM
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
     erubi (1.10.0)
+    erubis (2.7.0)
     ethon (0.15.0)
       ffi (>= 1.15.0)
     excon (0.71.1)
@@ -388,6 +403,11 @@ GEM
     fcrepo_wrapper (0.9.0)
       ruby-progressbar
     ffi (1.15.4)
+    flay (2.12.1)
+      erubis (~> 2.7.0)
+      path_expander (~> 1.0)
+      ruby_parser (~> 3.0)
+      sexp_processor (~> 4.0)
     flipflop (2.6.0)
       activesupport (>= 4.0)
     flot-rails (0.0.7)
@@ -399,6 +419,9 @@ GEM
     gender_detector (0.1.2)
       unicode_utils (>= 1.3.0)
     geocoder (1.7.1)
+    gitlab (4.18.0)
+      httparty (~> 0.18)
+      terminal-table (>= 1.5.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
     google-api-client (0.53.0)
@@ -447,6 +470,9 @@ GEM
     hiredis (0.6.3)
     htmlentities (4.3.4)
     http_logger (0.7.0)
+    httparty (0.20.0)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
     httpclient (2.8.3)
     hydra-access-controls (11.0.7)
       active-fedora (>= 10.0.0)
@@ -484,6 +510,12 @@ GEM
     hydra-pcdm (1.1.0)
       active-fedora (>= 10, < 14)
       mime-types (>= 1)
+    hydra-role-management (1.0.3)
+      blacklight
+      bootstrap_form
+      bundler (>= 1.5)
+      cancancan
+      json (>= 1.8)
     hydra-works (1.2.0)
       activesupport (>= 4.2.10, < 6.0)
       hydra-derivatives (~> 3.0)
@@ -558,6 +590,7 @@ GEM
       rails-i18n
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
+    i18n_data (0.8.0)
     ice_nine (0.11.2)
     iiif_manifest (0.5.0)
       activesupport (>= 4)
@@ -710,6 +743,8 @@ GEM
       iso-639
       nokogiri (>= 1.6.6)
       nom-xml (~> 1.0)
+    money (6.16.0)
+      i18n (>= 0.6.4, <= 2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
@@ -743,6 +778,9 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
+    octokit (4.21.0)
+      faraday (>= 0.9)
+      sawyer (~> 0.8.0, >= 0.5.3)
     oj (3.13.10)
     oj_mimic_json (1.0.1)
     openseadragon (0.6.0)
@@ -754,6 +792,7 @@ GEM
     parser (2.5.3.0)
       ast (~> 2.4.0)
     parslet (2.0.0)
+    path_expander (1.1.0)
     pg (1.2.3)
     posix-spawn (0.3.15)
     postrank-uri (1.0.24)
@@ -762,6 +801,27 @@ GEM
       public_suffix (>= 2.0.0, < 2.1)
     power_converter (0.1.2)
     powerpack (0.1.3)
+    pronto (0.10.0)
+      gitlab (~> 4.0, >= 4.0.0)
+      httparty (>= 0.13.7)
+      octokit (~> 4.7, >= 4.7.0)
+      rainbow (>= 2.2, < 4.0)
+      rugged (~> 0.24, >= 0.23.0)
+      thor (~> 0.20.0)
+    pronto-brakeman (0.10.0)
+      brakeman (>= 3.2.0)
+      pronto (~> 0.10.0)
+    pronto-flay (0.10.0)
+      flay (~> 2.8)
+      pronto (~> 0.10.0)
+    pronto-rails_best_practices (0.10.0)
+      pronto (~> 0.10.0)
+      rails_best_practices (~> 1.16, >= 1.15.0)
+    pronto-rails_schema (0.10.0)
+      pronto (~> 0.10.0)
+    pronto-rubocop (0.10.0)
+      pronto (~> 0.10.0)
+      rubocop (~> 0.50, >= 0.49.1)
     public_suffix (2.0.5)
     pul_uv_rails (2.0.1)
     puma (4.3.10)
@@ -806,6 +866,14 @@ GEM
       railties (>= 5.0, < 6)
     rails_autolink (1.1.6)
       rails (> 3.1)
+    rails_best_practices (1.22.1)
+      activesupport
+      code_analyzer (>= 0.5.2)
+      erubis
+      i18n
+      json
+      require_all (~> 3.0)
+      ruby-progressbar
     railties (5.2.6)
       actionpack (= 5.2.6)
       activesupport (= 5.2.6)
@@ -888,6 +956,7 @@ GEM
       uber (< 0.2.0)
     request_store (1.5.0)
       rack (>= 1.4)
+    require_all (3.0.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -949,7 +1018,10 @@ GEM
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     ruby_dep (1.5.0)
+    ruby_parser (3.18.1)
+      sexp_processor (~> 4.16)
     rubyzip (2.3.2)
+    rugged (0.99.0)
     samvera-nesting_indexer (2.0.0)
       dry-equalizer
     sass (3.7.4)
@@ -965,6 +1037,9 @@ GEM
       tilt (>= 1.1, < 3)
     sassc (2.4.0)
       ffi (~> 1.9)
+    sawyer (0.8.2)
+      addressable (>= 2.3.5)
+      faraday (> 0.8, < 2.0)
     scanf (1.0.0)
     scss_lint (0.59.0)
       sass (~> 3.5, >= 3.5.5)
@@ -974,6 +1049,7 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    sexp_processor (4.16.0)
     shex (0.6.4)
       ebnf (~> 2.1, >= 2.2)
       htmlentities (~> 4.3)
@@ -1003,6 +1079,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.3)
+    sixarm_ruby_unaccent (1.2.0)
     slop (4.9.1)
     solr_wrapper (2.2.0)
       faraday
@@ -1013,6 +1090,8 @@ GEM
       activesupport
       nokogiri
       xml-simple
+    sort_alphabetical (1.1.0)
+      unicode_utils (>= 1.2.2)
     sparql (3.1.8)
       builder (~> 3.2)
       ebnf (~> 2.1)
@@ -1048,7 +1127,7 @@ GEM
       unicode-display_width (>= 1.1.1, < 3)
     tether-rails (1.4.0)
       rails (>= 3.1)
-    thor (1.1.0)
+    thor (0.20.3)
     thread (0.2.2)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -1117,6 +1196,7 @@ DEPENDENCIES
   cocoon
   codemirror-rails
   coffee-rails (~> 4.2)
+  country_select (~> 3.1, >= 3.1.1)
   database_cleaner
   devise
   devise-guests (~> 0.3)
@@ -1127,6 +1207,7 @@ DEPENDENCIES
   fcrepo_wrapper (~> 0.4)
   flipflop (~> 2.3)
   flutie
+  hydra-role-management
   hyrax (~> 2.9, >= 2.9.1)
   hyrax-doi
   i18n-debug
@@ -1140,6 +1221,12 @@ DEPENDENCIES
   mods (~> 2.4)
   parser (~> 2.5.3)
   pg
+  pronto
+  pronto-brakeman
+  pronto-flay
+  pronto-rails_best_practices
+  pronto-rails_schema
+  pronto-rubocop
   puma (~> 4.3)
   rack-test (= 0.7.0)
   rails (~> 5.2.5)
