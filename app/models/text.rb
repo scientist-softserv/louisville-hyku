@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # Generated via
 #  `rails generate hyrax:work Text`
 class Text < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   # Adds behaviors for hyrax-doi plugin.
-  #include Hyrax::DOI::DOIBehavior
+  # include Hyrax::DOI::DOIBehavior
 
   self.indexer = TextIndexer
   # Change this to restrict which works can be added as a child.
@@ -63,7 +65,6 @@ class Text < ActiveFedora::Base
   property :resource_query, predicate: ::RDF::URI.new("https://purl.org/vra/isRelatedTo"), multiple: true do |index|
     index.as :stored_searchable
   end
-
 
   # Text Metadata
 

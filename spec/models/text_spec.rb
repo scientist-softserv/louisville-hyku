@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Generated via
 #  `rails generate hyrax:work Text`
 require 'rails_helper'
