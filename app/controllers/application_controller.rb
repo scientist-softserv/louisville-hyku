@@ -19,20 +19,45 @@ class ApplicationController < ActionController::Base
   include Hyrax::ThemedLayoutController
   with_themed_layout '1_column'
 
-  helper_method :current_account, :admin_host?
-
+  helper_method :current_account, :admin_host?, :home_page_theme, :show_page_theme, :search_results_theme
+  before_action :authenticate_if_needed
   before_action :require_active_account!, if: :multitenant?
   before_action :set_account_specific_connections!
   before_action :elevate_single_tenant!, if: :singletenant?
   skip_after_action :discard_flash_if_xhr
-
-  before_action :add_honeybadger_context
 
   rescue_from Apartment::TenantNotFound do
     raise ActionController::RoutingError, 'Not Found'
   end
 
   protected
+
+    def is_hidden
+      current_account.persisted? && !current_account.is_public?
+    end
+
+    def is_api_or_pdf
+      request.format.to_s.match('json') ||
+        params[:print] ||
+        request.path.include?('api') ||
+        request.path.include?('pdf')
+    end
+
+    def is_staging
+      ['staging'].include?(Rails.env)
+    end
+
+    ##
+    # Extra authentication for palni-palci during development phase
+    def authenticate_if_needed
+      # Disable this extra authentication in test mode
+      return true if Rails.env.test?
+      if (is_hidden || is_staging) && !is_api_or_pdf
+        authenticate_or_request_with_http_basic do |username, password|
+          username == "samvera" && password == "hyku"
+        end
+      end
+    end
 
     def super_and_current_users
       users = Role.find_by(name: 'superadmin')&.users.to_a
@@ -43,7 +68,7 @@ class ApplicationController < ActionController::Base
   private
 
     def require_active_account!
-      return unless Settings.multitenancy.enabled
+      return if singletenant?
       return if devise_controller?
       raise Apartment::TenantNotFound, "No tenant for #{request.host}" unless current_account.persisted?
     end
@@ -53,11 +78,11 @@ class ApplicationController < ActionController::Base
     end
 
     def multitenant?
-      Settings.multitenancy.enabled
+      @multitenant ||= ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_MULTITENANT', false))
     end
 
     def singletenant?
-      !Settings.multitenancy.enabled
+      !multitenant?
     end
 
     def elevate_single_tenant!
@@ -69,13 +94,13 @@ class ApplicationController < ActionController::Base
     end
 
     def admin_host?
-      return false unless multitenant?
+      return false if singletenant?
       Account.canonical_cname(request.host) == Account.admin_host
     end
 
     def current_account
       @current_account ||= Account.from_request(request)
-      @current_account ||= if Settings.multitenancy.enabled
+      @current_account ||= if multitenant?
                              Account.new do |a|
                                a.build_solr_endpoint
                                a.build_fcrepo_endpoint
@@ -86,6 +111,19 @@ class ApplicationController < ActionController::Base
                            end
     end
 
+    # Find themes set on Site model, or return default
+    def home_page_theme
+      current_account.sites&.first&.home_theme || 'default_home'
+    end
+
+    def show_page_theme
+      current_account.sites&.first&.show_theme || 'default_show'
+    end
+
+    def search_results_theme
+      current_account.sites&.first&.search_theme || 'list_view'
+    end
+
     # Add context information to the lograge entries
     def append_info_to_payload(payload)
       super
@@ -94,11 +132,7 @@ class ApplicationController < ActionController::Base
       payload[:account_id] = current_account.cname if current_account
     end
 
-    def add_honeybadger_context
-      Honeybadger.context(user_email: current_user.email) if current_user
-    end
-
     def ssl_configured?
-      ActiveRecord::Type::Boolean.new.cast(Settings.ssl_configured)
+      ActiveRecord::Type::Boolean.new.cast(current_account.ssl_configured)
     end
 end
