@@ -1,0 +1,2 @@
+<%= f.input :media_type, as: :select, collection: Hyrax::MediaTypeService.select_options,
+    input_html: { class: 'form-control', multiple: true } %>

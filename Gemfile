@@ -129,3 +129,9 @@ gem 'riiif', '~> 1.1'
 gem 'bootstrap-datepicker-rails'
 gem 'parser', '~> 2.5.3'
 gem 'tether-rails'
+
+gem 'country_select', '~> 3.1', '>= 3.1.1'
+
+gem 'hyrax-doi', '~> 0.2.0'
+
+gem 'hydra-role-management'

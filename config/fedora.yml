@@ -9,7 +9,7 @@ test:
   url: <%= ENV['FEDORA_URL'] || "http://127.0.0.1:#{ENV.fetch('FCREPO_TEST_PORT', 8986)}/rest" %>
   base_path: /test
 production:
-  user: fedoraAdmin
-  password: fedoraAdmin
-  url: <%= ENV['FEDORA_URL'] || "http://127.0.0.1:8983/fedora/rest" %>
+  user: Rails.application.credentials.dig(:production, :fedora_user)
+  password: Rails.application.credentials.dig(:production, :fedora_password)
+  url: <%= ENV['FEDORA_URL'] || Rails.application.credentials.dig(:production, :fedora_url) %>
   base_path: /prod
