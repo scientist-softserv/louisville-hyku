@@ -31,10 +31,13 @@ Rails.application.routes.draw do
   root 'hyrax/homepage#index'
 
   devise_for :users, controllers: { invitations: 'hyku/invitations', registrations: 'hyku/registrations' }
+  mount Hydra::RoleManagement::Engine => '/'
+
   mount Qa::Engine => '/authorities'
 
   mount Blacklight::Engine => '/'
   mount Hyrax::Engine, at: '/'
+  mount Hyrax::DOI::Engine, at: '/doi', as: 'hyrax_doi'
   if Settings.bulkrax.enabled
     mount Bulkrax::Engine, at: '/'
   end

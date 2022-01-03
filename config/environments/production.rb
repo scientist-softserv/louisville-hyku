@@ -68,6 +68,19 @@ Rails.application.configure do
   #
   config.action_mailer.default_url_options = { protocol: Settings.ssl_configured ? 'https' : 'http' }
 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.louisville.edu',
+    port: '587',
+    domain: "ad.louisville.edu",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: Rails.application.credentials.dig(:production, :smtp_user),
+    password: Rails.application.credentials.dig(:production, :smtp_password),
+    openssl_verify_mode: 'none'
+  }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true

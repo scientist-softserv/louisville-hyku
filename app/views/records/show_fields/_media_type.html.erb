@@ -1,0 +1,3 @@
+<% record.media_type.each do |mtype| %>
+  <%= link_to_facet(mtype, Solrizer.solr_name("media_type", :facetable)) %><br />
+<% end %>

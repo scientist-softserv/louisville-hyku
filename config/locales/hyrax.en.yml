@@ -1133,15 +1133,24 @@ en:
         admin_set_id: Administrative Set
         based_near: Location
         creator: Creator
-        date_created: Date Created
+        date_created: Date original
         description: Description
+        descriptor: Descriptors
+        digitization_specification: Digitization specifications
         embargo_release_date: until
+        extent: Duration
         files: Upload a file
+        identifier: Item number
+        iqb: IQB#
         keyword: Keyword
         lease_expiration_date: until
         license: License
         member_of_collection_ids: Add to collection
-        related_url: Related URL
+        mesh: Subject (MeSH)
+        publisher: Repository
+        related_url: Related resource
+        resource_query: Query
+        resource_type: Object type
         rights_statement: Rights statement
         title: Title
         visibility_after_embargo: then open it up to
