@@ -73,7 +73,9 @@ class SolrDocument
   attribute :production, Solr::Array, solr_name('production')
   attribute :region, Solr::Array, solr_name('region')
   attribute :related_image, Solr::Array, solr_name('related_image')
-  attribute :related_material_and_publication_history, Solr::Array, solr_name('related_material_and_publication_history')
+  attribute :related_material_and_publication_history,
+            Solr::Array,
+            solr_name('related_material_and_publication_history')
   attribute :resource_query, Solr::Array, solr_name('resource_query')
   attribute :series, Solr::Array, solr_name('series')
   attribute :story, Solr::Array, solr_name('story')

@@ -14,73 +14,107 @@ class Text < ActiveFedora::Base
 
   # Shared Metadata
 
-  property :alternative_title, predicate: ::RDF::Vocab::DC.alternative, multiple: true do |index|
+  property :alternative_title,
+           predicate: ::RDF::Vocab::DC.alternative,
+           multiple: true do |index|
     index.as :stored_searchable
   end
 
-  property :collection_information, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_findingAid"), multiple: true do |index|
+  property :collection_information,
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_findingAid"),
+           multiple: true do |index|
     index.as :stored_searchable
   end
 
-  property :contributor_role, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Contribution"), multiple: true do |index|
+  property :contributor_role,
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Contribution"),
+           multiple: true do |index|
     index.as :stored_searchable
   end
 
-  property :creator_role, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Role"), multiple: true do |index|
+  property :creator_role,
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe/Role"),
+           multiple: true do |index|
     index.as :stored_searchable
   end
 
-  property :date_digital, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_ProvisionActivity"), multiple: false do |index|
+  property :date_digital,
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_ProvisionActivity"),
+           multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :digitization_specification, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_DigitalCharacteristic"), multiple: false do |index|
+  property :digitization_specification,
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_DigitalCharacteristic"),
+           multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :format, predicate: ::RDF::Vocab::DC.format, multiple: false do |index|
+  property :format,
+           predicate: ::RDF::Vocab::DC.format,
+           multiple: false do |index|
     index.as :stored_searchable, :facetable
   end
 
-  property :location, predicate: ::RDF::Vocab::DC.spatial, multiple: true do |index|
+  property :location,
+           predicate: ::RDF::Vocab::DC.spatial,
+           multiple: true do |index|
     index.as :stored_searchable, :facetable
   end
 
-  property :media_type, predicate: ::RDF::Vocab::DC.MediaType, multiple: true do |index|
+  property :media_type,
+           predicate: ::RDF::Vocab::DC.MediaType,
+           multiple: true do |index|
     index.as :stored_searchable, :facetable
   end
 
-  property :mesh, predicate: ::RDF::Vocab::DC.MESH, multiple: true do |index|
+  property :mesh,
+           predicate: ::RDF::Vocab::DC.MESH,
+           multiple: true do |index|
     index.as :stored_searchable
   end
 
-  property :ordering_information, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_UsePolicy"), multiple: false do |index|
+  property :ordering_information,
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_UsePolicy"),
+           multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :people_represented, predicate: ::RDF::Vocab::FOAF.name, multiple: true do |index|
+  property :people_represented,
+           predicate: ::RDF::Vocab::FOAF.name,
+           multiple: true do |index|
     index.as :stored_searchable
   end
 
-  property :resource_query, predicate: ::RDF::URI.new("https://purl.org/vra/isRelatedTo"), multiple: true do |index|
+  property :resource_query,
+           predicate: ::RDF::URI.new("https://purl.org/vra/isRelatedTo"),
+           multiple: true do |index|
     index.as :stored_searchable
   end
 
   # Text Metadata
 
-  property :issue, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_hasSubseries"), multiple: false do |index|
+  property :issue,
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_hasSubseries"),
+           multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :searchable_text, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_supplement"), multiple: false do |index|
+  property :searchable_text,
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_supplement"),
+           multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :table_of_contents, predicate: ::RDF::Vocab::DC.tableOfContents, multiple: false do |index|
+  property :table_of_contents,
+           predicate: ::RDF::Vocab::DC.tableOfContents,
+           multiple: false do |index|
     index.as :stored_searchable
   end
 
-  property :volume, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_hasSeries"), multiple: false do |index|
+  property :volume,
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_hasSeries"),
+           multiple: false do |index|
     index.as :stored_searchable
   end
 
