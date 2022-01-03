@@ -59,3 +59,4 @@ notes
 cmd.txt
 docker-compose.override.yml
 fits.log
+solr_db_initialized
