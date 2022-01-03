@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # Generated via
 #  `rails generate hyrax:work Art`
 require 'rails_helper'
 include Warden::Test::Helpers
 
 # NOTE: If you generated more than one work, you have to set "js: true"
-RSpec.feature 'Create a Art', js: false do
+RSpec.describe 'Create a Art', js: false do
   context 'a logged in user' do
     let(:user_attributes) do
       { email: 'test@example.com' }
@@ -30,7 +32,7 @@ RSpec.feature 'Create a Art', js: false do
       login_as user
     end
 
-    scenario do
+    it do
       visit '/dashboard'
       click_link "Works"
       click_link "Add new work"

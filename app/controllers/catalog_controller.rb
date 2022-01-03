@@ -189,8 +189,6 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('table_of_contents', :stored_searchable)
     config.add_show_field solr_name('volume', :stored_searchable)
 
-
-
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #
@@ -348,19 +346,17 @@ class CatalogController < ApplicationController
       }
     end
 
-=begin
-    config.add_search_field('based_near_label') do |field|
-      field.label = "Location"
-      field.solr_parameters = {
-        "spellcheck.dictionary": "based_near_label"
-      }
-      solr_name = solr_name("based_near_label", :stored_searchable)
-      field.solr_local_parameters = {
-        qf: solr_name,
-        pf: solr_name
-      }
-    end
-=end
+    #     config.add_search_field('based_near_label') do |field|
+    #       field.label = "Location"
+    #       field.solr_parameters = {
+    #         "spellcheck.dictionary": "based_near_label"
+    #       }
+    #       solr_name = solr_name("based_near_label", :stored_searchable)
+    #       field.solr_local_parameters = {
+    #         qf: solr_name,
+    #         pf: solr_name
+    #       }
+    #     end
 
     config.add_search_field('keyword') do |field|
       field.solr_parameters = {

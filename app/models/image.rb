@@ -63,7 +63,6 @@ class Image < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-
   # Image Metadata
 
   property :building_date, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_temporalCoverage"), multiple: false do |index|
