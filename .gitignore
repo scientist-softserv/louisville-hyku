@@ -8,6 +8,8 @@ capybara-*.html
 /db/postgres
 pg_upgrade_*.log
 /public/system
+/public/uv
+/node_modules
 /coverage/
 /spec/tmp
 **.orig
@@ -55,4 +57,5 @@ public/uploads
 public/assets
 notes
 cmd.txt
+docker-compose.override.yml
 fits.log

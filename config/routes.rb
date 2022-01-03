@@ -1,13 +1,20 @@
+require 'sidekiq/web'
+Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
+
 Rails.application.routes.draw do
   concern :oai_provider, BlacklightOaiProvider::Routes.new
 
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
 
-  if Settings.multitenancy.enabled
+  authenticate :user, lambda { |u| u.is_superadmin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  if ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_MULTITENANT', false))
     constraints host: Account.admin_host do
       get '/account/sign_up' => 'account_sign_up#new', as: 'new_sign_up'
       post '/account/sign_up' => 'account_sign_up#create'
-      get '/', to: 'splash#index'
+      get '/', to: 'splash#index', as: 'splash'
 
       # pending https://github.com/projecthydra-labs/hyrax/issues/376
       get '/dashboard', to: redirect('/')
@@ -25,7 +32,6 @@ Rails.application.routes.draw do
   resource :site, only: [:update] do
     resources :roles, only: [:index, :update]
     resource :labels, only: [:edit, :update]
-    resource :contact, only: [:edit, :update]
   end
 
   root 'hyrax/homepage#index'
@@ -38,7 +44,7 @@ Rails.application.routes.draw do
   mount Blacklight::Engine => '/'
   mount Hyrax::Engine, at: '/'
   mount Hyrax::DOI::Engine, at: '/doi', as: 'hyrax_doi'
-  if Settings.bulkrax.enabled
+  if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
     mount Bulkrax::Engine, at: '/'
   end
 
@@ -82,4 +88,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get 'all_collections' => 'hyrax/homepage#all_collections', as: :all_collections
 end

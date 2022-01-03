@@ -1,15 +1,34 @@
-FROM hyku/base:latest
+ARG HYRAX_IMAGE_VERSION=3.0.2
+FROM ghcr.io/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_VERSION as hyku-base
 
-ADD https://time.is/just build-time
-COPY ops/nginx.sh /etc/service/nginx/run
-COPY ops/webapp.conf /etc/nginx/sites-enabled/webapp.conf
-COPY ops/env.conf /etc/nginx/main.d/env.conf
+USER root
 
-COPY  --chown=app . $APP_HOME
+ARG EXTRA_APK_PACKAGES="openjdk11-jre ffmpeg"
+RUN apk --no-cache upgrade && \
+  apk --no-cache add \
+    libxml2-dev \
+    mediainfo \
+    perl \
+    $EXTRA_APK_PACKAGES
 
-RUN /sbin/setuser app bash -l -c "set -x && \
-    (bundle check || bundle install) && \
-    bundle exec rake assets:precompile DB_ADAPTER=nulldb && \
-    mv ./public/assets ./public/assets-new"
+USER app
 
-CMD ["/sbin/my_init"]
+RUN mkdir -p /app/fits && \
+    cd /app/fits && \
+    wget https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip -O fits.zip && \
+    unzip fits.zip && \
+    rm fits.zip && \
+    chmod a+x /app/fits/fits.sh
+ENV PATH="${PATH}:/app/fits"
+
+COPY --chown=1001:101 $APP_PATH/Gemfile* /app/samvera/hyrax-webapp/
+RUN bundle install --jobs "$(nproc)"
+
+COPY --chown=1001:101 $APP_PATH /app/samvera/hyrax-webapp
+
+ARG HYKU_BULKRAX_ENABLED="false"
+RUN RAILS_ENV=production SECRET_KEY_BASE=`bin/rake secret` DB_ADAPTER=nulldb DATABASE_URL='postgresql://fake' bundle exec rake assets:precompile
+
+FROM hyku-base as hyku-worker
+ENV MALLOC_ARENA_MAX=2
+CMD bundle exec sidekiq
