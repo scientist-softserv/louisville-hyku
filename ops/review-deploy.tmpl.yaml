@@ -64,13 +64,13 @@ extraEnvVars: &envVars
     value: "5"
   - name: RAILS_SERVE_STATIC_FILES
     value: "true"
-  - name: SETTINGS__ACTIVE_JOB__QUEUE_ADAPTER
+  - name: HYKU_ACTIVE_JOB_QUEUE_URL
     value: sidekiq
-  - name: SETTINGS__CONTACT_EMAIL
+  - name: HYRAX_ACTIVE_JOB_QUEUE
+    value: sidekiq
+  - name: HYKU_CONTACT_EMAIL
     value: samvera@example.com
-  - name: SETTINGS__DEVISE__INVITATION_FROM_EMAIL
-    value: samvera@example.com
-  - name: SETTINGS__FITS_PATH
+  - name: HYRAX_FITS_PATH
     value: /app/fits/fits.sh
   - name: HYKU_ADMIN_ONLY_TENANT_CREATION
     value: "true"

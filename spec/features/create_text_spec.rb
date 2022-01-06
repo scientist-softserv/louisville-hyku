@@ -34,7 +34,7 @@ RSpec.describe 'Create a Text', js: false do
       login_as user
     end
 
-    it do
+    xit do
       visit '/dashboard'
       click_link "Works"
       click_link "Add new work"

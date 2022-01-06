@@ -5,7 +5,7 @@ x-app: &app
     context: .
     target: hyku-base
     args:
-      - SETTINGS__BULKRAX__ENABLED=true
+      - HYKU_BULKRAX_ENABLED=true
   image: registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}
   env_file:
     - .env
@@ -51,6 +51,7 @@ services:
       test: ["CMD-SHELL", "echo 'ruok' | nc -w 2 -q 2 localhost 2181 | grep imok || exit 1"]
       interval: "10s"
       timeout: "8s"
+
   solr:
     image: bitnami/solr:8
     environment:
@@ -84,10 +85,9 @@ services:
     environment:
       - VIRTUAL_PORT=8080
       - VIRTUAL_HOST=fcrepo.hyku.test
+      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
     expose:
       - 8080
-    environment:
-      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
     networks:
       internal:
 
@@ -140,7 +140,7 @@ services:
       context: .
       target: hyku-worker
       args:
-        - SETTINGS__BULKRAX__ENABLED=true
+        - HYKU_BULKRAX_ENABLED=true
       cache_from:
         - registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}
         - registry.gitlab.com/notch8/louisville-hyku/worker:${TAG:-latest}
@@ -157,8 +157,6 @@ services:
       redis:
         condition: service_started
       zoo:
-        condition: service_started
-      check_volumes:
         condition: service_started
       initialize_app:
         condition: service_completed_successfully
