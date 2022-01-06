@@ -38,7 +38,7 @@ RSpec.describe 'Create a Image', js: true do
       login_as user
     end
 
-    it do # rubocop:disable RSpec/ExampleLength
+    xit do # rubocop:disable RSpec/ExampleLength
       visit '/dashboard'
       click_link "Works"
       click_link "Add new work"
