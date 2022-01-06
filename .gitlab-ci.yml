@@ -64,8 +64,8 @@ test:
     POSTGRESQL_DATABASE: hyku
     POSTGRESQL_PASSWORD: postgres
     REDIS_HOST: redis
-    SETTINGS__BULKRAX__ENABLED: "true"
     SETTINGS__SOLR__URL: http://admin:admin@solr:8983/solr/
+    HYKU_BULKRAX_ENABLED: "true"
     SOLR_ADMIN_PASSWORD: admin
     SOLR_ADMIN_USER: admin
     SOLR_ADMIN_USERNAME: admin
@@ -178,6 +178,7 @@ hyku.staging:
     HELM_EXTRA_ARGS: >
       --values ops/staging-deploy.yaml
   script:
+    - export KUBECONFIG=$KUBECONFIG_R2
     - envsubst < ops/staging-deploy.tmpl.yaml > ops/staging-deploy.yaml
     - ./bin/helm_deploy hyku-staging lv-hyku-staging
   tags:

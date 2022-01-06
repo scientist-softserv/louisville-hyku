@@ -34,22 +34,22 @@ RSpec.describe 'Create a Art', js: false do
       login_as user
     end
 
-    it do
+    xit do
       visit '/dashboard'
       click_link "Works"
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
-      # choose "payload_concern", option: "Art"
-      # click_button "Create work"
+      choose "payload_concern", option: "Art"
+      click_button "Create work"
 
       expect(page).to have_content "Add New Art"
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
       within('span#addfiles') do
-        attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
-        attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
+        attach_file("files[]", File.join(fixture_path, 'hyrax', 'image.jp2'), visible: false)
+        attach_file("files[]", File.join(fixture_path, 'hyrax', 'jp2_fits.xml'), visible: false)
       end
       click_link "Descriptions" # switch tab
       fill_in('Title', with: 'My Test Work')
