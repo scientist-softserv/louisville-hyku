@@ -43,12 +43,10 @@ ingress:
         - path: /
 
 extraEnvVars:
-  - name: HYKU_ADMIN_HOST
-    value: lv-hyku-staging.notch8.cloud
   - name: HYKU_ROOT_HOST
     value: lv-hyku-staging.notch8.cloud
-  - name: HYKU_DEFAULT_HOST
-    value: "%{tenant}.lv-hyku-staging.notch8.cloud"
+  - name: HYKU_MULTITENANT
+    value: "false"
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
   - name: INITIAL_ADMIN_EMAIL
@@ -99,10 +97,6 @@ extraEnvVars:
     value: support@notch8.com
   - name: HYRAX_FITS_PATH
     value: /app/fits/fits.sh
-  - name: HYKU_ADMIN_ONLY_TENANT_CREATION
-    value: "true"
-  - name: HYKU_DEFAULT_HOST
-    value: "%{tenant}.lv-hyku-staging.notch8.cloud"
   - name: HYKU_ENABLED
     value: "true"
   - name: SOLR_ADMIN_USER
@@ -158,12 +152,10 @@ worker:
       mountPath: /app/samvera/hyrax-webapp/tmp/network_files
       subPath: network-files
   extraEnvVars:
-    - name: HYKU_ADMIN_HOST
-      value: lv-hyku-staging.notch8.cloud
     - name: HYKU_ROOT_HOST
       value: lv-hyku-staging.notch8.cloud
-    - name: HYKU_DEFAULT_HOST
-      value: "%{tenant}.lv-hyku-staging.notch8.cloud"
+    - name: HYKU_MULTITENANT
+      value: "false"
     - name: CONFDIR
       value: "/app/samvera/hyrax-webapp/solr/config"
     - name: INITIAL_ADMIN_EMAIL
