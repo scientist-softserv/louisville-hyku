@@ -32,7 +32,7 @@ class Image < ActiveFedora::Base
   end
 
   property :decade, predicate: ::RDF::Vocab::DC.temporal, multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :digitization_specification, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_DigitalCharacteristic"), multiple: false do |index|

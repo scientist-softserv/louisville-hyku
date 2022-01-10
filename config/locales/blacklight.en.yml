@@ -6,8 +6,10 @@ en:
         facet:
           location_sim: Location
           city_sim: City
+          county_sim: County
           creator_sim: Creator
           contributor_sim: Contributor
+          decade_sim: Decade
           file_format_sim: Format
           generic_type_sim: Type
           depositor_ssim: Depositor
@@ -15,7 +17,9 @@ en:
           language_sim: Language
           media_type_sim: Media Type
           neighborhood_sim: Neighborhood
+          people_represented_sim: People Represented
           publisher_sim: Repository
+          resource_query_sim: Resource Query
           resource_type_sim: Object Type
           street_sim: Street
           subject_sim: Subject
@@ -23,10 +27,12 @@ en:
           location_tesim: Location
           city_tesim: City
           contributor_tesim: Contributor
+          county_tesim: County
           creator_tesim: Creator
           date_created_tesim: Date Original
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
+          decade_tesim: Decade
           description_tesim: Description
           extent_tesim: Duration
           file_format_tesim: File Format
@@ -36,7 +42,9 @@ en:
           license_tesim: License
           media_type_tesim: Media Type
           neighborhood_tesim: Neighborhood
+          people_represented_tesim: People Represented
           publisher_tesim: Repository
+          resource_query_tesim: Resource Query
           resource_type_tesim: Object Type
           rights_statement_tesim: Rights Statement
           rights_tesim: Rights
@@ -46,10 +54,12 @@ en:
           location_tesim: Location
           city_tesim: City
           contributor_tesim: Contributor
+          county_tesim: County
           creator_tesim: Creator
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
+          decade_tesim: Decade
           description_tesim: Description
           extent_tesim: Duration
           file_format_tesim: File Format
@@ -57,7 +67,9 @@ en:
           keyword_tesim: Keyword
           language_tesim: Language
           neighborhood_tesim: Neighborhood
+          people_represented_tesim: People Represented
           publisher_tesim: Repository
+          resource_query_tesim: Resource Query
           rights_tesim: Rights
           subject_tesim: Subject
           street_tesim: Street

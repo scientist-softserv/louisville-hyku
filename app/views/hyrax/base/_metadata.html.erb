@@ -1,4 +1,4 @@
-<dl class="work-show <%= dom_class(presenter) %>" <%= presenter.microdata_type_to_html %>> 
+<dl class="work-show <%= dom_class(presenter) %>" <%= presenter.microdata_type_to_html %>>
     <%#= render 'attribute_rows', presenter: presenter %>
     <%= presenter.attribute_to_html(:identifier, html_dl: true, label: "Item number") %>
     <%= presenter.attribute_to_html(:alternative_title, html_dl: true) %>
@@ -44,7 +44,7 @@
     <%= presenter.attribute_to_html(:place_original, html_dl: true) %>
     <%= presenter.attribute_to_html(:production, html_dl: true) %>
     <%= presenter.attribute_to_html(:date_created, html_dl: true, label: "Date original") %>
-    <%= presenter.attribute_to_html(:decade, html_dl: true) %>
+    <%= presenter.attribute_to_html(:decade, render_as: :faceted, html_dl: true) %>
     <%= presenter.attribute_to_html(:building_date, html_dl: true) %>
     <%= presenter.attribute_to_html(:language, html_dl: true) %>
     <%= presenter.attribute_to_html(:language_script, html_dl: true) %>
@@ -74,5 +74,5 @@
     <%= presenter.attribute_to_html(:embargo_release_date, render_as: :date, html_dl: true) %>
     <%= presenter.attribute_to_html(:lease_expiration_date, render_as: :date, html_dl: true) %>
     <%#= presenter.attribute_to_html(:based_near_label) %>
-    
- </dl> 
+
+ </dl>
