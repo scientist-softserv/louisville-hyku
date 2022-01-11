@@ -76,7 +76,7 @@ extraEnvVars:
   - name: PASSENGER_APP_ENV
     value: production
   - name: RAILS_CACHE_STORE_URL
-    value: redis://:staging@hyku-staging-redis-master:6379/louisville
+    value: redis://:staging@lv-hyku-staging-redis-master:6379/louisville
   - name: RAILS_ENV
     value: production
   - name: RAILS_LOG_TO_STDOUT
@@ -86,9 +86,9 @@ extraEnvVars:
   - name: RAILS_SERVE_STATIC_FILES
     value: "true"
   - name: REDIS_HOST
-    value: hyku-staging-redis-master
+    value: lv-hyku-staging-redis-master
   - name: REDIS_URL
-    value: redis://:staging@hyku-staging-redis-master:6379/louisville
+    value: redis://:staging@lv-hyku-staging-redis-master:6379/louisville
   - name: HYKU_ACTIVE_JOB_QUEUE_URL
     value: sidekiq
   - name: HYRAX_ACTIVE_JOB_QUEUE
@@ -185,7 +185,7 @@ worker:
     - name: PASSENGER_APP_ENV
       value: production
     - name: RAILS_CACHE_STORE_URL
-      value: redis://:staging@hyku-staging-redis-master:6379/louisville
+      value: redis://:staging@lv-hyku-staging-redis-master:6379/louisville
     - name: RAILS_ENV
       value: production
     - name: RAILS_LOG_TO_STDOUT
@@ -195,9 +195,9 @@ worker:
     - name: RAILS_SERVE_STATIC_FILES
       value: "true"
     - name: REDIS_HOST
-      value: hyku-staging-redis-master
+      value: lv-hyku-staging-redis-master
     - name: REDIS_URL
-      value: redis://:staging@hyku-staging-redis-master:6379/louisville
+      value: redis://:staging@lv-hyku-staging-redis-master:6379/louisville
     - name: HYKU_ACTIVE_JOB_QUEUE_URL
       value: sidekiq
     - name: HYRAX_ACTIVE_JOB_QUEUE
