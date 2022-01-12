@@ -126,7 +126,7 @@ extraEnvVars:
   - name: SMTP_TYPE
     value: cram_md5
   - name: SENTRY_DSN
-    value: $SENTRY_DSN
+    value: https://304cc0d8a7ed4e28af43bddf277e8cbd:a612bdbe2cbe4ff2b1cbc4cd93e5dde3@sentry.notch8.com/71
 
 worker:
   replicaCount: 1
@@ -239,7 +239,7 @@ worker:
     - name: SMTP_TYPE
       value: cram_md5
     - name: SENTRY_DSN
-      value: $SENTRY_DSN
+      value: https://304cc0d8a7ed4e28af43bddf277e8cbd:a612bdbe2cbe4ff2b1cbc4cd93e5dde3@sentry.notch8.com/71
 
 podSecurityContext:
   runAsUser: 1001
