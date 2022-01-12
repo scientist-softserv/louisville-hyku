@@ -143,4 +143,3 @@ gem 'country_select', '~> 3.1', '>= 3.1.1'
 
 gem 'hydra-role-management'
 
-gem 'willow_sword', github: 'notch8/willow_sword'
