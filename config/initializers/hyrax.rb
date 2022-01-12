@@ -194,8 +194,3 @@ Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::
 if ENV.fetch('HYKU_BULKRAX_ENABLED', false) && Bulkrax.default_work_type.blank?
   Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s
 end
-
-# set bulkrax default work type to first curation_concern if it isn't already set
-if Bulkrax.default_work_type.blank?
-  Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s
-end
