@@ -7,7 +7,7 @@
 gem install stack_car
 ```
 
-3. If this is the first time building the application or if any of the dependancies changed, please build with:
+3. If this is the first time building the application or if any of the dependencies changed, please build with:
 ```bash
 sc build
 ```
@@ -24,7 +24,4 @@ Note: Be sure to [adjust your ~/.dory.yml file to support the .test tld](https:/
 sc up
 ```
 
-6. Once the application is up and running, navigate to [single.test](https://single.test)in the browser and log in with the following credentials:
-
-login un: `admin@example.com`
-pw: `testing123`
+6. Once the application is up and running, navigate to [single.hyku.test](single.hyku.test) in the browser and log in with the credentials for "hyku.test" listed in 1Password.
