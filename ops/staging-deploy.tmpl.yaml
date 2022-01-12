@@ -50,8 +50,24 @@ extraEnvVars:
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
   - name: INITIAL_ADMIN_EMAIL
-    value: support@notch8.com
+    value: admin@example.com
   - name: INITIAL_ADMIN_PASSWORD
+    value: testing123
+  - name: INITIAL_USER_EMAIL
+    value: user@example.com
+  - name: INITIAL_USER_PASSWORD
+    value: testing123
+  - name: ROB_EMAIL
+    value: rob@notch8.com
+  - name: ROB_PASSWORD
+    value: testing123
+  - name: SUPPORT_EMAIL
+    value: support@notch8.com
+  - name: SUPPORT_PASSWORD
+    value: testing123
+  - name: TEST_USER_EMAIL
+    value: user@notch8.com
+  - name: TEST_USER_PASSWORD
     value: testing123
   - name: DATABASE_ADAPTER
     value: postgresql
@@ -159,8 +175,24 @@ worker:
     - name: CONFDIR
       value: "/app/samvera/hyrax-webapp/solr/config"
     - name: INITIAL_ADMIN_EMAIL
-      value: support@notch8.com
+      value: admin@example.com
     - name: INITIAL_ADMIN_PASSWORD
+      value: testing123
+    - name: INITIAL_USER_EMAIL
+      value: user@example.com
+    - name: INITIAL_USER_PASSWORD
+      value: testing123
+    - name: ROB_EMAIL
+      value: rob@notch8.com
+    - name: ROB_PASSWORD
+      value: testing123
+    - name: SUPPORT_EMAIL
+      value: support@notch8.com
+    - name: SUPPORT_PASSWORD
+      value: testing123
+    - name: TEST_USER_EMAIL
+      value: user@notch8.com
+    - name: TEST_USER_PASSWORD
       value: testing123
     - name: DATABASE_ADAPTER
       value: postgresql
