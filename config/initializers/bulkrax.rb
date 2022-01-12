@@ -2,9 +2,12 @@
 
 Bulkrax.setup do |config|
   # Add local parsers
-  # config.parsers += [
-  #   { name: 'MODS - My Local MODS parser', class_name: 'Bulkrax::ModsXmlParser', partial: 'mods_fields' },
-  # ]
+  config.parsers = [
+    { name: 'CSV',
+      class_name: 'CsvParser',
+      partial: 'csv_fields'
+    }
+  ]
 
   # WorkType to use as the default if none is specified in the import
   # Default is the first returned by Hyrax.config.curation_concerns
