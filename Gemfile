@@ -142,4 +142,3 @@ gem 'tether-rails'
 gem 'country_select', '~> 3.1', '>= 3.1.1'
 
 gem 'hydra-role-management'
-
