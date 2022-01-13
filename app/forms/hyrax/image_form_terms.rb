@@ -44,7 +44,6 @@ module Hyrax
                     license
                     related_url
                     resource_query
-                    extent
                 ]
     end
   end

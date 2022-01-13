@@ -35,7 +35,8 @@ Rails.application.routes.draw do
     resource :contact, only: [:edit, :update]
   end
 
-  root 'hyrax/homepage#index'
+  #root 'hyrax/homepage#index'
+  root 'catalog#index'
 
   devise_for :users, controllers: { invitations: 'hyku/invitations', registrations: 'hyku/registrations' }
   mount Hydra::RoleManagement::Engine => '/'

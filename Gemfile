@@ -135,3 +135,5 @@ gem 'country_select', '~> 3.1', '>= 3.1.1'
 gem 'hyrax-doi', '~> 0.2.0'
 
 gem 'hydra-role-management'
+
+gem 'font_awesome5_rails'

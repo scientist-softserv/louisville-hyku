@@ -18,6 +18,7 @@
 //= require jquery.fontselect
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require jssor.slider-28.1.0.min
 //= require turbolinks
 
 //= require tether

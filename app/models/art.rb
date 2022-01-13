@@ -55,7 +55,7 @@ class Art < ActiveFedora::Base
   property :extent, predicate: ::RDF::Vocab::DC.extent, multiple: true do |index|
     index.as :stored_searchable
   end
-  
+
   property :format, predicate: ::RDF::Vocab::DC.format, multiple: true do |index|
     index.as :stored_searchable, :facetable
   end
@@ -125,9 +125,9 @@ class Art < ActiveFedora::Base
 
   #property :description_1990, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_derivedFrom"), multiple: false
 
-  property :descriptor, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#c_Topic"), multiple: true do |index|
-    index.as :stored_searchable
-  end
+  #property :descriptor, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#c_Topic"), multiple: true do |index|
+    #index.as :stored_searchable
+  #end
 
   property :exhibit_history, predicate: ::RDF::URI.new("https://purl.org/vra/exhibitedAt"), multiple: false do |index|
     index.as :stored_searchable
@@ -136,12 +136,12 @@ class Art < ActiveFedora::Base
   property :honoree, predicate: ::RDF::URI.new("https://purl.org/vra/designedFor"), multiple: true do |index|
     index.as :stored_searchable
   end
-  
+
   #property :inscription, predicate: ::RDF::URI.new("https://purl.org/vra/Inscription"), multiple: false
 
-  property :iqb, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_code"), multiple: false do |index|
-    index.as :stored_searchable
-  end
+  #property :iqb, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_code"), multiple: false do |index|
+    #index.as :stored_searchable
+  #end
 
   #property :image_number, predicate: ::RDF::Vocab::DC.identifier, multiple: false do |index|
     #index.as :stored_searchable
@@ -183,9 +183,9 @@ class Art < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-  property :related_material_and_publication_history, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_referencedBy"), multiple: true do |index|
-    index.as :stored_searchable
-  end
+  #property :related_material_and_publication_history, predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_referencedBy"), multiple: true do |index|
+    #index.as :stored_searchable
+  #end
 
   #property :resource_repository, predicate: ::RDF::URI.new("https://purl.org/vra/sourceFor"), multiple: false do |index|
     #index.as :stored_searchable

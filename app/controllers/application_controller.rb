@@ -32,6 +32,11 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError, 'Not Found'
   end
 
+  #layout :set_layout
+  def set_layout
+    current_user ? "application" : "application_public"
+  end
+
   protected
 
     def super_and_current_users

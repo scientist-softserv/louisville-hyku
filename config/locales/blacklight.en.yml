@@ -74,3 +74,27 @@ en:
           subject_tesim: Subject
           street_tesim: Street
           title_tesim: Title
+
+    bookmarks:
+      title: 'Bookmarks'
+      page_title: 'Bookmarks - %{application_name}'
+      no_bookmarks: 'You have no bookmarks. Bookmarks can be added from the search results page.'
+      add:
+        button: 'Bookmark'
+        success:
+          one: 'Successfully added bookmark.'
+          other: 'Successfully added bookmarks.'
+        failure:  'Sorry, there was a problem saving the bookmarks.'
+      remove:
+        button: 'Remove bookmark'
+        success: 'Successfully removed bookmark.'
+        failure: 'Sorry, there was a problem removing the bookmarks.'
+        action_confirm: 'Remove this bookmark?'
+      clear:
+        action_title: 'Clear Bookmarks'
+        action_confirm: 'Clear your bookmarks?'
+        success: 'Cleared your bookmarks.'
+        failure: 'Sorry, there was a problem clearing your bookmarks.'
+      need_login: 'Please log in to manage and view your bookmarks.'
+      list_title: 'Your Bookmarks'
+      delete: 'Remove'

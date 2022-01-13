@@ -1,0 +1,7 @@
+<li class="recent-item item">
+          <%= link_to [main_app, recent_document] do %>
+            <%= render_thumbnail_tag(recent_document, {width: 90}, {suppress_link: true}) + recent_document.to_s %>
+          <% end %>
+</li>
+
+    

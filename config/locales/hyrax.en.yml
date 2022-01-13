@@ -452,7 +452,7 @@ en:
       search_form:
         button_label: Go
         label: Search Collection %{title}
-        placeholder: Search subcollections and works in this collection
+        placeholder: Search this collection
       show:
         buttons:
           remove_from_collection: Remove
@@ -931,7 +931,7 @@ en:
             label_short: My Works
         q:
           label: Search %{application_name}
-          placeholder: Enter search terms
+          placeholder: Search all digital collections
     select_type:
       description: General purpose worktype
       name: Work
@@ -971,6 +971,7 @@ en:
         logout: Logout
         sr_action: View
         sr_target: profile
+      bookmark: Bookmarks
     transfers:
       new:
         confirm: Are you sure you want to transfer ownership of this work to another user? Click Ok to transfer or Cancel to return to the transfer screen
@@ -1135,13 +1136,11 @@ en:
         creator: Creator
         date_created: Date original
         description: Description
-        descriptor: Descriptors
         digitization_specification: Digitization specifications
         embargo_release_date: until
         extent: Duration
         files: Upload a file
         identifier: Item number
-        iqb: IQB#
         keyword: Keyword
         lease_expiration_date: until
         license: License

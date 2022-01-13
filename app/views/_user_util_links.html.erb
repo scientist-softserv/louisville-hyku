@@ -1,5 +1,7 @@
 <ul id="user_utility_links" class="nav navbar-nav navbar-right">
+  <div id="shared-locale-picker">
   <%= render 'shared/locale_picker' if available_translations.size > 1 %>
+  </div>
   <% if user_signed_in? %>
     <li>
       <%= render_notifications(user: current_user) %>
@@ -21,7 +23,12 @@
       </ul>
     </li><!-- /.btn-group -->
   <% else %>
-    <li>
+      <li id="bookmarks">
+      <%= link_to main_app.bookmarks_path do %>
+        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> <%= t("hyrax.toolbar.bookmark") %>
+      <% end %>
+    </li>
+    <li id="login">
       <%= link_to main_app.new_user_session_path do %>
         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> <%= t("hyrax.toolbar.profile.login") %>
       <% end %>
