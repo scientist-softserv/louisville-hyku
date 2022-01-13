@@ -115,6 +115,8 @@ extraEnvVars:
     value: /app/fits/fits.sh
   - name: HYKU_ENABLED
     value: "true"
+  - name: HYKU_BULKRAX_ENABLED
+    value: "true"
   - name: SOLR_ADMIN_USER
     value: admin
   - name: SOLR_COLLECTION_NAME
@@ -243,6 +245,8 @@ worker:
     - name: HYKU_DEFAULT_HOST
       value: "%{tenant}.lv-hyku-staging.notch8.cloud"
     - name: HYKU_ENABLED
+      value: "true"
+    - name: HYKU_BULKRAX_ENABLED
       value: "true"
     - name: SOLR_ADMIN_USER
       value: admin
