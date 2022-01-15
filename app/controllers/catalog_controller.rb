@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CatalogController < ApplicationController
+  include BlacklightAdvancedSearch::Controller
   include Hydra::Catalog
   include Hydra::Controller::ControllerBehavior
   include BlacklightOaiProvider::Controller
@@ -16,7 +17,19 @@ class CatalogController < ApplicationController
     solr_name('system_modified', :stored_sortable, type: :date)
   end
 
+  # CatalogController-scope behavior and configuration for BlacklightIiifSearch
+  include BlacklightIiifSearch::Controller
+
   configure_blacklight do |config|
+    # configuration for Blacklight IIIF Content Search
+    config.iiif_search = {
+      full_text_field: 'all_text_tsimv',
+      object_relation_field: 'is_page_of_ssi',
+      supported_params: %w[q page],
+      autocomplete_handler: 'iiif_suggest',
+      suggester_name: 'iiifSuggester'
+    }
+
     config.view.gallery.partials = %i[index_header index]
     config.view.masonry.partials = [:index]
     config.view.slideshow.partials = [:index]
@@ -30,19 +43,27 @@ class CatalogController < ApplicationController
     config.advanced_search[:query_parser] ||= 'dismax'
     config.advanced_search[:form_solr_parameters] ||= {}
 
-    config.search_builder_class = Hyrax::CatalogSearchBuilder
+    config.search_builder_class = CustomSearchBuilder
 
     # Show gallery view
     config.view.gallery.partials = %i[index_header index]
     config.view.slideshow.partials = [:index]
 
+    # rubocop:disable Style/HashSyntax
+    # rubocop:disable Style/SymbolLiteral
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
     config.default_solr_params = {
       qt: "search",
       rows: 10,
-      qf: "title_tesim description_tesim creator_tesim keyword_tesim"
+      qf: "title_tesim description_tesim creator_tesim keyword_tesim all_text_tsimv",
+      :"hl" => true,
+      :"hl.simple.pre" => "<span class='highlight'>",
+      :"hl.simple.post" => "</span>",
+      :"hl.snippets" => 30,
+      :"hl.fragsize" => 100
     }
-
+    # rubocop:enable Style/SymbolLiteral
+    # rubocop:enable Style/HashSyntax
     # Specify which field to use in the tag cloud on the homepage.
     # To disable the tag cloud, comment out this line.
     config.tag_cloud_field_name = Solrizer.solr_name("tag", :facetable)
@@ -94,6 +115,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name("identifier", :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
     config.add_index_field solr_name("embargo_release_date", :stored_sortable, type: :date), label: "Embargo release date", helper_method: :human_readable_date
     config.add_index_field solr_name("lease_expiration_date", :stored_sortable, type: :date), label: "Lease expiration date", helper_method: :human_readable_date
+    config.add_index_field 'all_text_tsimv', highlight: true, helper_method: :render_ocr_snippets
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
@@ -133,11 +155,11 @@ class CatalogController < ApplicationController
     # This one uses all the defaults set by the solr request handler. Which
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
-    config.add_search_field('all_fields', label: 'All Fields', include_in_advanced_search: false) do |field|
+    config.add_search_field('all_fields', label: 'All Fields', include_in_advanced_search: false, advanced_parse: false) do |field|
       all_names = config.show_fields.values.map(&:field).join(" ")
       title_name = solr_name("title", :stored_searchable)
       field.solr_parameters = {
-        qf: "#{all_names} file_format_tesim all_text_timv",
+        qf: "#{all_names} file_format_tesim title_tesim all_text_tsimv",
         pf: title_name.to_s
       }
     end
@@ -359,11 +381,25 @@ class CatalogController < ApplicationController
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
     config.spell_max = 5
+
+    config.add_field_configuration_to_solr_request!
   end
 
   # This is overridden just to give us a JSON response for debugging.
   def show
     _, @document = fetch params[:id]
     render json: @document.to_h
+  end
+
+  def iiif_search
+    _parent_response, @parent_document = fetch(params[:solr_document_id])
+    iiif_search = BlacklightIiifSearch::IiifSearch.new(iiif_search_params, iiif_search_config,
+                                                       @parent_document)
+    @response, _document_list = search_results(iiif_search.solr_params)
+    iiif_search_response = BlacklightIiifSearch::IiifSearchResponse.new(@response,
+                                                                        @parent_document,
+                                                                        self)
+    render json: iiif_search_response.annotation_list,
+           content_type: 'application/json'
   end
 end

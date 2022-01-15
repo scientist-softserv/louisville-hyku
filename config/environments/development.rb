@@ -50,7 +50,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: "localhost:3001" }
 
-  config.web_console.whitelisted_ips = ['172.18.0.0/16', '172.27.0.0/16', '0.0.0.0/0']
+  config.web_console.whitelisted_ips = ["172.0.0.0/8", '192.168.0.0/16', '127.0.0.1']
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
