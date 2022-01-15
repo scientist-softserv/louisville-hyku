@@ -6,6 +6,17 @@ module Hyku
 
     delegate :extent, to: :solr_document
 
+    # are there any pages to display in uv?
+    def derived_files?
+      derived_members.present?
+    end
+
+    def derived_members
+      @derived_members ||= member_presenters_for(list_of_item_ids_to_display).select do |member|
+        member.solr_document['is_derived_ssi'] == 'true'
+      end
+    end
+
     # assumes there can only be one doi
     def doi
       doi_regex = %r{10\.\d{4,9}\/[-._;()\/:A-Z0-9]+}i

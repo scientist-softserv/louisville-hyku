@@ -8,6 +8,7 @@ class SolrDocument
 
   # Adds Hyrax behaviors to the SolrDocument.
   include Hyrax::SolrDocumentBehavior
+  include NewspaperWorks::Solr::Document
 
   # self.unique_key = 'id'
 

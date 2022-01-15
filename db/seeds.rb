@@ -51,4 +51,8 @@ if ENV['INITIAL_ADMIN_EMAIL'] && ENV['INITIAL_ADMIN_PASSWORD']
     u.password = ENV['INITIAL_ADMIN_PASSWORD']
   end
   u.add_role(:superadmin)
+  Account.find_each do |account|
+    Apartment::Tenant.switch!(account.tenant)
+    u.add_role(:admin, Site.instance)
+  end
 end

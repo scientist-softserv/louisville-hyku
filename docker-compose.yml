@@ -5,7 +5,7 @@ x-app: &app
     context: .
     target: hyku-base
     args:
-      - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre ffmpeg rsync
+      - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre ffmpeg rsync exiftool
   image: ghcr.io/samvera/hyku:latest
   env_file:
     - .env
@@ -37,7 +37,7 @@ services:
     image: bitnami/zookeeper:3.6
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
-      - ZOO_4LW_COMMANDS_WHITELIST=mntr, srvr, ruok
+      - ZOO_4LW_COMMANDS_WHITELIST=mntr,srvr,ruok,conf
       - ZOO_SERVER_ID=1
       - ZOO_SERVERS=zoo:2888:3888
     expose:
@@ -112,6 +112,7 @@ services:
     environment:
       - VIRTUAL_PORT=3000
       - VIRTUAL_HOST=.hyku.test
+      - TMPDIR=/app/samvera/hyrax-webapp/tmp/uploads
     depends_on:
       db:
         condition: service_started
@@ -141,8 +142,10 @@ services:
       context: .
       target: hyku-worker
       args:
-        - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre ffmpeg rsync
+        - EXTRA_APK_PACKAGES=less vim bash openjdk11-jre ffmpeg rsync exiftool
     command: bundle exec sidekiq
+    environment:
+      - TMPDIR=/app/samvera/hyrax-webapp/tmp/uploads
     depends_on:
       check_volumes:
         condition: service_completed_successfully
@@ -187,6 +190,7 @@ services:
           solrcloud-assign-configset.sh &&
           SOLR_COLLECTION_NAME=hydra-test solrcloud-assign-configset.sh &&
           db-migrate-seed.sh &&
+          yarn install
           touch /app/samvera/hyrax-webapp/solr_db_initialized
         fi
     depends_on:

@@ -62,6 +62,10 @@ Hyrax.config do |config|
   # Specify the path to the file derivatives creation tool:
   config.libreoffice_path = ENV.fetch('HYRAX_LIBREOFFICE_PATH', 'soffice')
 
+  # Option to enable/disable full text extraction from PDFs
+  # Default is true, set to false to disable full text extraction
+  config.extract_full_text = false
+
   # Stream realtime notifications to users in the browser
   # config.realtime_notifications = true
 

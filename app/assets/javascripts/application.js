@@ -45,6 +45,8 @@
 /////////////////////////////////////////////
 
 //= require hyrax
+//= require newspaper_works
+
 //= require jquery.flot.pie
 //= require flot_graph
 //= require statistics_tab_manager
