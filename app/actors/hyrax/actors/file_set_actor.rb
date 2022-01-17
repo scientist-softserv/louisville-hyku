@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # OVERRIDE Hyrax 2.9.1 create metadata to add derived to metadata
 
 module Hyrax
@@ -76,7 +78,6 @@ module Hyrax
 
       # Adds a FileSet to the work using ore:Aggregations.
       # Locks to ensure that only one process is operating on the list at a time.
-      # rubocop: disable Metrics/AbcSize
       def attach_to_work(work, file_set_params = {})
         Sidekiq.logger.error("FileSetActor.attach_to_work is starting #{Time.now.utc} :: work.id #{work.id}") # rubocop: disable Metrics/LineLength
         acquire_lock_for(work.id) do

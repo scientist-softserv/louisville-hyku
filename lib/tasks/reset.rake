@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :hyrax do
   namespace :reset do
     desc 'Reset fedora / solr and corrisponding database tables w/o clearing other active record tables like users'

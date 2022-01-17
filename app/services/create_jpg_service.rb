@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateJpgService
   attr_accessor :files, :results, :cached
 
@@ -48,10 +50,12 @@ class CreateJpgService
     end
   end
 
+  # rubocop:disable Style/RedundantSelf
   def files_present?(directory)
     return true if self.cached
     Dir.glob("#{directory}/*.jpg").size.positive?
   end
+  # rubocop:enable Style/RedundantSelf
 
   def create_jpgs
     files.each do |file|
@@ -84,7 +88,6 @@ class CreateJpgService
     [output, $CHILD_STATUS]
   end
 
-  # rubocop:disable Metrics/AbcSize
   def create_jpgs_from_remote_pdf
     name = URI(files).path.split('/').last
     return if name.nil?

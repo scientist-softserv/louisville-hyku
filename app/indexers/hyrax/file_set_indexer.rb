@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # OVERRIDE: Hyrax 2.9.1 to change all_text_timv to all_text_tsimv
 # Would like the OCR text to display in search results
 # so it needs to be a stored value

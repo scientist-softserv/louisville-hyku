@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # OVERRIDE FROM HYRAX 2.5.1 TO ONLY ESCAPE URLS THAT ARE UNSAFE
 
 module Hyrax
@@ -52,7 +54,6 @@ module Hyrax
         # OVERRIDE FROM HYRAX 2.5.1 - only escape uri if unsafe, follows redirects to get final url
         # @param [HashWithIndifferentAccess] remote_files
         # @return [TrueClass]
-        # rubocop:disable Metrics/PerceivedComplexity
         def attach_files(env, remote_files)
           return true unless remote_files
           # URI::UNSAFE except skips % sign. This allows for already encoded urls to pass
