@@ -123,8 +123,8 @@ group :aws do
   gem 'aws-sdk-sqs'
 end
 
-gem "cocoon"
 gem 'bootstrap-datepicker-rails'
+gem "cocoon"
 gem 'codemirror-rails'
 gem 'final_redirect_url'
 gem 'httparty'

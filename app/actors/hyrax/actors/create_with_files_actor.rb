@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # OVERRIDE: Hyrax 2.5.1 Add call to CreateJpgService and send result to attach files method
 module Hyrax
   module Actors

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'open3'
 require 'tmpdir'
 
@@ -5,7 +7,7 @@ require 'tmpdir'
 class PDFComposer
   attr_accessor :work, :page_pdfs
 
-  CMD_BASE = "gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite".freeze
+  CMD_BASE = "gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite"
 
   # @param work [NewspaperWork] adapts work work object
   def initialize(work)

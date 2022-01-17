@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # OVERRIDE: Hyrax 2.9.1 to add derived to uploaded files
 
 class AttachFilesToWorkJob < Hyrax::ApplicationJob
@@ -6,7 +8,6 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
 
   # @param [ActiveFedora::Base] work - the work object
   # @param [Array<Hyrax::UploadedFile>] uploaded_files - an array of files to attach
-  # rubocop:disable Metrics/AbcSize
   def perform(work, uploaded_files, **work_attributes)
     Sidekiq.logger.error("AttachFilesToWorkJob is starting #{Time.now.utc} :: Work ID #{work.id}") # rubocop: disable Metrics/LineLength
     validate_files!(uploaded_files)
@@ -28,7 +29,7 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
         actor.create_content(uploaded_file)
         actor.file_set.visibility = work.visibility
         actors << actor
-       Sidekiq.logger.error("uploaded files block is ending #{Time.now.utc} :: Work ID #{work.id}")
+        Sidekiq.logger.error("uploaded files block is ending #{Time.now.utc} :: Work ID #{work.id}")
       end
     end
 
@@ -42,6 +43,7 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
   # rubocop:enable Metrics/AbcSize
 
   private
+
     def attach_to_work(actors, work)
       acquire_lock_for(work.id) do
         members = work.ordered_members

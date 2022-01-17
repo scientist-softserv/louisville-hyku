@@ -36,7 +36,6 @@ class User < ApplicationRecord
     email
   end
 
-  # rubocop:disable Naming/PredicateName
   def is_superadmin
     has_role? :superadmin
   end
