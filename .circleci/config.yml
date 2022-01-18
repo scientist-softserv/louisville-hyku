@@ -27,7 +27,7 @@ jobs:
       os-dependencies:
         default: ''
         type: string
-        description: exiftool
+        description: "exiftool"
     docker:
       - image: circleci/ruby:<< parameters.ruby_version >>-node-browsers-legacy
       - image: ualbertalib/docker-fcrepo4:<< parameters.fcrepo_version>>
@@ -79,6 +79,10 @@ jobs:
       - samvera/bundle:
           ruby_version: << parameters.ruby_version >>
           bundler_version: << parameters.bundler_version >>
+      - when:
+        condition: << parameters.os-dependencies >>
+        steps:
+          - run: apk add --update-cache << parameters.os-dependencies >>
       - samvera/rubocop
       - run: bundle exec rake db:create db:schema:load
       - run: bin/solrcloud-upload-configset.sh solr/config
