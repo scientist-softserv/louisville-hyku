@@ -45,14 +45,23 @@ RSpec.describe CatalogController, type: :request, clean: true, multitenant: true
   describe 'Cross Tenant Search' do
     let(:cross_tenant_solr_options) do
       {
-        "read_timeout" => 120,
+        "timeout" => 120,
         "open_timeout" => 120,
         "url" => "#{ENV['SOLR_URL']}hydra-cross-search-tenant",
         "adapter" => "solr"
       }
     end
 
-    let(:black_light_config) { Blacklight::Configuration.new(connection_config: cross_tenant_solr_options) }
+    let(:black_light_config) do
+      Blacklight::Configuration.new do |config|
+        config.connection_config = cross_tenant_solr_options
+        config.advanced_search = {}
+        config.add_search_field "all_fields"
+        config.add_search_field "special_field" do |field|
+          field.advanced_parse = false
+        end
+      end
+    end
 
     before do
       host! "http://#{cross_search_tenant_account.cname}/"
