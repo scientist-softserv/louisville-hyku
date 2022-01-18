@@ -24,10 +24,6 @@ jobs:
       redis_version:
         type: string
         default: '4'
-      os-dependencies:
-        default: ''
-        type: string
-        description: "exiftool"
     docker:
       - image: circleci/ruby:<< parameters.ruby_version >>-node-browsers-legacy
       - image: ualbertalib/docker-fcrepo4:<< parameters.fcrepo_version>>
@@ -75,10 +71,7 @@ jobs:
       SPEC_OPTS: --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
     steps:
       - samvera/cached_checkout
-      - when:
-          condition: << parameters.os-dependencies >>
-          steps:
-            - run: apk add --update-cache << parameters.os-dependencies >>
+
       - samvera/bundle:
           ruby_version: << parameters.ruby_version >>
           bundler_version: << parameters.bundler_version >>
