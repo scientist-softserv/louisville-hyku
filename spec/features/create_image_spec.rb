@@ -38,9 +38,15 @@ RSpec.describe 'Create a Image', js: true do
       login_as user
     end
 
+    def wait_for_btn_to_load(text)
+      # find('a.btn', text: text)
+      page.has_css?('.btn-primary')
+    end
+
     it do # rubocop:disable RSpec/ExampleLength
       visit '/dashboard'
       click_link "Works"
+      wait_for_btn_to_load('Add new work')
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
