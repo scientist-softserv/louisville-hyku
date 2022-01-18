@@ -30,8 +30,6 @@ jobs:
         description: "exiftool"
     docker:
       - image: circleci/ruby:<< parameters.ruby_version >>-node-browsers-legacy
-        environment:
-          EXTRA_APK_PACKAGES: "exiftool"
       - image: ualbertalib/docker-fcrepo4:<< parameters.fcrepo_version>>
         environment:
           CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC"
@@ -77,7 +75,10 @@ jobs:
       SPEC_OPTS: --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
     steps:
       - samvera/cached_checkout
-
+      - when:
+          condition: << parameters.os-dependencies >>
+          steps:
+            - run: apk add --update-cache << parameters.os-dependencies >>
       - samvera/bundle:
           ruby_version: << parameters.ruby_version >>
           bundler_version: << parameters.bundler_version >>
