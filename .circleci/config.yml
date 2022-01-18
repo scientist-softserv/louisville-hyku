@@ -27,7 +27,7 @@ jobs:
       os-dependencies:
         default: ''
         type: string
-        description: "exiftool"
+        description: exiftool
     docker:
       - image: circleci/ruby:<< parameters.ruby_version >>-node-browsers-legacy
       - image: ualbertalib/docker-fcrepo4:<< parameters.fcrepo_version>>
