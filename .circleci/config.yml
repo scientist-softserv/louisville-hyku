@@ -79,7 +79,7 @@ jobs:
       - samvera/bundle:
           ruby_version: << parameters.ruby_version >>
           bundler_version: << parameters.bundler_version >>
-          os-dependencies: << parameters.os-dependencies >>
+      - run: apk add --update-cache << parameters.os-dependencies >>
       - samvera/rubocop
       - run: bundle exec rake db:create db:schema:load
       - run: bin/solrcloud-upload-configset.sh solr/config
