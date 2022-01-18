@@ -30,6 +30,7 @@ jobs:
         description: "exiftool"
     docker:
       - image: circleci/ruby:<< parameters.ruby_version >>-node-browsers-legacy
+        run: apk add --update-cache << parameters.os-dependencies >>
       - image: ualbertalib/docker-fcrepo4:<< parameters.fcrepo_version>>
         environment:
           CATALINA_OPTS: "-Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms512m -Xmx1024m -XX:NewSize=256m -XX:MaxNewSize=256m -XX:PermSize=256m -XX:MaxPermSize=256m -XX:+DisableExplicitGC"
@@ -79,7 +80,6 @@ jobs:
       - samvera/bundle:
           ruby_version: << parameters.ruby_version >>
           bundler_version: << parameters.bundler_version >>
-      - run: apk add --update-cache << parameters.os-dependencies >>
       - samvera/rubocop
       - run: bundle exec rake db:create db:schema:load
       - run: bin/solrcloud-upload-configset.sh solr/config
