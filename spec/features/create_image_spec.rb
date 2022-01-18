@@ -39,8 +39,7 @@ RSpec.describe 'Create a Image', js: true do
     end
 
     def wait_for_btn_to_load(text)
-      # find('a.btn', text: text)
-      page.has_css?('.btn-primary')
+      find('a.btn', text: text)
     end
 
     it do # rubocop:disable RSpec/ExampleLength
