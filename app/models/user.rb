@@ -54,6 +54,7 @@ class User < ApplicationRecord
       remove_role :superadmin
     end
   end
+  # rubocop:enable Naming/PredicateName
 
   def site_roles
     roles.site

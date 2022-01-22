@@ -9,6 +9,7 @@ class SolrDocument
   # Adds Hyrax behaviors to the SolrDocument.
   include Hyrax::SolrDocumentBehavior
   # Add attributes for DOIs for hyrax-doi plugin.
+  include NewspaperWorks::Solr::Document
   include Hyrax::DOI::SolrDocument::DOIBehavior
 
   # self.unique_key = 'id'
@@ -45,14 +46,12 @@ class SolrDocument
   attribute :data_source, Solr::Array, solr_name('data_source')
   attribute :date_digital, Solr::Array, solr_name('date_digital')
   attribute :decade, Solr::Array, solr_name('decade')
-  attribute :descriptor, Solr::Array, solr_name('descriptor')
   attribute :digitization_specification, Solr::Array, solr_name('digitization_specification')
   attribute :cataloguing_note, Solr::Array, solr_name('cataloguing_note')
   attribute :exhibit_history, Solr::Array, solr_name('exhibit_history')
   attribute :format, Solr::Array, solr_name('format')
   attribute :honoree, Solr::Array, solr_name('honoree')
   attribute :invoice_information, Solr::Array, solr_name('invoice_information')
-  attribute :iqb, Solr::Array, solr_name('iqb')
   attribute :issue, Solr::Array, solr_name('issue')
   attribute :language_script, Solr::Array, solr_name('language_script')
   attribute :location, Solr::Array, solr_name('location')
@@ -73,9 +72,6 @@ class SolrDocument
   attribute :production, Solr::Array, solr_name('production')
   attribute :region, Solr::Array, solr_name('region')
   attribute :related_image, Solr::Array, solr_name('related_image')
-  attribute :related_material_and_publication_history,
-            Solr::Array,
-            solr_name('related_material_and_publication_history')
   attribute :resource_query, Solr::Array, solr_name('resource_query')
   attribute :series, Solr::Array, solr_name('series')
   attribute :story, Solr::Array, solr_name('story')
@@ -90,6 +86,7 @@ class SolrDocument
 
   attribute :extent, Solr::Array, solr_name('extent')
   attribute :rendering_ids, Solr::Array, solr_name('hasFormat', :symbol)
+  attribute :account_cname, Solr::Array, solr_name('account_cname')
 
   field_semantics.merge!(
     contributor: 'contributor_tesim',

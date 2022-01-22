@@ -398,6 +398,23 @@ ActiveRecord::Schema.define(version: 2021_12_03_195233) do
     t.index ["namespace"], name: "index_minter_states_on_namespace", unique: true
   end
 
+  create_table "newspaper_works_derivative_attachments", id: :serial, force: :cascade do |t|
+    t.string "fileset_id"
+    t.string "path"
+    t.string "destination_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fileset_id"], name: "index_newspaper_works_derivative_attachments_on_fileset_id"
+  end
+
+  create_table "newspaper_works_ingest_file_relations", id: :serial, force: :cascade do |t|
+    t.string "file_path"
+    t.string "derivative_path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["file_path"], name: "index_newspaper_works_ingest_file_relations_on_file_path"
+  end
+
   create_table "permission_template_accesses", id: :serial, force: :cascade do |t|
     t.integer "permission_template_id"
     t.string "agent_type"
@@ -688,6 +705,7 @@ ActiveRecord::Schema.define(version: 2021_12_03_195233) do
     t.string "file_set_uri"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "derived", default: false
     t.index ["file_set_uri"], name: "index_uploaded_files_on_file_set_uri"
     t.index ["user_id"], name: "index_uploaded_files_on_user_id"
   end
