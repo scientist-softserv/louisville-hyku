@@ -1,0 +1,335 @@
+<!-- use customB1 with custom-homepage css -->
+<div id="homepage">
+
+  <!-- script src="assets/jssor.slider-28.1.0.min.js" type="text/javascript"></script -->
+  <script>
+        window.jssor_1_slider_init = function() {
+
+            var jssor_1_SlideoTransitions = [
+              [{b:-1,d:1,ls:0.5},{b:0,d:1000,y:5,e:{y:6}}],
+              [{b:-1,d:1,ls:0.5},{b:200,d:1000,y:25,e:{y:6}}],
+              [{b:-1,d:1,ls:0.5},{b:400,d:1000,y:45,e:{y:6}}],
+              [{b:-1,d:1,ls:0.5},{b:600,d:1000,y:65,e:{y:6}}],
+              [{b:-1,d:1,ls:0.5},{b:800,d:1000,y:85,e:{y:6}}],
+              [{b:-1,d:1,ls:0.5},{b:500,d:1000,y:195,e:{y:6}}],
+              [{b:0,d:2000,y:30,e:{y:3}}],
+              [{b:-1,d:1,rY:-15,tZ:100},{b:0,d:1500,y:30,o:1,e:{y:3}}],
+              [{b:-1,d:1,rY:-15,tZ:-100},{b:0,d:1500,y:100,o:0.8,e:{y:3}}],
+              [{b:500,d:1500,o:1}],
+              [{b:0,d:1000,y:380,e:{y:6}}],
+              [{b:300,d:1000,x:80,e:{x:6}}],
+              [{b:300,d:1000,x:330,e:{x:6}}],
+              [{b:-1,d:1,r:-110,sX:5,sY:5},{b:0,d:2000,o:1,r:-20,sX:1,sY:1,e:{o:6,r:6,sX:6,sY:6}}],
+              [{b:0,d:600,x:150,o:0.5,e:{x:6}}],
+              [{b:0,d:600,x:1140,o:0.6,e:{x:6}}],
+              [{b:-1,d:1,sX:5,sY:5},{b:600,d:600,o:1,sX:1,sY:1,e:{sX:3,sY:3}}]
+            ];
+
+            var jssor_1_options = {
+              $AutoPlay: 1,
+              $Idle: 10000, /* slide display time */
+              $LazyLoading: 1,
+              $CaptionSliderOptions: {
+                $Class: $JssorCaptionSlideo$,
+                $Transitions: jssor_1_SlideoTransitions
+              },
+              $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$
+              },
+              $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$,
+                $SpacingX: 20,
+                $SpacingY: 20
+              }
+            };
+
+            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+            /*#region responsive code begin*/
+
+            var MAX_WIDTH = 1600;
+
+            function ScaleSlider() {
+                var containerElement = jssor_1_slider.$Elmt.parentNode;
+                var containerWidth = containerElement.clientWidth;
+
+                if (containerWidth) {
+
+                    var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+
+                    jssor_1_slider.$ScaleWidth(expectedWidth);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+
+            ScaleSlider();
+
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+            $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+            /*#endregion responsive code end*/
+        };
+    </script>
+
+  <div id="homeGallery" class="col-xs-12">
+    <div id="home-header" class="col-xs-12">
+      <h1>Digital Collections</h1>
+      <h2>Historic photographs, newspapers, books, and more from the University of Louisville's rare collections.</h2>
+    </div>
+
+    <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:840px;height:350px;overflow:hidden;visibility:hidden;">
+        <!-- Loading Screen -->
+      <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:840px;height:350px;overflow:hidden;">
+        <div>
+          <a href="https://library.louisville.edu/home">
+            <%= image_tag("840x350_R_05189_n.jpg", alt: "Jefferson Meat Market", style: "opacity:0.9;", data: { u: "image" }) %>
+            <svg viewbox="-600 0 1000 72" data-to="100% 100%" width="1000" height="72" data-t="12" 
+             style="left:2300px;top:460px;display:block;position:absolute;font-family:'Open Sans',sans-serif;font-size:1rem;;font-weight:900;overflow:visible;">
+            </svg>
+            <div class="caption">Jefferson Meat Market (R_05189)</div>
+          </a>
+        </div>
+        <div>
+          <a href="">
+            <%= image_tag("840x350_map_01.jpg", alt: "map", style: "opacity:0.9;", data: { u: "image" }) %>
+            <svg viewbox="-600 0 1000 72" data-to="100% 100%" width="1000" height="72" data-t="12" 
+               style="left:2300px;top:460px;display:block;position:absolute;font-family:'Open Sans',sans-serif;font-size:1rem;;font-weight:900;overflow:visible;">
+            </svg>
+            <div class="caption">Map name</div>
+          </a>
+        </div>
+        <div>
+          <a href="">
+            <%= image_tag("840x350_Georgian002.jpg", alt: "train", style: "opacity:0.9;", data: { u: "image" }) %>
+            <svg viewbox="-600 0 1000 72" data-to="100% 100%" width="1000" height="72" data-t="12" 
+               style="left:2300px;top:460px;display:block;position:absolute;font-family:'Open Sans',sans-serif;font-size:1rem;;font-weight:900;overflow:visible;">
+            </svg>
+            <div class="caption">The Georgian</div>
+          </a>
+        </div>
+      </div>
+        <!-- Bullet Navigator -->
+      <div data-u="navigator" class="jssorb132" style="position:absolute;bottom:10px;right:16px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+        <div data-u="prototype" class="i" style="width:12px;height:12px;">
+          <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+            <circle class="b" cx="8000" cy="8000" r="5800"></circle>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+    <script>jssor_1_slider_init();</script>
+  </div><!-- homeGallery -->
+
+
+  <div id="highlights">
+    <div id="featured">
+              <h2>Featured Topics</h2>
+
+              <div class="s-card col-md-3" id="cards">
+                <div class="content">
+
+                  <div class="s-card col-md-3" id="card-1">
+                    <a href="/catalog/?f%5Bcity_sim%5D%5B%5D=Louisville+%28Ky.%29&f%5Bmedia_type_sim%5D%5B%5D=Still+Image&locale=en" class="inner">
+                      <div class="card-media-wrapper">
+                        <div class="card-image">
+                          <%= image_tag("cards-ULPA1998-09-210.png", alt: "downtown buildings") %>
+                        </div>
+                      </div>
+  
+                      <div class="card-text-wrapper">
+                        <h3>Louisville Images</h3>
+                      </div>
+                    </a>
+                  </div>
+          
+                   <div class="s-card col-md-3" id="card-2">
+                      <a href="/catalog/?locale=en&q=University+of+Louisville&search_field=all_fields" class="inner">
+                        <div class="card-media-wrapper">
+                          <div class="card-image">
+                            <%= image_tag("cards-ULUA-001-0349.jpg", alt: "UofL Football players") %>
+                          </div>
+                        </div>
+                        <div class="card-text-wrapper">
+                          <h3>University of Louisville</h3>
+                        </div>
+                      </a>
+                    </div>
+          
+                   <div class="s-card col-md-3" id="card-3">
+                      <a href="/catalog?f%5Blocation_sim%5D%5B%5D=Kentucky&f%5Bresource_type_sim%5D%5B%5D=Maps&locale=en" class="inner">
+                        <div class="card-media-wrapper">
+                          <div class="card-image">
+                            <%= image_tag("cards-maps-1884-plate1.png", alt: "map") %>
+                          </div>
+                        </div>
+                        <div class="card-text-wrapper">
+                          <h3>Kentucky Maps</h3>
+                        </div>
+                      </a>
+                    </div>
+          
+                    <div class="s-card col-md-3" id="card-4">
+                      <a href="/catalog?f%5Bresource_type_sim%5D%5B%5D=Illuminated+manuscripts&locale=en&search_field=all_fields" class="inner">
+                        <div class="card-media-wrapper">
+                          <div class="card-image"> 
+                            <%= image_tag("cards-illuminated-ULRB-2006.mss.05.png", alt: "book of hours") %>
+                          </div>
+                        </div>
+                        <div class="card-text-wrapper">
+                          <h3>Illuminated Manuscripts</h3>
+                        </div> 
+                      </a> 
+                    </div> 
+          
+                    <div class="s-card col-md-3" id="card-5">
+                      <a href="/catalog?utf8=%E2%9C%93&locale=en&search_field=all_fields&q=Louisville+General+Hospital" class="inner">
+                        <div class="card-media-wrapper">
+                          <div class="card-image"> 
+                            <%= image_tag("cards-ulhl-student-nurse16.png", alt: "nursing lesson") %>
+                          </div>
+                        </div>
+                        <div class="card-text-wrapper">
+                          <h3>Louisville General Hospital</h3>
+                        </div> 
+                      </a> 
+                    </div> 
+          
+                   <div class="s-card col-md-3" id="card-6">
+                     <a href="/catalog?utf8=?&locale=en&search_field=all_fields&q=yearbook+OR+yearbooks" class="inner">
+                        <div class="card-media-wrapper">
+                          <div class="card-image"> 
+                            <%= image_tag("cards-yearbook-1974-p188.jpg", alt: "yearbook") %>
+                          </div>
+                        </div>
+                        <div class="card-text-wrapper">
+                          <h3>Yearbooks</h3>
+                        </div> 
+                      </a> 
+                  </div> 
+                </div> 
+            </div>
+  
+          </div>
+
+
+    <div id="repositories">
+            <h2>Repositories</h2>
+
+            <div class="s-card col-md-3" id="r-cards">
+              <div class="content">
+
+                <div id="card-bridwell" class="s-card col-md-3">
+                <a href="/catalog?utf8=?&locale=en&search_field=all_fields&q=University+of+Louisville+Margaret+M.+Bridwell+Art+Library" class="inner">
+                  <div class="card-media-wrapper">
+                    <div class="card-image">
+                      <%= image_tag("cards-ULAL-knott-bookplate.png", alt: "bookplate") %>
+                    </div>
+                  </div>
+                  <div class="card-text-wrapper">
+                    <h3>Bridwell Art Library</h3>
+                  </div>
+                </a>
+              </div>
+  
+                <div id="card-hite" class="s-card col-md-3">
+              <a href="/catalog?utf8=?&locale=en&search_field=all_fields&q=University+of+Louisville+Hite+Art+Institute" class="inner">
+                <div class="card-media-wrapper">
+                  <div class="card-image">
+                    <%= image_tag("cards-Hite-Y23N3-LouBlock-1.png", alt: "Hite catalog") %> 
+                  </div>
+                </div>
+  
+                <div class="card-text-wrapper">
+                  <h3>Hite Art Institute</h3>
+                </div>
+              </a>
+            </div>
+          
+                <div id="card-korn" class="s-card col-md-3">
+              <a href="/catalog?utf8=?&locale=en&search_field=all_fields&q=University+of+Louisville+Kornhauser+Health+Sciences+Library" class="inner">
+                <div class="card-media-wrapper">
+                  <div class="card-image"> 
+                    <%= image_tag("cards-ULHL-Nursing03.png", alt: "student nurse") %> 
+                  </div>
+                </div>
+                <div class="card-text-wrapper">
+                  <h3>Kornhauser Health Sciences Library</h3>
+                </div> 
+              </a> 
+            </div> 
+          
+                <div id="card-law" class="s-card col-md-3">
+              <a href="/catalog?utf8=?&locale=en&search_field=all_fields&q=Law+Library+of+the+Louis+D.+Brandeis+School+of+Law%2C+University+of+Louisville" class="inner">
+                <div class="card-media-wrapper">
+                  <div class="card-image"> 
+                    <%= image_tag("cards-LouisvilleLawyer-May1961-p1.png", alt: "Louisville Lawyer 1961") %>
+                  </div>
+                </div>
+                <div class="card-text-wrapper">
+                  <h3>Law Library of the Louis D. Brandeis School of Law</h3>
+                </div> 
+              </a> 
+            </div> 
+          
+                <div id="card-music" class="s-card col-md-3">
+              <a href="/catalog?utf8=?&locale=en&search_field=all_fields&q=University+of+Louisville+Dwight+Anderson+Music+Library" class="inner">
+                <div class="card-media-wrapper">
+                  <div class="card-image">
+                    <%= image_tag("cards-music-guestbook-p18.png", alt: "guest book") %>
+                  </div>
+                </div>
+                <div class="card-text-wrapper">
+                  <h3>Dwight Anderson Music Library</h3>
+                </div>
+              </a>
+            </div>
+          
+                <div id="card-photoarc" class="s-card col-md-3">
+              <a href="/catalog?utf8=?&locale=en&search_field=all_fields&q=University+of+Louisville+Photographic+Archives" class="inner">
+                <div class="card-media-wrapper">
+                  <div class="card-image"> 
+                    <%= image_tag("cards-sonj-49546-M-6.png", alt: "Esther Bubley photo of New York bus station") %>
+                  </div>
+                </div>
+                <div class="card-text-wrapper">
+                  <h3>Photographic Archives</h3>
+                </div> 
+              </a> 
+            </div>
+                    
+                <div id="card-rare" class="s-card col-md-3" >
+              <a href="/catalog?utf8=?&locale=en&search_field=all_fields&q=University+of+Louisville+Rare+Books" class="inner">
+                <div class="card-media-wrapper">
+                  <div class="card-image"> 
+                    <%= image_tag("cards-book-on-virtues-p208-209.jpg", alt: "Book on Virtues") %>
+                  </div>
+                </div>
+                <div class="card-text-wrapper">
+                  <h3>Rare Books</h3>
+                </div> 
+              </a> 
+            </div> 
+          
+                <div id="card-uarc" class="s-card col-md-3">
+              <a href="/catalog?utf8=?&locale=en&search_field=all_fields&q=University+of+Louisville+Archives+Records+Center" class="inner">
+                <div class="card-media-wrapper">
+                  <div class="card-image"> 
+                    <%= image_tag("cards-LN19720708.jpg", alt: "L and N Magazine") %>
+                  </div>
+                </div>
+                <div class="card-text-wrapper">
+                  <h3>University of Louisville Archives and Records Center</h3>
+                </div> 
+              </a> 
+            </div>
+              
+              </div> 
+            </div>
+  
+          </div>  
+ 
+  </div>
+</div>

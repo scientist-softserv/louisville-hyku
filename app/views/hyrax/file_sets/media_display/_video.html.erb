@@ -1,0 +1,7 @@
+<div>
+  <video controls="controls" class="video-js vjs-default-skin" style="width:100%" data-setup="{}" controlsList="nodownload" preload="auto">
+    <source src="<%= hyrax.download_path(file_set) %>" type="video/webm" />
+    <source src="<%= hyrax.download_path(file_set) %>" type="video/mp4" />
+    <%= t('hyrax.file_set.show.downloadable_content.video_tag_not_supported') %>
+  </video>
+</div>

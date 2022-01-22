@@ -1,8 +1,7 @@
-<dl class="work-show <%= dom_class(presenter) %>" <%= presenter.microdata_type_to_html %>> 
+<dl id="hyrax-base-metadata" class="work-show <%= dom_class(presenter) %>" <%= presenter.microdata_type_to_html %>>
     <%#= render 'attribute_rows', presenter: presenter %>
     <%= presenter.attribute_to_html(:identifier, html_dl: true, label: "Item number") %>
     <%= presenter.attribute_to_html(:alternative_title, html_dl: true) %>
-    <%= presenter.attribute_to_html(:iqb, html_dl: true) %>
     <%= presenter.attribute_to_html(:honoree, html_dl: true) %>
     <%= presenter.attribute_to_html(:type_of_honoree, html_dl: true) %>
     <%= presenter.attribute_to_html(:location_of_honoree, html_dl: true) %>
@@ -18,7 +17,6 @@
     <%= presenter.attribute_to_html(:contributor_history, html_dl: true) %>
     <%= presenter.attribute_to_html(:contributor_description, html_dl: true) %>
     <%= presenter.attribute_to_html(:transcription_translation, html_dl: true) %>
-    <%= presenter.attribute_to_html(:descriptor, html_dl: true) %>
     <%= presenter.attribute_to_html(:table_of_contents, html_dl: true) %>
     <%= presenter.attribute_to_html(:invoice_information, html_dl: true) %>
     <%= presenter.attribute_to_html(:photo_comment, html_dl: true) %>
@@ -44,13 +42,12 @@
     <%= presenter.attribute_to_html(:place_original, html_dl: true) %>
     <%= presenter.attribute_to_html(:production, html_dl: true) %>
     <%= presenter.attribute_to_html(:date_created, html_dl: true, label: "Date original") %>
-    <%= presenter.attribute_to_html(:decade, html_dl: true) %>
+    <%= presenter.attribute_to_html(:decade, render_as: :faceted, html_dl: true) %>
     <%= presenter.attribute_to_html(:building_date, html_dl: true) %>
     <%= presenter.attribute_to_html(:language, html_dl: true) %>
     <%= presenter.attribute_to_html(:language_script, html_dl: true) %>
     <%= presenter.attribute_to_html(:resource_type, render_as: :faceted, html_dl: true, label: "Object type") %>
     <%= presenter.attribute_to_html(:ornamentation, html_dl: true) %>
-    <%= presenter.attribute_to_html(:related_material_and_publication_history, html_dl: true) %>
     <%= presenter.attribute_to_html(:exhibit_history, html_dl: true) %>
     <%= presenter.attribute_to_html(:data_source, html_dl: true) %>
     <%= presenter.attribute_to_html(:cataloguing_note, html_dl: true) %>
@@ -74,5 +71,5 @@
     <%= presenter.attribute_to_html(:embargo_release_date, render_as: :date, html_dl: true) %>
     <%= presenter.attribute_to_html(:lease_expiration_date, render_as: :date, html_dl: true) %>
     <%#= presenter.attribute_to_html(:based_near_label) %>
-    
- </dl> 
+
+ </dl>

@@ -9,7 +9,6 @@ module Hyrax
     def primary_terms
       super + %i[
         alternative_title
-        iqb
         honoree
         type_of_honoree
         location_of_honoree
@@ -23,11 +22,11 @@ module Hyrax
         contributor_description
         description
         transcription_translation
-        descriptor
         subject
         style
         technique
         material
+        ornamentation
         measurement
         cultural_context
         keyword
@@ -37,8 +36,6 @@ module Hyrax
         place_original
         date_created
         resource_type
-        ornamentation
-        related_material_and_publication_history
         exhibit_history
         data_source
         cataloguing_note
@@ -57,7 +54,6 @@ module Hyrax
         date_digital
         media_type
         format
-        extent
       ]
     end
   end

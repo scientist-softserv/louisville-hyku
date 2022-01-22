@@ -19,5 +19,10 @@
  *= require hyrax
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require bootstrap-datepicker
+ *= require font_awesome5_webfont
+ *= require custom
  *= require_self
- */
+ 
+ *= require 'blacklight_advanced_search'
+
+*/

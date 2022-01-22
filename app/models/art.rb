@@ -184,11 +184,11 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   # predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_derivedFrom"),
   # multiple: false
 
-  property :descriptor,
-           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#c_Topic"),
-           multiple: true do |index|
-    index.as :stored_searchable
-  end
+  # property :descriptor,
+  #         predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#c_Topic"),
+  #           multiple: true do |index|
+  # index.as :stored_searchable
+  # end
 
   property :exhibit_history,
            predicate: ::RDF::URI.new("https://purl.org/vra/exhibitedAt"),
@@ -206,11 +206,11 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   # predicate: ::RDF::URI.new("https://purl.org/vra/Inscription"),
   # multiple: false
 
-  property :iqb,
-           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_code"),
-           multiple: false do |index|
-    index.as :stored_searchable
-  end
+  # property :iqb,
+  #         predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_code"),
+  #        multiple: false do |index|
+  # index.as :stored_searchable
+  # end
 
   # property :image_number,
   # predicate: ::RDF::Vocab::DC.identifier,
@@ -272,11 +272,11 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
     index.as :stored_searchable
   end
 
-  property :related_material_and_publication_history,
-           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_referencedBy"),
-           multiple: true do |index|
-    index.as :stored_searchable
-  end
+  # property :related_material_and_publication_history,
+  #         predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_referencedBy"),
+  #        multiple: true do |index|
+  # index.as :stored_searchable
+  # end
 
   # property :resource_repository,
   # predicate: ::RDF::URI.new("https://purl.org/vra/sourceFor"),

@@ -47,6 +47,8 @@ RSpec.describe 'Admin can select cultural repository theme', type: :feature, js:
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       visit '/'
       expect(page).to have_css('body.cultural_repository')
+      skip 'not used by Louisville theme'
+
       expect(page).to have_css('nav.navbar.navbar-inverse.navbar-static-top.cultural-repository-nav')
       expect(page).to have_css('form#search-form-header.cultural-repository.form-horizontal.search-form')
       expect(page).to have_css('ul#user_utility_links.cultural-repository.nav.navbar-nav.navbar-right')

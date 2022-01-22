@@ -52,7 +52,6 @@ module Hyrax
       exhibit_history
       extent
       honoree
-      iqb
       language_script
       location_of_contributor
       location_of_honoree
@@ -62,7 +61,6 @@ module Hyrax
       ornamentation
       place_original
       related_image
-      related_material_and_publication_history
       style
       technique
       transcription_translation

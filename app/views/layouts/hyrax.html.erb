@@ -4,8 +4,17 @@
   <head>
     <%= render partial: 'layouts/head_tag_content' %>
     <%= content_for(:head) %>
+
+<!-- for homepage carousel -->
+<!-- <script src="assets/carousel.js"></script> THIS LINE IS CAUSING ERRORS-->
+<!-- end homepage carousel dependencies -->
+
   </head>
+  <% if user_signed_in? %>
+    <% content_for(:extra_body_classes, 'staff') %>
+  <% else %>
   <% content_for(:extra_body_classes, 'public-facing') unless params[:controller].match(/^proprietor/) %>
+  <% end %>
 
   <body class="<%= body_class %> <%= home_page_theme %> <%= search_results_theme %> <%= show_page_theme %>">
     <%= render_gtm_body(request.original_url) %>

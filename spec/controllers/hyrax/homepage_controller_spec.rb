@@ -4,7 +4,8 @@
 RSpec.describe Hyrax::HomepageController, type: :controller, clean: true do
   let(:routes) { Hyrax::Engine.routes }
 
-  describe "#index" do
+  it "custom Louisville home page does not have specs"
+  xdescribe "#index" do
     let(:user) { create(:user) }
 
     before do

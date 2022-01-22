@@ -33,6 +33,8 @@ RSpec.describe 'Admin can select institutional repository theme', type: :feature
 
   context 'when the institutional repository theme is selected' do
     it 'renders the partials in the theme folder' do # rubocop:disable RSpec/ExampleLength
+      skip 'not used by Louisville theme'
+
       login_as admin
       visit '/admin/appearance'
       click_link('Themes')
@@ -56,6 +58,7 @@ RSpec.describe 'Admin can select institutional repository theme', type: :feature
     end
 
     it 'renders the stats carousel if there are more than 6 resource_types' do
+      skip 'not used by Louisville theme'
       work.resource_type = [
         'Article', 'Audio', 'Book', 'Capstone Project', 'Conference Proceeding', 'Dataset', 'Software or Program Code'
       ]
