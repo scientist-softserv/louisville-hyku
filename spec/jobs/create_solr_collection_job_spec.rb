@@ -16,7 +16,7 @@ RSpec.describe CreateSolrCollectionJob do
       expect(client).to receive(:get).with('/solr/admin/collections',
                                            params: hash_including(action: 'CREATE',
                                                                   name: account.tenant,
-                                                                  'collection.configName': 'hyku'))
+                                                                  'collection.configName': ENV['SOLR_CONFIGSET_NAME']))
       described_class.perform_now(account)
 
       expect(account.solr_endpoint.url).to eq "#{ENV.fetch('SOLR_URL')}#{account.tenant}"

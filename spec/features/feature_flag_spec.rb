@@ -28,6 +28,7 @@ RSpec.describe 'Admin can select feature flags', type: :feature, js: true, clean
 
   context 'as a repository admin' do
     it 'has a setting for featured works' do
+      skip 'not used by Louisville theme'
       login_as admin
       visit 'admin/features'
       expect(page).to have_content 'Show featured works'
@@ -44,6 +45,7 @@ RSpec.describe 'Admin can select feature flags', type: :feature, js: true, clean
     end
 
     it 'has a setting for recently uploaded' do
+      skip 'not used by Louisville theme'
       login_as admin
       visit 'admin/features'
       expect(page).to have_content 'Show recently uploaded'
@@ -64,6 +66,7 @@ RSpec.describe 'Admin can select feature flags', type: :feature, js: true, clean
 
   context 'when all home tabs and share work features are turned off' do
     it 'the page only shows the collections tab' do
+      skip 'not used by Louisville theme'
       login_as admin
       visit 'admin/features'
       find("tr[data-feature='show-featured-works']").find_button('off').click

@@ -1,0 +1,530 @@
+@charset "utf-8";
+/* CSS Document  custom-footer.css */
+
+/* FOOTER */
+footer, #contactFooter { font-family: "Open Sans", Arial, sans-serif; }
+
+#contactFooter { 
+  min-height:unset; 
+  background-color:transparent; 
+  margin-top:4rem; 
+}
+
+#tagline {
+  display: flex; 
+  justify-content: center; 
+  color:#555; 
+  text-transform:uppercase; 
+  margin:2rem 1rem 3rem; 
+}
+#tagline p { font-size:2rem; }
+
+footer .panel-group { margin-bottom:0; }
+
+#indLib_footer {
+  background-color: #444; 
+  color: #fff;
+}
+
+#ulibs_footer {
+  background-color: #222; 
+  color: #fff;
+}
+
+#uofl_footer { 
+  background-color:black; 
+  color:white;
+}
+
+#indLib_footer, 
+#uofl_footer, 
+#ulibs_footer {
+  padding:1rem; 
+}
+
+#indLib_footer_name {
+  font-size:1.8rem; 
+}
+
+.indLib_address { font-size: 1.4rem; }
+
+#indLib_footer_name a { 
+  color:white;
+  text-decoration:none; 
+  text-transform:uppercase;
+  font-weight:bold;
+}
+
+#libs-headingThree a span span { text-transform:lowercase;}
+#uofl_footer_menu,
+.ulibs_footer_menu {
+  list-style-type: none; 
+}
+
+#uofl_footer_menu a,
+footer .panel-title a,
+footer .panel-body a {
+  color:white;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 1px;
+  font-size:1.4rem;
+}
+
+footer .panel-title a i { margin-left:1rem; }
+
+.our_footer #collapse3 a, 
+.our_footer #collapseThree a { margin-right:1.4rem; }
+
+#uofl_footer_menu a,
+footer .panel-title a  {
+  text-transform:uppercase;
+}
+
+#ulibs_footer a svg path, 
+#ulibs_footer a svg circle { 
+  fill:#ffffff; 
+}
+
+#ulibs_footer a:hover svg path, 
+#ulibs_footer a:hover svg circle { 
+  fill:#ad0000; 
+}
+
+
+#s-lg-guide-footer-attributes { list-style-type:none;}
+#meta-wrap { padding:0; }
+
+#s-lib-footer-public { justify-content: flex-start;}
+
+#web_menu li { font-size:1.2rem; }
+
+footer .panel { box-shadow:none; }
+footer .panel-group .panel { border:none; }
+footer .panel-default>.panel-heading {
+  border:none;
+}
+
+footer .panel-body ul {
+  list-style-type: none;
+  padding-left:0;
+  margin-bottom:0; 
+}
+
+footer .panel-default>.panel-heading+.panel-collapse>.panel-body, 
+footer .panel.panel-default, .panel-default>.panel-heading { 
+  border:0;
+}
+#indLib_footer .panel-default>.panel-heading+.panel-collapse>.panel-body, 
+#indLib_footer .panel.panel-default, 
+#indLib_footer .panel-default>.panel-heading { 
+  background-color:#444; 
+  color:white;
+}
+
+#ulibs_footer .panel-default>.panel-heading+.panel-collapse>.panel-body, 
+#ulibs_footer .panel.panel-default, 
+#ulibs_footer .panel-default>.panel-heading { 
+  background-color:#222; 
+  color:white;
+}
+
+
+footer li a:hover {
+  background-color: #ad0000; 
+  color:white;
+}
+
+.sm { display:flex; }
+
+.sm-item { margin-right:.5rem; }
+
+.icon-circle{
+  white-space: nowrap;
+  overflow:hidden; 
+  position:relative;
+  z-index:1;
+  width:4rem;
+  height:4rem;
+  border-width:.3rem;
+  border-style:solid; 
+  border-radius:50%; 
+  transition: background-color .1s ease; 
+  display:inline-block;
+  font-size:0; 
+  vertical-align: middle;
+}
+
+.icon-circle::before{
+  background-position:50% 50%;
+  background-repeat:no-repeat;
+  content: '';
+  font-size:0;
+  display:block;
+  position:absolute;
+  left:50%;
+  top:50%; 
+  transform: translate(-50%, -50%);
+  width:2rem; 
+  height:2rem;
+  background-size:2rem 2rem;
+}
+
+.icon-circle.facebook { border-color:#3b5998; background-color:#ffffff;}
+.icon-circle.twitter { border-color:#55acee; background-color:#ffffff;}
+.icon-circle.instagram { border-color:#ff5d40; background-color:#ffffff;}
+.icon-circle.flickr { border-color:#4A62A8; background-color:#ffffff;}
+.icon-circle.wp { border-color:#ff5d40;  background-color:#ffffff; }
+.icon-circle.more-sm { border-color:#55acee; background-color:#ffffff;}
+
+
+.icon-circle.facebook path { fill:#3b5998!important; }
+.icon-circle.facebook:hover { background-color:#3b5998; }
+.icon-circle.facebook:hover path { fill:#fff!important; }
+
+.icon-circle.twitter path { fill:#55acee; }
+.icon-circle.twitter:hover path { fill:#ad0000!important; }
+
+.icon-circle.instagram:hover { background-color:#FFF7D5;}
+
+.icon-circle.flickr circle { fill:#ffffff!important; }
+.icon-circle.flickr:hover circle { fill:#fff7d5!important; }
+
+#ulibs_footer a.wp svg path { fill:#ff5d40; }
+.icon-circle.wp:hover { border-color:#ffffff; background-color:#ff5d40;}
+#ulibs_footer a.wp:hover svg path { fill:#ffffff; }
+
+
+#ulibs_footer a.more-sm svg path { fill:#55acee; }
+.icon-circle.more-sm:hover { background-color:#ffffff;}
+#ulibs_footer a.more-sm:hover svg path { fill:#ad0000; }
+
+
+.icon-circle.plus {
+  color:black;
+  font-size:3rem; 
+  font-weight:bold;
+  text-decoration:none; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a.icon-circle.plus:hover {
+  background-color:#000;
+}
+a.icon-circle.plus:hover span {
+  color:white;
+}
+
+footer .join-email { 
+  line-height: 1.2;
+}
+
+footer .panel-body .join-email a { text-decoration:underline; }
+
+footer.navbar-inverse .navbar-link { 
+  color: #000000; 
+  text-decoration:underline #ad0000; 
+}
+
+footer.navbar-inverse .navbar-link:hover { color:#ad0000; }
+
+footer.navbar.site-footer { 
+  margin-top:0; 
+  border:none; 
+}
+footer.site-footer .navbar-text { margin:0; }
+footer.site-footer p { 
+  margin:0; 
+  text-align:left; 
+  }
+footer.site-footer .navbar-right { margin:0; }
+
+@media (max-width: 767.99px) {
+  footer {  margin:2rem 1rem; }
+  
+  footer .panel-body { padding-top:0; }
+  
+  .our_footer .container { width:100%; }
+  
+  footer #collapse3 .panel-body { padding-top:1rem; }
+  
+  #uofl_footer_menu a, footer .panel-title a {display:flex; }
+  
+  footer .panel-title a:focus { 
+    background-color:#ad0000; 
+    color:white; 
+    outline:none;
+  }
+  
+   .panel-title a[aria-expanded="true"] i.glyphicon-menu-down { 
+    transform: rotate(180deg);
+     margin-left:1rem; 
+  }
+  
+
+  .indLib_address { 
+    width:20rem; 
+    margin: 0 auto 1rem; 
+    text-align: center;
+  }
+  #indLib_footer_name { 
+  display:flex; 
+  justify-content: center; 
+    text-align: center;
+  padding:1rem .5rem; 
+}
+
+  
+  #uofl_footer, 
+  .our_footer { 
+    display:flex; 
+    flex-direction:column;
+    align-items:center;
+  }
+  
+  #uofl_footer_menu {
+    padding: 1rem 0 2rem; 
+    column-count:2; 
+    column-gap:3rem; 
+  }
+  
+  footer #uofl_logo, 
+  footer #ulibs_footer_logo { 
+    padding:1rem 1rem .5rem;
+    text-align:center;
+  }
+  
+}
+
+@media (min-width: 768px) {
+
+  
+  .our_footer .container { 
+    display:flex;
+    padding: 2rem; 
+    align-items:flex-start; 
+    justify-content: space-between; 
+  }
+  
+  #indLib_footer_name { 
+    line-height: 1.15; 
+  }
+  
+  #indLib_footer_name, 
+  #ulibs_footer_logo {
+    width:25rem;
+  }
+  
+   ul#uofl_footer_menu li {
+    padding:0 1rem;  
+    line-height:1;
+  }
+  #ulibs_footer_logo a { display:flex; }
+  
+  footer .collapse { display:block;}
+  footer .panel-group {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width:80%; 
+    margin-bottom:0; 
+  }
+  
+  footer .panel-group .panel { margin-left:2rem; }
+  
+  footer .panel-heading { padding:0; }
+  
+  footer .panel-title { 
+    font-size: 1.9rem; 
+    font-weight:700; 
+    margin-top:0;
+    margin-bottom:0; 
+  }
+  
+  footer .panel-title a {
+    padding:0; 
+    line-height:1.2;
+  }
+
+  #indLib_footer .panel-title a, 
+  #indLib_footer .panel-title a:hover {
+    cursor:default; 
+    background-color:#444!important;
+  }
+
+  #ulibs_footer .panel-title a, 
+  #ulibs_footer .panel-title a:hover {
+    cursor:default; 
+    background-color:#222!important;
+  }
+
+  #uofl_footer .container { display:flex; }
+  
+  #uofl_logo { width:20%; }
+  
+  ul#uofl_footer_menu {
+    display: flex;
+    justify-content: space-between;
+    align-items:center; 
+    width:65%;
+    height:2.8rem;
+    margin-bottom:0; 
+  }
+  
+  footer .panel-group .panel+.panel { margin-top:0; }
+  
+  footer .panel.panel-default, 
+  footer .panel-default>.panel-heading {
+    background-color:transparent; 
+  }
+  footer .panel-default>.panel-heading+.panel-collapse>.panel-body {
+
+    border-top:none;
+  }
+ 
+  footer .panel-body { padding:1rem 0; }
+  
+  footer .glyphicon-lock { font-size:12px; }
+}
+@media (max-width: 767.99px) {
+  footer { 
+    margin:2rem 1rem; 
+  }
+  
+  footer .panel-body { 
+    padding-top:0; 
+  }
+  
+  .our_footer .container { width:100%; }
+  
+  footer #collapse3 .panel-body { padding-top:1rem; }
+  
+  
+  footer .panel-title a:focus { 
+    background-color:#ad0000; 
+    color:white; 
+    outline:none;
+  }
+  
+   .panel-title a[aria-expanded="true"] i.glyphicon-menu-down { 
+    transform: rotate(180deg);
+  }
+  
+
+  .indLib_address { 
+    width:20rem; 
+    margin: 0 auto 1rem; 
+    text-align: center;
+  }
+  #indLib_footer_name { 
+  display:flex; 
+  justify-content: center; 
+    text-align: center;
+  padding:1rem .5rem; 
+}
+
+  
+  #uofl_footer, 
+  .our_footer { 
+    display:flex; 
+    flex-direction:column;
+    align-items:center;
+  }
+  
+  #uofl_footer_menu {
+    padding: 1rem 0 2rem; 
+    column-count:2; 
+    column-gap:3rem; 
+  }
+  
+  footer #uofl_logo, 
+  footer #ulibs_footer_logo { 
+    padding:1rem 1rem .5rem;
+    text-align:center;
+  }
+  
+}
+
+@media (min-width: 768px) {
+
+  
+  .our_footer .container { 
+    display:flex;
+    padding: 2rem; 
+    align-items:flex-start; 
+    justify-content: space-between; 
+  }
+  
+  #indLib_footer_name { 
+    line-height: 1.15; 
+  }
+  
+  #indLib_footer_name, 
+  #ulibs_footer_logo {
+    width:25rem;
+  }
+  
+   ul#uofl_footer_menu li {
+    padding:0 1rem;  
+    line-height:1;
+  }
+  #ulibs_footer_logo a { display:flex; }
+  
+  footer .collapse { display:block;}
+  footer .panel-group {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width:80%; 
+    margin-bottom:0; 
+  }
+  
+  footer .panel-group .panel { margin-left:2rem; }
+  
+  footer .panel-title a {
+    padding:0; 
+    line-height:1.2;
+  }
+
+  #indLib_footer .panel-title a, 
+  #indLib_footer .panel-title a:hover {
+    cursor:default; 
+    background-color:#444!important;
+  }
+
+  #ulibs_footer .panel-title a, 
+  #ulibs_footer .panel-title a:hover {
+    cursor:default; 
+    background-color:#222!important;
+  }
+
+  #uofl_footer .container { display:flex; }
+  
+  #uofl_logo { width:20%; }
+  
+  ul#uofl_footer_menu {
+    display: flex;
+    justify-content: space-between;
+    align-items:center; 
+    width:65%;
+    height:2.8rem;
+    margin-bottom:0; 
+  }
+  
+  footer .panel-group .panel+.panel { margin-top:0; }
+  
+  footer .panel.panel-default, 
+  footer .panel-default>.panel-heading {
+    background-color:transparent; 
+  }
+  footer .panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border-top:none;
+  }
+ 
+  footer .panel-body { padding:1rem 0; }
+  
+  footer .glyphicon-lock { font-size:12px; }
+  
+  #s-lg-guide-footer-meta .container { width:100%; }
+}
+

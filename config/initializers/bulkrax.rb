@@ -1,8 +1,6 @@
 # frozen_string_literal: true
-
 if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
   Bulkrax.setup do |config|
-    # Add local parsers
     config.parsers = [
       { name: 'CSV - Comma Separated Values',
         class_name: 'Bulkrax::CsvParser',
@@ -12,19 +10,98 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
 
     # WorkType to use as the default if none is specified in the import
     # Default is the first returned by Hyrax.config.curation_concerns
-    # config.default_work_type = MyWork
+    config.default_work_type = 'Image'
 
     # Path to store pending imports
-    # config.import_path = 'tmp/imports'
+    config.import_path = 'tmp/imports'
 
     # Path to store exports before download
-    # config.export_path = 'tmp/exports'
+    config.export_path = 'tmp/exports'
 
     # Server name for oai request header
     # config.server_name = 'my_server@name.com'
 
-    # NOTE: Creating Collections using the collection_field_mapping will no longer be supported as of version Bulkrax v2.
-    #       Please configure Bulkrax to use related_parents_field_mapping and related_children_field_mapping instead.
+    config.field_mappings = {
+      "Bulkrax::CsvParser" => {
+        "alternative_title" => { from: ["alternative_title"], split: ";" },
+        "identifier" => { from: ["identifier"], split: ";", source_identifier: true },
+        "title" => { from: ["title"], split: ";" },
+        "contributor" => { from: ["contributor"], split: ";" },
+        "contributor_role" => { from: ["contributor_role"], split: ";" },
+        "publisher" => { from: ["repository"], split: ";" },
+        "people_represented" => { from: ["people_represented"], split: ";" },
+        "creator" => { from: ["creator"], split: ";" },
+        "creator_role" => { from: ["creator_role"], split: ";" },
+        "date_created" => { from: ["date_original"] },
+        "decade" => { from: ["decade"], split: ";" },
+        "description" => { from: ["description"] },
+        "resource_type" => { from: ["object_type"], split: ";" },
+        "collection_information" => { from: ["collection_information"], split: ";" },
+        "artificial_collection" => { from: ["artificial_collection"], split: ";" },
+        "digitization_specification" => { from: ["digitization_specification"] },
+        "date_digital" => { from: ["date_digital"] },
+        "media_type" => { from: ["media_type"], split: ";" },
+        "format" => { from: ["format"], split: ";" },
+        "ordering_information" => { from: ["ordering_information"] },
+        "administrative_note" => { from: ["administrative_note"] },
+        "resource_query" => { from: ["resource_query"], split: ";" },
+        "resource_date_created" => { from: ["resource_date_created"] },
+        "source" => { from: ["source"], split: ";" },
+        "building_date" => { from: ["building_date"], split: ";" },
+        "code" => { from: ["code"], split: ";" },
+        "extent" => { from: ["duration"] },
+        "invoice_information" => { from: ["invoice_information"] },
+        "language" => { from: ["language"], split: ";" },
+        "operating_area" => { from: ["operating_area"], split: ";" },
+        "photo_comment" => { from: ["photo_comment"] },
+        "production" => { from: ["production"] },
+        "region" => { from: ["region"] },
+        "related_image" => { from: ["related_image"], split: ";" },
+        "related_url" => { from: ["related_resource"], split: ";" },
+        "series" => { from: ["series"] },
+        "story" => { from: ["story"] },
+        "subject" => { from: ["subject"], split: ";" },
+        "mesh" => { from: ["mesh"], split: ";" },
+        "tab_heading" => { from: ["tab_heading"] },
+        "people_named" => { from: ["people_named"], split: ";" },
+        "location" => { from: ["location"], split: ";" },
+        "table_of_contents" => { from: ["table_of_contents"] },
+        "volume" => { from: ["volume"] },
+        "issue" => { from: ["issue"] },
+        "searchable_text" => { from: ["searchable_text"] },
+        "biography_of_contributor" => { from: ["biography_of_contributor"] },
+        "cataloguing_note" => { from: ["cataloguing_note"] },
+        "condition" => { from: ["condition"], split: ";" },
+        "contributor_description" => { from: ["contributor_description"] },
+        "contributor_history" => { from: ["contributor_history"] },
+        "cultural_context" => { from: ["cultural_context"], split: ";" },
+        "data_source" => { from: ["data_source"] },
+        "exhibit_history" => { from: ["exhibit_history"] },
+        "honoree" => { from: ["honoree"], split: ";" },
+        "language_script" => { from: ["language_script"], split: ";" },
+        "location_of_contributor" => { from: ["location_of_contributor"], split: ";" },
+        "location_of_honoree" => { from: ["location_of_honoree"], split: ";" },
+        "material" => { from: ["material"], split: ";" },
+        "measurement" => { from: ["measurement"] },
+        "object_location" => { from: ["object_location"] },
+        "ornamentation" => { from: ["ornamentation"], split: ";" },
+        "place_original" => { from: ["place_original"], split: ";" },
+        "style" => { from: ["style"], split: ";" },
+        "technique" => { from: ["technique"], split: ";" },
+        "transcription_translation" => { from: ["transcription_translation"] },
+        "type_of_honoree" => { from: ["type_of_honoree"] },
+        "children" => { from: ["children"], split: ";", related_children_field_mapping: true },
+        "rights_statement" => { from: ["rights_statement"], split: ";" },
+        "city" => { from: ["city"] },
+        "street" => { from: ["street"] },
+        "neighborhood" => { from: ["neighborhood"] },
+        "county" => { from: ["county"] },
+        "keyword" => { from: ["keyword"], split: ";" },
+        "license" => { from: ["license"], split: ";" },
+      }
+    }
+
+    # By default no parent-child relationships are added
     # Field_mapping for establishing a collection relationship (FROM work TO collection)
     # This value IS NOT used for OAI, so setting the OAI parser here will have no effect
     # The mapping is supplied per Entry, provide the full class name as a string, eg. 'Bulkrax::CsvEntry'
@@ -41,31 +118,12 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
     # Add to, or change existing mappings as follows
     #   e.g. to exclude date
     #   config.field_mappings["Bulkrax::OaiDcParser"]["date"] = { from: ["date"], excluded: true  }
-    #
-    #   e.g. to import parent-child relationships
-    #   config.field_mappings['Bulkrax::CsvParser']['parents'] = { from: ['parents'], related_parents_field_mapping: true }
-    #   config.field_mappings['Bulkrax::CsvParser']['children'] = { from: ['children'], related_children_field_mapping: true }
-    #   (For more info on importing relationships, see Bulkrax Wiki: https://github.com/samvera-labs/bulkrax/wiki/Configuring-Bulkrax#parent-child-relationship-field-mappings)
-    #
-    # #   e.g. to add the required source_identifier field
-    #   #   config.field_mappings["Bulkrax::CsvParser"]["source_id"] = { from: ["old_source_id"], source_identifier: true  }
-    # If you want Bulkrax to fill in source_identifiers for you, see below
 
     # To duplicate a set of mappings from one parser to another
     #   config.field_mappings["Bulkrax::OaiOmekaParser"] = {}
     #   config.field_mappings["Bulkrax::OaiDcParser"].each {|key,value| config.field_mappings["Bulkrax::OaiOmekaParser"][key] = value }
 
-    # Should Bulkrax make up source identifiers for you? This allow round tripping
-    # and download errored entries to still work, but does mean if you upload the
-    # same source record in two different files you WILL get duplicates.
-    # It is given two aruguments, self at the time of call and the index of the reocrd
-    #    config.fill_in_blank_source_identifiers = ->(parser, index) { "b-#{parser.importer.id}-#{index}"}
-    # or use a uuid
-    #    config.fill_in_blank_source_identifiers = ->(parser, index) { SecureRandom.uuid }
-
     # Properties that should not be used in imports/exports. They are reserved for use by Hyrax.
     # config.reserved_properties += ['my_field']
   end
-  # Sidebar for hyrax 3+ support
-  # Hyrax::DashboardController.sidebar_partials[:repository_content] << "hyrax/dashboard/sidebar/bulkrax_sidebar_additions" if Object.const_defined?(:Hyrax) && ::Hyrax::DashboardController&.respond_to?(:sidebar_partials)
-end 
+end

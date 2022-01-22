@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'json'
+100.times do |i|
+  `bundle exec rspec --format json --out rspec-#{i}.json ./spec/features/create_image_spec.rb`
+  j = JSON.parse(File.read("rspec-#{i}.json"))
+  puts "#{i} - #{j['seed']} ~ #{j['summary']}"
+end
+
+seeds = []
+jobs = []
+100.times do |i|
+  j = JSON.parse(File.read("rspec-#{i}.json"))
+  puts "#{i} - #{j['seed']} ~ #{j['summary']}"
+  seeds << j['seed'] if j['summary']['failure_count'].positive?
+  jobs << i if j['summary']['failure_count'].positive?
+end
+puts "Seeds: #{seeds}"
+puts "Jobs: #{jobs}"
