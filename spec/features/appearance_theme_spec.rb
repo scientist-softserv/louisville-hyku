@@ -129,6 +129,7 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
     end
 
     it 'renders the partials in the theme folder' do
+      skip 'not used by Louisville theme'
       login_as admin
       visit '/admin/appearance'
       click_link('Themes')
@@ -144,6 +145,7 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
     end
 
     it 'updates the home theme when the theme is changed' do # rubocop:disable RSpec/ExampleLength
+      skip 'not used by Louisville theme'
       login_as admin
       visit '/admin/appearance'
       click_link('Themes')
@@ -170,6 +172,7 @@ RSpec.describe 'Admin can select home page theme', type: :feature, js: true, cle
     end
 
     it 'renders the default partial if the theme partial is missing' do
+      skip 'not used by Louisville theme'
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       allow_any_instance_of(ApplicationController).to receive(:home_page_theme).and_return("missing_theme")
       visit '/'

@@ -1,5 +1,5 @@
-ARG HYRAX_IMAGE_VERSION=3.0.3
-FROM ghcr.io/samvera/hyku/hyku-base:$HYRAX_IMAGE_VERSION as hyku-base
+ARG HYRAX_IMAGE_VERSION=3.1.0
+FROM ghcr.io/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_VERSION as hyku-base
 
 USER root
 
@@ -7,6 +7,7 @@ RUN apk --no-cache upgrade && \
   apk --no-cache add \
     bash \
     cmake \
+    exiftool \
     ffmpeg \
     git \
     less \
@@ -18,7 +19,41 @@ RUN apk --no-cache upgrade && \
     openjdk11-jre \
     perl \
     rsync \
+    poppler \
+    poppler-utils \
+    tesseract-ocr \
+    openjpeg-dev \
+    openjpeg-tools \
+    nodejs \
+    yarn \
     vim
+
+RUN wget https://imagemagick.org/download/ImageMagick.tar.gz && \
+    tar xf ImageMagick.tar.gz \
+    && apk --no-cache add \
+      libjpeg-turbo openjpeg libpng tiff librsvg libgsf libimagequant poppler-qt5-dev \
+    && cd ImageMagick-* \
+    && ./configure \
+    && make install
+
+ARG VIPS_VERSION=8.11.3
+
+RUN set -x -o pipefail \
+    && wget -O- https://github.com/libvips/libvips/releases/download/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz | tar xzC /tmp \
+    && apk --no-cache add \
+     libjpeg-turbo openjpeg libpng tiff librsvg libgsf libimagequant poppler-qt5-dev \
+    && apk add --virtual vips-dependencies build-base \
+     libjpeg-turbo-dev libpng-dev tiff-dev librsvg-dev libgsf-dev libimagequant-dev \
+    && cd /tmp/vips-${VIPS_VERSION} \
+    && ./configure --prefix=/usr \
+                   --disable-static \
+                   --disable-dependency-tracking \
+                   --enable-silent-rules \
+    && make -s install-strip \
+    && cd $OLDPWD \
+    && rm -rf /tmp/vips-${VIPS_VERSION} \
+    && apk del --purge vips-dependencies \
+    && rm -rf /var/cache/apk/*
 
 USER app
 

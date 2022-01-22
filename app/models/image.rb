@@ -46,7 +46,7 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   property :decade,
            predicate: ::RDF::Vocab::DC.temporal,
            multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :digitization_specification,

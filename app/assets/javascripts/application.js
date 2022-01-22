@@ -18,7 +18,7 @@
 //= require jquery.fontselect
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require stat_slider
+//= require jssor.slider-28.1.0.min
 //= require turbolinks
 //= require cocoon
 
@@ -45,6 +45,8 @@
 /////////////////////////////////////////////
 
 //= require hyrax
+//= require newspaper_works
+
 //= require jquery.flot.pie
 //= require flot_graph
 //= require statistics_tab_manager

@@ -30,20 +30,25 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError, 'Not Found'
   end
 
+  # layout :set_layout
+  def set_layout
+    current_user ? "application" : "application_public"
+  end
+
   protected
 
-    def is_hidden
+    def hidden?
       current_account.persisted? && !current_account.is_public?
     end
 
-    def is_api_or_pdf
+    def api_or_pdf?
       request.format.to_s.match('json') ||
         params[:print] ||
         request.path.include?('api') ||
         request.path.include?('pdf')
     end
 
-    def is_staging
+    def staging?
       ['staging'].include?(Rails.env)
     end
 
@@ -51,11 +56,10 @@ class ApplicationController < ActionController::Base
     # Extra authentication for palni-palci during development phase
     def authenticate_if_needed
       # Disable this extra authentication in test mode
-      return true if Rails.env.test?
-      if (is_hidden || is_staging) && !is_api_or_pdf
-        authenticate_or_request_with_http_basic do |username, password|
-          username == "samvera" && password == "hyku"
-        end
+      return true if Rails.env.test? || api_or_pdf?
+      return true if !hidden? && !staging?
+      authenticate_or_request_with_http_basic do |username, password|
+        username == "samvera" && password == "hyku"
       end
     end
 
