@@ -8,7 +8,6 @@ class User < ApplicationRecord
   # Connects this user object to Role-management behaviors.
   include Hydra::RoleManagement::UserRoles
 
-
   # Connects this user object to Hyrax behaviors.
   include Hyrax::User
   include Hyrax::UserUsageStats
@@ -26,6 +25,13 @@ class User < ApplicationRecord
   scope :for_repository, -> {
     joins(:roles)
   }
+
+  scope :registered, -> { for_repository.group(:id).where(guest: false) }
+
+  # set default scope to exclude guest users
+  def self.default_scope
+    where(guest: false)
+  end
 
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier.
@@ -48,6 +54,7 @@ class User < ApplicationRecord
       remove_role :superadmin
     end
   end
+  # rubocop:enable Naming/PredicateName
 
   def site_roles
     roles.site
@@ -77,8 +84,9 @@ class User < ApplicationRecord
   # If this user is the first user on the tenant, they become its admin
   # unless we are in the global tenant
   def add_default_roles
-    add_role :admin, Site.instance unless
-      self.class.joins(:roles).where("roles.name = ?", "admin").any? || Account.global_tenant?
+    return if Account.global_tenant?
+
+    add_role :admin, Site.instance unless self.class.joins(:roles).where("roles.name = ?", "admin").any?
     # Role for any given site
     add_role :registered, Site.instance
   end

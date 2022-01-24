@@ -13,3 +13,4 @@ production:
   password: Rails.application.credentials.dig(:production, :fedora_password)
   url: <%= ENV['FEDORA_URL'] || Rails.application.credentials.dig(:production, :fedora_url) %>
   base_path: /prod
+  request: { timeout: 600, open_timeout: 60}
