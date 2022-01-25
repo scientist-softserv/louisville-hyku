@@ -1,27 +1,164 @@
-### Installing the application in a developent environment at Notch8
+# University of Louisville
+----
+## Table of Contents
+  * [Running the stack](#running-the-stack)
+    * [Important URL's](#important-urls)
+    * [Dory](#dory)
+    * [With Docker](#with-docker)
+      * [Install Docker](#install-docker)
+      * [Start the server](#start-the-server)
+      * [Seed the database](#seed-the-database)
+      * [Access the container](#access-the-container)
+      * [Stop the app and services](#stop-the-app-and-services)
+      * [Troubleshooting](#troubleshooting)
+      * [Rubocop](#rubocop)
+  * [Admin User](#admin-user)
+  * [Bulkrax](#importing)
+    * [Enable Bulkrax](#enable-bulkrax)
+    * [Disable Bulkrax](#disable-bulkrax)
+    * [Importing](#importing)
+    * [Exporting](#exporting)
+----
 
-1. First clone the repository and cd into the folder
+## Running the stack
+### Important URL's
+- Local site:
+  - With dory: single.hyku.test
+  - Without dory: localhost:3000
+- Staging site: http://lv-hyku-staging.notch8.cloud/
+- Production site:
+- Solr: http://solr.hyku.test
+  - Check the `SOLR_ADMIN_USER` and `SOLR_ADMIN_PASSWORD` in "docker-compose.yml"
+- Sidekiq: http://single.hyku.test/sidekiq
 
-2. Install Stack Car
-```bash
-gem install stack_car
-```
+### Dory
+On OS X or Linux we recommend running [Dory](https://github.com/FreedomBen/dory). Be sure to [adjust your ~/.dory.yml file to support the .test tld](https://github.com/FreedomBen/dory#config-file).
 
-3. If this is the first time building the application or if any of the dependencies changed, please build with:
-```bash
-sc build
-```
+You can still run in development via docker with out Dory, but to do so please uncomment the ports section in docker-compose.yml
 
-4. After building the application please install and start dory with:
 ```bash
 gem install dory
 dory up
 ```
-Note: Be sure to [adjust your ~/.dory.yml file to support the .test tld](https://github.com/FreedomBen/dory#config-file).
 
-5. Bring the container up with:
+### Stack Car
+stack_car is optional, but all instructions will be given using this gem. If you choose not to use stack_car, please use the docker-compose equivalents.
+
+```bash
+gem install stack_car
+```
+
+### With Docker
+We distribute two configuration files:
+- `docker-compose.yml` is set up for development / running the specs
+- `docker-compose.production.yml` is for running the Hyku stack in a production setting
+
+#### Install Docker
+- Download [Docker Desktop](https://www.docker.com/products/docker-desktop) and log in
+
+#### If this is your first time working in this repo or the Dockerfile has been updated you will need to pull your services first
+  ```bash
+  sc pull
+  sc build
+  ```
+
+#### Start the server
 ```bash
 sc up
 ```
+This command starts the web and worker containers allowing Rails to be started or stopped independent of the other services. Once that starts (you'll see the line `Listening on tcp://0.0.0.0:3000` to indicate a successful boot), you can view your app at one of the [dev URL's](#important-urls) above.
 
-6. Once the application is up and running, navigate to [single.hyku.test](single.hyku.test) in the browser and log in with the credentials for "hyku.test" listed in 1Password.
+#### Seed the database
+```bash
+sc be rails db:seed
+```
+
+#### Access the container
+- In a separate terminal window or tab than the running server, run:
+  ``` bash
+  sc sh
+  ```
+
+- You need to be inside the container to:
+  - Access the rails console for debugging
+  ``` bash
+  rails c
+  ```
+
+  - Run [rspec](https://github.com/rspec/rspec-rails/tree/4-1-maintenance#running-specs)
+  ``` bash
+  rspec
+  ```
+
+#### Stop the app and services
+- Press `Ctrl + C` in the window where `sc up` is running
+- When that's done `sc stop` shuts down the running containers
+- `dory down` stops Dory
+
+#### Troubleshooting
+- Was the Dockerfile changed on your most recent `git pull`? Refer to the instructions above
+- Double check your dory set up
+
+- Issue: Sidekiq isn't working (e.g.: importer/exporter status stays stuck at "pending")
+- Try:
+  ``` bash
+  sc sh
+  sidekiq
+  ```
+
+#### Rubocop
+Rubocop can be run in docker locally using either of the options below:
+- Outside the container:
+  ```bash
+  sc be rake
+  ```
+- With autocorrect: (learn about the `-a` flag [here](https://docs.rubocop.org/rubocop/usage/basic_usage.html#auto-correcting-offenses))
+  ```bash
+  sc exec rubocop -a
+  ```
+- Inside the container:
+  ```bash
+  rubocop -a
+  ```
+
+## Admin User
+This is for the admin login on the Shared Research Repository page or when logging in to a specific tenant
+- Local: `INITIAL_ADMIN_EMAIL` and `INITIAL_ADMIN_PASSWORD` in ".env"
+- Staging: `INITIAL_ADMIN_EMAIL` and `INITIAL_ADMIN_PASSWORD` in "staging-deploy.yaml"
+
+## Bulkrax
+### Enable Bulkrax:
+- Change `HYKU_BULKRAX_ENABLED` to `true` in ".env"
+- Change `//require bulkrax/application` to `//= require bulkrax/application` in "application.js"
+- Change `require bulkrax/application` to `*= require bulkrax/application` in "application.css"
+- Change `HYKU_BULKRAX_ENABLED` to `true` in "docker-compose.yml" (it's in there more than once)
+- Change the value under `name: HYKU_BULKRAX_ENABLED` to `true` in "staging-deploy.yaml" (it's in there more than once)
+- Restart the server
+
+### Disable Bulkrax:
+- Revert each of the changes above
+- Restart the server
+
+### Importing
+- Use the "tmp" folder to organize any csv's and their related files
+  e.g.
+  ``` bash
+  mkdir tmp/yearbooks < -- this is where the csv will live
+  mkdir tmp/yearbooks/files < -- this is where the associated files will live
+  ```
+- Choose "Importers" from the left navbar on the dashboard
+- Click "New"
+- Fill in the required fields
+  (Refer to this [Wiki article](https://github.com/samvera-labs/bulkrax/wiki/Bulkrax-User-Interface---Importers) for more details about the fields and save options)
+- Select the "CSV" parser option
+- Choose the "Specify a path on the server" radio button
+- Use a path to a csv in the tmp folder
+  e.g.
+  ``` bash
+  /app/samvera/hyrax-webapp/tmp/yearbooks/1999.csv
+  ```
+
+### Exporting
+``` bash
+# TODO(alishaevn): fill this out if/when necessary
+```
