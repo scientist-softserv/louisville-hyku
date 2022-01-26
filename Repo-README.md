@@ -26,7 +26,8 @@
   - With dory: single.hyku.test
   - Without dory: localhost:3000
 - Staging site: http://lv-hyku-staging.notch8.cloud/
-- Production site:
+- Production site: https://hyku.library.louisville.edu/
+  - The server credentials are in 1Password
 - Solr: http://solr.hyku.test
   - Check the `SOLR_ADMIN_USER` and `SOLR_ADMIN_PASSWORD` in "docker-compose.yml"
 - Sidekiq: http://single.hyku.test/sidekiq
@@ -90,6 +91,11 @@ sc be rails db:seed
   rspec
   ```
 
+  - Recompile the assets
+  ``` bash
+  RAILS_ENV=development bundle exec rake assets:precompile
+  ```
+
 #### Stop the app and services
 - Press `Ctrl + C` in the window where `sc up` is running
 - When that's done `sc stop` shuts down the running containers
@@ -100,11 +106,21 @@ sc be rails db:seed
 - Double check your dory set up
 
 - Issue: Sidekiq isn't working (e.g.: importer/exporter status stays stuck at "pending")
-- Try:
-  ``` bash
-  sc sh
-  sidekiq
-  ```
+  - Try:
+    ``` bash
+    sc sh
+    sidekiq
+    ```
+
+- Issue: The text on the homepage is all jumbled
+  - Try:
+    ``` bash
+    dc down -v
+    rm solr_db_initialized
+    sc build
+    sc up
+    ```
+    Then recompile the assets using [these instructions](#access-the-containers)
 
 #### Rubocop
 Rubocop can be run in docker locally using either of the options below:
