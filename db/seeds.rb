@@ -7,13 +7,17 @@
 
 unless ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_MULTITENANT', false))
   puts "\n== Creating single tenant resources"
-  single_tenant_default = Account.find_by(cname: 'single.tenant.default')
-  if single_tenant_default.blank?
-    single_tenant_default = Account.new(name: 'Single Tenant', cname: 'single.tenant.default', tenant: 'single', is_public: true)
-    CreateAccount.new(single_tenant_default).save
-    raise "Account creation failed for #{single_tenant_default.errors.full_messages}" unless single_tenant_default.valid?
-    single_tenant_default = single_tenant_default.reload
+  begin
+    single_tenant_default = Account.find_by(cname: 'single.tenant.default')
+    if single_tenant_default.blank?
+      single_tenant_default = Account.new(name: 'Single Tenant', cname: 'single.tenant.default', tenant: 'single', is_public: true)
+      CreateAccount.new(single_tenant_default).save
+      single_tenant_default = single_tenant_default.reload
+    end
+    # Rescue from any errors during creation
+  rescue
   end
+
   AccountElevator.switch!(single_tenant_default.cname)
 
   puts "\n== Creating default admin set"
@@ -31,7 +35,7 @@ unless ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_MULTITENANT', false))
   puts "\n== Creating permission template"
   begin
     permission_template = admin_set.permission_template
-  # If the permission template is missing we will need to run the creete service
+    # If the permission template is missing we will need to run the create service
   rescue
     Hyrax::AdminSetCreateService.new(admin_set: admin_set, creating_user: nil).create
   end

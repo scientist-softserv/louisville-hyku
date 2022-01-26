@@ -132,6 +132,7 @@ sc be rails db:seed
     # which is what is should have been already because of the seeds
     user.add_role(:superadmin)
     ```
+    - if that doesn't work, use hyku.test instead of single.hyku.test
 
 #### Rubocop
 Rubocop can be run in docker locally using either of the options below:
