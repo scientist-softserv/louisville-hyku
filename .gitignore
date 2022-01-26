@@ -61,3 +61,4 @@ docker-compose.override.yml
 fits.log
 solr_db_initialized
 public/assets
+public/universalviewer
