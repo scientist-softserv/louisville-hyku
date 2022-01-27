@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/samvera-labs/bulkrax.git
-  revision: f76b0bff90d3c704b0624a44e33bb4f2c7272273
+  revision: 5189672bc475a1d20f673891946a192141ce6a07
   branch: main
   specs:
     bulkrax (2.0.0)
@@ -586,7 +586,7 @@ GEM
       bolognese (~> 1.8, >= 1.8.6)
       hyrax (~> 2.9)
       rails (~> 5.2.4, >= 5.2.4.3)
-    i18n (1.8.11)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     i18n-debug (1.2.0)
       i18n (< 2)
