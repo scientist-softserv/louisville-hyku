@@ -112,7 +112,7 @@ sc be rails db:seed
     sidekiq
     ```
 
-- Issue: The text on the homepage is all jumbled
+- Issue: Assets don't display correctly (e.g. the text on the homepage is all jumbled)
   - Try:
     ``` bash
     dc down -v
@@ -121,6 +121,18 @@ sc be rails db:seed
     sc up
     ```
     Then recompile the assets using [these instructions](#access-the-containers)
+
+- Issue: No default admin set
+  - Try:
+    - make sure you're signed in with the user defined at `ENV['INITIAL_ADMIN_EMAIL']`
+    ``` bash
+    user = User.find_or_create_by(email: ENV['INITIAL_ADMIN_EMAIL'])
+    user.is_superadmin
+    # if the above returns false, make your user a superadmin
+    # which is what is should have been already because of the seeds
+    user.add_role(:superadmin)
+    ```
+    - if that doesn't work, use hyku.test instead of single.hyku.test
 
 #### Rubocop
 Rubocop can be run in docker locally using either of the options below:
