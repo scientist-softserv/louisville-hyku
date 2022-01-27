@@ -54,7 +54,6 @@ class CreateJpgService
     return true if cached
     Dir.glob("#{directory}/*.jpg").size.positive?
   end
-  # rubocop:enable Style/RedundantSelf
 
   def create_jpgs
     files.each do |file|
