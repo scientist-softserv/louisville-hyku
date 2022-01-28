@@ -50,7 +50,7 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
         "digitization_specification" => { from: ["digitization_specification"] },
         "exhibit_history" => { from: ["exhibit_history"] },
         "extent" => { from: ["duration"] },
-        "format" => { from: ["format"], split: ";" },
+        "format" => { from: ["format"] },
         "honoree" => { from: ["honoree"], split: ";" },
         "identifier" => { from: ["source_identifier"], source_identifier: true },
         "invoice_information" => { from: ["invoice_information"] },
