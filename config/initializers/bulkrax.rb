@@ -19,15 +19,13 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
     # Server name for oai request header
     # config.server_name = 'my_server@name.com'
 
-    config.field_mappings = {
-      'Bulkrax::CsvParser' => {
+    config.field_mappings['Bulkrax::CsvParser'] = {
         'administrative_note' => { from: ['administrative_note'] },
         'alternative_title' => { from: ['alternative_title'], split: ';' },
         'artificial_collection' => { from: ['artificial_collection'], split: ';' },
         'biography_of_contributor' => { from: ['biography_of_contributor'] },
         'building_date' => { from: ['building_date'], split: ';' },
         'cataloguing_note' => { from: ['cataloguing_note'] },
-        'children' => { from: ['children'], split: /\s*[|]\s*/, related_children_field_mapping: true },
         'city' => { from: ['city'] },
         'code' => { from: ['code'], split: ';' },
         'collection_information' => { from: ['collection_information'], split: ';' },
@@ -69,7 +67,6 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
         'operating_area' => { from: ['operating_area'], split: ';' },
         'ordering_information' => { from: ['ordering_information'] },
         'ornamentation' => { from: ['ornamentation'], split: ';' },
-        'parents' => { from: ['parents'], split: /\s*[|]\s*/, related_parents_field_mapping: true },
         'people_named' => { from: ['people_named'], split: ';' },
         'people_represented' => { from: ['people_represented'], split: ';' },
         'photo_comment' => { from: ['photo_comment'] },
@@ -98,7 +95,12 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
         'type_of_honoree' => { from: ['type_of_honoree'] },
         'volume' => { from: ['volume'] }
       }
-    }
+
+    # support v.2.0 parent/child relationships: https://github.com/samvera-labs/bulkrax/wiki/Configuring-Bulkrax#parent-child-relationship-field-mappings
+    config.field_mappings['Bulkrax::CsvParser'].merge!({
+      'parents' => { from: ['parents'], split: /\s*[|]\s*/, related_parents_field_mapping: true },
+      'children' => { from: ['children'], split: /\s*[|]\s*/, related_children_field_mapping: true },
+    })
 
     # By default no parent-child relationships are added
     # Field_mapping for establishing a collection relationship (FROM work TO collection)
