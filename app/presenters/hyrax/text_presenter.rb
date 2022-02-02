@@ -8,7 +8,7 @@ module Hyrax
     # include Hyrax::DOI::DOIPresenterBehavior
 
     # OVERRIDE: Hyrax 2.9.6
-    def total_pages(members=nil)
+    def total_pages(members = nil)
       # if we're hiding the derivatives, we won't have as many pages to show
       pages = members.presence || total_items
 
