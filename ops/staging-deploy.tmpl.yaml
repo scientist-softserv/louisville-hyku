@@ -240,10 +240,6 @@ worker:
       value: support@notch8.com
     - name: HYRAX_FITS_PATH
       value: /app/fits/fits.sh
-    - name: HYKU_ADMIN_ONLY_TENANT_CREATION
-      value: "true"
-    - name: HYKU_DEFAULT_HOST
-      value: "%{tenant}.lv-hyku-staging.notch8.cloud"
     - name: HYKU_ENABLED
       value: "true"
     - name: HYKU_BULKRAX_ENABLED
