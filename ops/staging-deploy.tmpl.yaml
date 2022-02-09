@@ -31,6 +31,9 @@ extraVolumeMounts:
   - name: branding
     mountPath: /app/samvera/hyrax-webapp/public/branding
     subPath: branding
+  - name: uploads
+    mountPath: /app/samvera/hyrax-webapp/tmp/originals
+    subPath: originals
 
 ingress:
   enabled: true
@@ -132,9 +135,9 @@ extraEnvVars:
   - name: SMTP_ENABLED
     value: "true"
   - name: SMTP_USER_NAME
-    value: fc604e3b82d260
+    value: 2726c8c2909983
   - name: SMTP_PASSWORD
-    value: 3b1f24f81b7709
+    value: a4b37ccfd8c29f
   - name: SMTP_ADDRESS
     value: smtp.mailtrap.io
   - name: SMTP_DOMAIN
@@ -240,10 +243,6 @@ worker:
       value: support@notch8.com
     - name: HYRAX_FITS_PATH
       value: /app/fits/fits.sh
-    - name: HYKU_ADMIN_ONLY_TENANT_CREATION
-      value: "true"
-    - name: HYKU_DEFAULT_HOST
-      value: "%{tenant}.lv-hyku-staging.notch8.cloud"
     - name: HYKU_ENABLED
       value: "true"
     - name: HYKU_BULKRAX_ENABLED
@@ -263,9 +262,9 @@ worker:
     - name: SMTP_ENABLED
       value: "true"
     - name: SMTP_USER_NAME
-      value: fc604e3b82d260
+      value: 2726c8c2909983
     - name: SMTP_PASSWORD
-      value: 3b1f24f81b7709
+      value: a4b37ccfd8c29f
     - name: SMTP_ADDRESS
       value: smtp.mailtrap.io
     - name: SMTP_DOMAIN
