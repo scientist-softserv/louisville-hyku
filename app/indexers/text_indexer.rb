@@ -13,8 +13,8 @@ class TextIndexer < Hyrax::WorkIndexer
 
   # Uncomment this block if you want to add custom indexing behavior:
   def generate_solr_document
-   super.tap do |solr_doc|
-     solr_doc['searchable_text_tesi']          = object.searchable_text
-   end
+    super.tap do |solr_doc|
+      solr_doc['searchable_text_tesi'] = object.searchable_text
+    end
   end
 end
