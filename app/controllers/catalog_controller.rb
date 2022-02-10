@@ -112,6 +112,7 @@ class CatalogController < ApplicationController
     # config.add_index_field solr_name("identifier", :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
     config.add_index_field solr_name("title", :stored_searchable), itemprop: 'name', if: false
     config.add_index_field solr_name("description", :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link
+    config.add_index_field solr_name("searchable_text", :stored_searchable), itemprop: 'searchable_text', label: 'Searchable Text', helper_method: :iconify_auto_link
     # config.add_index_field solr_name("keyword", :stored_searchable), itemprop: 'keywords', link_to_search: solr_name("keyword", :facetable)
     config.add_index_field solr_name("date_created", :stored_searchable), itemprop: 'dateCreated'
     config.add_index_field solr_name("subject", :stored_searchable), itemprop: 'subject', link_to_search: solr_name("subject", :facetable)
@@ -213,6 +214,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name('stored_text', :stored_searchable)
     config.add_show_field solr_name('table_of_contents', :stored_searchable)
     config.add_show_field solr_name('volume', :stored_searchable)
+    config.add_show_field solr_name('searchable_text', :stored_searchable)
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
