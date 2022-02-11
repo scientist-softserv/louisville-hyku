@@ -9,6 +9,7 @@ class SolrDocument
   # Adds Hyrax behaviors to the SolrDocument.
   include Hyrax::SolrDocumentBehavior
   # Add attributes for DOIs for hyrax-doi plugin.
+  include NewspaperWorks::Solr::Document
   include Hyrax::DOI::SolrDocument::DOIBehavior
 
   # self.unique_key = 'id'
@@ -85,6 +86,7 @@ class SolrDocument
 
   attribute :extent, Solr::Array, solr_name('extent')
   attribute :rendering_ids, Solr::Array, solr_name('hasFormat', :symbol)
+  attribute :account_cname, Solr::Array, solr_name('account_cname')
 
   field_semantics.merge!(
     contributor: 'contributor_tesim',

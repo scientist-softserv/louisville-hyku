@@ -7,58 +7,57 @@ module Hyrax
     include Hyrax::ImageFormTerms
     self.model_class = ::Image
 
-    self.required_fields -= [
-                              :creator,
-                              :keyword,
-                              :rights_statement,
-                              :title
-                            ]
+    self.required_fields -= %i[
+      creator
+      keyword
+      rights_statement
+      title
+    ]
 
     self.terms -= [
-                    :based_near
-                  ]
-                  
-    self.required_fields += [
-                             :identifier,
-                             :title
-                            ]
-                            
-    self.terms += [
-                    :alternative_title,
-                    :creator_role,
-                    :contributor_role,
-                    :decade,
-                    :resource_type,
-                    :collection_information,
-                    :digitization_specification,
-                    :date_digital,
-                    :media_type,
-                    :format,
-                    :ordering_information,
-                    :resource_query
-                  ]
+      :based_near
+    ]
 
-    self.terms += [
-                    :people_represented,
-                    :location,
-                    :street,
-                    :neighborhood,
-                    :city,
-                    :code,
-                    :county,
-                    :building_date,
-                    :extent,
-                    :invoice_information,
-                    :operating_area,
-                    :photo_comment,
-                    :production,
-                    :region,
-                    :related_image,
-                    :series,
-                    :story,
-                    :mesh,
-                    :tab_heading
-                  ]
+    self.required_fields += %i[
+      identifier
+      title
+    ]
 
+    self.terms += %i[
+      alternative_title
+      creator_role
+      contributor_role
+      decade
+      resource_type
+      collection_information
+      digitization_specification
+      date_digital
+      media_type
+      format
+      ordering_information
+      resource_query
+    ]
+
+    self.terms += %i[
+      people_represented
+      location
+      street
+      neighborhood
+      city
+      code
+      county
+      building_date
+      extent
+      invoice_information
+      operating_area
+      photo_comment
+      production
+      region
+      related_image
+      series
+      story
+      mesh
+      tab_heading
+    ]
   end
 end

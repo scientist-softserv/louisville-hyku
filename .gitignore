@@ -8,11 +8,14 @@ capybara-*.html
 /db/postgres
 pg_upgrade_*.log
 /public/system
+/public/uv
+/node_modules
 /coverage/
 /spec/tmp
 **.orig
 rerun.txt
 pickle-email-*.html
+solr_db_initialized
 
 ## Environment normalization:
 /.bundle
@@ -54,4 +57,9 @@ public/uploads
 
 notes
 cmd.txt
+docker-compose.override.yml
 fits.log
+solr_db_initialized
+public/assets
+public/universalviewer
+.DS_Store

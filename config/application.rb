@@ -3,9 +3,12 @@ require_relative 'boot'
 require 'rails/all'
 require 'i18n/debug' if ENV['I18N_DEBUG']
 
+require 'rubygems/package' # Needed for untar command
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(*Rails.groups)
+groups = Rails.groups
+groups += ['bulkrax'] if ENV['HYKU_BULKRAX_ENABLED'] == 'true' # Settings obj is not available yet
+Bundler.require(*groups)
 
 module Hyku
   class Application < Rails::Application
@@ -22,33 +25,43 @@ module Hyku
       "I18n::InvalidLocale" => :not_found
     )
 
-    if defined? ActiveElasticJob
+    if defined?(ActiveElasticJob) && ENV.fetch('HYRAX_ACTIVE_JOB_QUEUE', '') == 'elastic'
       Rails.application.configure do
-        config.active_elastic_job.process_jobs = Settings.worker == 'true'
+        process_jobs = ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_ELASTIC_JOBS', false))
+        config.active_elastic_job.process_jobs = process_jobs
         config.active_elastic_job.aws_credentials = lambda { Aws::InstanceProfileCredentials.new }
         config.active_elastic_job.secret_key_base = Rails.application.secrets[:secret_key_base]
       end
     end
 
     config.to_prepare do
-      # Do dependency injection after the classes have been loaded.
-      # Before moving this here (from an initializer) Devise was raising invalid
-      # authenticity token errors.
-      Hyrax::Admin::AppearancesController.form_class = AppearanceForm
+      # Allows us to use decorator files in the app directory
+      Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")).sort.each do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
+
+      # Allows us to use decorator files in the lib directory
+      Dir.glob(File.join(File.dirname(__FILE__), "../lib/**/*_decorator*.rb")).sort.each do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
     end
 
     # resolve reloading issue in dev mode
     config.paths.add 'app/helpers', eager_load: true
 
     config.before_initialize do
-      if defined? ActiveElasticJob
+      if defined?(ActiveElasticJob) && ENV.fetch('HYRAX_ACTIVE_JOB_QUEUE', '') == 'elastic'
         Rails.application.configure do
-          config.active_elastic_job.process_jobs = Settings.worker == 'true'
+          process_jobs = ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_ELASTIC_JOBS', false))
+          config.active_elastic_job.process_jobs = process_jobs
           config.active_elastic_job.aws_credentials = lambda { Aws::InstanceProfileCredentials.new }
           config.active_elastic_job.secret_key_base = Rails.application.secrets[:secret_key_base]
         end
       end
-      if Settings.bulkrax.enabled
+
+      Object.include(AccountSwitch)
+
+      if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
         Bundler.require('bulkrax')
       end
     end

@@ -38,10 +38,14 @@ RSpec.describe 'Create a Image', js: true do
       login_as user
     end
 
-    # rubocop:disable RSpec/ExampleLength
-    it do
+    def wait_for_btn_to_load(text)
+      find('a.btn', text: text)
+    end
+
+    xit do # rubocop:disable RSpec/ExampleLength
       visit '/dashboard'
       click_link "Works"
+      wait_for_btn_to_load('Add new work')
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
@@ -76,6 +80,5 @@ RSpec.describe 'Create a Image', js: true do
       expect(page).to have_content('My Test Work')
       expect(page).to have_content "Your files are being processed by Hyku in the background."
     end
-    # rubocop:enable RSpec/ExampleLength
   end
 end
