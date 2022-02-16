@@ -164,8 +164,16 @@ module Hyrax
       def build
         ids.map do |id|
           solr_doc = load_docs.find { |doc| doc.id == id }
-          presenter_class.for(solr_doc) if solr_doc
-        end.compact
+          next unless solr_doc
+
+          if solr_doc.file_set?
+            presenter_class.for(solr_doc)
+          elsif Hyrax.config.curation_concerns.include?(solr_doc.hydra_model)
+            # look up file set ids and loop through those
+            file_set_docs = load_file_set_docs(solr_doc.file_set_ids)
+            file_set_docs.map { |doc| presenter_class.for(doc) }
+          end
+        end.flatten.compact
       end
 
       private
@@ -175,6 +183,11 @@ module Hyrax
         # this can probably be pushed up to the parent class
         def load_docs
           @cached_docs ||= super
+        end
+
+        def load_file_set_docs(file_set_ids)
+          query("{!terms f=id}#{file_set_ids.join(',')}", rows: 1000)
+          .map { |res| ::SolrDocument.new(res) }
         end
     end
 
