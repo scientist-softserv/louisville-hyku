@@ -77,6 +77,16 @@ if ENV['ROB_EMAIL'] && ENV['ROB_PASSWORD']
   puts "\n== Finished seeding Rob's superadmin user"
 end
 
+if ENV['CLIENT_USER_EMAIL'] && ENV['CLIENT_USER_PASSWORD']
+  u = User.find_or_create_by(email: ENV['CLIENT_USER_EMAIL']) do |u|
+    u.password = ENV['CLIENT_USER_PASSWORD']
+  end
+  u.add_role(:admin)
+  puts "\n== Finished seeding client's admin user"
+  u.add_role(:superadmin)
+  puts "\n== Finished seeding client's superadmin user"
+end
+
 if ENV['INITIAL_USER_EMAIL'] && ENV['INITIAL_USER_PASSWORD']
   u = User.find_or_create_by(email: ENV['INITIAL_USER_EMAIL']) do |u|
     u.password = ENV['INITIAL_USER_PASSWORD']
