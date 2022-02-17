@@ -187,7 +187,7 @@ module Hyrax
 
         def load_file_set_docs(file_set_ids)
           query("{!terms f=id}#{file_set_ids.join(',')}", rows: 1000)
-          .map { |res| ::SolrDocument.new(res) }
+            .map { |res| ::SolrDocument.new(res) }
         end
     end
 
