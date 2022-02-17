@@ -2,7 +2,7 @@
 
 namespace :hyrax do
   namespace :reset do
-    desc 'Reset fedora / solr and corrisponding database tables w/o clearing other active record tables like users'
+    desc 'Reset fedora / solr and corresponding database tables w/o clearing other active record tables like users'
     task works_and_collections: [:environment] do
       AccountElevator.switch!('single.tenant.default')
       confirm('You are about to delete all works and collections, this is not reversable!')
