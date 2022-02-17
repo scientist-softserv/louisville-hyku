@@ -31,9 +31,6 @@ extraVolumeMounts:
   - name: branding
     mountPath: /app/samvera/hyrax-webapp/public/branding
     subPath: branding
-  - name: uploads
-    mountPath: /app/samvera/hyrax-webapp/tmp/originals
-    subPath: originals
 
 ingress:
   enabled: true
@@ -172,6 +169,9 @@ worker:
     - name: uploads
       mountPath: /app/samvera/hyrax-webapp/tmp/network_files
       subPath: network-files
+    - name: uploads
+      mountPath: /app/samvera/hyrax-webapp/tmp/originals
+      subPath: originals
   extraEnvVars:
     - name: HYKU_ROOT_HOST
       value: lv-hyku-staging.notch8.cloud
