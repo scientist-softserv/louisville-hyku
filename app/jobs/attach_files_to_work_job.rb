@@ -59,7 +59,6 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
           if a.file_set.label.match(/.jpg/)
             work.representative = a.file_set if work.representative.blank?
             work.thumbnail = a.file_set if work.thumbnail.blank?
-            set_parent_thumbnail(work.parent_works.first, a.file_set)
           end
 
           members << a.file_set
@@ -68,18 +67,6 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
         work.rendering_ids = [pdf.id] if pdf.present?
         work.save
       end
-    end
-
-    def set_parent_thumbnail(parent_work, child_file_set)
-      return unless parent_work.present?
-      return if parent_work.thumbnail.present?
-
-      # exclude parent collections
-      curation_concerns = Hyrax.config.curation_concerns
-      return unless curation_concerns.include? (parent_work.class)
-
-      parent_work.thumbnail = child_file_set
-      parent_work.save
     end
 
     # The attributes used for visibility - sent as initial params to created FileSets.
