@@ -11,8 +11,7 @@ class SetParentDefaultThumbnailJob < ApplicationJob
     end
 
     return unless parent_work.present? && child_file_sets.present?
-    child_file_sets.each { |file_set| parent_work.rendering_ids << file_set.id }
-    parent_work.save
+    # child_file_sets.each { |file_set| parent_work.rendering_ids << file_set.id; parent_work.save! }
 
     return if parent_work.thumbnail.present?
 
