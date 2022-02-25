@@ -26,7 +26,7 @@
     <%= presenter.attribute_to_html(:street, render_as: :faceted, html_dl: true) %>
     <%= presenter.attribute_to_html(:neighborhood, render_as: :faceted, html_dl: true) %>
     <%= presenter.attribute_to_html(:city, render_as: :faceted, html_dl: true) %>
-    <%= presenter.attribute_to_html(:county, html_dl: true) %>
+    <%= presenter.attribute_to_html(:county, render_as: :faceted, html_dl: true) %>
     <%= presenter.attribute_to_html(:region, html_dl: true) %>
     <%= presenter.attribute_to_html(:operating_area, html_dl: true) %>
     <%= presenter.attribute_to_html(:subject, render_as: :faceted, html_dl: true) %>
@@ -38,7 +38,7 @@
     <%= presenter.attribute_to_html(:mesh, html_dl: true) %>
     <%= presenter.attribute_to_html(:tab_heading, html_dl: true) %>
     <%= presenter.attribute_to_html(:keyword, render_as: :faceted, html_dl: true) %>
-    <%= presenter.attribute_to_html(:people_represented, html_dl: true) %>
+    <%= presenter.attribute_to_html(:people_represented, render_as: :faceted, html_dl: true) %>
     <%= presenter.attribute_to_html(:place_original, html_dl: true) %>
     <%= presenter.attribute_to_html(:production, html_dl: true) %>
     <%= presenter.attribute_to_html(:date_created, html_dl: true, label: "Date original") %>
