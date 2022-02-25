@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bulkrax
   module CreateRelationshipsJobDecorator
     # OVERRIDE: Bulkrax v.2.2
