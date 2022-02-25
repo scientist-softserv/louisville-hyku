@@ -56,7 +56,7 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
         actors.each do |a|
           pdf = a.file_set if pdf.blank? && a.file_set.label.match(/.pdf/)
 
-          if a.file_set.label.match(/.jpg/)
+          if a.file_set.label =~ /.jpg/
             work.representative = a.file_set if work.representative.blank?
             work.thumbnail = a.file_set if work.thumbnail.blank?
           end
