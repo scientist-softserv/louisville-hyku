@@ -92,7 +92,9 @@ module Hyrax
     ##
     # @return [Array<#to_s>]
     def member_ids
-      Hyrax::SolrDocument::OrderedMembers.decorate(model).ordered_member_ids
+      # TODO(alishaevn): return this to use "ordered_member_ids" instead
+      # when the CreateRelationshipsJob is fixed in Bulkrax 2.0+
+      Hyrax::SolrDocument::OrderedMembers.decorate(model).member_ids
     end
 
     ##
