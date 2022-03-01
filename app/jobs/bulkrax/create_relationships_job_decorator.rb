@@ -30,7 +30,7 @@ module Bulkrax
 
       create_relationship
       # OVERRIDE Bulkrax 2.2 add job to set parent work's default thumbnail when its file_set is nil
-      ::SetDefaultParentThumbnailJob.perform_later(parent_work: @parent_record, child_work: @child_record)
+      ::SetDefaultParentThumbnailJob.set(wait: 10.minutes).perform_later(parent_work: @parent_record)
     rescue ::StandardError => e
       base_entry.status_info(e)
       importer_run.increment!(:failed_relationships) # rubocop:disable Rails/SkipsModelValidations
