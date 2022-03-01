@@ -1,4 +1,4 @@
-# frozen_sting_literal: true
+# frozen_string_literal: true
 
 # OVERRIDE BULKRAX 2.2.4 to split on semicolon only
 module Bulkrax
