@@ -1234,7 +1234,7 @@ DEPENDENCIES
   font_awesome5_rails
   httparty
   hydra-role-management
-  hyrax (= 2.9.6)
+  hyrax (~> 2.9, >= 2.9.1)
   hyrax-doi
   i18n-debug
   i18n-tasks
