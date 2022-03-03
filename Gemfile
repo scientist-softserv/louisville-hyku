@@ -136,6 +136,7 @@ gem 'codemirror-rails'
 gem 'final_redirect_url'
 gem 'httparty'
 gem 'parser', '~> 2.5.3'
+gem 'pry-byebug'
 gem 'rdf', '~> 3.1.15' # rdf 3.2.0 removed SerializedTransaction which ldp requires
 gem 'riiif', '~> 1.1'
 gem 'secure_headers'
