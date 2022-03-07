@@ -19,13 +19,16 @@ class SetDefaultParentThumbnailJob < ApplicationJob
     parent_work.representative = child_file_set
     parent_work.thumbnail = child_file_set
     parent_work.save
+    # rubocop:disable Rails/SkipsModelValidations
     importer_run.increment!(:processed_parent_thumbnails)
   rescue ::StandardError => e
     importer_run.increment!(:failed_parent_thumbnails)
-    Bulkrax::Entry.find_by(identifier: parent_work.identifier.first).status_info(e)
+    # rubocop:enable Rails/SkipsModelValidations
+    Bulkrax::Entry.find_by(identifier: parent_work.identifier.first).status_info(e) if parent_work
   end
 
   def reschedule(parent_work:)
-    SetDefaultParentThumbnailJob.set(wait: 5.minutes).perform_later(parent_work: parent_work, importer_run: importer_run)
+    SetDefaultParentThumbnailJob.set(wait: 5.minutes)
+                                .perform_later(parent_work: parent_work, importer_run: importer_run)
   end
 end
