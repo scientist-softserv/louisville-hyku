@@ -29,6 +29,7 @@
     <%= presenter.attribute_to_html(:neighborhood, render_as: :faceted, html_dl: true) %>
     <%= presenter.attribute_to_html(:city, render_as: :faceted, html_dl: true) %>
     <%= presenter.attribute_to_html(:county, render_as: :faceted, html_dl: true) %>
+    <%= presenter.attribute_to_html(:county, html_dl: true) %>
     <%= presenter.attribute_to_html(:region, html_dl: true) %>
     <%= presenter.attribute_to_html(:operating_area, html_dl: true) %>
     <%= presenter.attribute_to_html(:subject, render_as: :faceted, html_dl: true) %>
@@ -66,6 +67,7 @@
     <%= presenter.attribute_to_html(:license, render_as: :license, html_dl: true) %>
     <%= presenter.attribute_to_html(:related_url, render_as: :external_link, html_dl: true, label: "Related resource") %>
     <%#= presenter.attribute_to_html(:resource_query, render_as: :faceted, html_dl: true) %>
+    <%#= presenter.attribute_to_html(:resource_query, html_dl: true) %>
     <%#= presenter.attribute_to_html(:digitization_specification, html_dl: true) %>
     <%#= presenter.attribute_to_html(:date_digital, html_dl: true) %>
     <%#= presenter.attribute_to_html(:media_type, render_as: :faceted, html_dl: true) %>
@@ -74,5 +76,5 @@
     <%= presenter.attribute_to_html(:embargo_release_date, render_as: :date, html_dl: true) %>
     <%= presenter.attribute_to_html(:lease_expiration_date, render_as: :date, html_dl: true) %>
     <%#= presenter.attribute_to_html(:based_near_label) %>
-
  </dl>
+
