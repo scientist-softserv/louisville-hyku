@@ -9,10 +9,10 @@ GIT
 
 GIT
   remote: https://github.com/samvera-labs/bulkrax.git
-  revision: 1dc28d8bc26caa7c0d564b1f0a8da370615b13a8
-  branch: main
+  revision: ee0575c745ef4a672e04ea8abe11eb361429421e
+  branch: relationships_concurrency_bug
   specs:
-    bulkrax (2.2.3)
+    bulkrax (2.3.0)
       bagit (~> 0.4)
       coderay
       iso8601 (~> 0.9.0)
@@ -1297,4 +1297,4 @@ DEPENDENCIES
   willow_sword!
 
 BUNDLED WITH
-   2.2.27
+   2.3.8
