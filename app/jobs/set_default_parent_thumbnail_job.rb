@@ -3,7 +3,8 @@
 class SetDefaultParentThumbnailJob < ApplicationJob
   queue_as :import
 
-  def perform(parent_work:, importer_run:)
+  def perform(parent_work:, importer_run_id:)
+    importer_run = Bulkrax::ImporterRun.find(importer_run_id)
     parent_work.reload
     return if parent_work.thumbnail.present?
 
@@ -12,7 +13,7 @@ class SetDefaultParentThumbnailJob < ApplicationJob
 
     child_file_set = parent_work.child_works&.first&.file_sets&.first
     if child_file_set.nil?
-      reschedule(parent_work: parent_work)
+      reschedule(parent_work: parent_work, importer_run_id: importer_run_id)
       return false # stop current job from continuing to run after rescheduling
     end
 
@@ -27,8 +28,8 @@ class SetDefaultParentThumbnailJob < ApplicationJob
     Bulkrax::Entry.find_by(identifier: parent_work.identifier.first).status_info(e) if parent_work
   end
 
-  def reschedule(parent_work:)
+  def reschedule(parent_work:, importer_run_id:)
     SetDefaultParentThumbnailJob.set(wait: 5.minutes)
-                                .perform_later(parent_work: parent_work, importer_run: importer_run)
+                                .perform_later(parent_work: parent_work, importer_run_id: importer_run_id)
   end
 end
