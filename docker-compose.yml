@@ -110,7 +110,7 @@ services:
 
   web:
     <<: *app
-    #command: sh -l -c "yarn install && bundle exec puma -v -b tcp://0.0.0.0:3000"
+    command: sh -l -c "yarn install && bundle exec puma -v -b tcp://0.0.0.0:3000"
     environment:
       - VIRTUAL_PORT=3000
       - VIRTUAL_HOST=.hyku.test

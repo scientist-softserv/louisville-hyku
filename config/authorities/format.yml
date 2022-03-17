@@ -9,6 +9,8 @@ terms:
     term: image/tiff
   - id: video/flv
     term: video/flv
+  - id: video/mp4
+    term: video/mp4
   - id: video/mpeg
     term: video/mpeg
   - id: video/x-msvideo
