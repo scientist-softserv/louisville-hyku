@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2022_03_07_164617) do
     t.integer "total_file_set_entries", default: 0
     t.integer "processed_works", default: 0
     t.integer "failed_works", default: 0
-    t.text "parents"
+    t.text "parents", array: true
     t.integer "processed_parent_thumbnails", default: 0
     t.integer "failed_parent_thumbnails", default: 0
     t.index ["importer_id"], name: "index_bulkrax_importer_runs_on_importer_id"
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 2022_03_07_164617) do
     t.string "child_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "order"
+    t.integer "order", default: 0
     t.index ["bulkrax_importer_run_id"], name: "index_bulkrax_pending_relationships_on_bulkrax_importer_run_id"
   end
 
