@@ -19,8 +19,9 @@ module Hyrax
     delegate_all
 
     def search_service
-      Rails.application.routes.url_helpers.solr_document_iiif_search_url(id,
+      url = Rails.application.routes.url_helpers.solr_document_iiif_search_url(id,
                                                                          host: hostname)
+      url.sub(/\Ahttp:/, 'https:')
     end
 
     ##
