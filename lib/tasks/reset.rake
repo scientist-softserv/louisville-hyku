@@ -10,6 +10,7 @@ namespace :hyrax do
       ActiveFedora::Cleaner.clean!
       Hyrax::PermissionTemplateAccess.delete_all
       Hyrax::PermissionTemplate.delete_all
+      Bulkrax::PendingRelationship if defined?(Bulkrax::PendingRelationship)
       Bulkrax::Entry.delete_all
       Bulkrax::ImporterRun.delete_all
       Bulkrax::Status.delete_all
