@@ -47,6 +47,7 @@ namespace :hyrax do
         puts "#{oldtitle} changed to #{c.title}"
       end
     end
+
     def confirm(action)
       # rubocop:disable Style/GuardClause
       if ENV['RESET_CONFIRMED'].blank?
