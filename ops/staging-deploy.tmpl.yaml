@@ -47,7 +47,8 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt-prod
   }
   tls:
-    - host: lv-hyku-staging.notch8.cloud
+    - hosts:
+        - lv-hyku-staging.notch8.cloud
       secretName: notch8cloud
 
 extraEnvVars:
