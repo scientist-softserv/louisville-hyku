@@ -11,6 +11,20 @@ namespace :hyrax do
       Hyrax::PermissionTemplateAccess.delete_all
       Hyrax::PermissionTemplate.delete_all
       Bulkrax::Entry.delete_all
+      Bulkrax::ImporterRun.delete_all
+      Bulkrax::Status.delete_all
+      # Remove sipity methods, everything but sipity roles
+      Sipity::Workflow.delete_all
+      Sipity::EntitySpecificResponsibility.delete_all
+      Sipity::Comment.delete_all
+      Sipity::Entity.delete_all
+      Sipity::WorkflowRole.delete_all
+      Sipity::WorkflowResponsibility.delete_all
+      Sipity::Agent.delete_all
+      Mailboxer::Receipt.destroy_all
+      Mailboxer::Notification.delete_all
+      Mailboxer::Conversation::OptOut.delete_all
+      Mailboxer::Conversation.delete_all
       AccountElevator.switch!('single.tenant.default')
       # we need to wait till Fedora is done with its cleanup
       # otherwise creating the admin set will fail
@@ -18,8 +32,19 @@ namespace :hyrax do
         puts 'waiting for delete to finish before reinitializing Fedora'
         sleep 20
       end
-      Rake::Task["hyrax:default_collection_types:create"].invoke
-      Rake::Task["hyrax:default_admin_set:create"].invoke
+
+      Hyrax::CollectionType.find_or_create_default_collection_type
+      Hyrax::CollectionType.find_or_create_admin_set_type
+      AdminSet.find_or_create_default_admin_set_id
+
+      collection_types = Hyrax::CollectionType.all
+      collection_types.each do |c|
+        next unless c.title =~ /^translation missing/
+        oldtitle = c.title
+        c.title = I18n.t(c.title.gsub("translation missing: en.", ''))
+        c.save
+        puts "#{oldtitle} changed to #{c.title}"
+      end
     end
     def confirm(action)
       # rubocop:disable Style/GuardClause
