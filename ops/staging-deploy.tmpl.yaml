@@ -256,6 +256,8 @@ worker:
       value: "true"
     - name: HYKU_BULKRAX_ENABLED
       value: "true"
+    - name: HYKU_SSL_CONFIGURED
+      value: "true"
     - name: SOLR_ADMIN_USER
       value: admin
     - name: SOLR_COLLECTION_NAME
