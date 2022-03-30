@@ -58,6 +58,7 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
   context 'when a show page theme is selected' do
     it 'renders theme notes and wireframe' do
       login_as admin
+      sleep 3
       visit '/admin/appearance'
       click_link('Themes')
       select('Cultural Show Page', from: 'Show Page Theme')
