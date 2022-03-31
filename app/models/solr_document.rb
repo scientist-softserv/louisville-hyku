@@ -53,6 +53,7 @@ class SolrDocument
   attribute :honoree, Solr::Array, solr_name('honoree')
   attribute :invoice_information, Solr::Array, solr_name('invoice_information')
   attribute :issue, Solr::Array, solr_name('issue')
+  attribute :is_parent, Solr::String, "is_parent_bsi"
   attribute :language_script, Solr::Array, solr_name('language_script')
   attribute :location, Solr::Array, solr_name('location')
   attribute :location_of_contributor, Solr::Array, solr_name('location_of_contributor')
