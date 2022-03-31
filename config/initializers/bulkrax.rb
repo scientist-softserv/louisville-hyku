@@ -98,8 +98,8 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
 
     # support v.2.0 parent/child relationships: https://github.com/samvera-labs/bulkrax/wiki/Configuring-Bulkrax#parent-child-relationship-field-mappings
     config.field_mappings['Bulkrax::CsvParser'].merge!({
-      'parents' => { from: ['parents'], split: /\s*[;]\s*/, related_parents_field_mapping: true },
-      'children' => { from: ['children'], split: /\s*[;]\s*/, related_children_field_mapping: true },
+      'parents' => { from: ['parents'], split: /\s*[;|]\s*/, related_parents_field_mapping: true },
+      'children' => { from: ['children'], split: /\s*[;|]\s*/, related_children_field_mapping: true },
     })
 
     # By default no parent-child relationships are added
