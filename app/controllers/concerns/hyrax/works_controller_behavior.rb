@@ -231,6 +231,7 @@ module Hyrax
       def curation_concern_from_search_results
         search_params = params
         search_params.delete :page
+        search_params.delete :q
         search_result_document(search_params)
       end
 
