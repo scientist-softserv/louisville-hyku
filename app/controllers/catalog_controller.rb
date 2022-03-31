@@ -43,7 +43,7 @@ class CatalogController < ApplicationController
     config.advanced_search[:query_parser] ||= 'dismax'
     config.advanced_search[:form_solr_parameters] ||= {}
 
-    config.search_builder_class = CustomSearchBuilder
+    config.search_builder_class = CustomCatalogSearchBuilder
 
     # Show gallery view
     config.view.gallery.partials = %i[index_header index]
