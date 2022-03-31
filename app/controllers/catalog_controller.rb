@@ -55,6 +55,7 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: "search",
       rows: 10,
+      fq: "is_parent_bs:true",
       qf: "title_tesim description_tesim creator_tesim keyword_tesim all_text_tsimv",
       :"hl" => true,
       :"hl.simple.pre" => "<span class='highlight'>",
