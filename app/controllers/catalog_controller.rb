@@ -43,7 +43,7 @@ class CatalogController < ApplicationController
     config.advanced_search[:query_parser] ||= 'dismax'
     config.advanced_search[:form_solr_parameters] ||= {}
 
-    config.search_builder_class = CustomCatalogSearchBuilder
+    config.search_builder_class = CustomSearchBuilder
 
     # Show gallery view
     config.view.gallery.partials = %i[index_header index]
@@ -55,7 +55,6 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: "search",
       rows: 10,
-      fq: "is_parent_bs:true",
       qf: "title_tesim description_tesim creator_tesim keyword_tesim all_text_tsimv",
       :"hl" => true,
       :"hl.simple.pre" => "<span class='highlight'>",
