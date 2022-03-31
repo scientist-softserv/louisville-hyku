@@ -56,6 +56,12 @@ class Text < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
+  property :is_parent,
+    predicate: ::RDF::URI.intern('https://hyku.library.louisville.edu/terms/isParent'),
+    multiple: false do |index|
+    index.as :stored_searchable
+  end
+
   property :location,
            predicate: ::RDF::Vocab::DC.spatial,
            multiple: true do |index|
