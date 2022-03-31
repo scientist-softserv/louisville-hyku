@@ -22,6 +22,7 @@ class CustomSearchBuilder < Hyrax::CatalogSearchBuilder
     blacklight_params[:date_start].present? || blacklight_params[:date_end].present? || super
   end
   # rubocop:enable Naming/PredicateName
+
   def show_parents_only(solr_parameters)
     solr_parameters[:fq] = ['is_parent_bsi:true']
   end

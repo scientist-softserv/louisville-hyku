@@ -57,8 +57,8 @@ class Text < ActiveFedora::Base
   end
 
   property :is_parent,
-    predicate: ::RDF::URI.intern('https://hyku.library.louisville.edu/terms/isParent'),
-    multiple: false do |index|
+           predicate: ::RDF::URI.intern('https://hyku.library.louisville.edu/terms/isParent'),
+           multiple: false do |index|
     index.as :stored_searchable
   end
 
