@@ -19,7 +19,7 @@ module Bulkrax
       add_rights_statement
       add_local
 
-      self.parsed_metadata
+      self.parsed_metadata # rubocop:disable Style/RedundantSelf
     end
 
     def possible_collection_ids
