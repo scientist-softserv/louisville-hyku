@@ -9,10 +9,10 @@ GIT
 
 GIT
   remote: https://github.com/samvera-labs/bulkrax.git
-  revision: 8e93a1830caef93ca27e544ee0ecdc4fd469d161
+  revision: 970964df41223689b474df7da73a71f0338a1d0e
   branch: main
   specs:
-    bulkrax (2.3.0)
+    bulkrax (3.0.0.beta3)
       bagit (~> 0.4)
       coderay
       iso8601 (~> 0.9.0)
@@ -273,7 +273,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     colorize (0.8.1)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
     countries (2.1.4)
       i18n_data (~> 0.8.0)
@@ -723,7 +723,7 @@ GEM
       activesupport (>= 4)
       railties (>= 4)
       request_store (~> 1.0)
-    loofah (2.15.0)
+    loofah (2.16.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
