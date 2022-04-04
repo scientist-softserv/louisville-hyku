@@ -14,6 +14,7 @@ namespace :hyrax do
       Bulkrax::Entry.delete_all
       Bulkrax::ImporterRun.delete_all
       Bulkrax::Status.delete_all
+      Bulkrax::Importer.delete_all
       # Remove sipity methods, everything but sipity roles
       Sipity::Workflow.delete_all
       Sipity::EntitySpecificResponsibility.delete_all
