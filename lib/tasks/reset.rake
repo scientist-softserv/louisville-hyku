@@ -17,10 +17,8 @@ namespace :hyrax do
       ActiveFedora::Cleaner.clean!
       Hyrax::PermissionTemplateAccess.delete_all
       Hyrax::PermissionTemplate.delete_all
-      Bulkrax::PendingRelationship if defined?(Bulkrax::PendingRelationship)
+      Bulkrax::PendingRelationship.delete_all
       Bulkrax::Entry.delete_all
-      # TODO(alishaevn): troubleshoot the error below as a result of trying to delete the importer runs
-      # ActiveRecord::InvalidForeignKey: PG::ForeignKeyViolation: ERROR: update or delete on table "bulkrax_importer_runs" violates foreign key constraint "fk_rails_c6af228061" on table "bulkrax_pending_relationships"
       Bulkrax::ImporterRun.delete_all
       Bulkrax::Status.delete_all
       # Remove sipity methods, everything but sipity roles
