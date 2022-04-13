@@ -18,5 +18,13 @@ module Hyrax
     def universal_viewer_config_url
       "#{request&.base_url}/uv/uv-config.json"
     end
+
+    # Extract query param from search
+    def uv_search_param
+      search_params = current_search_session.try(:query_params) || {}
+      q = search_params['q'].presence || ''
+
+      "&q=#{url_encode(q)}" if q.present?
+    end
   end
 end
