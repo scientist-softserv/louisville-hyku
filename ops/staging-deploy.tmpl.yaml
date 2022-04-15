@@ -59,9 +59,9 @@ extraEnvVars:
   - name: CONFDIR
     value: "/app/samvera/hyrax-webapp/solr/config"
   - name: CLIENT_USER_EMAIL
-  - value: client@example.com
+    value: client@example.com
   - name: CLIENT_USER_PASSWORD
-  - value: password123
+    value: password123
   - name: INITIAL_ADMIN_EMAIL
     value: admin@example.com
   - name: INITIAL_ADMIN_PASSWORD
