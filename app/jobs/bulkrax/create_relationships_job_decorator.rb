@@ -16,7 +16,7 @@ module Bulkrax
         parent_record.update(is_parent: true)
         # set the first child's thumbnail as the thumbnail for the parent
         ::SetDefaultParentThumbnailJob.set(wait: 10.minutes)
-                                      .perform_later(parent_work: @parent_record, importer_run_id: @importer_run_id)
+                                      .perform_later(parent_work: parent_record, importer_run_id: importer_run_id)
 
         if child_records[:collections].present?
           raise ::StandardError, 'a Collection may not be assigned as a child of a Work'
