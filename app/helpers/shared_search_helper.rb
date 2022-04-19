@@ -22,7 +22,7 @@ module SharedSearchHelper
       new_url = "#{request[:request_protocol]}#{account_cname || request[:request_host]}"
       new_url += ":#{request[:request_port]}" if Rails.env.development? || Rails.env.test?
       new_url += "/concern/#{has_model}/#{id}"
-      new_url += if "?q=#{query}" query.present?
+      new_url += "?q=#{query}" if query.present?
       new_url
     end
 end
