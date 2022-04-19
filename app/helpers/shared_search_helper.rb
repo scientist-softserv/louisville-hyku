@@ -21,7 +21,8 @@ module SharedSearchHelper
     def get_url(id:, request:, account_cname:, has_model:, query:)
       new_url = "#{request[:request_protocol]}#{account_cname || request[:request_host]}"
       new_url += ":#{request[:request_port]}" if Rails.env.development? || Rails.env.test?
-      new_url += "/concern/#{has_model}/#{id}?q=#{query}"
+      new_url += "/concern/#{has_model}/#{id}"
+      new_url += if "?q=#{query}" query.present?
       new_url
     end
 end
