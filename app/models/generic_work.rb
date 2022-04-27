@@ -8,4 +8,10 @@ class GenericWork < ActiveFedora::Base
 
   self.indexer = GenericWorkIndexer
   self.human_readable_type = 'Work'
+
+  property :is_parent,
+           predicate: ::RDF::URI.intern('https://hyku.library.louisville.edu/terms/isParent'),
+           multiple: false do |index|
+    index.as :stored_searchable
+  end
 end
