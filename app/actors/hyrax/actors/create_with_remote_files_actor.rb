@@ -83,7 +83,7 @@ module Hyrax
             ConvertRemotePdfToJpgJob.perform_now(uri.to_s, env.curation_concern, env.attributes, env.user)
           end
 
-          works_that_need_pdfs = [Image, GenericWork]
+          works_that_need_pdfs = []
           make_pdfs(env) if works_that_need_pdfs.include?(env.curation_concern.class)
           true
         end
