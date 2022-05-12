@@ -1,4 +1,4 @@
-# IIFManifest OVERRIDE : Add sequence['viewingHint'] = 'paged' to Sequences for two-page view
+# OVERRIDE IIIFManifest v0.5.0: Add sequence['viewingHint'] = 'paged' to Sequences for two-page view
 
 module IIIFManifest
   class ManifestBuilder
@@ -11,7 +11,6 @@ module IIIFManifest
       end
 
       def apply(manifest)
-        # sequence.viewing_hint = manifest.viewing_hint
         manifest.sequences += [sequence] unless empty?
         manifest
       end
