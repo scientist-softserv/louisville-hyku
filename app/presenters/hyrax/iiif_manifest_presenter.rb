@@ -86,7 +86,8 @@ module Hyrax
     def manifest_url
       return '' if id.blank?
 
-      Rails.application.routes.url_helpers.polymorphic_url([:manifest, model], host: hostname)
+      protocol = ENV['HYKU_SSL_CONFIGURED'] == 'true' ? 'https' : 'http'
+      Rails.application.routes.url_helpers.polymorphic_url([:manifest, model], host: hostname, protocol: protocol)
     end
 
     ##
