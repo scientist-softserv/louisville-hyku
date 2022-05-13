@@ -20,7 +20,7 @@ module Hyrax
 
     def search_service
       url = Rails.application.routes.url_helpers.solr_document_iiif_search_url(id, host: hostname)
-      ENV['HYKU_SSL_CONFIGURED'] == 'true' ? url.sub(/\Ahttp:/, 'https:') : url
+      Site.account.ssl_configured ? url.sub(/\Ahttp:/, 'https:') : url
     end
 
     ##
@@ -86,7 +86,8 @@ module Hyrax
     def manifest_url
       return '' if id.blank?
 
-      Rails.application.routes.url_helpers.polymorphic_url([:manifest, model], host: hostname)
+      protocol = Site.account.ssl_configured ? 'https' : 'http'
+      Rails.application.routes.url_helpers.polymorphic_url([:manifest, model], host: hostname, protocol: protocol)
     end
 
     ##

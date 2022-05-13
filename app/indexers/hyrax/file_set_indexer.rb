@@ -41,13 +41,22 @@ module Hyrax
         solr_doc['original_file_id_ssi']    = original_file_id
         solr_doc['is_derived_ssi']          = object.is_derived
         # only UV viewable images should have is_page_of, it is only used for iiif search
-        solr_doc['is_page_of_ssi']          = object.parent&.id if object.mime_type&.match(/image/)
+        solr_doc['is_page_of_ssim']         = [ancestor_ids(object)] if object.mime_type&.match(/image/)
         index_full_text(object, solr_doc)
       end
     end
     # rubocop:enable Metrics/AbcSize
 
     private
+
+      def ancestor_ids(o)
+        a_ids = []
+        o.in_works.each do |work|
+          a_ids << work.id
+          a_ids += ancestor_ids(work) unless work.is_parent
+        end
+        a_ids
+      end
 
       def digest_from_content
         return unless object.original_file

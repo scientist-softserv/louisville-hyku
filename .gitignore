@@ -63,3 +63,4 @@ solr_db_initialized
 public/assets
 public/universalviewer
 .DS_Store
+*~undo-tree~
