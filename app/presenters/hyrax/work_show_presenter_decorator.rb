@@ -30,7 +30,7 @@ module Hyrax
       file_set_ids.present?
     end
 
-    def sort_members_by_idenfitier(members)
+    def sort_members_by_identifier(members)
       members.sort_by { |work| work.try(:identifier) }
     end
   end
