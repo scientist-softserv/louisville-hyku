@@ -2,7 +2,7 @@
 
 namespace :hyrax do
   namespace :reset do
-    desc "Delete Bulkrax importers in addition the reset below"
+    desc "Delete Bulkrax importers in addition to the reset below"
     task :all => :works_and_collections do
       # sometimes re-running an existing importer causes issues
       # and you may need to create new ones or delete the existing ones
