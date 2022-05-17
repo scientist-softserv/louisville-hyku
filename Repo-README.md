@@ -124,7 +124,6 @@ sc be rails db:seed
   - Try:
     ``` bash
     dc down -v
-    rm solr_db_initialized
     sc build
     sc up
     ```

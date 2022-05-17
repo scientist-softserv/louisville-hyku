@@ -37,7 +37,7 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
 
     attach_to_work(actors, work)
 
-    works_that_dont_need_pdf = [Art, GenericWork, Image, Text]
+    works_that_dont_need_pdf = Hyrax.config.curation_concerns
     ConvertImagesToPdfJob.perform_later(work) unless works_that_dont_need_pdf.include?(work.class)
     Sidekiq.logger.error("AttachFilesToWorkJob is ending #{Time.now.utc} :: Work ID #{work.id}") # rubocop: disable Metrics/LineLength
     true

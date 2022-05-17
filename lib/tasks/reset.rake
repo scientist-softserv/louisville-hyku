@@ -56,14 +56,11 @@ namespace :hyrax do
     end
 
     def confirm(action)
-      # rubocop:disable Style/GuardClause
-      if ENV['RESET_CONFIRMED'].blank?
-        confirm_token = rand(36**6).to_s(36)
-        STDOUT.puts "#{action} Enter '#{confirm_token}' to confirm:"
-        input = STDIN.gets.chomp
-        raise "Aborting. You entered #{input}" unless input == confirm_token
-      end
-      # rubocop:enable Style/GuardClause
+      return if ENV['RESET_CONFIRMED'].present?
+      confirm_token = rand(36**6).to_s(36)
+      STDOUT.puts "#{action} Enter '#{confirm_token}' to confirm:"
+      input = STDIN.gets.chomp
+      raise "Aborting. You entered #{input}" unless input == confirm_token
     end
   end
 end

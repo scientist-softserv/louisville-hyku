@@ -26,7 +26,8 @@
       </tr>
     </thead>
     <tbody>
-      <%= render partial: 'member', collection: members %>
+      <% sorted_members = presenter.sort_members_by_identifier(members) %>
+      <%= render partial: 'member', collection: sorted_members %>
     </tbody>
   </table>
   <% if page_count > 1 %>
