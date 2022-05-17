@@ -172,7 +172,7 @@ module Hyrax
           elsif Hyrax.config.curation_concerns.include?(solr_doc.hydra_model)
             # look up file set ids and loop through those
             file_set_docs = load_file_set_docs(solr_doc.file_set_ids)
-            file_set_docs.map { |doc| presenter_class.for(doc) }
+            file_set_docs.map { |doc| presenter_class.for(doc) } if file_set_docs.length
           end
         end.flatten.compact
       end
@@ -186,7 +186,10 @@ module Hyrax
           @cached_docs ||= super
         end
 
+        # still create the manifest if the parent work has images attached but the child works do not
         def load_file_set_docs(file_set_ids)
+          return [] if file_set_ids.nil?
+
           query("{!terms f=id}#{file_set_ids.join(',')}", rows: 1000)
             .map { |res| ::SolrDocument.new(res) }
         end
