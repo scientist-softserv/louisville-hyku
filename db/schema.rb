@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_30_165510) do
+ActiveRecord::Schema.define(version: 2022_03_07_164617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(version: 2022_03_30_165510) do
     t.integer "total_file_set_entries", default: 0
     t.integer "processed_works", default: 0
     t.integer "failed_works", default: 0
-    t.text "parents"
     t.integer "processed_parent_thumbnails", default: 0
     t.integer "failed_parent_thumbnails", default: 0
     t.index ["importer_id"], name: "index_bulkrax_importer_runs_on_importer_id"
