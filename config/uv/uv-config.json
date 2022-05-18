@@ -25,7 +25,7 @@
     "theme": "uv-en-GB-theme",
     "tokenStorage": "session",
     "useArrowKeysToNavigate": true,
-    "zoomToSearchResultEnabled": true
+    "zoomToSearchResultEnabled": false
   },
   "modules": {
     "contentLeftPanel": {

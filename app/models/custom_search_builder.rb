@@ -24,6 +24,6 @@ class CustomSearchBuilder < Hyrax::CatalogSearchBuilder
   # rubocop:enable Naming/PredicateName
 
   def show_parents_only(solr_parameters)
-    solr_parameters[:fq] = ['is_parent_bsi:true']
+    solr_parameters[:fq] += ['is_parent_bsi:true']
   end
 end

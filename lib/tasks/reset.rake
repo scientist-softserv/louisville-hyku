@@ -2,6 +2,13 @@
 
 namespace :hyrax do
   namespace :reset do
+    desc "Delete Bulkrax importers in addition to the reset below"
+    task all: :works_and_collections do
+      # sometimes re-running an existing importer causes issues
+      # and you may need to create new ones or delete the existing ones
+      Bulkrax::Importer.delete_all
+    end
+
     desc 'Reset fedora / solr and corresponding database tables w/o clearing other active record tables like users'
     task works_and_collections: [:environment] do
       AccountElevator.switch!('single.tenant.default')
@@ -10,7 +17,7 @@ namespace :hyrax do
       ActiveFedora::Cleaner.clean!
       Hyrax::PermissionTemplateAccess.delete_all
       Hyrax::PermissionTemplate.delete_all
-      Bulkrax::PendingRelationship if defined?(Bulkrax::PendingRelationship)
+      Bulkrax::PendingRelationship.delete_all
       Bulkrax::Entry.delete_all
       Bulkrax::ImporterRun.delete_all
       Bulkrax::Status.delete_all

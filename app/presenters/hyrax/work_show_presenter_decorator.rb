@@ -31,7 +31,7 @@ module Hyrax
     end
 
     def sort_members_by_identifier(members)
-      members.sort_by { |work| work.try(:identifier) }
+      members.sort_by { |work| work.try(:identifier) || [] }
     end
   end
 end
