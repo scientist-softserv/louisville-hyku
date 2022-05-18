@@ -15,7 +15,7 @@ class TextIndexer < Hyrax::WorkIndexer
   def generate_solr_document
     super.tap do |solr_doc|
       solr_doc['all_text_tsimv'] = [object.searchable_text]
-      solr_doc['is_page_of_ssim']         = ancestor_ids(object)
+      solr_doc['is_page_of_ssim'] = ancestor_ids(object)
     end
   end
 
