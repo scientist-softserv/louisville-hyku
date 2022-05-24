@@ -1,8 +1,9 @@
 <%# OVERRIDE: Hyrax 2.9.6 %>
 <h2><%= t('.header') %></h2>
+<%# OVERRIDE: Hyrax 2.9.6 to return all item ids %>
 <% array_of_ids = presenter.list_of_item_ids_to_display %>
 <% members = presenter.member_presenters_for(array_of_ids) %>
-<%# OVERRIDE: Hyrax 2.9.6 %>
+<%# OVERRIDE: Hyrax 2.9.6 to hide jpg derivatives for non admin's/superadmin's %>
 <% page_count = presenter.total_pages %>
 
 <%
@@ -33,7 +34,8 @@
   <% if page_count > 1 %>
     <div class="row">
       <div class="row record-padding col-md-9">
-        <%= paginate array_of_ids, outer_window: 2, theme: 'blacklight', param_name: :page, route_set: main_app %>
+        <%# OVERRIDE: Hyrax 2.9.6 to use our paginated list %>
+        <%= paginate sorted_members, outer_window: 2, theme: 'blacklight', param_name: :page, route_set: main_app %>
       </div><!-- /pager -->
     </div>
   <% end %>
