@@ -52,4 +52,13 @@ class Ability
     @user_groups |= ['registered'] if !current_user.new_record? && current_user.roles.count.positive?
     @user_groups
   end
+
+  def download_groups(id)
+    doc = permissions_doc(id)
+    return [] if doc.nil?
+    # OVERRIDE Hyrax 2.9.6 to only allow admin's and super admin's access to actions
+    groups = Array(doc[self.class.edit_group_field])
+    Rails.logger.debug("[CANCAN] download_groups: #{groups.inspect}")
+    groups
+  end
 end
