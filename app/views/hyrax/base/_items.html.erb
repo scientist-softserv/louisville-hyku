@@ -16,6 +16,7 @@
 %>
 
 <% if members.present? %>
+  <% sorted_members = presenter.sort_members_by_identifier(members) %>
   <table class="table table-striped related-files">
     <thead>
       <tr>
@@ -23,11 +24,10 @@
         <th><%= t('.title') %></th>
         <th><%= t('.date_uploaded') %></th>
         <th><%= t('.visibility') %></th>
-        <th><%= t('.actions') %></th>
+        <% if can?(:download, sorted_members)%> <th><%= t('.actions') %></th> <% end %>
       </tr>
     </thead>
     <tbody>
-      <% sorted_members = presenter.sort_members_by_identifier(members) %>
       <%= render partial: 'member', collection: sorted_members %>
     </tbody>
   </table>
