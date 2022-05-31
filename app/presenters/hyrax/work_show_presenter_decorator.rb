@@ -30,8 +30,18 @@ module Hyrax
       file_set_ids.present?
     end
 
+    # OVERRIDE: Hyrax 2.9.6 to return all item ids so we can sort below before paginating
+    def list_of_item_ids_to_display
+      authorized_item_ids
+    end
+
     def sort_members_by_identifier(members)
-      members.sort_by { |work| work.try(:identifier) || [] }
+      sorted = members.sort_by { |work| work.try(:identifier) || [] }
+      paginate_members(sorted)
+    end
+
+    def paginate_members(sorted)
+      Kaminari.paginate_array(sorted, total_count: sorted.size).page(current_page).per(rows_from_params)
     end
   end
 end
