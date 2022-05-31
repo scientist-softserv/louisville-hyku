@@ -3,6 +3,7 @@
 # These methods override 2.5.1 behavior defined in hyrax_helper_behavior.rb
 module Hyrax
   module OverrideHelperBehavior
+    include Hyrax::FileSetHelperDecorator
     # @param values [Array{String}] strings to display
     # @param solr_field [String] name of the solr field to link to, without its suffix (:facetable)
     # @param empty_message [String] message to display if no values are passed in
