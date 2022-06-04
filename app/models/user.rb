@@ -39,6 +39,16 @@ class User < ApplicationRecord
   def is_superadmin
     has_role? :superadmin
   end
+  # rubocop:disable Style/Alias
+  alias_method :is_superadmin?, :is_superadmin
+  # rubocop:enable Style/Alias
+
+  def is_admin
+    has_role? :admin
+  end
+  # rubocop:disable Style/Alias
+  alias_method :is_admin?, :is_admin
+  # rubocop:enable Style/Alias
 
   # This comes from a checkbox in the proprietor interface
   # Rails checkboxes are often nil or "0" so we handle that

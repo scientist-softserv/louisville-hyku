@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
 
-  authenticate :user, lambda { |u| u.is_superadmin } do
+  authenticate :user, lambda { |u| u.is_superadmin || u.is_admin } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
