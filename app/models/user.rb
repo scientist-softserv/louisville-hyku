@@ -44,7 +44,7 @@ class User < ApplicationRecord
   # rubocop:enable Style/Alias
 
   def is_admin
-    has_role? :admin
+    has_role?(:admin, Site.instance)
   end
   # rubocop:disable Style/Alias
   alias_method :is_admin?, :is_admin
@@ -84,7 +84,7 @@ class User < ApplicationRecord
   end
 
   def groups
-    return ['admin'] if has_role?(:admin, Site.instance)
+    return ['admin'] if is_admin?
     []
   end
 

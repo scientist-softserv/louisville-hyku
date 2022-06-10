@@ -40,7 +40,7 @@ class Ability
   end
 
   def superadmin?
-    current_user.has_role? :superadmin
+    current_user.is_superadmin?
   end
 
   # Override from blacklight-access_controls-0.6.2 to define registered to include having a role on this tenant
