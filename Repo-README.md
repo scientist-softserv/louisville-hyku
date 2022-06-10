@@ -134,7 +134,7 @@ sc be rails db:seed
     - make sure you're signed in with the user defined at `ENV['INITIAL_ADMIN_EMAIL']`
     ``` bash
     user = User.find_or_create_by(email: ENV['INITIAL_ADMIN_EMAIL'])
-    user.is_superadmin
+    user.is_superadmin?
     # if the above returns false, make your user a superadmin
     # which is what is should have been already because of the seeds
     user.add_role(:superadmin)
