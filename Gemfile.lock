@@ -225,9 +225,6 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
-    bootstrap_form (5.0.0)
-      actionpack (>= 5.2)
-      activemodel (>= 5.2)
     brakeman (5.2.0)
     breadcrumbs_on_rails (3.0.1)
     browse-everything (1.1.2)
@@ -537,12 +534,6 @@ GEM
     hydra-pcdm (1.1.0)
       active-fedora (>= 10, < 14)
       mime-types (>= 1)
-    hydra-role-management (1.0.3)
-      blacklight
-      bootstrap_form
-      bundler (>= 1.5)
-      cancancan
-      json (>= 1.8)
     hydra-works (1.2.0)
       activesupport (>= 4.2.10, < 6.0)
       hydra-derivatives (~> 3.0)
@@ -1249,7 +1240,6 @@ DEPENDENCIES
   flutie
   font_awesome5_rails
   httparty
-  hydra-role-management
   hyrax (~> 2.9, >= 2.9.1)
   hyrax-doi
   i18n-debug
