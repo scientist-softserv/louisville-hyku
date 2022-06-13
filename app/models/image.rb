@@ -101,13 +101,13 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
 
   property :building_date,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_temporalCoverage"),
-           multiple: false do |index|
+           multiple: true do |index|
     index.as :stored_searchable
   end
 
   property :city,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#City"),
-           multiple: false do |index|
+           multiple: true do |index|
     index.as :stored_searchable, :facetable
   end
 
@@ -119,8 +119,8 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
 
   property :county,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#County"),
-           multiple: false do |index|
-    index.as :stored_searchable, :facetable
+           multiple: true do |index|
+    index.as :stored_searchable
   end
 
   property :invoice_information,
@@ -131,7 +131,7 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
 
   property :neighborhood,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#CitySection"),
-           multiple: false do |index|
+           multiple: true do |index|
     index.as :stored_searchable, :facetable
   end
 
@@ -179,7 +179,7 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
 
   property :street,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#Address"),
-           multiple: false do |index|
+           multiple: true do |index|
     index.as :stored_searchable, :facetable
   end
 
