@@ -50,10 +50,6 @@ module Hyrax
         license
         related_url
         resource_query
-        digitization_specification
-        date_digital
-        media_type
-        format
       ]
     end
   end

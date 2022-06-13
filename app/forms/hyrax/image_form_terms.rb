@@ -10,6 +10,7 @@ module Hyrax
       super + %i[
         alternative_title
         series
+        story
         creator
         creator_role
         contributor
@@ -18,7 +19,6 @@ module Hyrax
         invoice_information
         photo_comment
         code
-        story
         location
         street
         neighborhood
@@ -30,8 +30,8 @@ module Hyrax
         mesh
         tab_heading
         keyword
-        people_represented
         production
+        people_represented
         date_created
         decade
         building_date
