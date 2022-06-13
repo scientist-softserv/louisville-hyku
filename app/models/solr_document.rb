@@ -53,6 +53,7 @@ class SolrDocument
   attribute :honoree, Solr::Array, solr_name('honoree')
   attribute :invoice_information, Solr::Array, solr_name('invoice_information')
   attribute :issue, Solr::Array, solr_name('issue')
+  attribute :is_parent, Solr::String, "is_parent_bsi"
   attribute :language_script, Solr::Array, solr_name('language_script')
   attribute :location, Solr::Array, solr_name('location')
   attribute :location_of_contributor, Solr::Array, solr_name('location_of_contributor')
@@ -73,6 +74,7 @@ class SolrDocument
   attribute :region, Solr::Array, solr_name('region')
   attribute :related_image, Solr::Array, solr_name('related_image')
   attribute :resource_query, Solr::Array, solr_name('resource_query')
+  attribute :searchable_text, Solr::String, solr_name('searchable_text')
   attribute :series, Solr::Array, solr_name('series')
   attribute :story, Solr::Array, solr_name('story')
   attribute :street, Solr::Array, solr_name('street')

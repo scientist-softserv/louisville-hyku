@@ -12,9 +12,19 @@ class TextIndexer < Hyrax::WorkIndexer
   include Hyrax::IndexesLinkedMetadata
 
   # Uncomment this block if you want to add custom indexing behavior:
-  # def generate_solr_document
-  #  super.tap do |solr_doc|
-  #    solr_doc['my_custom_field_ssim'] = object.my_custom_property
-  #  end
-  # end
+  def generate_solr_document
+    super.tap do |solr_doc|
+      solr_doc['all_text_tsimv'] = [object.searchable_text]
+      solr_doc['is_page_of_ssim'] = ancestor_ids(object)
+    end
+  end
+
+  def ancestor_ids(o)
+    a_ids = []
+    o.in_works.each do |work|
+      a_ids << work.id
+      a_ids += ancestor_ids(work) unless work.is_parent
+    end
+    a_ids
+  end
 end

@@ -10,7 +10,7 @@ unless ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_MULTITENANT', false))
   begin
     single_tenant_default = Account.find_by(cname: 'single.tenant.default')
     if single_tenant_default.blank?
-      single_tenant_default = Account.new(name: 'Single Tenant', cname: 'single.tenant.default', tenant: 'single', is_public: true)
+      single_tenant_default = Account.new(name: 'Single Tenant', cname: 'single.tenant.default', tenant: SecureRandom.uuid, is_public: true)
       CreateAccount.new(single_tenant_default).save
       single_tenant_default = single_tenant_default.reload
     end
@@ -77,6 +77,16 @@ if ENV['ROB_EMAIL'] && ENV['ROB_PASSWORD']
   puts "\n== Finished seeding Rob's superadmin user"
 end
 
+if ENV['CLIENT_USER_EMAIL'] && ENV['CLIENT_USER_PASSWORD']
+  u = User.find_or_create_by(email: ENV['CLIENT_USER_EMAIL']) do |u|
+    u.password = ENV['CLIENT_USER_PASSWORD']
+  end
+  u.add_role(:admin)
+  puts "\n== Finished seeding client's admin user"
+  u.add_role(:superadmin)
+  puts "\n== Finished seeding client's superadmin user"
+end
+
 if ENV['INITIAL_USER_EMAIL'] && ENV['INITIAL_USER_PASSWORD']
   u = User.find_or_create_by(email: ENV['INITIAL_USER_EMAIL']) do |u|
     u.password = ENV['INITIAL_USER_PASSWORD']
@@ -89,4 +99,14 @@ if ENV['TEST_USER_EMAIL'] && ENV['TEST_USER_PASSWORD']
     u.password = ENV['TEST_USER_PASSWORD']
   end
   puts "\n== Finished seeding the default notch8 registered user"
+end
+
+# Fix the collection types if need be
+collection_types = Hyrax::CollectionType.all
+collection_types.each do |c|
+  next unless c.title =~ /^translation missing/
+  oldtitle = c.title
+  c.title = I18n.t(c.title.gsub("translation missing: en.", ''))
+  c.save
+  puts "#{oldtitle} changed to #{c.title}"
 end

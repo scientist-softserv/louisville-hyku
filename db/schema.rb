@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_19_213325) do
+ActiveRecord::Schema.define(version: 2022_03_07_164617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(version: 2022_01_19_213325) do
     t.integer "total_file_set_entries", default: 0
     t.integer "processed_works", default: 0
     t.integer "failed_works", default: 0
+    t.integer "processed_parent_thumbnails", default: 0
+    t.integer "failed_parent_thumbnails", default: 0
     t.index ["importer_id"], name: "index_bulkrax_importer_runs_on_importer_id"
   end
 
@@ -142,6 +144,16 @@ ActiveRecord::Schema.define(version: 2022_01_19_213325) do
     t.datetime "last_error_at"
     t.datetime "last_succeeded_at"
     t.index ["user_id"], name: "index_bulkrax_importers_on_user_id"
+  end
+
+  create_table "bulkrax_pending_relationships", force: :cascade do |t|
+    t.bigint "bulkrax_importer_run_id", null: false
+    t.string "parent_id", null: false
+    t.string "child_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order", default: 0
+    t.index ["bulkrax_importer_run_id"], name: "index_bulkrax_pending_relationships_on_bulkrax_importer_run_id"
   end
 
   create_table "bulkrax_statuses", force: :cascade do |t|
@@ -813,6 +825,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_213325) do
   add_foreign_key "accounts", "endpoints", column: "solr_endpoint_id", on_delete: :nullify
   add_foreign_key "bulkrax_exporter_runs", "bulkrax_exporters", column: "exporter_id"
   add_foreign_key "bulkrax_importer_runs", "bulkrax_importers", column: "importer_id"
+  add_foreign_key "bulkrax_pending_relationships", "bulkrax_importer_runs"
   add_foreign_key "collection_type_participants", "hyrax_collection_types"
   add_foreign_key "content_blocks", "sites"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"

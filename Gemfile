@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'newspaper_works'
+gem 'newspaper_works', git: 'https://github.com/samvera-labs/newspaper_works.git', branch: :no_scrubs
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -96,8 +96,10 @@ group :development do
 end
 
 # Bulkrax
-gem 'bulkrax', git: 'https://github.com/samvera-labs/bulkrax.git', branch: :main
-gem 'willow_sword', git: 'https://github.com/notch8/willow_sword.git'
+group :bulkrax do
+  gem 'bulkrax', git: 'https://github.com/samvera-labs/bulkrax.git'
+  gem 'willow_sword', git: 'https://github.com/notch8/willow_sword.git'
+end
 
 gem 'blacklight', '~> 6.7'
 gem 'blacklight_oai_provider', '~> 6.1', '>= 6.1.1'
@@ -136,6 +138,7 @@ gem 'codemirror-rails'
 gem 'final_redirect_url'
 gem 'httparty'
 gem 'parser', '~> 2.5.3'
+gem 'pry-byebug'
 gem 'rdf', '~> 3.1.15' # rdf 3.2.0 removed SerializedTransaction which ldp requires
 gem 'riiif', '~> 1.1'
 gem 'secure_headers'
@@ -144,7 +147,5 @@ gem 'sidekiq'
 gem 'tether-rails'
 
 gem 'country_select', '~> 3.1', '>= 3.1.1'
-
-gem 'hydra-role-management'
 
 gem 'font_awesome5_rails'

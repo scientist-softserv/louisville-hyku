@@ -61,6 +61,12 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
     index.as :stored_searchable, :facetable
   end
 
+  property :is_parent,
+           predicate: ::RDF::URI.intern('https://hyku.library.louisville.edu/terms/isParent'),
+           multiple: false do |index|
+    index.as :stored_searchable
+  end
+
   property :location,
            predicate: ::RDF::Vocab::DC.spatial,
            multiple: true do |index|
@@ -82,7 +88,7 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   property :people_represented,
            predicate: ::RDF::Vocab::FOAF.name,
            multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :resource_query,
@@ -101,7 +107,7 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
 
   property :city,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#City"),
-           multiple: true do |index|
+           multiple: false do |index|
     index.as :stored_searchable, :facetable
   end
 
@@ -113,8 +119,8 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
 
   property :county,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#County"),
-           multiple: true do |index|
-    index.as :stored_searchable
+           multiple: false do |index|
+    index.as :stored_searchable, :facetable
   end
 
   property :invoice_information,
@@ -125,7 +131,7 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
 
   property :neighborhood,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#CitySection"),
-           multiple: true do |index|
+           multiple: false do |index|
     index.as :stored_searchable, :facetable
   end
 
@@ -173,7 +179,7 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
 
   property :street,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#Address"),
-           multiple: true do |index|
+           multiple: false do |index|
     index.as :stored_searchable, :facetable
   end
 

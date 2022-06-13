@@ -104,6 +104,14 @@ sc be rails db:seed
 #### Troubleshooting
 - Was the Dockerfile changed on your most recent `git pull`? Refer to the instructions above
 - Double check your dory set up
+- Do migrations need to be run?
+  ``` bash
+  sc be rails db:migrate
+  ```
+- Do seeds need to be run?
+  ``` bash
+  sc be rails db:seed
+  ```
 
 - Issue: Sidekiq isn't working (e.g.: importer/exporter status stays stuck at "pending")
   - Try:
@@ -116,7 +124,6 @@ sc be rails db:seed
   - Try:
     ``` bash
     dc down -v
-    rm solr_db_initialized
     sc build
     sc up
     ```
@@ -127,12 +134,15 @@ sc be rails db:seed
     - make sure you're signed in with the user defined at `ENV['INITIAL_ADMIN_EMAIL']`
     ``` bash
     user = User.find_or_create_by(email: ENV['INITIAL_ADMIN_EMAIL'])
-    user.is_superadmin
+    user.is_superadmin?
     # if the above returns false, make your user a superadmin
     # which is what is should have been already because of the seeds
     user.add_role(:superadmin)
     ```
     - if that doesn't work, use hyku.test instead of single.hyku.test
+
+- You can't access hyku.test/sidekiq
+  - Try: comment out the do block around `mount Sidekiq::Web => '/sidekiq'` in routes.rb
 
 #### Rubocop
 Rubocop can be run in docker locally using either of the options below:

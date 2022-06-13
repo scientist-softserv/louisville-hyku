@@ -19,8 +19,8 @@ module Hyrax
     delegate_all
 
     def search_service
-      Rails.application.routes.url_helpers.solr_document_iiif_search_url(id,
-                                                                         host: hostname)
+      url = Rails.application.routes.url_helpers.solr_document_iiif_search_url(id, host: hostname)
+      Site.account.ssl_configured ? url.sub(/\Ahttp:/, 'https:') : url
     end
 
     ##
@@ -86,7 +86,8 @@ module Hyrax
     def manifest_url
       return '' if id.blank?
 
-      Rails.application.routes.url_helpers.polymorphic_url([:manifest, model], host: hostname)
+      protocol = Site.account.ssl_configured ? 'https' : 'http'
+      Rails.application.routes.url_helpers.polymorphic_url([:manifest, model], host: hostname, protocol: protocol)
     end
 
     ##
@@ -164,8 +165,16 @@ module Hyrax
       def build
         ids.map do |id|
           solr_doc = load_docs.find { |doc| doc.id == id }
-          presenter_class.for(solr_doc) if solr_doc
-        end.compact
+          next unless solr_doc
+
+          if solr_doc.file_set?
+            presenter_class.for(solr_doc)
+          elsif Hyrax.config.curation_concerns.include?(solr_doc.hydra_model)
+            # look up file set ids and loop through those
+            file_set_docs = load_file_set_docs(solr_doc.file_set_ids)
+            file_set_docs.map { |doc| presenter_class.for(doc) } if file_set_docs.length
+          end
+        end.flatten.compact
       end
 
       private
@@ -175,6 +184,14 @@ module Hyrax
         # this can probably be pushed up to the parent class
         def load_docs
           @cached_docs ||= super
+        end
+
+        # still create the manifest if the parent work has images attached but the child works do not
+        def load_file_set_docs(file_set_ids)
+          return [] if file_set_ids.nil?
+
+          query("{!terms f=id}#{file_set_ids.join(',')}", rows: 1000)
+            .map { |res| ::SolrDocument.new(res) }
         end
     end
 

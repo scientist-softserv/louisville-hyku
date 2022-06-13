@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# OVERRIDE: Hyrax 2.9.1 to add derived to uploaded files
+# OVERRIDE: Hyrax 2.9.6 to add derived to uploaded files
 
 class AttachFilesToWorkJob < Hyrax::ApplicationJob
   include Hyrax::Lockable
@@ -18,6 +18,7 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
     metadata = visibility_attributes(work_attributes)
     visibility_attributes(work_attributes)
     actors = []
+
     uploaded_files.in_groups_of(10, false) do |upload_group|
       upload_group.each do |uploaded_file|
         next if uploaded_file.file_set_uri.present?
@@ -36,7 +37,7 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
 
     attach_to_work(actors, work)
 
-    works_that_dont_need_pdf = [Art, GenericWork, Image, Text]
+    works_that_dont_need_pdf = Hyrax.config.curation_concerns
     ConvertImagesToPdfJob.perform_later(work) unless works_that_dont_need_pdf.include?(work.class)
     Sidekiq.logger.error("AttachFilesToWorkJob is ending #{Time.now.utc} :: Work ID #{work.id}") # rubocop: disable Metrics/LineLength
     true
@@ -49,10 +50,20 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
       acquire_lock_for(work.id) do
         members = work.ordered_members
         pdf = nil
+        work.representative = nil
+        work.thumbnail = nil
+
         actors.each do |a|
           pdf = a.file_set if pdf.blank? && a.file_set.label.match(/.pdf/)
+
+          if a.file_set.label =~ /.jpg/
+            work.representative = a.file_set if work.representative.blank?
+            work.thumbnail = a.file_set if work.thumbnail.blank?
+          end
+
           members << a.file_set
         end
+
         work.rendering_ids = [pdf.id] if pdf.present?
         work.save
       end
