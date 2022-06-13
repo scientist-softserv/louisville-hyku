@@ -3,3 +3,5 @@
   - default
   - import
   - export
+
+:concurrency: 5
