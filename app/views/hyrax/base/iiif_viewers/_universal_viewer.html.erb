@@ -1,9 +1,0 @@
-<%# OVERRIDE Hyrax 2.9.6 to pass the uv_search_param method %>
-
-<div class="viewer-wrapper">
-  <iframe
-    src="<%= universal_viewer_base_url %>#?manifest=<%= main_app.polymorphic_url [main_app, :manifest, presenter], { locale: nil } %>&config=<%= universal_viewer_config_url %><%= uv_search_param %>"
-    allowfullscreen="true"
-    frameborder="0"
-  ></iframe>
-</div>
