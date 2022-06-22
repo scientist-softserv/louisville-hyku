@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # Generated via
 #  `rails generate hyrax:work Art`
 require 'rails_helper'
 include Warden::Test::Helpers
 
 # NOTE: If you generated more than one work, you have to set "js: true"
-RSpec.feature 'Create a Art', js: false do
+RSpec.describe 'Create a Art', js: false do
   context 'a logged in user' do
     let(:user_attributes) do
       { email: 'test@example.com' }
@@ -14,7 +16,9 @@ RSpec.feature 'Create a Art', js: false do
     end
     let(:admin_set_id) { AdminSet.find_or_create_default_admin_set_id }
     let(:permission_template) { Hyrax::PermissionTemplate.find_or_create_by!(source_id: admin_set_id) }
-    let(:workflow) { Sipity::Workflow.create!(active: true, name: 'test-workflow', permission_template: permission_template) }
+    let(:workflow) do
+      Sipity::Workflow.create!(active: true, name: 'test-workflow', permission_template: permission_template)
+    end
 
     before do
       # Create a single action that can be taken
@@ -30,22 +34,22 @@ RSpec.feature 'Create a Art', js: false do
       login_as user
     end
 
-    scenario do
+    xit do
       visit '/dashboard'
       click_link "Works"
       click_link "Add new work"
 
       # If you generate more than one work uncomment these lines
-      # choose "payload_concern", option: "Art"
-      # click_button "Create work"
+      choose "payload_concern", option: "Art"
+      click_button "Create work"
 
       expect(page).to have_content "Add New Art"
       click_link "Files" # switch tab
       expect(page).to have_content "Add files"
       expect(page).to have_content "Add folder"
       within('span#addfiles') do
-        attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/image.jp2", visible: false)
-        attach_file("files[]", "#{Hyrax::Engine.root}/spec/fixtures/jp2_fits.xml", visible: false)
+        attach_file("files[]", File.join(fixture_path, 'hyrax', 'image.jp2'), visible: false)
+        attach_file("files[]", File.join(fixture_path, 'hyrax', 'jp2_fits.xml'), visible: false)
       end
       click_link "Descriptions" # switch tab
       fill_in('Title', with: 'My Test Work')
@@ -58,7 +62,9 @@ RSpec.feature 'Create a Art', js: false do
       # its element
       find('body').click
       choose('art_visibility_open')
-      expect(page).to have_content('Please note, making something visible to the world (i.e. marking this as Public) may be viewed as publishing which could impact your ability to')
+      note = 'Please note, making something visible to the world (i.e. marking this as Public) '
+      note += 'may be viewed as publishing which could impact your ability to'
+      expect(page).to have_content(note)
       check('agreement')
 
       click_on('Save')

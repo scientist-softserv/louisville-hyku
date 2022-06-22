@@ -1,10 +1,13 @@
+<% content_for(:extra_body_classes, 'works-show ') %>
+<div id="hyrax-base-show">
+
 <% provide :page_title, @presenter.page_title %>
 
 <%= render 'shared/citations' %>
-
+<%= render './shared/additional_citations' %>
 <div class="row work-type">
   <div class="col-xs-12">
-    <%= render 'work_type', presenter: @presenter %>
+    <%#= render 'work_type', presenter: @presenter %>
   </div>
   <div class="col-xs-12">&nbsp;</div>
   <div itemscope itemtype="http://schema.org/CreativeWork" class="col-xs-12">
@@ -25,7 +28,7 @@
             <%= render 'citations', presenter: @presenter %>
             <%= render 'social_media' %>
           </div>
-          <div class="col-sm-9">
+          <div id="desc-meta-th" class="col-sm-9">
             <%= render 'work_description', presenter: @presenter %>
             <%= render 'metadata', presenter: @presenter %>
           </div>
@@ -39,7 +42,9 @@
           </div>
           <% end %>
         </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+

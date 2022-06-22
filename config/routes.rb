@@ -1,20 +1,24 @@
-Rails.application.routes.draw do
-  concern :oai_provider, BlacklightOaiProvider::Routes.new
+require 'sidekiq/web'
+Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
 
-  #mount ActionCable.server => '/cable'
+Rails.application.routes.draw do
+
+  concern :iiif_search, BlacklightIiifSearch::Routes.new
+
+  mount NewspaperWorks::Engine => '/'
+  concern :oai_provider, BlacklightOaiProvider::Routes.new
 
   mount Riiif::Engine => 'images', as: :riiif if Hyrax.config.iiif_image_server?
 
-  require 'sidekiq/web'
-  authenticate :user do
+  authenticate :user, lambda { |u| u.is_superadmin? || u.is_admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  if Settings.multitenancy.enabled
+  if ActiveModel::Type::Boolean.new.cast(ENV.fetch('HYKU_MULTITENANT', false))
     constraints host: Account.admin_host do
       get '/account/sign_up' => 'account_sign_up#new', as: 'new_sign_up'
       post '/account/sign_up' => 'account_sign_up#create'
-      get '/', to: 'splash#index'
+      get '/', to: 'splash#index', as: 'splash'
 
       # pending https://github.com/projecthydra-labs/hyrax/issues/376
       get '/dashboard', to: redirect('/')
@@ -32,20 +36,21 @@ Rails.application.routes.draw do
   resource :site, only: [:update] do
     resources :roles, only: [:index, :update]
     resource :labels, only: [:edit, :update]
-    resource :contact, only: [:edit, :update]
   end
 
-  root 'hyrax/homepage#index'
+  #root 'hyrax/homepage#index'
+  root 'catalog#index'
 
   devise_for :users, controllers: { invitations: 'hyku/invitations', registrations: 'hyku/registrations' }
-  mount Hydra::RoleManagement::Engine => '/'
 
   mount Qa::Engine => '/authorities'
 
   mount Blacklight::Engine => '/'
+  mount BlacklightAdvancedSearch::Engine => '/'
+
   mount Hyrax::Engine, at: '/'
   mount Hyrax::DOI::Engine, at: '/doi', as: 'hyrax_doi'
-  if Settings.bulkrax.enabled
+  if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
     mount Bulkrax::Engine, at: '/'
   end
 
@@ -62,6 +67,7 @@ Rails.application.routes.draw do
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
     concerns :exportable
+    concerns :iiif_search
   end
 
   resources :bookmarks do
@@ -89,4 +95,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get 'all_collections' => 'hyrax/homepage#all_collections', as: :all_collections
 end

@@ -9,6 +9,7 @@ en:
           county_sim: County
           creator_sim: Creator
           contributor_sim: Contributor
+          decade_sim: Decade
           file_format_sim: Format
           generic_type_sim: Type
           depositor_ssim: Depositor
@@ -31,6 +32,7 @@ en:
           date_created_tesim: Date Original
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
+          decade_tesim: Decade
           description_tesim: Description
           extent_tesim: Duration
           file_format_tesim: File Format
@@ -57,6 +59,7 @@ en:
           date_created_tesim: Date Created
           date_modified_dtsi: Date Modified
           date_uploaded_dtsi: Date Uploaded
+          decade_tesim: Decade
           description_tesim: Description
           extent_tesim: Duration
           file_format_tesim: File Format
@@ -71,3 +74,27 @@ en:
           subject_tesim: Subject
           street_tesim: Street
           title_tesim: Title
+
+    bookmarks:
+      title: 'Bookmarks'
+      page_title: 'Bookmarks - %{application_name}'
+      no_bookmarks: 'You have no bookmarks. Bookmarks can be added from the search results page.'
+      add:
+        button: 'Bookmark'
+        success:
+          one: 'Successfully added bookmark.'
+          other: 'Successfully added bookmarks.'
+        failure:  'Sorry, there was a problem saving the bookmarks.'
+      remove:
+        button: 'Remove bookmark'
+        success: 'Successfully removed bookmark.'
+        failure: 'Sorry, there was a problem removing the bookmarks.'
+        action_confirm: 'Remove this bookmark?'
+      clear:
+        action_title: 'Clear Bookmarks'
+        action_confirm: 'Clear your bookmarks?'
+        success: 'Cleared your bookmarks.'
+        failure: 'Sorry, there was a problem clearing your bookmarks.'
+      need_login: 'Please log in to manage and view your bookmarks.'
+      list_title: 'Your Bookmarks'
+      delete: 'Remove'

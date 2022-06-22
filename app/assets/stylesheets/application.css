@@ -10,12 +10,19 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ ///////////// BULKRAX - add astrix eq sign to enable
  *= require bulkrax/application
+/////////////////////////////////////////////
  *= require fontselect
  *= require codemirror
  *= require codemirror-theme
  *= require hyrax
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require bootstrap-datepicker
+ *= require font_awesome5_webfont
+ *= require custom
  *= require_self
- */
+ 
+ *= require 'blacklight_advanced_search'
+
+*/

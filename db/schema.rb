@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_220007) do
+ActiveRecord::Schema.define(version: 2022_03_07_164617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_cross_searches", force: :cascade do |t|
+    t.bigint "search_account_id"
+    t.bigint "full_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["full_account_id"], name: "index_account_cross_searches_on_full_account_id"
+    t.index ["search_account_id"], name: "index_account_cross_searches_on_search_account_id"
+  end
 
   create_table "accounts", id: :serial, force: :cascade do |t|
     t.string "tenant"
@@ -24,10 +33,16 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.integer "fcrepo_endpoint_id"
     t.string "name"
     t.integer "redis_endpoint_id"
+    t.boolean "is_public", default: false
+    t.jsonb "settings", default: {}
+    t.bigint "data_cite_endpoint_id"
+    t.boolean "search_only", default: false
     t.index ["cname", "tenant"], name: "index_accounts_on_cname_and_tenant"
     t.index ["cname"], name: "index_accounts_on_cname", unique: true
+    t.index ["data_cite_endpoint_id"], name: "index_accounts_on_data_cite_endpoint_id"
     t.index ["fcrepo_endpoint_id"], name: "index_accounts_on_fcrepo_endpoint_id", unique: true
     t.index ["redis_endpoint_id"], name: "index_accounts_on_redis_endpoint_id", unique: true
+    t.index ["settings"], name: "index_accounts_on_settings", using: :gin
     t.index ["solr_endpoint_id"], name: "index_accounts_on_solr_endpoint_id", unique: true
   end
 
@@ -51,10 +66,10 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.text "parsed_metadata"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "last_error"
     t.datetime "last_error_at"
     t.datetime "last_succeeded_at"
     t.string "importerexporter_type", default: "Bulkrax::Importer"
+    t.integer "import_attempts", default: 0
     t.index ["importerexporter_id"], name: "index_bulkrax_entries_on_importerexporter_id"
   end
 
@@ -80,7 +95,6 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.string "export_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "last_error"
     t.datetime "last_error_at"
     t.datetime "last_succeeded_at"
     t.date "start_date"
@@ -102,9 +116,16 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.integer "processed_collections", default: 0
     t.integer "failed_collections", default: 0
     t.integer "total_collection_entries", default: 0
-    t.integer "processed_children", default: 0
-    t.integer "failed_children", default: 0
+    t.integer "processed_relationships", default: 0
+    t.integer "failed_relationships", default: 0
     t.text "invalid_records"
+    t.integer "processed_file_sets", default: 0
+    t.integer "failed_file_sets", default: 0
+    t.integer "total_file_set_entries", default: 0
+    t.integer "processed_works", default: 0
+    t.integer "failed_works", default: 0
+    t.integer "processed_parent_thumbnails", default: 0
+    t.integer "failed_parent_thumbnails", default: 0
     t.index ["importer_id"], name: "index_bulkrax_importer_runs_on_importer_id"
   end
 
@@ -120,16 +141,25 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "validate_only"
-    t.text "last_error"
     t.datetime "last_error_at"
     t.datetime "last_succeeded_at"
     t.index ["user_id"], name: "index_bulkrax_importers_on_user_id"
   end
 
+  create_table "bulkrax_pending_relationships", force: :cascade do |t|
+    t.bigint "bulkrax_importer_run_id", null: false
+    t.string "parent_id", null: false
+    t.string "child_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order", default: 0
+    t.index ["bulkrax_importer_run_id"], name: "index_bulkrax_pending_relationships_on_bulkrax_importer_run_id"
+  end
+
   create_table "bulkrax_statuses", force: :cascade do |t|
     t.string "status_message"
     t.string "error_class"
-    t.string "error_message"
+    t.text "error_message"
     t.text "error_backtrace"
     t.integer "statusable_id"
     t.string "statusable_type"
@@ -205,6 +235,16 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.index ["user_id"], name: "index_curation_concerns_operations_on_user_id"
   end
 
+  create_table "domain_names", force: :cascade do |t|
+    t.bigint "account_id"
+    t.string "cname"
+    t.boolean "is_active", default: true
+    t.boolean "is_ssl_enabled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_domain_names_on_account_id"
+  end
+
   create_table "domain_terms", id: :serial, force: :cascade do |t|
     t.string "model"
     t.string "term"
@@ -226,7 +266,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
   end
 
   create_table "featured_works", id: :serial, force: :cascade do |t|
-    t.integer "order", default: 5
+    t.integer "order", default: 6
     t.string "work_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -359,6 +399,9 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.string "mailbox_type", limit: 25
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_delivered", default: false
+    t.string "delivery_method"
+    t.string "message_id"
     t.index ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
   end
@@ -372,6 +415,23 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["namespace"], name: "index_minter_states_on_namespace", unique: true
+  end
+
+  create_table "newspaper_works_derivative_attachments", id: :serial, force: :cascade do |t|
+    t.string "fileset_id"
+    t.string "path"
+    t.string "destination_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fileset_id"], name: "index_newspaper_works_derivative_attachments_on_fileset_id"
+  end
+
+  create_table "newspaper_works_ingest_file_relations", id: :serial, force: :cascade do |t|
+    t.string "file_path"
+    t.string "derivative_path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["file_path"], name: "index_newspaper_works_ingest_file_relations_on_file_path"
   end
 
   create_table "permission_template_accesses", id: :serial, force: :cascade do |t|
@@ -633,6 +693,9 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.text "available_works", default: [], array: true
     t.string "directory_image"
     t.string "contact_email"
+    t.string "home_theme"
+    t.string "show_theme"
+    t.string "search_theme"
   end
 
   create_table "subject_local_authority_entries", id: :serial, force: :cascade do |t|
@@ -661,6 +724,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.string "file_set_uri"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "derived", default: false
     t.index ["file_set_uri"], name: "index_uploaded_files_on_file_set_uri"
     t.index ["user_id"], name: "index_uploaded_files_on_user_id"
   end
@@ -754,11 +818,14 @@ ActiveRecord::Schema.define(version: 2020_11_17_220007) do
     t.index ["work_id"], name: "index_work_view_stats_on_work_id"
   end
 
+  add_foreign_key "account_cross_searches", "accounts", column: "full_account_id"
+  add_foreign_key "account_cross_searches", "accounts", column: "search_account_id"
   add_foreign_key "accounts", "endpoints", column: "fcrepo_endpoint_id", on_delete: :nullify
   add_foreign_key "accounts", "endpoints", column: "redis_endpoint_id", on_delete: :nullify
   add_foreign_key "accounts", "endpoints", column: "solr_endpoint_id", on_delete: :nullify
   add_foreign_key "bulkrax_exporter_runs", "bulkrax_exporters", column: "exporter_id"
   add_foreign_key "bulkrax_importer_runs", "bulkrax_importers", column: "importer_id"
+  add_foreign_key "bulkrax_pending_relationships", "bulkrax_importer_runs"
   add_foreign_key "collection_type_participants", "hyrax_collection_types"
   add_foreign_key "content_blocks", "sites"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"

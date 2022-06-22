@@ -18,7 +18,9 @@
 //= require jquery.fontselect
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require jssor.slider-28.1.0.min
 //= require turbolinks
+//= require cocoon
 
 //= require tether
 // Required by Blacklight
@@ -28,11 +30,23 @@
 // Moved the Hyku JS *above* the Hyrax JS to resolve #1187 (following
 // a pattern found in ScholarSphere)
 //
+//= require hyku/admin/appearance/colors
+//= require hyku/admin/appearance/default_images
+//= require hyku/admin/appearance/fonts
+//= require hyku/admin/appearance/themes
 //= require hyku/groups/per_page
 //= require hyku/groups/add_member
+//= require proprietor
+//= require bootstrap_carousel
 //= require bootstrap-datepicker
+
+///////////// BULKRAX - add eq sign to enable
 //= require bulkrax/application
+/////////////////////////////////////////////
+
 //= require hyrax
+//= require newspaper_works
+
 //= require jquery.flot.pie
 //= require flot_graph
 //= require statistics_tab_manager

@@ -5,14 +5,12 @@ Rails.application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = !!Sidekiq.server?
-  #config.cache_classes = true
 
   # Do not eager load code on boot.
   config.eager_load = false
-  #config.eager_load = true
 
   # Show full error reports.
-  #config.consider_all_requests_local = true
+  config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
@@ -27,16 +25,6 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
-
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  #config.force_ssl = true
-
-  # Use the lowest log level to ensure availability of diagnostic information
-  # when problems arise.
-  #config.log_level = :debug
-
-  # Prepend all log lines with the following tags.
-  #config.log_tags = [ :request_id ]
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -62,7 +50,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: "localhost:3001" }
 
-  config.web_console.whitelisted_ips = ['172.18.0.0/16', '172.27.0.0/16', '0.0.0.0/0']
+  config.web_console.whitelisted_ips = ["172.0.0.0/8", '192.168.0.0/16', '127.0.0.1']
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
@@ -73,7 +61,8 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  config.active_job.queue_adapter     = Settings.active_job.queue_adapter
+  config.active_job.queue_adapter     = ENV.fetch('HYRAX_ACTIVE_JOB_QUEUE', 'sidekiq')
+
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
