@@ -98,7 +98,7 @@
         "minimiseButtons": true,
         "moreInfoEnabled": false,
         "openEnabled": false,
-        "printEnabled": true,
+        "printEnabled": false,
         "shareEnabled": false
       },
       "content": {
