@@ -29,7 +29,7 @@ RUN apk --no-cache upgrade && \
     yarn \
     vim
 
-RUN wget https://imagemagick.org/archive/ImageMagick.tar.gz && \
+RUN wget https://imagemagick.org/download/ImageMagick.tar.gz && \
     tar xf ImageMagick.tar.gz \
     && apk --no-cache add \
       libjpeg-turbo openjpeg libpng tiff librsvg libgsf libimagequant poppler-qt5-dev \
