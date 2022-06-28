@@ -4,6 +4,7 @@
 #  `rails generate hyrax:work Art`
 class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   include ::Hyrax::WorkBehavior
+  include SetChildFlag
 
   self.indexer = ArtIndexer
   # Change this to restrict which works can be added as a child.
@@ -88,8 +89,8 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
     index.as :stored_searchable, :facetable
   end
 
-  property :is_parent,
-           predicate: ::RDF::URI.intern('https://hyku.library.louisville.edu/terms/isParent'),
+  property :is_child,
+           predicate: ::RDF::URI.intern('https://hyku.library.louisville.edu/terms/isChild'),
            multiple: false do |index|
     index.as :stored_searchable
   end
