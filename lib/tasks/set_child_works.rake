@@ -2,8 +2,8 @@
 
 namespace :hyku do
   namespace :update do
-    desc 'Make sure all parent work models have the correct attribute'
-    task is_parent_attribute: [:environment] do
+    desc 'Make sure all child work models have the correct attribute'
+    task is_child_attribute: [:environment] do
       Account.find_each do |account|
         begin
           switch!(account.cname)
@@ -12,12 +12,7 @@ namespace :hyku do
             puts "********************** checking #{cc}s **********************"
             next if cc.count.zero?
 
-            cc.find_each do |item|
-              next if item.child_works.blank?
-              next if item.is_parent
-
-              item.update(is_parent: true)
-            end
+            cc.find_each(&:save)
           end
         rescue StandardError
           puts "********************** failed to update account #{account.cname} **********************"

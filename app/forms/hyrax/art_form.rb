@@ -48,7 +48,6 @@ module Hyrax
       contributor_history
       cultural_context
       data_source
-      descriptor
       exhibit_history
       extent
       honoree

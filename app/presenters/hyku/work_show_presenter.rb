@@ -20,7 +20,6 @@ module Hyku
              :data_source,
              :date_digital,
              :decade,
-             :descriptor,
              :digitization_specification,
              :cataloguing_note,
              :exhibit_history,
