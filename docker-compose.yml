@@ -1,61 +1,56 @@
 version: '3.8'
-
-x-app: &app
+x-app:
   build:
     context: .
     target: hyku-base
     args:
       - HYKU_BULKRAX_ENABLED=true
-  image: registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}
+  image: 'registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}'
   env_file:
     - .env
-  # NOTE: all common env variables moved to .env
   volumes:
-    - uploads:/app/samvera/hyrax-webapp/public/uploads
-    - assets:/app/samvera/hyrax-webapp/public/assets
-    - cache:/app/samvera/hyrax-webapp/tmp/cache
-    - .:/app/samvera/hyrax-webapp
+    - 'uploads:/app/samvera/hyrax-webapp/public/uploads'
+    - 'assets:/app/samvera/hyrax-webapp/public/assets'
+    - 'cache:/app/samvera/hyrax-webapp/tmp/cache'
+    - '.:/app/samvera/hyrax-webapp'
   networks:
-    internal:
-
-
+    internal: null
 volumes:
-  fcrepo:
-  solr:
-  db:
-  redis:
-  zk:
-  uploads:
-  assets:
-  cache:
-  uv:
-
+  fcrepo: null
+  solr: null
+  db: null
+  redis: null
+  zk: null
+  uploads: null
+  assets: null
+  cache: null
+  uv: null
 networks:
-  internal:
-
+  internal: null
 services:
   zoo:
-    image: bitnami/zookeeper:3.6
+    image: 'bitnami/zookeeper:3.6'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
-      - ZOO_4LW_COMMANDS_WHITELIST=mntr,srvr,ruok,conf
+      - 'ZOO_4LW_COMMANDS_WHITELIST=mntr,srvr,ruok,conf'
       - ZOO_SERVER_ID=1
-      - ZOO_SERVERS=zoo:2888:3888
-    expose:
-      - 2181
-      - 2888
-      - 3888
+      - 'ZOO_SERVERS=zoo:2888:3888'
+    ports:
+      - "127.0.0.1:2181:2181"
+      - "127.0.0.1:2888:2888"
+      - "127.0.0.1:3888:3888"
     volumes:
-      - zk:/bitnami/zookeeper
+      - 'zk:/bitnami/zookeeper'
     networks:
-      internal:
+      internal: null
     healthcheck:
-      test: ["CMD-SHELL", "echo 'ruok' | nc -w 2 -q 2 localhost 2181 | grep imok || exit 1"]
-      interval: "10s"
-      timeout: "8s"
-
+      test:
+        - CMD-SHELL
+        - echo 'ruok' | nc -w 2 -q 2 localhost 2181 | grep imok || exit 1
+      interval: 10s
+      timeout: 8s
   solr:
-    image: bitnami/solr:8
+    image: 'bitnami/solr:8'
     environment:
       - OOM=script
       - SOLR_ADMIN_USERNAME=admin
@@ -67,59 +62,69 @@ services:
       - SOLR_PORT_NUMBER=8983
       - SOLR_ZK_HOSTS=zoo
       - VIRTUAL_PORT=8983
-      - VIRTUAL_HOST=solr.hyku.test
+      - VIRTUAL_HOST=localhost
     depends_on:
       zoo:
         condition: service_healthy
-    expose:
-      - 8983
+    ports:
+      - "127.0.0.1:8983:8983"
     volumes:
-      - solr:/bitnami
+      - 'solr:/bitnami'
     networks:
-      internal:
+      internal: null
     healthcheck:
-      test: curl -sf http://$$SOLR_ADMIN_USERNAME:$$SOLR_ADMIN_PASSWORD@localhost:8983/solr/$$SOLR_COLLECTION/admin/ping?wt=json\&distrib=true || exit 1
+      test: 'curl -sf http://$$SOLR_ADMIN_USERNAME:$$SOLR_ADMIN_PASSWORD@localhost:8983/solr/$$SOLR_COLLECTION/admin/ping?wt=json\&distrib=true || exit 1'
       start_period: 30s
       interval: 20s
       timeout: 5s
       retries: 3
-
   fcrepo:
-    image: ghcr.io/samvera/fcrepo4:4.7.5
+    image: 'ghcr.io/samvera/fcrepo4:4.7.5'
     volumes:
-      - fcrepo:/data:cached
+      - 'fcrepo:/data:cached'
     env_file:
       - .env
     environment:
       - VIRTUAL_PORT=8080
-      - VIRTUAL_HOST=fcrepo.hyku.test
-      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
-    expose:
-      - 8080
+      - VIRTUAL_HOST=localhost
+      - 'JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"'
+    ports:
+      - "127.0.0.1:8080:8080"
     networks:
-      internal:
-
+      internal: null
   db:
-    image: postgres:11.1
+    image: 'postgres:11.1'
     env_file:
       - .env
     environment:
-      - POSTGRES_DB=${DATABASE_NAME}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_USER=${DATABASE_USER}
+      - 'POSTGRES_DB=${DATABASE_NAME}'
+      - 'POSTGRES_PASSWORD=${DATABASE_PASSWORD}'
+      - 'POSTGRES_USER=${DATABASE_USER}'
       - VIRTUAL_PORT=5432
-      - VIRTUAL_HOST=db.hyku.test
+      - VIRTUAL_HOST=localhost
     volumes:
-      - db:/var/lib/postgresql/data
+      - 'db:/var/lib/postgresql/data'
     networks:
-      internal:
-
+      internal: null
   web:
-    <<: *app
-    #command: sh -l -c "yarn install && bundle exec puma -v -b tcp://0.0.0.0:3000"
+    build:
+      context: .
+      target: hyku-base
+      args:
+        - HYKU_BULKRAX_ENABLED=true
+    image: 'registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}'
+    env_file:
+      - .env
+    volumes:
+      - 'uploads:/app/samvera/hyrax-webapp/public/uploads'
+      - 'assets:/app/samvera/hyrax-webapp/public/assets'
+      - 'cache:/app/samvera/hyrax-webapp/tmp/cache'
+      - '.:/app/samvera/hyrax-webapp'
+    networks:
+      internal: null
     environment:
       - VIRTUAL_PORT=3000
-      - VIRTUAL_HOST=.hyku.test
+      - VIRTUAL_HOST=.hyku-docker-dev.library.louisville.edu
       - TMPDIR=/app/samvera/hyrax-webapp/tmp/uploads
     depends_on:
       db:
@@ -140,21 +145,29 @@ services:
         condition: service_started
       initialize_app:
         condition: service_completed_successfully
-
     expose:
       - 3000
-
+    ports:
+      - "127.0.0.1:3000:3000"
   worker:
-    <<: *app
     build:
       context: .
       target: hyku-worker
       args:
         - HYKU_BULKRAX_ENABLED=true
       cache_from:
-        - registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}
-        - registry.gitlab.com/notch8/louisville-hyku/worker:${TAG:-latest}
-    image: registry.gitlab.com/notch8/louisville-hyku/worker:${TAG:-latest}
+        - 'registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}'
+        - 'registry.gitlab.com/notch8/louisville-hyku/worker:${TAG:-latest}'
+    image: 'registry.gitlab.com/notch8/louisville-hyku/worker:${TAG:-latest}'
+    env_file:
+      - .env
+    volumes:
+      - 'uploads:/app/samvera/hyrax-webapp/public/uploads'
+      - 'assets:/app/samvera/hyrax-webapp/public/assets'
+      - 'cache:/app/samvera/hyrax-webapp/tmp/cache'
+      - '.:/app/samvera/hyrax-webapp'
+    networks:
+      internal: null
     depends_on:
       check_volumes:
         condition: service_completed_successfully
@@ -170,32 +183,54 @@ services:
         condition: service_started
       initialize_app:
         condition: service_completed_successfully
-
-
-
-  # Do not recurse through all of tmp. derivitives will make booting
-  # very slow and eventually just time out as data grows
   check_volumes:
-    <<: *app
+    build:
+      context: .
+      target: hyku-base
+      args:
+        - HYKU_BULKRAX_ENABLED=true
+    image: 'registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}'
+    env_file:
+      - .env
+    volumes:
+      - 'uploads:/app/samvera/hyrax-webapp/public/uploads'
+      - 'assets:/app/samvera/hyrax-webapp/public/assets'
+      - 'cache:/app/samvera/hyrax-webapp/tmp/cache'
+      - '.:/app/samvera/hyrax-webapp'
+    networks:
+      internal: null
     user: root
-    entrypoint: ["sh", "-x", "-c"]
+    entrypoint:
+      - sh
+      - '-x'
+      - '-c'
     command:
-      - >
-        chown -R app:app /app/samvera/hyrax-webapp/public/uploads &&
-        chown -R app:app /app/samvera/hyrax-webapp/public/assets &&
-        chown -R app:app /app/samvera/hyrax-webapp/tmp/cache
-
+      - |
+        chown -R app:app /app/samvera/hyrax-webapp/public/uploads && chown -R app:app /app/samvera/hyrax-webapp/public/assets && chown -R app:app /app/samvera/hyrax-webapp/tmp/cache
   initialize_app:
-    <<: *app
+    build:
+      context: .
+      target: hyku-base
+      args:
+        - HYKU_BULKRAX_ENABLED=true
+    image: 'registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}'
+    env_file:
+      - .env
+    volumes:
+      - 'uploads:/app/samvera/hyrax-webapp/public/uploads'
+      - 'assets:/app/samvera/hyrax-webapp/public/assets'
+      - 'cache:/app/samvera/hyrax-webapp/tmp/cache'
+      - '.:/app/samvera/hyrax-webapp'
+    networks:
+      internal: null
     environment:
       - CONFDIR=/app/samvera/hyrax-webapp/solr/config
-    entrypoint: ["sh", "-c"]
+    entrypoint:
+      - sh
+      - '-c'
     command:
-      - >
-        solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/config &&
-        solrcloud-assign-configset.sh &&
-        SOLR_COLLECTION_NAME=hydra-test solrcloud-assign-configset.sh &&
-        db-migrate-seed.sh
+      - |
+        solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/config && solrcloud-assign-configset.sh && SOLR_COLLECTION_NAME=hydra-test solrcloud-assign-configset.sh && db-migrate-seed.sh
     depends_on:
       db:
         condition: service_started
@@ -205,16 +240,14 @@ services:
         condition: service_started
       redis:
         condition: service_started
-
   redis:
-    image: redis:5
+    image: 'redis:5'
     command: redis-server
     volumes:
-      - redis:/data
+      - 'redis:/data'
     networks:
-      internal:
-
+      internal: null
   chrome:
-    image: selenium/standalone-chrome:3.141
+    image: 'selenium/standalone-chrome:3.141'
     networks:
-      internal:
+      internal: null
