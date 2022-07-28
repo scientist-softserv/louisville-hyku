@@ -4,6 +4,8 @@
 #  `rails generate hyrax:work Text`
 class Text < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
+  include SetChildFlag
+
   # Adds behaviors for hyrax-doi plugin.
   # include Hyrax::DOI::DOIBehavior
 
@@ -56,8 +58,8 @@ class Text < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
 
-  property :is_parent,
-           predicate: ::RDF::URI.intern('https://hyku.library.louisville.edu/terms/isParent'),
+  property :is_child,
+           predicate: ::RDF::URI.intern('https://hyku.library.louisville.edu/terms/isChild'),
            multiple: false do |index|
     index.as :stored_searchable
   end
@@ -85,7 +87,6 @@ class Text < ActiveFedora::Base
            multiple: false do |index|
     index.as :stored_searchable
   end
-
 
   property :people_represented,
            predicate: ::RDF::Vocab::FOAF.name,

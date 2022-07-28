@@ -12,4 +12,3 @@ module SetChildFlag
     end
   end
 end
-

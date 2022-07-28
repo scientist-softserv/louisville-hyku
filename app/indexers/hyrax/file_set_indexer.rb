@@ -53,7 +53,7 @@ module Hyrax
         a_ids = []
         o.in_works.each do |work|
           a_ids << work.id
-          a_ids += ancestor_ids(work) unless work.is_parent
+          a_ids += ancestor_ids(work) if work.is_child
         end
         a_ids
       end
