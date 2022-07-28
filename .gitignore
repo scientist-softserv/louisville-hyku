@@ -67,3 +67,4 @@ public/universalviewer
 bad-index
 ReindexEverythingForLargeSystems.rb
 urls
+.env
