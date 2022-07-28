@@ -147,3 +147,5 @@ gem 'tether-rails'
 gem 'country_select', '~> 3.1', '>= 3.1.1'
 
 gem 'font_awesome5_rails'
+
+gem 'sidekiq-failures'
