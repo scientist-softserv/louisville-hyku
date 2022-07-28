@@ -19,23 +19,11 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
     index.as :stored_searchable
   end
 
-  # property :administrative_note,
-  # predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_Note"),
-  # multiple: false do |index|
-  # index.as :stored_searchable
-  # end
-
   property :variant_title,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_VariantTitle"),
            multiple: true do |index|
     index.as :stored_searchable
   end
-
-  # property :artificial_collection,
-  # predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_Collection"),
-  # multiple: true do |index|
-  # index.as :stored_searchable
-  # end
 
   property :collection_information,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_findingAid"),
@@ -60,16 +48,6 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
            multiple: false do |index|
     index.as :stored_searchable
   end
-
-  # property :date_original,
-  # predicate: ::RDF::Vocab::DC.date,
-  # multiple: false
-
-  # property :decade,
-  # predicate: ::RDF::Vocab::DC.temporal,
-  # multiple: true do |index|
-  # index.as :stored_searchable
-  # end
 
   property :digitization_specification,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_DigitalCharacteristic"),
@@ -107,12 +85,6 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
     index.as :stored_searchable, :facetable
   end
 
-  # property :object_type,
-  # predicate: ::RDF::Vocab::DC.type,
-  # multiple: false do |index|
-  # index.as :stored_searchable
-  # end
-
   property :ordering_information,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_UsageAndAccessPolicy"),
            multiple: false do |index|
@@ -124,18 +96,6 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
            multiple: true do |index|
     index.as :stored_searchable
   end
-
-  # property :people_named,
-  # predicate: ::RDF::Vocab::FOAF.name,
-  # multiple: true do |index|
-  # index.as :stored_searchable
-  # end
-
-  # property :people_pictured,
-  # predicate: ::RDF::Vocab::FOAF.depiction,
-  # multiple: true do |index|
-  # index.as :stored_searchable
-  # end
 
   property :resource_query,
            predicate: ::RDF::URI.new("https://purl.org/vra/isRelatedTo"),
@@ -187,16 +147,6 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
     index.as :stored_searchable
   end
 
-  # property :description_1990,
-  # predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_derivedFrom"),
-  # multiple: false
-
-  # property :descriptor,
-  #         predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#c_Topic"),
-  #           multiple: true do |index|
-  # index.as :stored_searchable
-  # end
-
   property :exhibit_history,
            predicate: ::RDF::URI.new("https://purl.org/vra/exhibitedAt"),
            multiple: false do |index|
@@ -212,23 +162,6 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   property :honoree, predicate: ::RDF::URI.new("https://purl.org/vra/designedFor"), multiple: true do |index|
     index.as :stored_searchable
   end
-
-  #property :inscription, predicate: ::RDF::URI.new("https://purl.org/vra/Inscription"), multiple: false
-  # property :inscription,
-  # predicate: ::RDF::URI.new("https://purl.org/vra/Inscription"),
-  # multiple: false
-
-  # property :iqb,
-  #         predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_code"),
-  #        multiple: false do |index|
-  # index.as :stored_searchable
-  # end
-
-  # property :image_number,
-  # predicate: ::RDF::Vocab::DC.identifier,
-  # multiple: false do |index|
-  # index.as :stored_searchable
-  # end
 
   property :language_script,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_Notation"),
@@ -284,18 +217,6 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
     index.as :stored_searchable
   end
 
-  # property :related_material_and_publication_history,
-  #         predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_referencedBy"),
-  #        multiple: true do |index|
-  # index.as :stored_searchable
-  # end
-
-  # property :resource_repository,
-  # predicate: ::RDF::URI.new("https://purl.org/vra/sourceFor"),
-  # multiple: false do |index|
-  # index.as :stored_searchable
-  # end
-
   property :style,
            predicate: ::RDF::URI.new("https://purl.org/vra/hasStylePeriod"),
            multiple: true do |index|
@@ -308,35 +229,17 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
     index.as :stored_searchable
   end
 
-  # property :theme,
-  # predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_subject"),
-  # multiple: true do |index|
-  # index.as :stored_searchable
-  # end
-
   property :transcription_translation,
            predicate: ::RDF::URI.new("https://schema.org/workTranslation"),
            multiple: false do |index|
     index.as :stored_searchable
   end
 
-  # property :translated_title,
-  #   predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#p_translationOf"),
-  #   multiple: false do |index|
-  # index.as :stored_searchable
-  # end
-
   property :type_of_honoree,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#p_hasAffiliation"),
            multiple: false do |index|
     index.as :stored_searchable
   end
-
-  # property :type_of_work,
-  # predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/bibframe.html#c_GenreForm"),
-  # multiple: false do |index|
-  # index.as :stored_searchable
-  # end
 
   # This must be included at the end, because it finalizes the metadata
   # schema (by adding accepts_nested_attributes)
