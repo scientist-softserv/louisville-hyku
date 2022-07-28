@@ -88,7 +88,6 @@ class Text < ActiveFedora::Base
     index.as :stored_searchable
   end
 
-
   property :people_represented,
            predicate: ::RDF::Vocab::FOAF.name,
            multiple: true do |index|
