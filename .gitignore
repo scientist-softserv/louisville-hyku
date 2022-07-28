@@ -64,3 +64,6 @@ public/assets
 public/universalviewer
 .DS_Store
 *~undo-tree~
+bad-index
+ReindexEverythingForLargeSystems.rb
+urls
