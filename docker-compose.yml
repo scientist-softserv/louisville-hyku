@@ -142,7 +142,7 @@ services:
         condition: service_completed_successfully
 
     ports:
-      - "127.0.0.1:3000:3000"
+      - 127.0.0.1:3000:3000
   worker:
     <<: *app
     build:
@@ -183,7 +183,7 @@ services:
         chown -R app:app /app/samvera/hyrax-webapp/public/uploads &&
         chown -R app:app /app/samvera/hyrax-webapp/public/assets &&
         chown -R app:app /app/samvera/hyrax-webapp/tmp/cache && 
-				chown -R app:app /app/samvera/hyrax-webapp/tmp
+	chown -R app:app /app/samvera/hyrax-webapp/tmp
 
   initialize_app:
     <<: *app
