@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2022_03_07_164617) do
     t.datetime "last_succeeded_at"
     t.string "importerexporter_type", default: "Bulkrax::Importer"
     t.integer "import_attempts", default: 0
+    t.index ["importerexporter_id"], name: "index_bulkrax_entries_on_importerexporter_id"
   end
 
   create_table "bulkrax_exporter_runs", force: :cascade do |t|
