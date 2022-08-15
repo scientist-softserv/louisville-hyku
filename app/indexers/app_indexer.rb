@@ -14,6 +14,8 @@ class AppIndexer < Hyrax::WorkIndexer
     super.tap do |solr_doc|
       solr_doc[Solrizer.solr_name('account_cname')] = Site.instance&.account&.cname
       solr_doc['is_child_bsi'] = object.is_child
+      solr_doc['title_ssi'] = object.title.first
+      solr_doc['identifier_ssi'] = object.identifier.first
     end
   end
 end
