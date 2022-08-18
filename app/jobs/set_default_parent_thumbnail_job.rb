@@ -11,7 +11,9 @@ class SetDefaultParentThumbnailJob < ApplicationJob
     curation_concerns = Hyrax.config.curation_concerns
     return unless curation_concerns.include?(parent_work.class)
 
-    child_file_set = parent_work.child_works&.first&.file_sets&.first
+    # the representative thumbnail for the parent should be the first page sorted alphanumerically by source_identifier
+    sorted_children = parent_work.child_works.sort_by { |work| work.identifier.first }
+    child_file_set = sorted_children&.first&.file_sets&.first
     if child_file_set.nil?
       reschedule(parent_work: parent_work, importer_run_id: importer_run_id)
       return false # stop current job from continuing to run after rescheduling
