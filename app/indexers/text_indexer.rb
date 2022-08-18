@@ -15,16 +15,6 @@ class TextIndexer < AppIndexer
   def generate_solr_document
     super.tap do |solr_doc|
       solr_doc['all_text_tsimv'] = [object.searchable_text]
-      solr_doc['is_page_of_ssim'] = ancestor_ids(object)
     end
-  end
-
-  def ancestor_ids(o)
-    a_ids = []
-    o.in_works.each do |work|
-      a_ids << work.id
-      a_ids += ancestor_ids(work) if work.is_child
-    end
-    a_ids
   end
 end
