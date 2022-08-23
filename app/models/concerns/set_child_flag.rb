@@ -4,6 +4,12 @@ module SetChildFlag
   extend ActiveSupport::Concern
   included do
     after_save :set_children
+
+    property :is_child,
+             predicate: ::RDF::URI.intern('https://hyku.library.louisville.edu/terms/isChild'),
+             multiple: false do |index|
+      index.as :stored_searchable
+    end
   end
 
   def set_children
