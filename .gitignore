@@ -57,10 +57,12 @@ public/uploads
 
 notes
 cmd.txt
-docker-compose.override.yml
 fits.log
-solr_db_initialized
 public/assets
 public/universalviewer
 .DS_Store
 *~undo-tree~
+bad-index
+ReindexEverythingForLargeSystems.rb
+urls
+.env

@@ -29,7 +29,6 @@ module Hyrax
       :creator_role,
       :contributor_role,
       :resource_type,
-      #:artificial_collection,
       :collection_information,
       :digitization_specification,
       :date_digital,

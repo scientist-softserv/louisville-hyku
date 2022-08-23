@@ -1,5 +1,4 @@
 <dl id="hyrax-base-metadata" class="work-show <%= dom_class(presenter) %>" <%= presenter.microdata_type_to_html %>>
-    <%#= render 'attribute_rows', presenter: presenter %>
     <%= presenter.attribute_to_html(:identifier, html_dl: true, label: "Item number") %>
     <%= presenter.attribute_to_html(:alternative_title, html_dl: true) %>
     <%= presenter.attribute_to_html(:honoree, html_dl: true) %>
@@ -62,13 +61,7 @@
     <%= presenter.attribute_to_html(:ordering_information, html_dl: true) %>
     <%= presenter.attribute_to_html(:license, render_as: :license, html_dl: true) %>
     <%= presenter.attribute_to_html(:related_url, render_as: :external_link, html_dl: true, label: "Related resource") %>
-    <%#= presenter.attribute_to_html(:resource_query, html_dl: true) %>
-    <%#= presenter.attribute_to_html(:digitization_specification, html_dl: true) %>
-    <%#= presenter.attribute_to_html(:date_digital, html_dl: true) %>
-    <%#= presenter.attribute_to_html(:media_type, render_as: :faceted, html_dl: true) %>
-    <%#= presenter.attribute_to_html(:format, html_dl: true) %>
-    <%#= presenter.attribute_to_html(:extent, html_dl: true, label: "Duration") %>
+    <%= presenter.attribute_to_html(:resource_query, render_as: :faceted, html_dl: true) %>
     <%= presenter.attribute_to_html(:embargo_release_date, render_as: :date, html_dl: true) %>
     <%= presenter.attribute_to_html(:lease_expiration_date, render_as: :date, html_dl: true) %>
-    <%#= presenter.attribute_to_html(:based_near_label) %>
 </dl>

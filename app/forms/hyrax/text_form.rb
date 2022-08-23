@@ -31,7 +31,6 @@ module Hyrax
       :alternative_title,
       :creator_role,
       :contributor_role,
-      #:decade,
       :resource_type,
       :collection_information,
       :digitization_specification,
