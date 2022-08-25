@@ -3,7 +3,7 @@
 # Provides a default host for the current tenant
 class HykuMailer < ActionMailer::Base
   def default_url_options
-    { host: "hyku.library.louisville.edu" }
+    { host: ENV.fetch('HYKU_ROOT_HOST', "hyku.library.louisville.edu") }
   end
 
   private
