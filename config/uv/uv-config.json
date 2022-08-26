@@ -76,7 +76,7 @@
     },
     "downloadDialogue": {
       "options": {
-        "confinedImageSize": 1000,
+        "confinedImageSize": 600,
         "currentViewDisabledPercentage": 90,
         "maxImageWidth": 5000,
         "optionsExplanatoryTextEnabled": false,
@@ -91,14 +91,14 @@
     "footerPanel": {
       "options": {
         "bookmarkEnabled": false,
-        "downloadEnabled": false,
+        "downloadEnabled": true,
         "embedEnabled": false,
         "feedbackEnabled": false,
         "fullscreenEnabled": true,
         "minimiseButtons": true,
         "moreInfoEnabled": false,
         "openEnabled": false,
-        "printEnabled": true,
+        "printEnabled": false,
         "shareEnabled": false
       },
       "content": {
