@@ -20,17 +20,19 @@
     * [Exporting](#exporting)
 ----
 
+This repository includes additional information on how some contributors may be building features to this repository.
+
 ## Running the stack
 ### Important URL's
 - Local site:
-  - With dory: single.hyku.test
+  - With dory: https://hyku.test
   - Without dory: localhost:3000
 - Staging site: http://lv-hyku-staging.notch8.cloud/
 - Production site: https://hyku.library.louisville.edu/
   - The server credentials are in 1Password
 - Solr: http://solr.hyku.test
   - Check the `SOLR_ADMIN_USER` and `SOLR_ADMIN_PASSWORD` in "docker-compose.yml"
-- Sidekiq: http://single.hyku.test/sidekiq
+- Sidekiq: http://hyku.test/sidekiq
 
 ### Dory
 On OS X or Linux we recommend running [Dory](https://github.com/FreedomBen/dory). Be sure to [adjust your ~/.dory.yml file to support the .test tld](https://github.com/FreedomBen/dory#config-file).
@@ -58,10 +60,21 @@ We distribute two configuration files:
 - Download [Docker Desktop](https://www.docker.com/products/docker-desktop) and log in
 
 #### If this is your first time working in this repo or the Dockerfile has been updated you will need to pull your services first
-  ```bash
+
+```bash
   sc pull
   sc build
   ```
+
+*Note: The `sc pull` may require that you login to the registry.*
+
+If you get the following error:
+
+> Error response from daemon: Head "<registry url>": denied: access forbidden
+
+Then run the following command.  The following command will likely require an access token that can read from the given registry.
+
+>  `docker login <registry url>`
 
 #### Start the server
 ```bash
@@ -139,9 +152,8 @@ sc be rails db:seed
     # which is what is should have been already because of the seeds
     user.add_role(:superadmin)
     ```
-    - if that doesn't work, use hyku.test instead of single.hyku.test
 
-- You can't access hyku.test/sidekiq
+- You can't access https://hyku.test/sidekiq
   - Try: comment out the do block around `mount Sidekiq::Web => '/sidekiq'` in routes.rb
 
 #### Rubocop
