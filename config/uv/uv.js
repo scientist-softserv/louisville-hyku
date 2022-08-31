@@ -11956,7 +11956,7 @@ define('extensions/uv-seadragon-extension/DownloadDialogue',["require", "exports
                             if (imageUri) {
                                 // UV override begins
                                 // window.open(imageUri);
-                                var filename = canvas.__jsonld.label
+                                var filename = canvas.__jsonld.label.split(".").slice(0, -1).join(".") + ".jpg"
                                 var link = document.createElement('a');
                                 link.href = imageUri;
                                 link.download = filename;
