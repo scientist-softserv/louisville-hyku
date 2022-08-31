@@ -11917,8 +11917,15 @@ define('extensions/uv-seadragon-extension/DownloadDialogue',["require", "exports
                         // if (printService && this.extension.isOnHomeDomain()){
                         //     this.component.publish(Events.PRINT);
                         // } else {
-                        window.open(_this.renderingUrls[id]);
-                        //}
+                        // UV override begins
+                        var filename = label.replace('Download whole resource', '');
+                        var link = document.createElement('a');
+                        link.href = _this.renderingUrls[id].split('http').join('https');
+                        link.download = filename;
+                        link.click();
+                        // window.open(_this.renderingUrls[id]);
+                        // UV override ends
+                        //
                     }
                 }
                 else {
@@ -11949,9 +11956,10 @@ define('extensions/uv-seadragon-extension/DownloadDialogue',["require", "exports
                             if (imageUri) {
                                 // UV override begins
                                 // window.open(imageUri);
+                                var filename = canvas.__jsonld.label.split(".").slice(0, -1).join(".") + ".jpg"
                                 var link = document.createElement('a');
                                 link.href = imageUri;
-                                link.download = imageUri.substr(imageUri.lastIndexOf('/') + 1);
+                                link.download = filename;
                                 link.click();
                                 // UV override ends
                             }

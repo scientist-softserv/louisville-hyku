@@ -10,11 +10,7 @@ module Hyrax
       case file
       when ActiveFedora::File
         # For original files that are stored in fedora
-        if current_user&.is_admin?
-          super
-        else
-          redirect_back fallback_location: main_app.root_url, alert: 'You are unauthorized to access that file.'
-        end
+        super
       when String
         # For derivatives stored on the local file system
         if file.include?('thumbnail') || current_user&.is_admin?
