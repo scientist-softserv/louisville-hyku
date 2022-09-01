@@ -44,7 +44,7 @@
         "panelAnimationDuration": 250,
         "panelCollapsedWidth": 30,
         "panelExpandedWidth": 255,
-        "panelOpen": false,
+        "panelOpen": true,
         "tabOrder": "",
         "thumbsEnabled": true,
         "thumbsExtraHeight": 8,
