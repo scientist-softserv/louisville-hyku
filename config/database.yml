@@ -3,18 +3,15 @@
 login: &login
   adapter: <%= ENV['DATABASE_ADAPTER'] || 'postgresql' %>
   host: <%= ENV['DATABASE_HOST'] %>
-  username: <%= ENV['DATABASE_USER'] || Rails.application.credentials.dig(:production, :database_user) %>
-  password: <%= ENV['DATABASE_PASSWORD'] || Rails.application.credentials.dig(:production, :database_password) %>
-  database: <%= ENV['DATABASE_NAME'] || Rails.application.credentials.dig(:production, :database_name) %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_NAME'] || 'hyku' %>
   pool: 50
   timeout: 5000
 
 
 development:
   <<: *login
-  username: <%= ENV['DATABASE_USER'] || Rails.application.credentials.dig(:development, :database_user) %>
-  password: <%= ENV['DATABASE_PASSWORD'] || Rails.application.credentials.dig(:development, :database_password) %>
-  database: <%= ENV['DATABASE_NAME'] || Rails.application.credentials.dig(:development, :database_name) %>
 
 test:
   <<: *login
