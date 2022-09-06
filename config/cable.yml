@@ -1,12 +1,12 @@
 development:
   adapter: redis
-  url: redis://<%= ENV['REDIS_HOST'] || 'localhost' %>:<%= ENV['REDIS_PORT'] || '6379' %>
-  password: <%= ENV['REDIS_PASSWORD'] || Rails.application.credentials.dig(:development, :redis_password) %>
+  url: <%= ENV.fetch("REDIS_URL") { sprintf "redis://%s%s:%s/1", (ENV['REDIS_PASSWORD'].present? ? ":#{ENV['REDIS_PASSWORD']}@" : ''), ENV.fetch('REDIS_HOST', 'localhost'), ENV.fetch('REDIS_PORT', '6379') } %>
+  channel_prefix: _hyku_production
 
 test:
   adapter: async
 
 production:
   adapter: redis
-  url: redis://<%= ENV['REDIS_HOST'] || 'localhost' %>:<%= ENV['REDIS_PORT'] || '6379' %>
-  password: <%= ENV['REDIS_PASSWORD'] || Rails.application.credentials.dig(:production, :redis_password) %>
+  url: <%= ENV.fetch("REDIS_URL") { sprintf "redis://%s%s:%s/1", (ENV['REDIS_PASSWORD'].present? ? ":#{ENV['REDIS_PASSWORD']}@" : ''), ENV.fetch('REDIS_HOST', 'localhost'), ENV.fetch('REDIS_PORT', '6379') } %>
+  channel_prefix: _hyku_production
