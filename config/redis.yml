@@ -7,4 +7,4 @@ test:
 production:
   host: <%= ENV['REDIS_HOST'] || 'localhost' %>
   port: <%= ENV['REDIS_PORT'] || 6379 %>
-  password: <%= ENV['REDIS_PASSWORD'] || Rails.application.credentials.dig(:production, :redis_password) %>
+  password: <%= ENV['REDIS_PASSWORD'] %>
