@@ -61,3 +61,5 @@ docker-compose.yml
 .DS_Store
 *~undo-tree~
 .env
+yarn-error.log
+solr/security.json
