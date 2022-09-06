@@ -1,7 +1,7 @@
 # This is a sample config file that points to a solr server for each environment
 development:
-  url: <%= ENV['SOLR_URL'] || Rails.application.credentials.dig(:development, :solr_url) %>
+  url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:#{ENV.fetch('SOLR_DEVELOPMENT_PORT', 8983)}/solr/blacklight-core" %>
 test:
   url: <%= ENV['SOLR_URL'] ? ENV['SOLR_URL'] + 'hydra-test' : "http://127.0.0.1:#{ENV.fetch('SOLR_TEST_PORT', 8985)}/solr/hydra-test" %>
 production:
-  url: <%= ENV['SOLR_URL'] || Rails.application.credentials.dig(:production, :solr_url) %>
+  url: <%= ENV['SOLR_URL'] || "http://#{ENV.fetch('SOLR_ADMIN_USER', 'solr')}:#{ENV.fetch('SOLR_ADMIN_PASSWORD', 'SolrRocks')}@#{ENV.fetch('SOLR_HOST', 'solr')}:#{ENV.fetch('SOLR_PORT', '8983')}/solr/blacklight-core" %>
