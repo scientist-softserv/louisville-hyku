@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
+require Rails.root.join('lib', 'rdf', 'custom_is_child_term.rb')
+
 module SetChildFlag
   extend ActiveSupport::Concern
   included do
     after_save :set_children
     property :is_child,
-             predicate: ::RDF::URI.intern("https://#{ENV.fetch('HYKU_ROOT_HOST', 'hyku.library.louisville.edu')}
-             /terms/isChild"),
+             predicate: ::RDF::CustomIsChildTerm.is_child,
              multiple: false do |index|
                index.as :stored_searchable
              end
