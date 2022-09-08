@@ -193,6 +193,8 @@ Hyrax.config do |config|
     # See Samvera Slack thread https://samvera.slack.com/archives/C0F9JQJDQ/p1596718417351200?thread_ts=1596717896.350700&cid=C0F9JQJDQ
     uri.sub(/\Ahttp:/, 'https:')
   end
+
+  config.iiif_metadata_fields = Hyrax::Forms::WorkForm.required_fields
   
 end
 
@@ -207,3 +209,77 @@ Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::
 if ENV.fetch('HYKU_BULKRAX_ENABLED', false) && Bulkrax.default_work_type.blank?
   Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s
 end
+# These are in rendering order
+HYKU_METADATA_RENDERING_ATTRIBUTES = {
+  identifier: { html_dl: true, label: "Item number" },
+  alternative_title: { html_dl: true },
+  honoree: { html_dl: true },
+  type_of_honoree: { html_dl: true },
+  location_of_honoree: { html_dl: true },
+  series: { html_dl: true },
+  volume: { html_dl: true },
+  issue: { html_dl: true },
+  creator: { render_as: :faceted, html_dl: true },
+  creator_role: { html_dl: true },
+  contributor: { render_as: :faceted, html_dl: true },
+  contributor_role: { html_dl: true },
+  location_of_contributor: { html_dl: true },
+  biography_of_contributor: { html_dl: true },
+  contributor_history: { html_dl: true },
+  contributor_description: { html_dl: true },
+  transcription_translation: { html_dl: true },
+  table_of_contents: { html_dl: true },
+  invoice_information: { html_dl: true },
+  photo_comment: { html_dl: true },
+  code: { html_dl: true },
+  story: { html_dl: true },
+  location: { render_as: :faceted, html_dl: true },
+  street: { render_as: :faceted, html_dl: true },
+  neighborhood: { render_as: :faceted, html_dl: true },
+  city: { render_as: :faceted, html_dl: true },
+  county: { render_as: :faceted, html_dl: true },
+  region: { html_dl: true },
+  operating_area: { html_dl: true },
+  subject: { render_as: :faceted, html_dl: true },
+  style: { html_dl: true },
+  technique: { html_dl: true },
+  material: { html_dl: true },
+  measurement: { html_dl: true },
+  cultural_context: { html_dl: true },
+  mesh: { html_dl: true },
+  tab_heading: { html_dl: true },
+  keyword: { render_as: :faceted, html_dl: true },
+  people_represented: { render_as: :faceted, html_dl: true },
+  place_original: { html_dl: true },
+  production: { html_dl: true },
+  date_created: { html_dl: true, label: "Date original" },
+  decade: { render_as: :faceted, html_dl: true },
+  building_date: { html_dl: true },
+  language: { html_dl: true },
+  language_script: { html_dl: true },
+  resource_type: { render_as: :faceted, html_dl: true, label: "Object type" },
+  ornamentation: { html_dl: true },
+  exhibit_history: { html_dl: true },
+  data_source: { html_dl: true },
+  cataloguing_note: { html_dl: true },
+  object_location: { html_dl: true },
+  condition: { html_dl: true },
+  source: { html_dl: true },
+  related_image: { html_dl: true },
+  collection: {},
+  collection_information: { html_dl: true },
+  publisher: { html_dl: true, label: "Repository" },
+  rights_statement: { html_dl: true },
+  ordering_information: { html_dl: true },
+  license: { render_as: :license, html_dl: true },
+  related_url: { render_as: :external_link, html_dl: true, label: "Related resource" },
+  # resource_query: { html_dl: true },
+  # digitization_specification: { html_dl: true },
+  # date_digital: { html_dl: true },
+  # media_type: { render_as: :faceted, html_dl: true },
+  # format: { html_dl: true },
+  # extent: { html_dl: true, label: "Duration" },
+  embargo_release_date: { render_as: :date, html_dl: true },
+  lease_expiration_date: { render_as: :date, html_dl: true },
+  # based_near_label: {}
+}
