@@ -2,9 +2,12 @@
     <%#= render 'attribute_rows', presenter: presenter %>
     <% HYKU_METADATA_RENDERING_ATTRIBUTES.each do |key, options| %>
         <% if key == :collection %>
-            <%= render 'collections', presenter: presenter %>
+          <%= render 'collections', presenter: presenter %>
+        <% elsif presenter.solr_document["is_child_bsi"] == true && options[:render_as] == :faceted %>
+          <% altered_options = options.merge(is_child_bsi: true) %>
+          <%= presenter.attribute_to_html(key, **altered_options) %>
         <% else %>
-            <%= presenter.attribute_to_html(key, **options) %>
+          <%= presenter.attribute_to_html(key, **options) %>
         <% end %>
     <% end %>
 </dl>
