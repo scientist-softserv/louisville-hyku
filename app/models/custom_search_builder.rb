@@ -24,7 +24,7 @@ class CustomSearchBuilder < Hyrax::CatalogSearchBuilder
   # rubocop:enable Naming/PredicateName
 
   def show_parents_only(solr_parameters)
-    query = if blacklight_params["include_children"]
+    query = if blacklight_params["include_children"] == 'true'
               ActiveFedora::SolrQueryBuilder.construct_query(is_child_bsi: 'true')
             else
               ActiveFedora::SolrQueryBuilder.construct_query(is_child_bsi: nil)
