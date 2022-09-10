@@ -5,7 +5,6 @@ module Hyrax
   module ManifestBuilderServiceDecorator
     private
 
-      # rubocop:disable Metrics/AbcSize
       def sanitized_manifest(presenter:)
         # ::IIIFManifest::ManifestBuilder#to_h returns a
         # IIIFManifest::ManifestBuilder::IIIFManifest, not a Hash.
@@ -30,19 +29,7 @@ module Hyrax
               doc[:member_ids_ssim]&.include?(file_set_id) && doc[:has_model_ssim] != ["FileSet"]
             end.first
 
-            canvas_metadata = metadata_fields.map do |field_name, options|
-              label = Hyrax::Renderers::AttributeRenderer.new(field_name, nil).label
-              if field_name == :collection
-                next unless image[:member_of_collection_ids_ssim]&.present?
-                {
-                  label: label,
-                  value: make_collection_link(image[:member_of_collection_ids_ssim], image[:member_of_collections_ssim])
-                }
-              else
-                next if image.try(field_name)&.first.blank?
-                { label: label, value: cast_to_value(image: image, field_name: field_name, options: options) }
-              end
-            end
+            canvas_metadata = get_canvas_metadata(metadata_fields, image)
             canvas['metadata'] = canvas_metadata.compact
           end
         end
@@ -50,7 +37,6 @@ module Hyrax
         sort_hash_by_identifier(hash)
         hash
       end
-      # rubocop:enable Metrics/AbcSize
 
       def sort_hash_by_identifier(hash)
         hash["sequences"].first["canvases"].sort_by! do |canvas|
@@ -74,6 +60,7 @@ module Hyrax
             path = Rails.application.routes.url_helpers.search_catalog_path(
               :"f[#{search_field}][]" => value, locale: I18n.locale
             )
+            path += '&include_children=true' if image["is_child_bsi"] == true
             "<a href='#{path}' target='_blank'>#{value}</a>"
           end
         else
@@ -123,6 +110,22 @@ module Hyrax
           description: {}
         }.merge(HYKU_METADATA_RENDERING_ATTRIBUTES)
           .merge(searchable_text: {})
+      end
+
+      def get_canvas_metadata(metadata_fields, image)
+        metadata_fields.map do |field_name, options|
+          label = Hyrax::Renderers::AttributeRenderer.new(field_name, nil).label
+          if field_name == :collection
+            next unless image[:member_of_collection_ids_ssim]&.present?
+            {
+              label: label,
+              value: make_collection_link(image[:member_of_collection_ids_ssim], image[:member_of_collections_ssim])
+            }
+          else
+            next if image.try(field_name)&.first.blank?
+            { label: label, value: cast_to_value(image: image, field_name: field_name, options: options) }
+          end
+        end
       end
   end
 end

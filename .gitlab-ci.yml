@@ -37,6 +37,8 @@ lint:
   script:
     - git fetch && git checkout main && git checkout ${CI_COMMIT_SHORT_SHA}
     - bundle check || bundle
+    # debugging tip: un-comment the sleep below in order to use k8's or docker to log into the actual running container
+    # - sleep 30m
     - bundle exec pronto run -f gitlab -c origin/main
     - cd /app/samvera/hyrax-webapp && bundle exec rubocop -P
   rules:
@@ -108,6 +110,7 @@ test:
     - rm -f /home/app/webapp/tmp/capybara/*
     - rm -rf $CI_PROJECT_DIR/capybara
     - cd /app/samvera/hyrax-webapp
+    # debugging tip: un-comment the sleep below in order to use k8's or docker to log into the actual running container
     # - sleep 30m
     - rspec --format progress --tag ~speed:slow --format RspecJunitFormatter --out rspec.xml
   after_script:
