@@ -9,7 +9,7 @@ module Hyrax
           path = Rails.application.routes.url_helpers.search_catalog_path(
             :"f[#{search_field}][]" => value, locale: I18n.locale
           )
-          path += '&include_children=true' if options[:is_child_bsi] == true
+          path += '&include_child_works=true' if options[:is_child_bsi] == true
           path
         end
     end
