@@ -488,7 +488,16 @@ class CatalogController < ApplicationController
     iiif_search_response = BlacklightIiifSearch::IiifSearchResponse.new(@response,
                                                                         @parent_document,
                                                                         self)
-    render json: iiif_search_response.annotation_list,
+    json_results = iiif_search_response.annotation_list
+    json_results&.[]('resources')&.each do |result_hit|
+      next if result_hit['resource'].present?
+      result_hit['resource'] = {
+        "@type": "cnt:ContentAsText",
+        "chars": "Metadata match, see sidebar for details"
+      }
+    end
+
+    render json: json_results,
            content_type: 'application/json'
   end
 end
