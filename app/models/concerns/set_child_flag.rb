@@ -17,5 +17,6 @@ module SetChildFlag
   def set_children
     ordered_works.each do |child_work|
     child_work.update(is_child: true) unless child_work.is_child
+    end
   end
 end
