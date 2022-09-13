@@ -1,4 +1,8 @@
+/* production custom-header */
+
 /* HEADER */
+
+#logo-col img { margin-right:1rem; }
 
 #header-row1 { 
   position:relative; 
@@ -9,7 +13,6 @@
 
 #header-navbar {
   z-index:20;
-  background-color: black;
   border-top:none; 
   padding:18px 0 10px 0; 
   margin-bottom: 0; 
@@ -18,24 +21,26 @@
   border-radius:0;
 }
 
+#header-navbar .navbar-product-name a { text-transform: uppercase;}
+
 .glyphicon-log-in:before { display:none; }
 
 #header-navbar a { text-decoration:none; }
 
 #header-navbar #logo-col { 
-  padding-left: 0; 
   padding-right:0; 
   display:flex; 
 }
 
-#logo, #logo-sm { margin-right:1rem; }
+
+#logo-col img { margin-right:1rem; }
+
 
 #header-navbar .navbar-product-name {
   display: block; 
   margin:0; 
   margin-top:-0.3rem; 
   padding:0; 
-  text-transform:uppercase;
   text-align: center;
   font-weight:700; 
   font-size:3rem; 
@@ -46,8 +51,12 @@
 
 #header-navbar .navbar-product-name a { color:white; }
 
+#user_utility_links { display:flex; }
+
+ul#head-user-actions { list-style-type:none; display:flex; }
+
 @media (max-width: 767.99px) {
-  #logo {display:none; }
+  #logo-col>a>img {display:none; }
   
   #header-navbar #logo-col { 
     display:flex;
@@ -59,7 +68,7 @@
 @media (max-width: 499.99px) { 
   #header-navbar .navbar-product-name { font-size:2.4rem; }
   #logo-sm a { display:flex; }
-  #logo-sm img { height:20px; }
+  #logo-sm img { height:22px; }
   #home-header { margin:0 1rem; }
   #home-header h1 { font-size: 2.4rem;}
   #home-header h2 { font-size:1.8rem; line-height:1.4; margin: 0; }
@@ -94,13 +103,6 @@
   background-color: rgb(236,238,244);
 }
 
-.navbar-default .navbar-nav > li > a { 
-  color:white; 
-  font-weight:700; 
-  text-shadow:1px 1px 0 black;
-}
-
-nav.navbar-default .dropdown-menu { text-shadow:none; }
 
 .navbar + .navbar, .navbar + .image-masthead { 
   margin-top:0; 
@@ -133,8 +135,7 @@ nav.navbar-default .dropdown-menu { text-shadow:none; }
 .image-masthead .navbar.navbar-default .navbar-nav a { color:white; }
 
 
-.image-masthead ul.nav.navbar-nav.col-sm-5, 
-.navbar-static-top>div>.row>.col-sm-5 { display:none; }
+
 .image-masthead ul.nav.navbar-nav.col-sm-7 { width:100%; }
 
 .container.site-title-container, 

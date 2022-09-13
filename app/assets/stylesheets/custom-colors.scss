@@ -1,0 +1,208 @@
+@charset "utf-8";
+/* CSS Document  custom-colors.scss */
+
+
+.public-facing { 
+
+  a, 
+  nav.breadcrumb a { 
+    color:#000000; 
+    text-decoration: underline #ad0000;
+  }
+
+  nav a, 
+  .nav-pills a, 
+  .panel-title > a, 
+  .dropdown-menu > li > a, 
+  .btn, 
+  .dashboard .nav-tabs > li > a, 
+  .visibility-link, 
+  .visibility-link .label { text-decoration: none; }
+
+  a:hover, a:focus { color:#ad0000; }
+
+  .active > a:hover { cursor:auto; }
+
+
+  .panel-default > .panel-heading {
+    background-color: #e2e8ec;
+    border-color: #dce3e8;
+  }
+
+  .facet-values a {
+    color:#ad0000; 
+    text-decoration: none; 
+  }
+  .facet-values a:hover { background-color:#eaeaea; }
+
+
+  .btn-primary { background-color: #ad0000; }
+
+  .btn-default { 
+    background-color: #333; 
+    color:white; 
+  }
+
+  .btn-default:hover {
+    background-color:#ad0000;
+    color:white; 
+  }
+
+  .constraint-value.btn-default {
+    background-color:white; 
+    color:black; 
+    border: 1px solid #ccc;
+  }
+
+  .nav-pills > li > a:hover, .nav-pills > li > a:focus, 
+  .btn-primary:hover, .btn-primary:focus, 
+  .btn-default:hover, .btn-default:focus { 
+    background-color:#ad0000; 
+    color:white; 
+  }
+  
+  #appliedParams .btn-default:hover,
+  #appliedParams .btn-default:hover:focus {
+    background-color:white; color:black;
+  } 
+  
+  
+  .btn-default:active, 
+  .btn-default.active {
+    background-color:white; 
+    color:#333;
+  }
+
+  .btn-danger, 
+  .appliedFilter .remove:hover, 
+  .appliedFilter .remove:active, 
+  span.appliedFilter .remove { 
+    background-color:rgba(173,0,0,.8); 
+    border-color:rgba(173,0,0,.9);
+    color:white;
+  }
+  
+  .btn.btn-danger:hover { background-color:#ad0000; color:white;}
+  
+  #documents.gallery .document-title-heading { font-size:1.6rem!important; }
+
+
+  #sort-dropdown .dropdown-toggle, 
+  #per_page-dropdown .dropdown-toggle, 
+  #sort-dropdown .dropdown-toggle .caret, 
+  #per_page-dropdown .dropdown-toggle .caret { 
+    color:white; 
+  }
+
+  #sortAndPerPage .open > .btn-default.dropdown-toggle:active, 
+  #sortAndPerPage .open > .btn-default.dropdown-toggle:hover, 
+  #sortAndPerPage .open > .btn-default.dropdown-toggle:focus, 
+  .facets-toggle:active, 
+  .facets-toggle:focus, 
+  .facets-toggle:hover { 
+    background-color:#ad0000; 
+    color:white; 
+  }
+
+  #sortAndPerPage .view-type a.active .glyphicon { color:#333; }
+
+  .view-type a.active { color:#333; }
+  
+  .alert-info {
+    color:rgb(0, 0, 0);
+    background-color: #e2e8ec;
+    border-color:#dce3e8;
+  }
+  
+  /* HEADER */
+  
+  #header-navbar { background-color: rgb(0, 0, 0); }
+
+  
+  /* MASTHEAD and NAVBAR */
+    .image-masthead .navbar.navbar-default { 
+      background-color: transparent;
+    }
+  
+  .image-masthead .navbar.navbar-default .navbar-nav a,
+  .navbar-default .navbar-nav > li > a { 
+    color:#333;
+    text-transform:none;
+    text-shadow:unset;
+    font-weight:700; 
+  }
+  
+
+nav.navbar-default .dropdown-menu { text-shadow:none; }
+
+
+  .image-masthead .navbar.navbar-default .navbar-nav li.active a, 
+  .image-masthead .navbar.navbar-default .navbar-nav li.active a:hover, 
+  .image-masthead .navbar.navbar-default .navbar-nav li.active a:focus, 
+  .navbar-default .navbar-nav > .active > a, 
+  .navbar-default .navbar-nav > .active > a:hover, 
+  .navbar-default .navbar-nav > .active > a:focus { 
+      color:white;
+      background-color:#333;
+    }
+
+  
+  .image-masthead .navbar.navbar-default .navbar-nav a:hover, 
+  .image-masthead .navbar.navbar-default .navbar-nav a:focus,
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:focus {
+    color:white;
+    background-color:#333; 
+  }
+
+  #masthead nav .navbar a { text-shadow:unset; }
+
+
+  
+  nav li.active { outline:1px dotted #333; }
+  
+
+  .navbar-static-top .navbar-nav > li:active > a,
+  .hyrax-pages .image-masthead .navbar.navbar-default .navbar-nav li:active a, 
+  .hyrax-contact_form .image-masthead .navbar.navbar-default .navbar-nav li:active a { 
+    color: #333; 
+   }
+  
+  
+  
+  /* SEARCH */
+  #search-submit-header { background-color:#ad0000; }
+
+  
+  
+  .hyrax-pages .image-masthead li:active a, 
+  .hyrax-contact_form .image-masthead li:active a { 
+    outline: 1px dashed #333;
+   }
+
+  /* FACETS */
+  .facets-toggle .icon-bar { background-color: white; }
+  .facets-toggle:hover { background-color:#ad0000;}
+  .facet-values li .selected { color:#000000; }
+  #appliedParams { 
+    border-bottom:1px solid #e5e5e5; 
+    background-color:transparent;
+  }
+  #startOverLink { 
+    background-color:#333; 
+    color:white; 
+  }
+  
+  @media (max-width:767.99px) {
+    #facets .top-panel-heading { background-color:#e2e8ec; }
+  }
+  @media (min-width:768px) { 
+    .facets-toggle { 
+      background-color: #555; 
+      color:white; 
+      border-color:#333; 
+    }
+  }
+
+  
+}
