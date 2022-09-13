@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
-# OVERRIDE Hyrax 2.9.6 to make customizations to the manifest that will allow metadata to be seen in the UV side panel
+# OVERRIDE Hyrax 2.9.6 to make customizations to the manifest that
+# will allow metadata to be seen in the UV side panel
 module Hyrax
   module ManifestBuilderServiceDecorator
     private
 
-      # OVERRIDE Hyrax 2.9.6 to make customizations to the manifest that will allow metadata to be seen in the UV side panel
+      # OVERRIDE Hyrax 2.9.6 to make customizations to the manifest that
+      # will allow metadata to be seen in the UV side panel
       def sanitized_manifest(presenter:)
         # ::IIIFManifest::ManifestBuilder#to_h returns a
         # IIIFManifest::ManifestBuilder::IIIFManifest, not a Hash.
