@@ -4,7 +4,16 @@
 /* ...
 pulls together custom stylesheets
 */
+@import "custom-base";
+@import "custom-colors";
+@import "custom-fonts";
 @import "custom-header";
+// @import "custom-navbar-search";
+@import "custom-facets";
+// @import "custom-pagination";
+@import "custom-bookmarks";
 @import "custom-footer";
+// @import "custom-modal";
 @import "custom-homepage";
+// @import "custom-pages";
 @import "custom-staff";

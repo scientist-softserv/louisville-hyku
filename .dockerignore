@@ -30,3 +30,5 @@ fcrpo/*
 pg/*
 Dockerfile*
 fits.log
+.env
+docker-compose.yml

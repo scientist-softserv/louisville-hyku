@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* CSS Document  custom-bookmarks.css */
+
+.public-facing {
+  .nav-pills.bookmarksTools a {
+    color:white; 
+    background-color:#555;
+    font-family:'Open Sans', Arial, sans-serif;
+    text-decoration:none; 
+    border-color:#333; 
+    font-size:1.7rem; 
+  }
+
+
+  .bookmarks #sortAndPerPage {
+    display:flex; 
+    justify-content:space-between;
+  }
+
+
+  .bookmarks #sortAndPerPage::before, 
+  .bookmarks #sortAndPerPage::after 
+    { display:none; }
+
+  .bookmarksTools { display:none; } /* hide Email and Cite until functionality is ready */
+
+}

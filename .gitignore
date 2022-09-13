@@ -55,14 +55,13 @@ public/uploads
 /config/master.key
 /config/credentials.yml.enc
 
-notes
-cmd.txt
-fits.log
 public/assets
 public/universalviewer
+docker-compose.yml
 .DS_Store
 *~undo-tree~
-bad-index
-ReindexEverythingForLargeSystems.rb
-urls
 .env
+yarn-error.log
+solr/security.json
+.env_dev
+.env_production
