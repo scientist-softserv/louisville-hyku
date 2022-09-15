@@ -64,7 +64,7 @@ module Hyrax
               :"f[#{search_field}][]" => value, locale: I18n.locale
             )
             path += '&include_child_works=true' if image["is_child_bsi"] == true
-            "<a href='#{path}' target='_blank'>#{value}</a>"
+            "<a href='#{path}'>#{value}</a>"
           end
         else
           make_link(image.send(field_name))
@@ -75,7 +75,7 @@ module Hyrax
         collection_ids_and_titles_map = {}
         collection_ids.each_with_index.map { |id, i| collection_ids_and_titles_map[id] = collection_titles[i] }
         collection_ids_and_titles_map.map do |id, title|
-          "<a href='/collections/#{id}' target='_blank'>#{title}</a>"
+          "<a href='/collections/#{id}'>#{title}</a>"
         end
       end
 
@@ -101,7 +101,7 @@ module Hyrax
       def make_link(text)
         Array(text).map do |t|
           t.gsub(MAKE_LINK_REGEX) do |url|
-            "<a href='#{url}' target='_blank'>#{url}</a>"
+            "<a href='#{url}'>#{url}</a>"
           end
         end
       end
