@@ -20,11 +20,11 @@ module Hyrax
         docs = get_solr_docs(presenter)
 
         hash = JSON.parse(manifest.to_json)
-        hash['label'] = sanitize_value(hash['label']) if hash.key?('label')
+        hash['label'] = CGI.unescapeHTML(sanitize_value(hash['label'])) if hash.key?('label')
         hash.delete('description') # removes default description since it's in the metadata fields
         hash['sequences']&.each do |sequence|
           sequence['canvases']&.each do |canvas|
-            canvas['label'] = sanitize_value(canvas['label'])
+            canvas['label'] = CGI.unescapeHTML(sanitize_value(canvas['label']))
             # uses the '@id' property which is a URL that contains the FileSet id
             file_set_id = canvas['@id'].split('/').last
             # finds the image that the FileSet is attached to and creates metadata on that canvas
