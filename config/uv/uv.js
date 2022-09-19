@@ -9901,7 +9901,7 @@ define('modules/uv-shared-module/HeaderPanel',["require", "exports", "./BaseEven
                 var n = this._$metadataItemValueTemplate.clone();
                 return n.html(e), n.find("a").each((function() {
                     var e = $(this);
-                    e.hasClass("iiif-viewer-link") || e.prop("target", "_blank")
+                    e.hasClass("iiif-viewer-link") || e.prop("target", "_parent")
                 })), t && this._addReadingDirection(n, t), n
             }, t.prototype._buildMetadataItemURIValue = function(e) {
                 e = this._sanitize(e);
