@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# OVERRIDE: Hyrax 2.5.1 Add call to CreateJpgService and send result to attach files method
+# OVERRIDE: Hyrax 2.9.6 Add call to CreateJpgService and send result to attach files method
 module Hyrax
   module Actors
     # Creates a work and attaches files to the work
@@ -10,11 +10,12 @@ module Hyrax
       def create(env)
         uploaded_file_ids = filter_file_ids(env.attributes.delete(:uploaded_files))
         files = uploaded_files(uploaded_file_ids)
-        next_actor.create(env)
-        # OVERRIDE: Hyrax 2.5.1 Split PDF into jpg for each page and sent to attach files method
+        # OVERRIDE: Hyrax: Split PDF into jpg for each page and sent to attach files method
+        return false unless validate_files(files, env)
+        return false unless next_actor.create(env)
         ConvertPdfToJpgJob.perform_later(files, env.curation_concern, env.attributes, env.user.id) if files.present?
-        validate_files(files, env) && attach_files(files, env)
-        true
+        # END OVERRIDE
+        attach_files(files, env)
       end
 
       # @param [Hyrax::Actors::Environment] env
@@ -22,11 +23,12 @@ module Hyrax
       def update(env)
         uploaded_file_ids = filter_file_ids(env.attributes.delete(:uploaded_files))
         files = uploaded_files(uploaded_file_ids)
-        next_actor.update(env)
-        # OVERRIDE: Hyrax 2.5.1 Split PDF into jpg for each page and sent to attach files method
+        # OVERRIDE: Hyrax: Split PDF into jpg for each page and sent to attach files method
+        return false unless validate_files(files, env)
+        return false unless next_actor.update(env)
         ConvertPdfToJpgJob.perform_later(files, env.curation_concern, env.attributes, env.user.id) if files.present?
-        validate_files(files, env) && attach_files(files, env)
-        true
+        # END OVERRIDE
+        attach_files(files, env)
       end
 
       private
@@ -39,9 +41,10 @@ module Hyrax
         def validate_files(files, env)
           expected_user_id = env.user.id
           files.each do |file|
-            next unless file.user_id != expected_user_id
-            Rails.logger.error "User #{env.user.user_key} attempted to ingest uploaded_file #{file.id},
-            but it belongs to a different user"
+            next if file.user_id == expected_user_id
+            # rubocop:disable Metrics/LineLength
+            Rails.logger.error "User #{env.user.user_key} attempted to ingest uploaded_file #{file.id}, but it belongs to a different user"
+            # rubocop:enable Metrics/LineLength
             return false
           end
           true

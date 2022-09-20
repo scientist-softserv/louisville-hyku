@@ -25,4 +25,6 @@ RSpec.describe Hyrax::ImageForm do
   end
 
   include_examples("work_form")
+  include_examples("custom_slugs")
+  include_examples("requires_slugs")
 end

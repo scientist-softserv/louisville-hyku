@@ -9,4 +9,10 @@ RSpec.describe Image do
 
     it { is_expected.to eq ImageIndexer }
   end
+
+  describe 'with custom slugs' do
+    let(:this_object) { create(:image) }
+
+    include_examples("object includes slugs")
+  end
 end

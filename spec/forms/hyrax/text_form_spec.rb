@@ -5,7 +5,9 @@
 require 'rails_helper'
 
 RSpec.describe Hyrax::TextForm do
-  it "has tests" do
-    skip "Add your tests here"
-  end
+  let(:work) { Text.new }
+  let(:form) { described_class.new(work, nil, nil) }
+
+  include_examples("custom_slugs")
+  include_examples("requires_slugs")
 end
