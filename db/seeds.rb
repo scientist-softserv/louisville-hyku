@@ -65,6 +65,8 @@ if ENV['SUPPORT_EMAIL'] && ENV['SUPPORT_PASSWORD']
   u = User.find_or_create_by(email: ENV['SUPPORT_EMAIL']) do |u|
     u.password = ENV['SUPPORT_PASSWORD']
   end
+  u.add_role(:admin)
+  puts "\n== Finished seeding admin support user"
   u.add_role(:superadmin)
   puts "\n== Finished seeding the superadmin notch8 support user"
 end
