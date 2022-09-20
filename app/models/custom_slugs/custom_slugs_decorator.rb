@@ -384,13 +384,26 @@ module CustomSlugs
   Hyrax::Forms::CollectionForm.class_eval do
     def required_fields
       %i[title
+         description
          identifier]
     end
 
+    def secondary_terms
+      %i[creator
+         contributor
+         keyword
+         license
+         publisher
+         date_created
+         subject
+         language
+         based_near
+         related_url
+         resource_type]
+    end
+
     def primary_terms
-      %i[title
-         description
-         identifier]
+      required_fields
     end
   end
 end
