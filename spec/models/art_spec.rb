@@ -5,7 +5,15 @@
 require 'rails_helper'
 
 RSpec.describe Art do
-  it "has tests" do
-    skip "Add your tests here"
+  describe 'indexer' do
+    subject { described_class.indexer }
+
+    it { is_expected.to eq ArtIndexer }
+  end
+
+  describe 'with custom slugs' do
+    let(:this_object) { create(:art) }
+
+    include_examples("object includes slugs")
   end
 end

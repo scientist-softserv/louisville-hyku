@@ -3,7 +3,7 @@
 RSpec.describe "OAI PMH Support", type: :feature do
   let(:user) { create(:user) }
   let(:work) { create(:work, user: user) }
-  let(:identifier) { work.id }
+  let(:identifier) { work.to_param }
 
   before do
     login_as(user, scope: :user)

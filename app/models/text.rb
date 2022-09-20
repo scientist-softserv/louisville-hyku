@@ -5,6 +5,7 @@
 class Text < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include SetChildFlag
+  include CustomSlugs::SlugBehavior
 
   # Adds behaviors for hyrax-doi plugin.
   # include Hyrax::DOI::DOIBehavior

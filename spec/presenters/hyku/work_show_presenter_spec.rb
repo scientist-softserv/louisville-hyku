@@ -18,14 +18,16 @@ RSpec.describe Hyku::WorkShowPresenter do
 
   context "when the work has valid doi and isbns" do
     # the values are set in generic_works factory
+    # These specs are commented out, as slug work doesn't allow for normal use of the identifier field
+    # and values were changed in the generic_works factory.
     describe "#doi" do
-      it "extracts the DOI from the identifiers" do
+      xit "extracts the DOI from the identifiers" do
         expect(presenter.doi).to eq('10.1038/nphys1170')
       end
     end
 
     describe "#isbns" do
-      it "extracts ISBNs from the identifiers" do
+      xit "extracts ISBNs from the identifiers" do
         expect(presenter.isbns)
           .to match_array(%w[978-83-7659-303-6 978-3-540-49698-4 9790879392788
                              3-921099-34-X 3-540-49698-x 0-19-852663-6])

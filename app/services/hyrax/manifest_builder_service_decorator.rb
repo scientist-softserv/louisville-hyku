@@ -42,13 +42,15 @@ module Hyrax
       end
 
       def sort_hash_by_identifier(hash)
-        hash["sequences"].first["canvases"].sort_by! do |canvas|
+        hash["sequences"]&.first&.[]("canvases")&.sort_by! do |canvas|
           canvas["metadata"].select { |h| h[:label] == "Identifier" }.first[:value]
         end
       end
 
       def get_solr_docs(presenter)
-        parent_id_and_child_ids = ([presenter._source['id']] + presenter._source['member_ids_ssim'])
+        parent_id = [presenter._source['id']]
+        child_ids = presenter._source['member_ids_ssim']
+        parent_id_and_child_ids = parent_id + CustomSlugs::Manipulations.cast_to_slug_or_ids_for(child_ids)
         query = ActiveFedora::SolrQueryBuilder.construct_query_for_ids(parent_id_and_child_ids)
         solr_hits = ActiveFedora::SolrService.query(query, rows: 100_000)
         solr_hits.map { |solr_hit| ::SolrDocument.new(solr_hit) }

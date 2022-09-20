@@ -5,6 +5,8 @@ class CollectionIndexer < Hyrax::CollectionIndexer
   # provide your own metadata and indexing.
   include Hyrax::IndexesBasicMetadata
 
+  include CustomSlugs::SlugIndexer
+
   # Uncomment this block if you want to add custom indexing behavior:
   def generate_solr_document
     super.tap do |solr_doc|
