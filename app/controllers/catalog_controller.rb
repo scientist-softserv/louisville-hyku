@@ -63,7 +63,8 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: "search",
       rows: 10,
-      qf: "title_tesim description_tesim creator_tesim keyword_tesim all_text_tsimv",
+      qf: HYKU_METADATA_RENDERING_ATTRIBUTES.keys.map { |attribute| "#{attribute}_tesim" }
+                                            .join(' ') << " title_tesim description_tesim all_text_tsimv",
       :"hl" => true,
       :"hl.simple.pre" => "<span class='highlight'>",
       :"hl.simple.post" => "</span>",

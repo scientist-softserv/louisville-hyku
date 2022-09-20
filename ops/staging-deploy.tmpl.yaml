@@ -289,7 +289,7 @@ worker:
     - name: SMTP_TYPE
       value: cram_md5
     - name: SENTRY_DSN
-      value: https://304cc0d8a7ed4e28af43bddf277e8cbd:a612bdbe2cbe4ff2b1cbc4cd93e5dde3@sentry.notch8.com/71
+      value: https://813cb5e6b6134a32bd938fe2e00457c3@o1008683.ingest.sentry.io/6745036
 
 podSecurityContext:
   runAsUser: 1001
