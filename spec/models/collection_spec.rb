@@ -12,4 +12,10 @@ RSpec.describe Collection do
 
     it { is_expected.to eq CollectionIndexer }
   end
+
+  describe 'with custom slugs' do
+    let(:this_object) { create(:collection) }
+
+    include_examples("object includes slugs")
+  end
 end

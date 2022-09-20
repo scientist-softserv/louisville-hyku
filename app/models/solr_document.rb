@@ -30,6 +30,8 @@ class SolrDocument
   # Do content negotiation for AF models.
   use_extension(Hydra::ContentNegotiation)
 
+  include CustomSlugs::SlugSolrAttributes
+
   attribute :alternative_title, Solr::Array, solr_name('alternative_title')
   attribute :biography_of_contributor, Solr::Array, solr_name('biography_of_contributor')
   attribute :building_date, Solr::Array, solr_name('building_date')

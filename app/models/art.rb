@@ -5,6 +5,7 @@
 class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   include ::Hyrax::WorkBehavior
   include SetChildFlag
+  include CustomSlugs::SlugBehavior
 
   self.indexer = ArtIndexer
   # Change this to restrict which works can be added as a child.
