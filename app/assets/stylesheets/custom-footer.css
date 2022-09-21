@@ -4,27 +4,28 @@
 /* FOOTER */
 footer, #contactFooter { font-family: "Open Sans", Arial, sans-serif; }
 
+.site-footer { position:relative; }
+
 #contactFooter { 
   min-height:unset; 
   background-color:transparent; 
   margin-top:4rem; 
 }
 
-#tagline {
-  display: flex; 
-  justify-content: center; 
-  color:#555; 
-  text-transform:uppercase; 
-  margin:2rem 1rem 3rem; 
-}
-#tagline p { font-size:2rem; }
-
 footer .panel-group { margin-bottom:0; }
 
-#indLib_footer {
+#indLib_footer, 
+#indLib_footer a {
   background-color: #444; 
   color: #fff;
 }
+
+#indLib_footer a { text-decoration:none; }
+
+#indLib_footer a:hover { 
+  background-color:#ad0000; 
+}
+
 
 #ulibs_footer {
   background-color: #222; 
@@ -42,11 +43,8 @@ footer .panel-group { margin-bottom:0; }
   padding:1rem; 
 }
 
-#indLib_footer_name {
-  font-size:1.8rem; 
-}
+#indLib_footer_name {  font-size:1.8rem;  }
 
-.indLib_address { font-size: 1.4rem; }
 
 #indLib_footer_name a { 
   color:white;
@@ -115,12 +113,7 @@ footer .panel-default>.panel-heading+.panel-collapse>.panel-body,
 footer .panel.panel-default, .panel-default>.panel-heading { 
   border:0;
 }
-#indLib_footer .panel-default>.panel-heading+.panel-collapse>.panel-body, 
-#indLib_footer .panel.panel-default, 
-#indLib_footer .panel-default>.panel-heading { 
-  background-color:#444; 
-  color:white;
-}
+
 
 #ulibs_footer .panel-default>.panel-heading+.panel-collapse>.panel-body, 
 #ulibs_footer .panel.panel-default, 
@@ -298,160 +291,29 @@ footer.site-footer .navbar-right { margin:0; }
   
 }
 
-@media (min-width: 768px) {
+@media (min-width:768px) {
+  #indLib_footer .row:before, 
+  #ulibs_footer .row:before, 
+  #uofl_footer .row:before { display:none; }
+  
 
-  
-  .our_footer .container { 
-    display:flex;
-    padding: 2rem; 
-    align-items:flex-start; 
-    justify-content: space-between; 
-  }
-  
-  #indLib_footer_name { 
-    line-height: 1.15; 
-  }
-  
-  #indLib_footer_name, 
-  #ulibs_footer_logo {
-    width:25rem;
-  }
-  
-   ul#uofl_footer_menu li {
-    padding:0 1rem;  
-    line-height:1;
-  }
-  #ulibs_footer_logo a { display:flex; }
-  
-  footer .collapse { display:block;}
-  footer .panel-group {
+  #indLib_footer .row,
+  #ulibs_footer .row, 
+  #uofl_footer .row {
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    width:80%; 
-    margin-bottom:0; 
+    grid-template-columns: 25rem 1fr;
+    width:100%;
   }
   
-  footer .panel-group .panel { margin-left:2rem; }
-  
-  footer .panel-heading { padding:0; }
-  
-  footer .panel-title { 
-    font-size: 1.9rem; 
-    font-weight:700; 
-    margin-top:0;
-    margin-bottom:0; 
-  }
-  
-  footer .panel-title a {
-    padding:0; 
-    line-height:1.2;
-  }
-
-  #indLib_footer .panel-title a, 
-  #indLib_footer .panel-title a:hover {
-    cursor:default; 
-    background-color:#444!important;
-  }
-
-  #ulibs_footer .panel-title a, 
-  #ulibs_footer .panel-title a:hover {
-    cursor:default; 
-    background-color:#222!important;
-  }
-
-  #uofl_footer .container { display:flex; }
-  
-  #uofl_logo { width:20%; }
-  
-  ul#uofl_footer_menu {
-    display: flex;
-    justify-content: space-between;
-    align-items:center; 
-    width:65%;
-    height:2.8rem;
-    margin-bottom:0; 
-  }
-  
-  footer .panel-group .panel+.panel { margin-top:0; }
-  
-  footer .panel.panel-default, 
-  footer .panel-default>.panel-heading {
-    background-color:transparent; 
-  }
-  footer .panel-default>.panel-heading+.panel-collapse>.panel-body {
-
-    border-top:none;
-  }
- 
-  footer .panel-body { padding:1rem 0; }
-  
-  footer .glyphicon-lock { font-size:12px; }
-}
-@media (max-width: 767.99px) {
-  footer { 
-    margin:2rem 1rem; 
-  }
-  
-  footer .panel-body { 
-    padding-top:0; 
-  }
-  
-  .our_footer .container { width:100%; }
-  
-  footer #collapse3 .panel-body { padding-top:1rem; }
-  
-  
-  footer .panel-title a:focus { 
-    background-color:#ad0000; 
-    color:white; 
-    outline:none;
-  }
-  
-   .panel-title a[aria-expanded="true"] i.glyphicon-menu-down { 
-    transform: rotate(180deg);
-  }
-  
-
-  .indLib_address { 
-    width:20rem; 
-    margin: 0 auto 1rem; 
-    text-align: center;
-  }
-  #indLib_footer_name { 
+  div#libs-footer-accordion { 
   display:flex; 
-  justify-content: center; 
-    text-align: center;
-  padding:1rem .5rem; 
-}
-
-  
-  #uofl_footer, 
-  .our_footer { 
-    display:flex; 
-    flex-direction:column;
-    align-items:center;
+  justify-content: space-between;
   }
-  
-  #uofl_footer_menu {
-    padding: 1rem 0 2rem; 
-    column-count:2; 
-    column-gap:3rem; 
-  }
-  
-  footer #uofl_logo, 
-  footer #ulibs_footer_logo { 
-    padding:1rem 1rem .5rem;
-    text-align:center;
-  }
-  
-}
-
-@media (min-width: 768px) {
 
   
   .our_footer .container { 
     display:flex;
-    padding: 2rem; 
+    padding: 2rem 0; 
     align-items:flex-start; 
     justify-content: space-between; 
   }
@@ -460,32 +322,10 @@ footer.site-footer .navbar-right { margin:0; }
     line-height: 1.15; 
   }
   
-  #indLib_footer_name, 
-  #ulibs_footer_logo {
-    width:25rem;
-  }
-  
-   ul#uofl_footer_menu li {
-    padding:0 1rem;  
-    line-height:1;
-  }
+
   #ulibs_footer_logo a { display:flex; }
   
-  footer .collapse { display:block;}
-  footer .panel-group {
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    width:80%; 
-    margin-bottom:0; 
-  }
   
-  footer .panel-group .panel { margin-left:2rem; }
-  
-  footer .panel-title a {
-    padding:0; 
-    line-height:1.2;
-  }
-
   #indLib_footer .panel-title a, 
   #indLib_footer .panel-title a:hover {
     cursor:default; 
@@ -497,20 +337,25 @@ footer.site-footer .navbar-right { margin:0; }
     cursor:default; 
     background-color:#222!important;
   }
-
-  #uofl_footer .container { display:flex; }
   
-  #uofl_logo { width:20%; }
-  
-  ul#uofl_footer_menu {
-    display: flex;
+  #uofl_footer_menu { 
+    padding-left:0; 
+    display:flex; 
     justify-content: space-between;
-    align-items:center; 
-    width:65%;
-    height:2.8rem;
     margin-bottom:0; 
   }
   
+  ul#uofl_footer_menu li { padding:0; }
+  
+  footer .collapse { display:block;}
+  
+  footer .panel-heading { padding:0 0 1rem; }
+
+  footer .panel-title a {
+    padding:0; 
+    line-height:1.2;
+  }
+
   footer .panel-group .panel+.panel { margin-top:0; }
   
   footer .panel.panel-default, 
@@ -519,12 +364,15 @@ footer.site-footer .navbar-right { margin:0; }
   }
   footer .panel-default>.panel-heading+.panel-collapse>.panel-body {
     border-top:none;
+    padding:0; 
   }
  
-  footer .panel-body { padding:1rem 0; }
-  
   footer .glyphicon-lock { font-size:12px; }
   
   #s-lg-guide-footer-meta .container { width:100%; }
+
+  footer.navbar.site-footer .navbar-text { display:flex; }
+  footer.navbar.site-footer .navbar-text p:first-of-type { margin-right:1rem; }
+
 }
 
