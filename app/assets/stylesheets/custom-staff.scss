@@ -1,9 +1,17 @@
 @charset "utf-8";
-/* CSS Document */
+/* SCSS Document */
+
+body.dashboard { padding-top:0; }
+
 
 body.dashboard { 
 
-  
+  #header-navbar { 
+	background-color:black; 
+	z-index:2000;
+	}
+
+
   form.search-query-form.form-horizontal.search-form label { display:none; }
 
 
