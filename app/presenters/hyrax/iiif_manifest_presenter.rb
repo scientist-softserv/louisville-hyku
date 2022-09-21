@@ -93,7 +93,8 @@ module Hyrax
     ##
     # @return [Array<#to_s>]
     def member_ids
-      Hyrax::SolrDocument::OrderedMembers.decorate(model).ordered_member_ids
+      list_of_ids = Hyrax::SolrDocument::OrderedMembers.decorate(model).ordered_member_ids
+      CustomSlugs::Manipulations.cast_to_slug_or_ids_for(list_of_ids)
     end
 
     ##

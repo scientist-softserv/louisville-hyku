@@ -3,6 +3,7 @@
 class GenericWork < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
   include SetChildFlag
+  include CustomSlugs::SlugBehavior
 
   validates :title, presence: { message: 'Your work must have a title.' }
 

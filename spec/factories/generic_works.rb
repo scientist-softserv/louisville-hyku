@@ -7,13 +7,14 @@ FactoryBot.define do
     end
 
     title { ["Test title"] }
+    identifier { [Faker::Alphanumeric.unique.alphanumeric.to_s] }
 
-    identifier do
-      %w[
-        ISBN:978-83-7659-303-6 978-3-540-49698-4 9790879392788
-        doi:10.1038/nphys1170 3-921099-34-X 3-540-49698-x 0-19-852663-6
-      ]
-    end
+    # identifier do
+    #   %w[
+    #     ISBN:978-83-7659-303-6 978-3-540-49698-4 9790879392788
+    #     doi:10.1038/nphys1170 3-921099-34-X 3-540-49698-x 0-19-852663-6
+    #   ]
+    # end
 
     factory :work_with_one_file do
       before(:create) do |work, evaluator|

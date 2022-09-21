@@ -77,7 +77,7 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
       site = Site.last
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-      visit "/concern/generic_works/#{work.id}"
+      visit "/concern/generic_works/#{work.to_param}"
       expect(page).to have_css('body.cultural_show.text-show-theme-partial')
       expect(page).to have_css('.text-show-title')
     end
@@ -92,7 +92,7 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
       site = Site.last
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-      visit "/concern/generic_works/#{work.id}"
+      visit "/concern/generic_works/#{work.to_param}"
       expect(page).to have_css('body.cultural_show.text-show-theme-partial')
       expect(page).to have_css('.text-show-title')
       visit '/admin/appearance'
@@ -103,7 +103,7 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
       site = Site.last
       account.sites << site
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
-      visit "/concern/generic_works/#{work.id}"
+      visit "/concern/generic_works/#{work.to_param}"
       expect(page).to have_css('body.default_show')
       expect(page).not_to have_css('.text-show-title')
     end
@@ -111,7 +111,7 @@ RSpec.describe 'Admin can select show page theme', type: :feature, js: true, cle
     it 'renders the default partial if the theme partial is missing' do
       allow_any_instance_of(ApplicationController).to receive(:current_account).and_return(account)
       allow_any_instance_of(ApplicationController).to receive(:show_page_theme).and_return("missing_theme")
-      visit "/concern/generic_works/#{work.id}"
+      visit "/concern/generic_works/#{work.to_param}"
       expect(page).to have_css('body.missing_theme')
       expect(page).not_to have_css('body.cultural_show.text-show-theme-partial')
     end

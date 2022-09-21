@@ -13,6 +13,9 @@ FactoryBot.define do
     end
     sequence(:title) { |n| ["Collection Title #{n}"] }
 
+    # identifier is required for slug logic
+    identifier { [Faker::Alphanumeric.unique.alphanumeric.to_s] }
+
     after(:build) do |collection, evaluator|
       collection.apply_depositor_metadata(evaluator.user.user_key)
       if evaluator.collection_type_settings.present?
