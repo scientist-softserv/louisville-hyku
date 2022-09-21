@@ -54,14 +54,14 @@ RSpec.describe 'Insitution visiblity work access', type: :request, clean: true, 
   describe 'as an end-user' do
     it 'allows access for users of the tenant' do
       login_as tenant_user, scope: :user
-      get "http://#{account.cname}/concern/generic_works/#{work.id}"
+      get "http://#{account.cname}/concern/generic_works/#{work.to_param}"
       expect(response.status).to eq(200)
     end
 
     xit 'does not allow access for users of other tenants' do
       # pending 'not passing because of Louisville changes'
       login_as tenant2_user, scope: :user
-      get "http://#{account.cname}/concern/generic_works/#{work.id}"
+      get "http://#{account.cname}/concern/generic_works/#{work.to_param}"
       expect(response.status).to eq(401)
     end
   end
@@ -76,7 +76,7 @@ RSpec.describe 'Insitution visiblity work access', type: :request, clean: true, 
 
     it 'now allows access for users of the tenant' do
       login_as tenant2_user, scope: :user
-      get "http://#{account.cname}/concern/generic_works/#{work.id}"
+      get "http://#{account.cname}/concern/generic_works/#{work.to_param}"
       expect(response.status).to eq(200)
     end
   end

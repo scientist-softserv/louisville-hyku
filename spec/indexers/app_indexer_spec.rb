@@ -24,4 +24,6 @@ RSpec.describe AppIndexer do
       expect(solr_document.fetch("account_cname_tesim")).to eq(account.cname)
     end
   end
+
+  include_examples("indexes_custom_slugs")
 end

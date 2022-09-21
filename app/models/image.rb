@@ -5,6 +5,7 @@
 class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   include ::Hyrax::WorkBehavior
   include SetChildFlag
+  include CustomSlugs::SlugBehavior
 
   property :extent,
            predicate: ::RDF::Vocab::DC.extent,
