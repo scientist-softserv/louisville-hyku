@@ -12,6 +12,10 @@ module Bulkrax
         collection_parent_collection_child unless child_records[:collections].empty?
       else
         work_parent_work_child unless child_records[:works].empty?
+        child_records[:works].each do |work|
+          # reindex filesets to update solr's is_page_of_ssim
+          work.file_sets.each(&:update_index)
+        end
         # OVERRIDE: Bulkrax v.3.0
         # set the first child's thumbnail as the thumbnail for the parent
         ::SetDefaultParentThumbnailJob.set(wait: 10.minutes)
