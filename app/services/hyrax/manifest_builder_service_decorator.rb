@@ -43,7 +43,8 @@ module Hyrax
 
       def sort_hash_by_identifier(hash)
         hash["sequences"]&.first&.[]("canvases")&.sort_by! do |canvas|
-          canvas["metadata"].select { |h| h[:label] == "Identifier" }.first[:value]
+          identifier_metadata = canvas["metadata"].select { |h| h[:label] == "Identifier" }
+          identifier_metadata.first[:value] if identifier_metadata.present?
         end
       end
 
