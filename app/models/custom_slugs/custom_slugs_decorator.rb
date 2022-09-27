@@ -371,6 +371,13 @@ module CustomSlugs
       nesting_depth.positive? ? nesting_depth : 1
     end
 
+    def clean_lucene_error(builder:)
+      query = builder.query.to_hash
+      query['q'].gsub!('{!lucene}', '') if query.key?('q') &&
+                                           query['q']&.include?('{!lucene}')
+      query
+    end
+
     def parent_nesting_depth(parent:, scope:)
       return 1 if parent.nil?
       Hyrax::Collections::NestedCollectionQueryService::NestingAttributes.new(id: parent.to_param, scope: scope).depth
