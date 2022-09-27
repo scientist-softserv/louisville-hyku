@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 ## Override from hyrax to fix file upload in logo and banner
 ## OVERRIDE: Hyrax 2.9 to use work titles for collection thumbnail select
 module Hyrax
   module Dashboard
     ## Shows a list of all collections to the admins
+    # rubocop: disable Metrics/ClassLength
+    # rubocop: disable Metrics/LineLength
     class CollectionsController < Hyrax::My::CollectionsController
       include Blacklight::AccessControls::Catalog
       include Blacklight::Base
@@ -22,8 +26,10 @@ module Hyrax
       # Catch permission errors
       rescue_from Hydra::AccessDenied, CanCan::AccessDenied, with: :deny_collection_access
 
+      # rubocop: disable Rails/LexicallyScopedActionFilter
       # actions: index, create, new, edit, show, update, destroy, permissions, citation
       before_action :authenticate_user!, except: [:index]
+      # rubocop: enable Rails/LexicallyScopedActionFilter
 
       class_attribute :presenter_class,
                       :form_class,
@@ -338,6 +344,8 @@ module Hyrax
         # Instantiates the search builder that builds a query for a single item
         # this is useful in the show view.
         def single_item_search_builder
+          slug = CustomSlugs::Manipulations.cast_to_slug(params[:id])
+          params[:id] = slug
           single_item_search_builder_class.new(self).with(params.except(:q, :page))
         end
 
@@ -482,7 +490,9 @@ module Hyrax
             f.file_url
           end
         end
-        ## END NEW CODE
+      ## END NEW CODE
     end
+    # rubocop: enable Metrics/ClassLength
+    # rubocop: enable Metrics/LineLength
   end
 end
