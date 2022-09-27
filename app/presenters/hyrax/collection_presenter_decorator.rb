@@ -29,4 +29,8 @@ Hyrax::CollectionPresenter.class_eval do
       solr_document.send key
     end
   end
+
+  def id
+    @id ||= CustomSlugs::Manipulations.cast_to_identifier(solr_document.id)
+  end
 end
