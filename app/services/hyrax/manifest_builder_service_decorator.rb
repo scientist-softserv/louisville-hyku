@@ -4,6 +4,17 @@
 # will allow metadata to be seen in the UV side panel
 module Hyrax
   module ManifestBuilderServiceDecorator
+    ##
+    # @api public
+    #
+    # @param presenter [Hyrax::WorkShowPresenter]
+    #
+    # @return [Hash] a Ruby hash representation of a IIIF manifest document
+    def manifest_for(presenter:, current_ability:)
+      @current_ability = current_ability
+      sanitized_manifest(presenter: presenter)
+    end
+
     private
 
       # OVERRIDE Hyrax 2.9.6 to make customizations to the manifest that
@@ -74,11 +85,9 @@ module Hyrax
         end
       end
 
-      def make_collection_link(collection_ids, collection_titles)
-        collection_ids_and_titles_map = {}
-        collection_ids.each_with_index.map { |id, i| collection_ids_and_titles_map[id] = collection_titles[i] }
-        collection_ids_and_titles_map.map do |id, title|
-          "<a href='/collections/#{id}'>#{title}</a>"
+      def make_collection_link(collection_documents)
+        collection_documents.map do |collection|
+          "<a href='/collections/#{collection.slug}'>#{collection.title.first}</a>"
         end
       end
 
@@ -123,9 +132,11 @@ module Hyrax
           label = Hyrax::Renderers::AttributeRenderer.new(field_name, nil).label
           if field_name == :collection
             next unless image[:member_of_collection_ids_ssim]&.present?
+            viewable_collections = Hyrax::CollectionMemberService.run(image, @current_ability)
+            next if viewable_collections.blank?
             {
               label: label,
-              value: make_collection_link(image[:member_of_collection_ids_ssim], image[:member_of_collections_ssim])
+              value: make_collection_link(viewable_collections)
             }
           else
             next if image.try(field_name)&.first.blank?
