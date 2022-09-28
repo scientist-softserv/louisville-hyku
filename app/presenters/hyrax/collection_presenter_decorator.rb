@@ -4,6 +4,7 @@
 # Override this class using #class_eval to avoid needing to copy the entire file over from
 # the dependency. For more info, see the "Overrides using #class_eval" section in the README.
 require_dependency Hyrax::Engine.root.join('app', 'presenters', 'hyrax', 'collection_presenter').to_s
+# rubocop:disable Metrics/BlockLength
 Hyrax::CollectionPresenter.class_eval do
   # Terms is the list of fields displayed by
   # app/views/collections/_show_descriptions.html.erb
@@ -30,7 +31,27 @@ Hyrax::CollectionPresenter.class_eval do
     end
   end
 
-  def id
-    @id ||= CustomSlugs::Manipulations.cast_to_identifier(solr_document.id)
+  def fedora_id
+    @fedora_id ||= CustomSlugs::Manipulations.cast_to_identifier(id)
+  end
+
+  def total_items
+    ActiveFedora::Base.where("member_of_collection_ids_ssim:#{fedora_id}").count
+  end
+
+  def total_viewable_items
+    ActiveFedora::Base.where("member_of_collection_ids_ssim:#{fedora_id}")
+                      .accessible_by(current_ability).count
+  end
+
+  def total_viewable_works
+    ActiveFedora::Base.where("member_of_collection_ids_ssim:#{fedora_id} AND generic_type_sim:Work")
+                      .accessible_by(current_ability).count
+  end
+
+  def total_viewable_collections
+    ActiveFedora::Base.where("member_of_collection_ids_ssim:#{fedora_id} AND generic_type_sim:Collection")
+                      .accessible_by(current_ability).count
   end
 end
+# rubocop:enable Metrics/BlockLength
