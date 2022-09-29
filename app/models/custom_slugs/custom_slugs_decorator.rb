@@ -243,6 +243,19 @@ module CustomSlugs
   end
   Hyrax::PermissionTemplate.singleton_class.send(:prepend, CustomSlugs::ActiveRecordFinderDecorator)
 
+  # search for subcollections using the fedora id
+  Hyrax::CollectionMemberSearchBuilder.class_eval do
+    def member_of_collection(solr_parameters)
+      collection_id = if collection.try(:solr_document).present?
+                        collection.solr_document['fedora_id_ssi']
+                      else
+                        collection.id
+                      end
+      solr_parameters[:fq] ||= []
+      solr_parameters[:fq] << "#{collection_membership_field}:#{collection_id}"
+    end
+  end
+
   # override to find all collections with deposit rights including slugs
   Hyrax::Dashboard::CollectionsSearchBuilder.class_eval do
     def apply_collection_deposit_permissions(_permission_types, _ability = current_ability)
