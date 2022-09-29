@@ -152,7 +152,7 @@ module Hyrax
     def manifest
       headers['Access-Control-Allow-Origin'] = '*'
 
-      json = iiif_manifest_builder.manifest_for(presenter: iiif_manifest_presenter)
+      json = iiif_manifest_builder.manifest_for(presenter: iiif_manifest_presenter, current_ability: current_ability)
 
       respond_to do |wants|
         wants.json { render json: json }
@@ -237,6 +237,8 @@ module Hyrax
 
       # Only returns unsuppressed documents the user has read access to
       def search_result_document(search_params)
+        slug = CustomSlugs::Manipulations.cast_to_slug(search_params[:id])
+        search_params[:id] = slug
         _, document_list = search_results(search_params)
         return document_list.first unless document_list.empty?
         document_not_found!

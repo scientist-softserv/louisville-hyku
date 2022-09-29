@@ -246,9 +246,13 @@ module CustomSlugs
   # search for subcollections using the fedora id
   Hyrax::CollectionMemberSearchBuilder.class_eval do
     def member_of_collection(solr_parameters)
-      fedora_id = collection.solr_document['fedora_id_ssi'] || collection.id
+      collection_id = if collection.try(:solr_document).present?
+                        collection.solr_document['fedora_id_ssi']
+                      else
+                        collection.id
+                      end
       solr_parameters[:fq] ||= []
-      solr_parameters[:fq] << "#{collection_membership_field}:#{fedora_id}"
+      solr_parameters[:fq] << "#{collection_membership_field}:#{collection_id}"
     end
   end
 
@@ -369,6 +373,13 @@ module CustomSlugs
       ).depth
       nesting_depth = descendant_depth - child_depth + 1
       nesting_depth.positive? ? nesting_depth : 1
+    end
+
+    def clean_lucene_error(builder:)
+      query = builder.query.to_hash
+      query['q'].gsub!('{!lucene}', '') if query.key?('q') &&
+                                           query['q']&.include?('{!lucene}')
+      query
     end
 
     def parent_nesting_depth(parent:, scope:)
