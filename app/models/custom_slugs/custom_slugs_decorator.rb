@@ -246,8 +246,11 @@ module CustomSlugs
   # search for subcollections using the fedora id
   Hyrax::CollectionMemberSearchBuilder.class_eval do
     def member_of_collection(solr_parameters)
+      # this method can be called on either a solr response or a collection object.
+      # - for a solr document without a fedora_id indexed, the id itself will be the fedora id.
+      # - on a collection object, the id is always the fedora id.
       collection_id = if collection.try(:solr_document).present?
-                        collection.solr_document['fedora_id_ssi']
+                        collection.solr_document['fedora_id_ssi'] || collection.id
                       else
                         collection.id
                       end
