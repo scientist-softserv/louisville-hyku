@@ -225,13 +225,13 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   end
 
   property :transcription_translation,
-           predicate: ::RDF::URI.new("https://schema.org/workTranslation"),
+           predicate: ::RDF::URI.new("https://schema.org/translationOfWork"),
            multiple: false do |index|
     index.as :stored_searchable
   end
 
   property :type_of_honoree,
-           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#p_hasAffiliation"),
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#hasAffiliation"),
            multiple: false do |index|
     index.as :stored_searchable
   end
