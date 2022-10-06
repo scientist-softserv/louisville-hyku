@@ -150,7 +150,7 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   end
 
   property :region,
-           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#c_Region"),
+           predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#Region"),
            multiple: false do |index|
     index.as :stored_searchable
   end
