@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* SCSS Document */
+
+.resp-sharing-button__icon svg { 
+  width:2rem; 
+  height:2rem; 
+}
+
+.social-media a:nth-of-type(3) { display:none; }
+
+.resp-sharing-button__icon.resp-sharing-button__icon--solid {
+	padding:0.5rem;
+	max-height:3rem;
+}
+
+.resp-sharing-button { padding:0.5rem; }
