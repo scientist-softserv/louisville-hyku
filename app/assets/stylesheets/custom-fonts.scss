@@ -1,9 +1,10 @@
 @charset "utf-8";
 /* CSS Document  custom-fonts.scss */
 
-html { font-size:10px; }
+body { font-size:10px; }
 
-.public-facing { 
+
+.navbar-nav { font-size:1.6rem; }
 
   h2.facets-heading, 
   .facets .facets-heading {
@@ -21,7 +22,8 @@ html { font-size:10px; }
   h3, .h3 { font-size:2.4rem;}
   h4, .facets .facets-heading, .h4 { font-size:2rem;}
   h5, #documents .document .document-title-heading, .h5, span.constraints-label { font-size:1.8rem;}
-  h6, .h6 { font-size:1.6rem;}
+  h6, .h6, p, li, footer, header, nav, form, table, dl,
+  #sortAndPerPage { font-size:1.6rem;}
 
   @media screen and (max-width:767.99px) {
     h1, .h1, .panel-heading h1 { font-size: 2.4rem;} 
@@ -47,11 +49,13 @@ html { font-size:10px; }
   }
 
   .iiif-metadata-component { font-size:1.4rem; }
-  .iiif-metadata-component .item_description { font-family:Merriweather, serif;}
   
+  #desc-meta-th,
+  #content-wrapper .collection-description,
   #content_block_page p { font-family:Merriweather, serif!important; }
 
-  h1, h2, .modal-title, h3, h4, .facets .facets-heading, h5, #documents .document .document-title-heading, h6, .h1, .h2, .h3, .h4, .h5, span.constraints-label, .h6 {
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5,  .h6, 
+.modal-title,  .facets .facets-heading,  #documents .document .document-title-heading,  span.constraints-label {
     font-weight:700; 
   }
 
@@ -66,8 +70,14 @@ html { font-size:10px; }
     font-size:1.4rem; 
   }
 
-  .glyphicon { font-weight:700; }
+  i.glyphicon.glyphicon-search, 
+  .glyphicon.glyphicon-gallery.view-icon-gallery, 
+  .glyphicon.glyphicon-list.view-icon-list {
+	font-family:'Font Awesome 5 Free';}
 
+  .glyphicon { font-weight:700; }
+  .glyphicon-list:before { content: "\f03a"; }
+  .view-icon-gallery:before { content: "\f00a";}
    
   #documents.gallery .document-title-heading { font-size:1.6rem!important; }
   
@@ -75,4 +85,3 @@ html { font-size:10px; }
 
   .panel-body { line-height: 1.2; }
   
-}
