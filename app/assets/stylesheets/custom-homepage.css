@@ -97,6 +97,7 @@
   padding:0; 
   margin:0; 
   box-sizing: border-box;
+  overflow:hidden;
 }
 
 .card-image img {
@@ -105,7 +106,30 @@
   height:auto!important;
   max-width:100%!important;
   border:none;
+  transform-origin: 0 0;
+  transition: transform .25s, visibility .25s ease-in;
 }
+
+.card-image:hover img { transform: scale(2); }
+
+#card-1 .card-image img { transform-origin: 5% 95%; }
+#card-3 .card-image img { transform-origin: 30% 80%; }
+#card-4 .card-image img { transform-origin: 100% 15%; }
+#card-4 .card-image:hover img { transform: scale(3); }
+#card-5 .card-image img { transform-origin: 50% 10%; }
+#card-6 .card-image img { transform-origin: 90% 50%; }
+#card-6 .card-image:hover img { transform: scale(3); }
+
+#card-uarc .card-image img { transform-origin: 0% 95%; }
+#card-uarc .card-image:hover img { transform: scale(2.5); }
+#card-korn .card-image img { transform-origin: 80% 50%; }
+#card-law .card-image img { transform-origin: 50% 10%; }
+#card-law .card-image:hover img { transform: scale(1.75); }
+#card-photoarc .card-image img { transform-origin: 55% 10%; }
+#card-rare .card-image img { transform-origin: 50% 70%; }
+
+
+
 
 @media (min-width:600px) {
   .s-card > .content { 
@@ -227,9 +251,6 @@
     margin:1rem; 
     width:65%;
   }
-  #homeGallery h1 {
-    
-  }
   #home-header h2 { margin:0; }
   
 }
@@ -250,7 +271,6 @@
   font-weight: 400; 
   line-height:1.6; 
 }
-.home_share_work { display: none; }
 
        /*jssor slider bullet skin 132 css*/
         .jssorb132 {position:absolute;}
