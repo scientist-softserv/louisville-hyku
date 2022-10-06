@@ -5,7 +5,7 @@
       <i class="glyphicon glyphicon-share-alt" />
     <% end %>
   </td>
-  <td>
+  <td class="item-title">
     <div class="media">
       <%= link_to [main_app, document], class: "media-left" do %>
         <%= render_thumbnail_tag document, { class: "hidden-xs file_listing_thumbnail" }, { suppress_link: true } %>
@@ -18,8 +18,9 @@
       </div>
     </div>
   </td>
-  <td class="text-center"><%= document.date_uploaded %> </td>
-  <td class="text-center">
+  <td class="item-identifier"><%= document.identifier.first %></td>
+  <td class="text-center uploaded"><%= document.date_uploaded %> </td>
+  <td class="text-center visibility">
     <%= render_visibility_link(document) %>
   </td>
 </tr>
