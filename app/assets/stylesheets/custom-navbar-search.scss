@@ -1,3 +1,105 @@
 @charset "utf-8";
 /* SCSS Document */
 
+
+/* production custom-navbar-search */
+
+
+/* NAVBAR */
+  
+  nav li.active { outline:1px dotted #333; }
+  nav.navbar-static-top { z-index: 10; }
+
+  nav.navbar.navbar-default.navbar-static-top>.container>.row { 
+	display:flex; 
+	flex-wrap:wrap;
+	justify-content:center;
+}
+
+  .navbar + .navbar, .navbar + .image-masthead {
+    flex-direction:row; 
+  }
+
+  #nav-contact { display:none; }
+
+  .image-masthead .navbar.navbar-default { 
+    background-color: transparent;
+    padding:2px 0 1px; 
+  }
+
+  .navbar-static-top .navbar-nav > li > a,
+  .hyrax-pages .image-masthead .navbar.navbar-default .navbar-nav a { 
+    background-color: transparent; 
+    color: #333; 
+    text-shadow:none;
+  }
+
+
+  .hyrax-pages .image-masthead li:active a { 
+    outline: 1px dashed #333;
+  }
+
+  #masthead nav .navbar a { text-shadow:none; }
+
+  .navbar-default .navbar-nav > li > a:hover, 
+  .navbar-default .navbar-nav > li > a:focus {
+    color:white;
+    background-color:#333; 
+  }
+
+  @media (max-width:767.99px) {
+    ul.nav.navbar-nav.col-sm-5 {
+      display:flex; 
+      justify-content: center; 
+      margin-bottom:0;
+    }
+  
+  }
+
+
+/* SEARCH */
+
+  .searchbar-right { 
+    display: flex;
+    justify-content: flex-end;
+    align-self:center;
+  }
+
+  .searchbar-right .form-horizontal .control-label { 
+    position:absolute; 
+    width:1px;
+    height:1px; 
+    margin:-1px; 
+    overflow:hidden; 
+    clip:rect(0,0,0,0); 
+    border:0; 
+   }
+
+  form#search-form-header { margin:.5rem; }
+  #search-submit-header { background-color:#ad0000; }
+  .searchbar-right .form-horizontal .control-label { white-space:nowrap; }
+
+  #search-form-header .input-group {
+    margin:0;
+    width:40rem;
+  }
+
+  @media (max-width:450px) {
+    #search-form-header .input-group { width:28rem; }
+  }
+
+  #search-form-header .form-group { 
+    display:flex; 
+    justify-content: center; 
+  }
+
+
+  @media (max-width: 767.99px) {
+    .searchbar-right { margin-bottom:1rem; }
+    .searchbar-right .form-group { flex-direction: column; }
+    .searchbar-right .form-horizontal .control-label { position:absolute; }
+    #search-form-header .form-group { align-items:center; }
+  }
+
+
+
