@@ -1,6 +1,8 @@
 @charset "utf-8";
 /* SCSS Document */
 
+/* DASHBOARD */
+
 body.dashboard { padding-top:0; }
 
 
@@ -15,5 +17,26 @@ body.dashboard {
   form.search-query-form.form-horizontal.search-form label { display:none; }
 
 
+
+}
+
+
+/* PUBLIC INTERFACE */
+
+body.staff {  
+
+  #header-navbar { background-image: linear-gradient(to bottom,#f9d187,#f7941d); }
+  #header-navbar .navbar-product-name a { color:#333; }
+  #header-navbar #user-utilities .navbar-nav a { color:#333; }
+  #header-navbar #user-utilities .navbar-nav a:active, 
+  #header-navbar #user-utilities .navbar-nav a:hover, 
+  #header-navbar #user-utilities .navbar-nav a:focus { color:white; }
+
+
+  .panel-default > .panel-heading { 
+    border-radius:4px; 
+    background-color: #e2e8ec;
+    border-color:#dce3e8;
+  }
 
 }
