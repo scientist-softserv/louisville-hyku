@@ -39,7 +39,7 @@
 #header-navbar .navbar-product-name {
   display: block; 
   margin:0; 
-  margin-top:-0.3rem; 
+  margin-top:-0.4rem; 
   padding:0; 
   text-align: center;
   font-weight:700; 
@@ -49,7 +49,6 @@
   white-space:nowrap;
 }
 
-#header-navbar .navbar-product-name a { color:white; }
 
 #user_utility_links { display:flex; }
 
@@ -79,29 +78,20 @@ ul#head-user-actions { list-style-type:none; display:flex; }
 }
 
 #header-navbar #user-utilities .navbar-nav a {
-  color:#ddd; 
   text-transform: none; 
   margin-bottom: 0; 
-  font-size:1.5rem; 
   padding:0.5rem; 
+  font-weight:bold;
 }
 
-#header-navbar #user-utilities .navbar-nav a:active, 
-#header-navbar #user-utilities .navbar-nav a:hover, 
-#header-navbar #user-utilities .navbar-nav a:focus { background-color:#ad0000; }
 
 #header-navbar .dropdown.open .dropdown-menu { z-index: 1001; }
-#header-navbar #user-utilities .dropdown.open .dropdown-menu a { color: #333; }
-#header-navbar #user-utilities .dropdown.open .dropdown-menu a:hover { color: white; }
 
 #shared-locale-picker { display:none; }
 
 
 /* NAVBAR  & MASTHEAD */
 
-.image-masthead .navbar.navbar-default {
-  background-color: rgb(236,238,244);
-}
 
 
 .navbar + .navbar, .navbar + .image-masthead { 
@@ -111,28 +101,12 @@ ul#head-user-actions { list-style-type:none; display:flex; }
   justify-content: center; 
   margin-bottom:0; 
   border-bottom: none;
-  border-bottom:1px solid #dcdcdc; 
 }
 
 .image-masthead .navbar { 
   border:none; 
   min-height:auto; 
 }
-
-.image-masthead .navbar, 
-.navbar + .navbar, .navbar + .image-masthead { 
-  background-color: #e2e8ec;
-  border-color: #dce3e8;
-}
-
-.image-masthead .navbar .navbar-nav a { color:#333; font-weight:bold; }
-
-
-.image-masthead .navbar label { 
-  color:#eaeaea;
-  text-shadow: 1px 1px 0 black; 
-} 
-.image-masthead .navbar.navbar-default .navbar-nav a { color:white; }
 
 
 
@@ -150,27 +124,7 @@ ul#head-user-actions { list-style-type:none; display:flex; }
 }
 
 
-#top-navbar-collapse { border-color:#e7e7e7; }
 
-
-
-.navbar-inverse .navbar-nav > li > a:hover, 
-.navbar-inverse .navbar-nav > li > a:focus, 
-.navbar-inverse .navbar-nav > .open > a, 
-.navbar-inverse .navbar-nav > .open > a:hover, 
-.navbar-inverse .navbar-nav > .open > a:focus, 
-.image-masthead .navbar .navbar-nav a:hover, 
-.image-masthead .navbar .navbar-nav a:focus {
-  color:white; 
-  background-color:#ad0000; 
-}
-
-.image-masthead .navbar .active > a, 
-.image-masthead .navbar .active > a:hover, 
-.image-masthead .navbar .active > a:focus {
-  background-color:rgba(0,0,0,.3);
-  color:white;
-}
 
 
 
