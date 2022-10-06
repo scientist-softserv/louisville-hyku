@@ -1,3 +1,64 @@
 @charset "utf-8";
 /* SCSS Document */
 
+.hyrax-pages #content_block_page { margin:2rem 2rem 3rem; }
+
+
+/* LOG IN */
+
+.devise-sessions {
+
+  #content-wrapper { margin-bottom:4rem; }
+
+
+}
+
+/* COLLECTION PAGE */
+
+.collections-page { margin:2rem 0 3rem; }
+
+.banner__overlay--collection { background-color: #000000;}
+
+.collections-page .hyc-title { 
+	padding:1rem; 
+	text-align:center; 
+}
+
+.collections-page .hyc-title h1 { 
+	color:#ffdb90; 
+	margin-bottom:0; 
+}
+
+.hyc-title .label { display:none; }
+
+form.edit_collection {
+	max-width:50rem; 
+	margin:1rem auto; 
+}
+#collection-search-form .input-group {
+	width:40rem; 
+	margin:0 auto;
+}
+.glyphicon-search:before { 
+	font-family: 'Font Awesome 5 Free';
+	content: "\f002"; 
+}
+
+
+
+.collection-description { padding:0 3.9rem; }
+
+.public-facing .collections-page .item-identifier { white-space:nowrap; }
+.public-facing .collections-page .item-title span,
+.public-facing .collections-page .uploaded, 
+.public-facing .collections-page .visibility { display:none; }
+
+.hyc-bl-results table { margin-bottom: 3rem; }   
+.hyc-bl-pager { min-height:3rem; margin-bottom:4rem; }
+
+
+
+
+@media (min-width:768px) {
+	body.bookmarks div#content { min-height:40rem; }
+}
