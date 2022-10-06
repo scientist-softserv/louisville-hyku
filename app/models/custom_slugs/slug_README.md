@@ -7,6 +7,11 @@ This implementation assumes the presence of RDF term `:identifier` as the conten
 
 A different term can be substituted by modifying the use of :identifier in CustomSlugs modules `manipulations.rb` and `slug_behavior.rb`, as well as the related spec files.
 
+## Design Decision
+The Fedora ID is conceptually the primary key for the record.  We index the Fedora ID property as `fedora_id_ssi`.  Further there is a property called `:identifier`; this is not necessarily the same as the Fedora ID.  We use the `:identifier` to build the slug.  The slug is a surrogate primary key; meaning it should be unique and we could use it to refer to the object.
+
+When we establish a relationship between an object, the "key/value" pair we use is the object's Fedora ID.  When we "fetch" an item from persistence, we can use either it's Fedora ID or it's surrogate.
+
 # Behavior
 - Replaces solr id with slug when slug is present
 - Adds both fedora id and slug to solr index
@@ -14,7 +19,7 @@ A different term can be substituted by modifying the use of :identifier in Custo
 - URL will include slug rather than UUID
 
 # Implementation
-- Copy files into models/custom_slugs directory 
+- Copy files into models/custom_slugs directory
 - include CustomSlugs::SlugBehavior in work and/or collection model files
 - include CustomSlugs::SlugSolrAttributes in solr document file
 - include CustomSlugs::SlugIndexer in collection, work, or app indexer files
