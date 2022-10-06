@@ -1,6 +1,12 @@
 /* production custom-facets */
 
 
+body.public-facing .panel-default > .panel-heading { 
+  border-radius:4px; 
+  background-color: #e2e8ec;
+  border-color:#dce3e8;
+}
+
 @media (max-width:767.99px) { 
 
   #sidebar, 
