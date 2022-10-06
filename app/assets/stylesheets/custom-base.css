@@ -34,3 +34,4 @@ td.toggle input.active[type=submit] { outline: 1px dotted black; }
 /* override line 119, /home/deploy/.rbenv/versions/2.7.2/lib/ruby/gems/2.7.0/gems/bootstrap-sass-3.4.1/assets/stylesheets/bootstrap/_carousel.scss */
 .carousel-control:hover, .carousel-control:focus {outline:1px dotted black;}
 
+#canary-tool-tip { display:none; }
