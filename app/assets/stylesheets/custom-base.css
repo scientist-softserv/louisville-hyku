@@ -10,13 +10,6 @@ body { margin-bottom:0; }
 nav.navbar.navbar-default.navbar-static-top > .container > .row { margin-top:-1px; }
 
 
-.btn:active, 
-.facets-toggle:active, 
-td.toggle input[type=submit]:active, 
-.btn.active, 
-.active.facets-toggle, 
-td.toggle input.active[type=submit] { outline: 1px dotted black; }
-
 
 /* override ruby gem which displays text "Too many items, can not select all." ADA issues */
 #check_all:disabled:hover:before { content:none; }
@@ -35,3 +28,15 @@ td.toggle input.active[type=submit] { outline: 1px dotted black; }
 .carousel-control:hover, .carousel-control:focus {outline:1px dotted black;}
 
 #canary-tool-tip { display:none; }
+
+
+@media (min-width:1200px) { 
+	#header-navbar .container, 
+	nav.navbar-static-top .container, 
+	#content-wrapper.container { width:100%; }
+
+	div#content-wrapper.container { padding:0 8rem; }
+
+	#sidebar { padding-right:4rem; }
+
+}
