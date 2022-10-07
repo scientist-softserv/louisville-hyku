@@ -3,18 +3,27 @@
 
 
 
-  nav.breadcrumb a, 
-  .search-result-title a,
-  #documents dd a,
-  #documents .search-result-title a, 
-  #documents .pagination a, 
-  #content-wrapper .collection-description a,
-  #hyrax-base-metadata a, 
-  #content-wrapper .hyc-blacklight .media a 
-  { 
-    color:#000000; 
-    text-decoration: underline #ad0000;
+#content-wrapper a  { 
+    color:#006ef5; 
+    text-decoration: none;
   }
+
+#content-wrapper a:hover, 
+#content-wrapper a:active,
+#content-wrapper a:focus { 
+	text-decoration:underline; 
+}
+
+#content-wrapper a:focus, 
+.btn:active, 
+.facets-toggle:active, 
+td.toggle input[type=submit]:active, 
+.btn.active, 
+.active.facets-toggle, 
+td.toggle input.active[type=submit]  { outline:1px dotted #333; } 
+
+
+
 
   nav a, 
   .nav-pills a, 
@@ -25,11 +34,6 @@
   .visibility-link, 
   .visibility-link .label { text-decoration: none; }
 
-  a:hover, a:focus
-  nav.breadcrumb a:hover, nav.breadcrumb a:focus,
-  .search-result-title a:hover, .search-result-title a:hover,
-  #documents dd a:hover,  #documents dd a:focus
- { color:#ad0000; }
 
   .active > a:hover { cursor:auto; }
 
@@ -40,19 +44,11 @@
   }
 
 
-
-  .facet-values a {
-    color:#ad0000; 
-    text-decoration: none; 
-  }
-  .facet-values a:hover { background-color:#eaeaea; }
-
-
   body.public-facing .btn-primary, 
-.btn-primary { background-color: #ad0000; }
+  .btn-primary { background-color: #ad0000; }
 
   #content-wrapper .btn-default { 
-    background-color: #333; 
+    background-color: #777; 
     color:white; 
   }
 
@@ -104,39 +100,46 @@
   
   #documents.gallery .document-title-heading { font-size:1.6rem!important; }
 
+/* SORT, PER PAGE, AND VIEW TYPE */
 
-  #sort-dropdown .dropdown-toggle, 
-  #per_page-dropdown .dropdown-toggle, 
-  #sort-dropdown .dropdown-toggle .caret, 
-  #per_page-dropdown .dropdown-toggle .caret { 
-	color:white!important; 
-	background-color:black;
-  }
+body.public-facing #sort-dropdown .dropdown-toggle, 
+body.public-facing #per_page-dropdown .dropdown-toggle {
+	text-transform:uppercase;
+	color:#333!important;
+	background-color:transparent;
+	border:none;
+}
 
-  #sortAndPerPage .open > .btn-default.dropdown-toggle:hover, 
-  #sortAndPerPage .open > .btn-default.dropdown-toggle:active, 
-  #sortAndPerPage .open > .btn-default.dropdown-toggle:focus, 
-  .facets-toggle:hover, 
-  .facets-toggle:active, 
-  .facets-toggle:focus { 
+#sortAndPerPage .btn-group.open button.btn.btn-default.dropdown-toggle { 
     background-color:#ad0000; 
-    color:white; 
+    color:white!important; 
   }
+
+#sortAndPerPage .btn-group.open button.btn.btn-default.dropdown-toggle .caret { color:white; }
 
   #sortAndPerPage .view-type a.active .glyphicon { color:#333; }
 
-
-
   .view-type a.active { color:#333; }
-  
+
+#content-wrapper #sortAndPerPage .view-type-group .btn-default { 
+	color:#000; 
+	background-color:transparent;
+	border:none;
+	border-radius:0;
+}
+
+#content-wrapper .dropdown-menu a { color:#333; }
+
+
+/* ALERTS */  
   .alert-info {
     color:rgb(0, 0, 0);
     background-color: #e2e8ec;
     border-color:#dce3e8;
   }
 
-body.public-facing .pagination > li > a, 
-.pagination > li > a { color:#ad0000; }
+
+/* PAGINATION */
 
 body.public-facing .pagination li.disabled a { color:#777; }
 
@@ -271,7 +274,7 @@ body.public-facing .image-masthead .navbar .navbar-nav a:focus,
 
 
   
-  nav li.active { outline:1px dotted #333; }
+
   
 
   .navbar-static-top .navbar-nav > li:active > a,
@@ -283,12 +286,7 @@ body.public-facing .image-masthead .navbar .navbar-nav a:focus,
   #search-submit-header, #collection_submit { background-color:#ad0000; }
 
     
-  .hyrax-pages .image-masthead li:active a, 
-  .hyrax-contact_form .image-masthead li:active a { 
-    outline: 1px dashed #333;
-   }
-  
-  
+ 
 
 /* FOOTER */
 footer a, 
@@ -331,32 +329,22 @@ footer a:hover { background-color:#ad0000; color:white; text-decoration:none; }
 
 
   /* FACETS */
-  body.public-facing .facet_select, 
-  #facets a { color:#000; }
+#facets .panel-title a { color:#333; }
+.facet-values li .selected { color:#000; }
 
-  body.public-facing .facet_select:hover, 
-  #facets .facet-values a:hover { 
-    background-color:transparent; 
-    text-decoration: 1px #ad0000 underline;
-    color:#000; 
-  }
-  .facet-values .facet-count { color:#000; }
 
-  .facets-toggle .icon-bar { background-color: white; }
-  .facets-toggle:hover { background-color:#ad0000;}
-  .facet-values li .selected { color:#000; }
+
+
   #appliedParams { 
     border-bottom:1px solid #e5e5e5; 
     background-color:transparent;
   }
-  #startOverLink { 
-    background-color:#333; 
+#content-wrapper #startOverLink { 
+    background-color:#777; 
     color:white; 
   }
 
 
-  .panel-heading:focus,
-  .panel-heading a:focus { outline:1px dashed black; }
   .panel-heading:focus { outline-offset: .25rem; }
   .panel-heading a:focus {outline-offset: 1.2rem; }
 
@@ -364,14 +352,9 @@ footer a:hover { background-color:#ad0000; color:white; text-decoration:none; }
 
   
   @media (max-width:767.99px) {
-    #facets .top-panel-heading { background-color:#e2e8ec; }
   }
   @media (min-width:768px) { 
-    .facets-toggle { 
-      background-color: #555; 
-      color:white; 
-      border-color:#333; 
-    }
+ 
   }
 
 
