@@ -48,8 +48,11 @@ form.edit_collection {
 
 .collection-description { padding:0 3.9rem; }
 
+.staff .collections-page .item-identifier, 
 .public-facing .collections-page .item-identifier { white-space:nowrap; }
+
 .public-facing .collections-page .item-title span,
+.staff .collections-page .item-title span,
 .public-facing .collections-page .uploaded, 
 .public-facing .collections-page .visibility { display:none; }
 
