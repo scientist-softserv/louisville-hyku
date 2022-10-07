@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document  custom-record.scss */
+/* universal viewer changes in home.deploy.hyku.public.uv.themes.uv-en-gb-theme.css.uv-seadragon-extension.theme.css */
+
+
+#hyrax-base-show .work-type .panel-heading>div>.col-sm-8 { width:100%; padding:0; }
+#hyrax-base-show .work-type .panel-heading>div>.col-sm-4 { display:none; }
+
+#hyrax-base-show .panel-body { padding-top:0; }
+
+
+#hyrax-base-show .panel-body>.row .col-sm-12:nth-of-type(2) { margin-bottom:5rem; }
+
+.work-type .panel-body .work_description { 
+	line-height:1.6; 
+	margin-bottom:2rem; 
+	}
+
+.public-facing {
+	#hyrax-base-show .panel-default > .panel-heading { 
+		background-color:transparent!important; 
+	}
+
+	#hyrax-base-show .panel-heading .label { display:none; }
+
+}
+
+#hyrax-base-show .panel.panel-default, 
+#hyrax-base-show .panel-heading { 
+	border:none; 
+	box-shadow:none;
+}
+
+
+
+@media (min-width:768px) {
+	dl.work-show.image { 
+		display:inline-grid;
+		grid-template-columns: 15rem 1fr;
+		grid-column-gap: 2rem;
+	}
+	.work-show dt { white-space:nowrap; }
+}
