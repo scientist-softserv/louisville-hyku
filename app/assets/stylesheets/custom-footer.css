@@ -5,7 +5,7 @@
 /* FOOTER */
 footer, #contactFooter { font-family: "Open Sans", Arial, sans-serif; }
 
-footer .container { padding:0; }
+
 
 footer .container:before, 
 footer .container:after { display:none; }
@@ -180,11 +180,9 @@ footer.site-footer .navbar-right { margin:0; }
 
 
 @media (max-width: 767.99px) {
-  footer {  margin:2rem 1rem; }
   
   footer .panel-body { padding-top:0; }
   
-  .our_footer .container { width:100%; }
   
   footer #collapse3 .panel-body { padding-top:1rem; }
   
@@ -196,11 +194,9 @@ footer.site-footer .navbar-right { margin:0; }
     outline:none;
   }
   
-   .panel-title a[aria-expanded="true"] i.glyphicon-menu-down { 
-    transform: rotate(180deg);
-     margin-left:1rem; 
-  }
+
   
+#indLib_footer, #uofl_footer, #ulibs_footer { padding-bottom: 3rem; }
 
   .indLib_address { 
     width:20rem; 
@@ -213,7 +209,8 @@ footer.site-footer .navbar-right { margin:0; }
     text-align: center;
   padding:1rem .5rem; 
 }
-
+	#ulibs-inner h2 { margin-bottom: .5rem; }
+	#ulibs-inner > div { margin:1.5rem 0; }
   
   #uofl_footer, 
   .our_footer { 
