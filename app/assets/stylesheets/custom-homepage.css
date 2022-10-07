@@ -129,7 +129,18 @@
 #card-rare .card-image img { transform-origin: 50% 70%; }
 
 
+@media (max-width:599.99px) { 
+	#cards .content { 
+		display:flex; 
+		flex-wrap:wrap;
+		width:100%; 
+	}
 
+	.s-card .s-card { 
+		max-width:250px;
+	}
+
+}
 
 @media (min-width:600px) {
   .s-card > .content { 
