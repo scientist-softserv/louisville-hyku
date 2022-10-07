@@ -3,9 +3,21 @@
 
 body.public-facing .panel-default > .panel-heading { 
   border-radius:4px; 
-  background-color: #e2e8ec;
-  border-color:#dce3e8;
 }
+
+h3.panel-title.facet-field-heading { line-height:1; }
+
+#facets .panel-title a { text-transform:uppercase; }
+
+
+.panel-heading.collapse-toggle .panel-title:after {
+	content:"\e080"; 
+	transform: rotate(-90deg);
+}
+.panel-heading.collapse-toggle.collapsed .panel-title:after { 
+	transform:rotate(90deg);
+}
+
 
 @media (max-width:767.99px) { 
 
@@ -20,7 +32,6 @@ body.public-facing .panel-default > .panel-heading {
   #facets .top-panel-heading {
     padding-left:1rem; 
   }
-  #facets .facets-toggle { background-color:#555; }
 }
 
 @media (min-width:768px) { 
@@ -49,7 +60,6 @@ body.public-facing .panel-default > .panel-heading {
 }
 
 #appliedParams { 
-  font-family:'Open Sans', Arial, sans-serif; 
   display:flex;
   align-items: center;
   justify-content: flex-start;
