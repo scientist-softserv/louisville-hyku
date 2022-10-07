@@ -8,6 +8,7 @@ body { margin-bottom:0; }
 .public-facing nav.breadcrumb { display:none; }
 
 nav.navbar.navbar-default.navbar-static-top > .container > .row { margin-top:-1px; }
+nav li.active { outline: 1px dotted white; }
 
 
 
@@ -35,7 +36,7 @@ nav.navbar.navbar-default.navbar-static-top > .container > .row { margin-top:-1p
 	nav.navbar-static-top .container, 
 	#content-wrapper.container { width:100%; }
 
-	div#content-wrapper.container { padding:0 8rem; }
+	div#content-wrapper.container { padding:0 8rem 4rem; }
 
 	#sidebar { padding-right:4rem; }
 
