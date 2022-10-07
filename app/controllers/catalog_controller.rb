@@ -97,6 +97,9 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("subject", :facetable), limit: 5
     config.add_facet_field solr_name("people_represented", :facetable), limit: 5
     config.add_facet_field solr_name("decade", :facetable), limit: 5
+    config.add_facet_field solr_name("style", :facetable), limit: 5
+    config.add_facet_field solr_name("technique", :facetable), limit: 5
+    config.add_facet_field solr_name("material", :facetable), limit: 5
     config.add_facet_field solr_name("resource_type", :facetable), limit: 5
     config.add_facet_field solr_name("publisher", :facetable), limit: 5
     config.add_facet_field solr_name("file_format", :facetable), limit: 5
