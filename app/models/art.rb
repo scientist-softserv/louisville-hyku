@@ -179,7 +179,7 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   property :material,
            predicate: ::RDF::URI.new("https://purl.org/vra/material"),
            multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :measurement,
@@ -215,13 +215,13 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   property :style,
            predicate: ::RDF::URI.new("https://purl.org/vra/hasStylePeriod"),
            multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :technique,
            predicate: ::RDF::URI.new("https://purl.org/vra/hasTechnique"),
            multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :transcription_translation,
