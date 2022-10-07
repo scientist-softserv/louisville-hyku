@@ -15,6 +15,7 @@ en:
           depositor_ssim: Depositor
           keyword_sim: Keyword
           language_sim: Language
+          material_sim: Material
           media_type_sim: Media Type
           neighborhood_sim: Neighborhood
           people_represented_sim: People Represented
@@ -22,7 +23,9 @@ en:
           resource_query_sim: Resource Query
           resource_type_sim: Object Type
           street_sim: Street
+          style_sim: Style
           subject_sim: Subject
+          technique_sim: Technique
         index:
           location_tesim: Location
           city_tesim: City
@@ -40,6 +43,7 @@ en:
           keyword_tesim: Keyword
           language_tesim: Language
           license_tesim: License
+          material_tesim: Material
           media_type_tesim: Media Type
           neighborhood_tesim: Neighborhood
           people_represented_tesim: People Represented
@@ -49,7 +53,9 @@ en:
           rights_statement_tesim: Rights Statement
           rights_tesim: Rights
           street_tesim: Street
+          style_tesim: Style
           subject_tesim: Subject
+          technique_tesim: Technique
         show:
           location_tesim: Location
           city_tesim: City
@@ -66,6 +72,7 @@ en:
           identifier_tesim: Item Number
           keyword_tesim: Keyword
           language_tesim: Language
+          material_tesim: Material
           neighborhood_tesim: Neighborhood
           people_represented_tesim: People Represented
           publisher_tesim: Repository
@@ -73,6 +80,8 @@ en:
           rights_tesim: Rights
           subject_tesim: Subject
           street_tesim: Street
+          style_tesim: Style
+          technique_tesim: Technique
           title_tesim: Title
 
     bookmarks:
