@@ -32,18 +32,19 @@ body { font-size:10px; }
   }
 
   h1, h2, h3, h4, h5, h6,  .h1, .h2, .h3, .h4, .h5, .h6, 
-  .modal-title,  
+  #appliedParams,
+  .btn, button, 
+  .btn-group .dropdown-menu, 
+  #documents .document .document-title-heading, 
   .facets .facets-heading,
   .facet-label, 
   .facet-count, 
-  .more_facets_link,
-  #documents .document .document-title-heading, 
-  span.constraints-label, 
-  nav, 
-  .btn, button, 
-  .btn-group .dropdown-menu, 
-  .pagination, 
   label, .label, 
+  .modal-title,  
+  .more_facets_link,
+  nav, 
+  .pagination, 
+  span.constraints-label, 
   #sortAndPerPage { 
     font-family:'Open Sans', Arial, sans-serif;
   }
@@ -85,3 +86,5 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5,  .h6,
 
   .panel-body { line-height: 1.2; }
   
+
+#facets h2.facets-heading { text-transform:uppercase; }
