@@ -28,7 +28,7 @@
 
     <% key = params[:f]&.keys&.first %>
     <% search_path = (params[:f]&.keys&.count == 1 && params[:f][key].length == 1) ? start_over_path : options[:remove] %>
-    <%= link_to(content_tag(:span, '', class: 'glyphicon glyphicon-remove') + accessible_remove_label,
+    <%= link_to(content_tag(:span, '', class: 'fas fa-times') + accessible_remove_label,
       search_path, class: 'btn btn-default btn-sm remove dropdown-toggle'
     ) %>
   <%- end -%>
