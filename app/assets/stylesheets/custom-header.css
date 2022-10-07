@@ -73,8 +73,10 @@ ul#head-user-actions { list-style-type:none; display:flex; }
   #home-header h2 { font-size:1.8rem; line-height:1.4; margin: 0; }
 }
 
-@media (min-width: 992px) { 
-  #logo { margin-right:2rem; }
+
+@media (min-width:768px) {
+	#logo-col img { margin-right:4rem; }
+
 }
 
 #header-navbar #user-utilities .navbar-nav a {
@@ -122,9 +124,6 @@ ul#head-user-actions { list-style-type:none; display:flex; }
   .image-masthead .background-container, 
   .image-masthead .background-container-gradient { display:none;  }
 }
-
-
-
 
 
 
