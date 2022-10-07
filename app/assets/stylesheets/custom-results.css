@@ -45,6 +45,9 @@
 #documents .document:last-of-type { border-bottom:none; }
 
 
+.catalog .list-thumbnail img { margin-bottom: 1rem; }
+
+
 @media (max-width:767.99px) {
 	#documents .document { 
 		display:flex;
@@ -61,6 +64,24 @@
 
 }
 
+
+@media (min-width:768px) {
+
+	.catalog-index .metadata dl.dl-horizontal { 
+		display:grid; 
+		grid-template-columns: 10rem 1fr; 
+		grid-column-gap: 2rem; 
+	}
+	.catalog-index .metadata dl.dl-horizontal dt { 
+		width:fit-content;
+		float:none;
+		text-overflow:unset;
+		overflow:unset;
+	}
+	.catalog-index .metadata dl.dl-horizontal dd { 
+		margin-left:0;
+	}
+}
 
 @media (min-width:980px) {
 	div#sortAndPerPage {
