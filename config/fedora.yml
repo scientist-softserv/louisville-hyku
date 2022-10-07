@@ -2,7 +2,7 @@ development:
   user: fedoraAdmin
   password: fedoraAdmin
   url: <%= ENV['FEDORA_URL'] || "http://127.0.0.1:#{ENV.fetch('FCREPO_DEVELOPMENT_PORT', 8984)}/rest" %>
-  base_path: /prod
+  # base_path: /prod
 test:
   user: fedoraAdmin
   password: fedoraAdmin
@@ -12,5 +12,5 @@ production:
   user: fedoraAdmin
   password: fedoraAdmin
   url: <%= ENV['FEDORA_URL'] || "http://127.0.0.1:8983/fedora/rest" %>
-  base_path: /prod
+  # base_path: /prod
   request: { timeout: 600, open_timeout: 60}
