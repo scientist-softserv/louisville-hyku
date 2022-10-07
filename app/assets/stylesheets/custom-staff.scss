@@ -3,10 +3,15 @@
 
 /* DASHBOARD */
 
+
+
 body.dashboard { padding-top:0; }
 
 
 body.dashboard { 
+
+	#content-wrapper .dropdown-menu a:hover { text-decoration:none; }
+	.dropdown-menu i { margin-right:.2rem; }
 
   #header-navbar { 
 	background-color:black; 
@@ -14,10 +19,73 @@ body.dashboard {
 	}
 
 
+	#content-wrapper a.btn-primary { 
+		color:white;
+		background-color:#ad0000; 
+		border-color: #9a1220;
+	}
+
   form.search-query-form.form-horizontal.search-form label { display:none; }
+  #content-wrapper .sidebar a { color:white; text-decoration:none!important;}
+
+  
+  .sidebar .nav-pills > li.active > a, 
+  .sidebar .nav-pills > li.active > a:focus, 
+  .sidebar .nav-pills > li.active > a:hover { background-color:#505050!important; }
+  .sidebar .sidebar-toggle { 
+	line-height:1; 
+	width:3.6rem; 
+	height:3.6rem; 
+	display:flex;
+	align-items:center; 
+	justify-content:center;
+	right:-15px; 
+	}
+  .sidebar-toggle .fa { 
+	font-size:3rem; 
+	width:3rem; 
+	}
+
+  input#check_all { margin-right:6px; }
+  a.dropdown-toggle { margin-left:3px; } /* maybe add .check-all before if this interferes elsewhere */
+
+	.panel-default .panel-heading { font-size:1.6rem; }
+
+	#content-wrapper a#startOverLink { 
+		border:1px solid black; 
+		color: white; 
+		background-color:#9a1220;
+		font-size:1.4rem; 
+	}
+	.constraints-container .start-over {display:none; }
+	span.btn-group.appliedFilter.constraint.query { 
+		border-color:#ccc; 
+		border-radius:4px; 
+	}
+	.appliedFilter span:hover { border:0; }
+	#content-wrapper .constraint-value.btn-default:hover, 
+	#content-wrapper .constraint-value.btn-default:focus {
+		color: black;
+		background:white; 
+	}
+	 
 
 
+	.dashboard #content-wrapper .constraint-value.btn, 
+	span.appliedFilter .remove { border-color:#ccc; }
 
+	.appliedFilter:hover .constraint-value { border-color:#ad0000; }
+	#content-wrapper .appliedFilter:hover .btn-default.remove { background-color:#ad0000; }
+	.btn-sm {
+		padding:.5rem 1rem; 
+		font-size:1.4rem; 
+	}
+	#documents th:nth-of-type(5), 
+	#documents th:nth-of-type(6) { text-align:center; }
+
+	#content-wrapper .pagination a:hover, 
+	#content-wrapper .pagination a:active, 
+	#content-wrapper .pagination a:focus { color:white; text-decoration:none; }
 }
 
 
@@ -38,5 +106,21 @@ body.staff {
     background-color: #e2e8ec;
     border-color:#dce3e8;
   }
+
+  nav.breadcrumb { 
+	border:none; 
+	background-color: transparent; 
+	}
+
+  dl.file-show-details {
+	display:grid; 
+	grid-template-columns: 14rem 1fr; 
+	grid-column-gap:2rem; 
+	}
+  .file-show-term dt { 
+	width:fit-content; 
+	float:none; 
+	}
+  .dl-horizontal dd { margin-left:0; }
 
 }
