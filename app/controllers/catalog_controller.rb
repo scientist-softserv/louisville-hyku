@@ -102,7 +102,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("technique", :facetable), limit: 5
     config.add_facet_field solr_name("material", :facetable), limit: 5
     config.add_facet_field solr_name("resource_type", :facetable), limit: 5
-    config.add_facet_field solr_name("file_format", :facetable), limit: 5
+    config.add_facet_field solr_name("media_type", :facetable), limit: 5
 
     # config.add_facet_field solr_name("publisher", :facetable), limit: 5
     # config.add_facet_field solr_name("keyword", :facetable), limit: 5
@@ -110,7 +110,6 @@ class CatalogController < ApplicationController
     # config.add_facet_field solr_name("location", :facetable), limit: 5
     # config.add_facet_field solr_name("language", :facetable), limit: 5
     # config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
-    # config.add_facet_field solr_name("media_type", :facetable), limit: 5
     # config.add_facet_field solr_name("file_format", :facetable), limit: 5
 
     # Have BL send all facet field names to Solr, which has been the default
