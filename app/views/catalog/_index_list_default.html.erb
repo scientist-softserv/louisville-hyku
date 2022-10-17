@@ -4,8 +4,8 @@
     <% doc_presenter = index_presenter(document) %>
     <% index_fields(document).each do |field_name, field| -%>
       <% if should_render_index_field? document, field %>
-          <dt class="<%= (render_index_field_label document, field: field_name).downcase!.tr(" ", "-").chop + " " + "metadata-heading" %>"><%= render_index_field_label document, field: field_name %></dt>
-          <dd class="<%= (render_index_field_label document, field: field_name).downcase!.tr(" ", "-").chop + " " + "metadata-content" %>"><%= doc_presenter.field_value field_name %></dd>
+          <dt class="<%= search_list_dt(render_index_field_label document, field: field_name) %>"><%= render_index_field_label document, field: field_name %></dt>
+          <dd class="<%= search_list_dd(render_index_field_label document, field: field_name) %>" ><%= doc_presenter.field_value field_name %></dd>
       <% end %>
     <% end %>
     </dl>
