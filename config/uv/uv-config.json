@@ -124,8 +124,8 @@
     },
     "headerPanel": {
       "options": {
-        "localeToggleEnabled": true,
-        "settingsButtonEnabled": true
+        "localeToggleEnabled": false,
+        "settingsButtonEnabled": false
       }
     },
     "helpDialogue": {
