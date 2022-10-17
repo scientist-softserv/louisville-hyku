@@ -1,8 +1,10 @@
 /* production custom-facets */
 
 
-body.public-facing .panel-default > .panel-heading { 
+.staff #facets .panel-default > .panel-heading, 
+body.public-facing #facets .panel-default > .panel-heading { 
   border-radius:4px; 
+  padding:.8rem;
 }
 
 h3.panel-title.facet-field-heading { line-height:1; }
@@ -17,6 +19,14 @@ h3.panel-title.facet-field-heading { line-height:1; }
 .panel-heading.collapse-toggle.collapsed .panel-title:after { 
 	transform:rotate(90deg);
 }
+
+
+.facet-values li { 
+  display:flex;
+  justify-content: space-between;
+}
+.facet-values .facet-count { width:5em!important; }
+
 
 
 @media (max-width:767.99px) { 

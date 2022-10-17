@@ -6,9 +6,18 @@
 
 /* LOG IN */
 
-.devise-sessions {
+body.devise-sessions.devise-sessions-new.public-facing {
 
-  #content-wrapper { margin-bottom:4rem; }
+  #content-wrapper { 
+    margin-bottom:4rem; 
+  }
+
+  @media (min-width:980px) { 
+    #content-wrapper { 
+      min-height:40rem; 
+    }
+  }
+
 
 
 }

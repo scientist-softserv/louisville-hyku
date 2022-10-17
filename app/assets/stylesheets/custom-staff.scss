@@ -9,6 +9,7 @@ body.dashboard { padding-top:0; }
 
 
 body.dashboard { 
+  #header-navbar { background-image: linear-gradient(to bottom,#f9d187,#f7941d); color:white; }
 
 	#content-wrapper .dropdown-menu a:hover { text-decoration:none; }
 	.dropdown-menu i { margin-right:.2rem; }
@@ -122,5 +123,12 @@ body.staff {
 	float:none; 
 	}
   .dl-horizontal dd { margin-left:0; }
+
+  #hyrax-base-show .work-type .panel-heading > div > .col-sm-8 { width:66.6666666667%; }
+  #hyrax-base-show .work-type .panel-heading > div > .col-sm-4 { display:block; }
+
+
+  /* ITEM RECORD */
+  .show-actions a[data-behavior="feature"] {display:none; }
 
 }
