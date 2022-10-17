@@ -73,6 +73,7 @@ en:
           keyword_tesim: Keyword
           language_tesim: Language
           material_tesim: Material
+          media_type_tesim: Media Type
           neighborhood_tesim: Neighborhood
           people_represented_tesim: People Represented
           publisher_tesim: Repository
