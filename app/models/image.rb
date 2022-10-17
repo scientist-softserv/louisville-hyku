@@ -116,7 +116,7 @@ class Image < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   property :county,
            predicate: ::RDF::URI.new("https://id.loc.gov/ontologies/madsrdf/v1.html#County"),
            multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   property :invoice_information,
