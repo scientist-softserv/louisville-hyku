@@ -88,23 +88,23 @@ class CatalogController < ApplicationController
     # config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
     # config.add_facet_field 'resource_type_tesim', label: "Object Type", limit: 5
 
-    config.add_facet_field solr_name("creator", :facetable), limit: 5
-    config.add_facet_field solr_name("contributor", :facetable), limit: 5
-    config.add_facet_field solr_name("street", :facetable), limit: 5
-    config.add_facet_field solr_name("neighborhood", :facetable), limit: 5
-    config.add_facet_field solr_name("city", :facetable), limit: 5
-    config.add_facet_field solr_name("county", :facetable), limit: 5
+    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
     config.add_facet_field solr_name("subject", :facetable), limit: 5
     config.add_facet_field solr_name("people_represented", :facetable), limit: 5
+    config.add_facet_field solr_name("county", :facetable), limit: 5
+    config.add_facet_field solr_name("city", :facetable), limit: 5
+    config.add_facet_field solr_name("neighborhood", :facetable), limit: 5
+    config.add_facet_field solr_name("street", :facetable), limit: 5
     config.add_facet_field solr_name("decade", :facetable), limit: 5
+    config.add_facet_field solr_name("creator", :facetable), limit: 5
+    config.add_facet_field solr_name("contributor", :facetable), limit: 5
     config.add_facet_field solr_name("style", :facetable), limit: 5
     config.add_facet_field solr_name("technique", :facetable), limit: 5
     config.add_facet_field solr_name("material", :facetable), limit: 5
     config.add_facet_field solr_name("resource_type", :facetable), limit: 5
-    config.add_facet_field solr_name("publisher", :facetable), limit: 5
     config.add_facet_field solr_name("file_format", :facetable), limit: 5
-    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
 
+    # config.add_facet_field solr_name("publisher", :facetable), limit: 5
     # config.add_facet_field solr_name("keyword", :facetable), limit: 5
     # config.add_facet_field 'location_tesim', label: "Location", limit: 5
     # config.add_facet_field solr_name("location", :facetable), limit: 5
