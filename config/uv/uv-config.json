@@ -22,7 +22,7 @@
     "clickToZoomEnabled": true,
     "searchWithinEnabled": true,
     "termsOfUseEnabled": false,
-    "theme": "uv-en-GB-theme",
+    "theme": "uv-en-uofl-theme",
     "tokenStorage": "session",
     "useArrowKeysToNavigate": true,
     "zoomToSearchResultEnabled": false
