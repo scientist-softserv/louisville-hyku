@@ -149,7 +149,7 @@
                 <div class="content">
 
                   <div class="s-card col-md-3" id="card-1">
-                    <a href="/?f%5Bcity_sim%5D%5B%5D=Louisville+%28Ky.%29&locale=en&q=%28prints+or+negatives%29&search_field=all_fields" class="inner">
+                    <a href="/?f%5Bcity_sim%5D%5B%5D=Louisville+%28Ky.%29&f%5Bmedia_type_sim%5D%5B%5D=Still+Image&locale=en" class="inner">
                       <div class="card-media-wrapper">
                         <div class="card-image">
                           <img src="/assets/cards-ULPA1998-09-210" alt="downtown buildings">  
@@ -157,7 +157,7 @@
                       </div>
   
                       <div class="card-text-wrapper">
-                        <h3>Louisville Photographs</h3>
+                        <h3>Louisville Images</h3>
                       </div>
                     </a>
                   </div>
@@ -177,7 +177,7 @@
                     </div>
           
                    <div class="s-card col-md-3" id="card-2">
-                      <a href="/catalog?utf8=%E2%9C%93&locale=en&search_field=all_fields&q=%22University+of+Louisville%22" class="inner">
+                      <a href="/catalog?f%5Bsubject_sim%5D%5B%5D=University+of+Louisville" class="inner">
                         <div class="card-media-wrapper">
                           <div class="card-image">
                             <img src="/assets/cards-ULUA-001-0349.jpg" alt="UofL Football players">
@@ -190,7 +190,7 @@
                     </div>
 
                     <div class="s-card col-md-3" id="card-4">
-                      <a href="/catalog?f%5Bresource_type_sim%5D%5B%5D=Illuminated+manuscripts&locale=en&search_field=all_fields" class="inner">
+                      <a href="/catalog?f%5Bresource_type_sim%5D%5B%5D=Illuminated+manuscripts&locale=en" class="inner">
                         <div class="card-media-wrapper">
                           <div class="card-image"> 
                             <img src="/assets/cards-illuminated-ULRB-2006.mss.05.png" alt="book of hours"> 
@@ -203,7 +203,7 @@
                     </div> 
           
                     <div class="s-card col-md-3" id="card-5">
-                      <a href="/catalog?utf8=%E2%9C%93&locale=en&search_field=all_fields&q=Louisville+General+Hospital" class="inner">
+                      <a href="/catalog?f%5Bsubject_sim%5D%5B%5D=Louisville+General+Hospital&locale=en" class="inner">
                         <div class="card-media-wrapper">
                           <div class="card-image"> 
                             <img src="/assets/cards-ulhl-student-nurse16.png" alt="nursing lesson"> 
@@ -216,7 +216,7 @@
                     </div> 
           
                    <div class="s-card col-md-3" id="card-6">
-                     <a href="/catalog?utf8=?&locale=en&search_field=all_fields&q=yearbook+OR+yearbooks" class="inner">
+                     <a href="/f%5Bresource_type_sim%5D%5B%5D=Yearbooks&locale=en" class="inner">
                         <div class="card-media-wrapper">
                           <div class="card-image"> 
                             <img src="/assets/cards-yearbook-1974-p188.jpg" alt="yearbook"> 
@@ -240,6 +240,33 @@
             <div class="s-card col-md-3" id="r-cards">
               <div class="content">
 
+                <div id="card-photoarc" class="s-card col-md-3">
+              <a href="/catalog?utf8=?&f%5Bpublisher_sim%5D%5B%5D=University+of+Louisville+Photographic+Archives&locale=en" class="inner">
+                <div class="card-media-wrapper">
+                  <div class="card-image">
+                    <%= image_tag("512x385_1979_033_0460_nt.jpg", alt: "Charity", data: { u: "image" }) %> 
+                  </div>
+                </div>
+                <div class="card-text-wrapper">
+                  <h3>ASC Photographic Archives</h3>
+                </div> 
+              </a> 
+            </div>
+                    
+
+                <div id="card-rare" class="s-card col-md-3" >
+              <a href="/catalog?utf8=?&f%5Bpublisher_sim%5D%5B%5D=University+of+Louisville+Rare+Books&locale=en" class="inner">
+                <div class="card-media-wrapper">
+                  <div class="card-image">
+                    <%= image_tag("512x385_2006_mss_08v.png", alt: "manuscript", data: { u: "image" }) %> 
+                  </div>
+                </div>
+                <div class="card-text-wrapper">
+                  <h3>ASC Rare Books</h3>
+                </div> 
+              </a> 
+            </div> 
+          
                 <div id="card-uarc" class="s-card col-md-3">
               <a href="/catalog?utf8=?&f%5Bpublisher_sim%5D%5B%5D=University+of+Louisville+Archives+and+Records+Center&locale=en" class="inner">
                 <div class="card-media-wrapper">
@@ -248,7 +275,7 @@
                   </div>
                 </div>
                 <div class="card-text-wrapper">
-                  <h3>Archives and Records Center</h3>
+                  <h3>ASC University Archives and Records Center</h3>
                 </div> 
               </a> 
             </div>
@@ -265,6 +292,21 @@
                   </div>
                 </a>
               </div>
+
+  <div id="card-music" class="s-card col-md-3">
+              <a href="/catalog?utf8=?&f%5Bpublisher_sim%5D%5B%5D=University+of+Louisville+Dwight+Anderson+Music+Library%2C+University+of+Louisville&locale=en" class="inner">
+                <div class="card-media-wrapper">
+                  <div class="card-image">
+                    <%= image_tag("cards-music-guestbook-p18.png", alt: "guest book", data: { u: "image" }) %> 
+                  </div>
+                </div>
+                <div class="card-text-wrapper">
+                  <h3>Dwight Anderson Music Library</h3>
+                </div>
+              </a>
+            </div>
+          
+                
   
     <div id="card-hite" class="s-card col-md-3">
               <a href="/catalog?utf8=?&f%5Bpublisher_sim%5D%5B%5D=University+of+Louisville+Hite+Art+Institute&locale=en" class="inner">
@@ -308,48 +350,6 @@
             </div> 
           
   
-
-  <div id="card-music" class="s-card col-md-3">
-              <a href="/catalog?utf8=?&f%5Bpublisher_sim%5D%5B%5D=University+of+Louisville+Dwight+Anderson+Music+Library%2C+University+of+Louisville&locale=en" class="inner">
-                <div class="card-media-wrapper">
-                  <div class="card-image">
-                    <%= image_tag("cards-music-guestbook-p18.png", alt: "guest book", data: { u: "image" }) %> 
-                  </div>
-                </div>
-                <div class="card-text-wrapper">
-                  <h3>Dwight Anderson Music Library</h3>
-                </div>
-              </a>
-            </div>
-          
-                <div id="card-photoarc" class="s-card col-md-3">
-              <a href="/catalog?utf8=?&f%5Bpublisher_sim%5D%5B%5D=University+of+Louisville+Photographic+Archives&locale=en" class="inner">
-                <div class="card-media-wrapper">
-                  <div class="card-image">
-                    <%= image_tag("512x385_1979_033_0460_nt.jpg", alt: "Charity", data: { u: "image" }) %> 
-                  </div>
-                </div>
-                <div class="card-text-wrapper">
-                  <h3>Photographic Archives</h3>
-                </div> 
-              </a> 
-            </div>
-                    
-
-                <div id="card-rare" class="s-card col-md-3" >
-              <a href="/catalog?utf8=?&f%5Bpublisher_sim%5D%5B%5D=University+of+Louisville+Rare+Books&locale=en" class="inner">
-                <div class="card-media-wrapper">
-                  <div class="card-image">
-                    <%= image_tag("512x385_1999_004_4774_p.jpg", alt: "Duncan-Irwin House", data: { u: "image" }) %> 
-                  </div>
-                </div>
-                <div class="card-text-wrapper">
-                  <h3>Rare Books</h3>
-                </div> 
-              </a> 
-            </div> 
-          
-                
               
               </div> 
             </div>
