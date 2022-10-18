@@ -3492,3 +3492,68 @@ input[type=range]:focus::-ms-fill-upper {
 .uv.en-gb .footerPanel .searchPager .controls .searchResultsInfo {
   width: 337px;
 }
+
+
+/* Terri's code */
+.uv, .uv .footerPanel .search .searchTextContainer .searchText { font-size:1rem; }
+.uv .footerPanel .search .searchTextContainer .searchText { padding:.2rem .5rem; }
+
+.uv .centerPanel .title, 
+.uv .headerPanel .rightOptions .localeToggle { display:none!important; }
+.uv .footerPanel { margin:0; }
+
+.iiif-metadata-component .groups .group .items .item .value a.toggle { color:#f6e7a1; }
+.iiif-metadata-component .groups .group .items .item .value a.toggle:hover { color:#f6e7a1; text-decoration:underline; }
+
+.options.minimiseButtons, 
+.uv .footerPanel .search { background-color:#2D2E2F; }
+
+.uv .headerPanel .options .rightOptions .settings, 
+.uv .website, .uv .version { display:none!important; }
+
+.uv .overlay.settings .scroll { height:9rem; }
+.uv .headerPanel .centerOptions .mode label { 
+	width:unset; 
+	padding-right:0.2rem;
+	}
+#uv .searchResults .line, 
+#uv .searchResults .positionPlacemarker,
+#uv .searchResults .label.right,
+#uv .searchResults .placeMarkerDetails, 
+button.btn.imageBtn.two-up { display:none; }
+
+.uv .footerPanel .searchResults { 
+	height:unset; 
+	padding:0; 
+	}
+
+.uv .leftPanel .views .thumbsView .thumbs .thumb.twoCol .wrap { width:unset; }
+
+.uv .leftPanel .views .thumbsView .thumbs { 
+	display:flex; 
+	flex-wrap:wrap; 
+	}
+.uv .leftPanel .views .thumbsView .thumbs.left-to-right .thumb, 
+.uv .leftPanel .views .thumbsView .thumbs.left-to-right.paged .thumb.first { float:unset; }
+
+.uv .leftPanel .views .thumbsView .thumbs .thumb .wrap { border:none!important; }
+.uv .leftPanel .views .thumbsView .thumbs .thumb.selected img { outline: 2px solid white; }
+
+
+
+@media (min-width:768px) {
+	.uv .headerPanel .centerOptions .mode label { font-size:1rem; line-height:1; }
+	.uv.en-gb .headerPanel .options .centerOptions { 
+		min-width: 30rem!important;
+		position:relative;
+		left:unset!important; 
+		display:flex; 
+		justify-content:center;
+		align-items:center;
+	}
+	.uv .headerPanel .options { 
+		display:grid; 
+		grid-template-columns: 1fr 70px; 
+	}
+	.uv .headerPanel .centerOptions .mode {margin:0; }
+}
