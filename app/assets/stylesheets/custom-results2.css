@@ -2,9 +2,6 @@
 /* CSS Document  custom-results.css */
 
 
-form.bookmark_toggle { display:none; }
-
-
 .search-widgets { text-align:right; }
 
 
@@ -45,25 +42,11 @@ form.bookmark_toggle { display:none; }
 	padding-top:6px;
 	border-bottom: 1px dotted #ddd;
 }
-#documents.documents-list .document:last-of-type { border-bottom:none; }
+#documents .document:last-of-type { border-bottom:none; }
 
-.gallery .document { min-height:unset;}
-
-.document .caption dl { 
-	margin-bottom:0; 
-	display:flex;
-	flex-direction:column; 
-	align-items:center;
-}
 
 .catalog .list-thumbnail img { margin-bottom: 1rem; }
 
-
-#documents.gallery dt, 
-#documents.gallery .blacklight-description_tesim, 
-#documents.gallery .blacklight-subject_tesim, 
-#documents.gallery .blacklight-date_created_tesim
- { display:none; } 
 
 @media (max-width:767.99px) {
 	#documents .document { 

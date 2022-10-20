@@ -1,6 +1,9 @@
 @charset "utf-8";
 /* CSS Document  custom-bookmarks.css */
 
+
+form.bookmark_toggle { display:none; }
+
 .public-facing {
   .nav-pills.bookmarksTools a {
     color:white; 

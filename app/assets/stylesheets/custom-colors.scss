@@ -185,31 +185,32 @@ body.staff #per_page-dropdown .dropdown-toggle {
 
 /* PAGINATION */
 
-body.public-facing .pagination li.disabled a { color:#777; }
+body.public-facing .pagination li.disabled a, 
+body.staff .pagination li.disabled a  { color:#777; }
 
-.pagination > .active > a,
-.pagination > .active > a:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span,
-.pagination > .active > span:hover,
-.pagination > .active > span:focus {
-  background-color: #333;
-  border-color: black;
-  color:white;
-}
+#content-wrapper {
+	.pagination > .active > a,
+	.pagination > .active > a:hover,
+	.pagination > .active > a:focus,
+	.pagination > .active > span,
+	.pagination > .active > span:hover,
+	.pagination > .active > span:focus {
+  		background-color: #333;
+ 		border-color: black;
+  		color:white;
+		}
 
-  .pagination > li > a:hover, 
-  .pagination > li > a:active, 
-  .pagination > li > a:focus, 
-  body.public-facing .pagination > li > a:hover, 
-  body.public-facing .pagination > li > a:active, 
-  body.public-facing .pagination > li > a:focus
-   { 
-    background-color:#ad0000; 
-    color:white; 
-  }
+	.pagination > li > a:hover, 
+	.pagination > li > a:active, 
+	.pagination > li > a:focus, 
+	.pagination > li > a:hover, 
+  	.pagination > li > a:active, 
+	.pagination > li > a:focus { 
+	    background-color:#ad0000; 
+	    color:white; 
+	  }
 
-
+	}
 .hyc-bl-pager .pagination li.disabled a {
   color: #555;
 }
