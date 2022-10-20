@@ -45,7 +45,7 @@ Rails.application.routes.draw do
 
   mount Qa::Engine => '/authorities'
 
-  mount Blacklight::Engine => '/'
+  #mount Blacklight::Engine => '/'
   mount BlacklightAdvancedSearch::Engine => '/'
 
   mount Hyrax::Engine, at: '/'
@@ -70,6 +70,7 @@ Rails.application.routes.draw do
     concerns :iiif_search
   end
 
+=begin
   resources :bookmarks do
     concerns :exportable
 
@@ -77,6 +78,7 @@ Rails.application.routes.draw do
       delete 'clear'
     end
   end
+=end
 
   namespace :admin do
     resource :account, only: [:edit, :update]
