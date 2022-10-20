@@ -4,10 +4,12 @@
       <ul class="nav navbar-nav col-sm-5">
         <li id="nav-home" <%= 'class=active' if current_page?(hyrax.root_path) %>>
           <%= link_to t(:'hyrax.controls.home'), hyrax.root_path, aria: current_page?(hyrax.root_path) ? {current: 'page'} : nil %></li>
-        <% if user_signed_in? %>
-          <li id="nav-bookmark" <%= 'class=active' if current_page?("/bookmarks") %>>
-            <%= link_to t("hyrax.toolbar.bookmark"), "/bookmarks", aria: current_page?("/bookmarks") ? {current: 'page'} : nil %></li>
-        <% end %>
+        <%# if user_signed_in? %>
+          <!-- 
+          <li id="nav-bookmark" <%#= 'class=active' if current_page?("/bookmarks") %>>
+            <%#= link_to t("hyrax.toolbar.bookmark"), "/bookmarks", aria: current_page?("/bookmarks") ? {current: 'page'} : nil %></li>
+          -->
+        <%# end %>
         <li id="nav-terms" <%= 'class=active' if current_page?(hyrax.terms_path) %>>
           <%= link_to t(:'hyrax.controls.terms'), hyrax.terms_path, aria: current_page?(hyrax.terms_path) ? {current: 'page'} : nil %></li>
 
