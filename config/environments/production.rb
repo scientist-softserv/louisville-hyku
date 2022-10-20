@@ -88,35 +88,6 @@ Rails.application.configure do
 
   # Mailer ssl and url configured in accountsettings
   # config.action_mailer.default_url_options = { protocol: 'https' }
-  if ENV['SMTP_ENABLED'].present? && ENV['SMTP_ENABLED'].to_s == 'true'
-    config.action_mailer.smtp_settings = {
-      user_name: ENV['SMTP_USER_NAME'],
-      password: ENV['SMTP_PASSWORD'],
-      address: ENV['SMTP_ADDRESS'],
-      domain: ENV['SMTP_DOMAIN'],
-      port: ENV['SMTP_PORT'],
-      enable_starttls_auto: true,
-      authentication: ENV['SMTP_TYPE']
-    }
-    # ActionMailer Config
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.raise_delivery_errors = false
-    config.action_mailer.asset_host = ENV['HYKU_ADMIN_HOST']
-  else
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      address: 'smtp.louisville.edu',
-      port: '587',
-      domain: "ad.louisville.edu",
-      authentication: "plain",
-      enable_starttls_auto: true,
-      user_name: Rails.application.credentials.dig(:production, :smtp_user),
-      password: Rails.application.credentials.dig(:production, :smtp_password),
-      openssl_verify_mode: 'none'
-    }
-  end
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
