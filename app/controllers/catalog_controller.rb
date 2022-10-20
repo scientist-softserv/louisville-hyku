@@ -39,8 +39,8 @@ class CatalogController < ApplicationController
     }
 
     config.view.gallery.partials = %i[index_header index]
-    config.view.masonry.partials = [:index]
-    config.view.slideshow.partials = [:index]
+    # config.view.masonry.partials = [:index]
+    # config.view.slideshow.partials = [:index]
 
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
@@ -52,10 +52,6 @@ class CatalogController < ApplicationController
     config.advanced_search[:form_solr_parameters] ||= {}
 
     config.search_builder_class = CustomSearchBuilder
-
-    # Show gallery view
-    config.view.gallery.partials = %i[index_header index]
-    config.view.slideshow.partials = [:index]
 
     # rubocop:disable Style/HashSyntax
     # rubocop:disable Style/SymbolLiteral
@@ -259,6 +255,7 @@ class CatalogController < ApplicationController
     # creator, title, description, publisher, date_created,
     # subject, language, resource_type, format, identifier, based_near,
     config.add_search_field('contributor') do |field|
+      field.include_in_advanced_search = true
       # solr_parameters hash are sent to Solr as ordinary url query params.
       field.solr_parameters = { "spellcheck.dictionary": "contributor" }
 
@@ -274,6 +271,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('creator') do |field|
+      field.include_in_advanced_search = true
       field.solr_parameters = { "spellcheck.dictionary": "creator" }
       solr_name = solr_name("creator", :stored_searchable)
       field.solr_local_parameters = {
@@ -283,6 +281,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('title') do |field|
+      field.include_in_advanced_search = true
       field.solr_parameters = {
         "spellcheck.dictionary": "title"
       }
@@ -294,6 +293,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('description') do |field|
+      field.include_in_advanced_search = true
       field.label = "Abstract or Summary"
       field.solr_parameters = {
         "spellcheck.dictionary": "description"
@@ -306,6 +306,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('publisher') do |field|
+      field.include_in_advanced_search = true
       field.solr_parameters = {
         "spellcheck.dictionary": "publisher"
       }
@@ -317,6 +318,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('date_created') do |field|
+      field.include_in_advanced_search = true
       field.solr_parameters = {
         "spellcheck.dictionary": "date_created"
       }
@@ -328,6 +330,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('subject') do |field|
+      field.include_in_advanced_search = true
       field.solr_parameters = {
         "spellcheck.dictionary": "subject"
       }
@@ -339,6 +342,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('language') do |field|
+      field.include_in_advanced_search = true
       field.solr_parameters = {
         "spellcheck.dictionary": "language"
       }
@@ -350,6 +354,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('resource_type') do |field|
+      field.include_in_advanced_search = true
       field.solr_parameters = {
         "spellcheck.dictionary": "resource_type"
       }
@@ -373,7 +378,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('identifier') do |field|
-      field.include_in_advanced_search = false
+      field.include_in_advanced_search = true
       field.solr_parameters = {
         "spellcheck.dictionary": "identifier"
       }
@@ -397,6 +402,7 @@ class CatalogController < ApplicationController
     #     end
 
     config.add_search_field('keyword') do |field|
+      field.include_in_advanced_search = false
       field.solr_parameters = {
         "spellcheck.dictionary": "keyword"
       }
@@ -408,6 +414,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('depositor') do |field|
+      field.include_in_advanced_search = false
       solr_name = solr_name("depositor", :stored_searchable)
       field.solr_local_parameters = {
         qf: solr_name,
@@ -416,6 +423,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('rights_statement') do |field|
+      field.include_in_advanced_search = true
       solr_name = solr_name("rights_statement", :stored_searchable)
       field.solr_local_parameters = {
         qf: solr_name,
@@ -424,6 +432,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('license') do |field|
+      field.include_in_advanced_search = false
       solr_name = solr_name("license", :stored_searchable)
       field.solr_local_parameters = {
         qf: solr_name,
@@ -432,6 +441,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('extent') do |field|
+      field.include_in_advanced_search = false
       solr_name = solr_name("extent", :stored_searchable)
       field.solr_local_parameters = {
         qf: solr_name,
