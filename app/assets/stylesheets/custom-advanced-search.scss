@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* SCSS Document custom-advanced-search.scss */
+
+
+form.advanced h2  { font-size:2.4rem; }
+
+
+.advanced.form-horizontal h3.panel-title.facet-field-heading { font-size:1.7rem; }
+
+.form-group.advanced-search-field {
+	margin-bottom:0; 
+	margin-top:5px;
+}
+
+.advanced.page-header { border:none; }
+
+.advanced-search-form .row {
+	margin-right:0;
+	margin-left:0;
+}
+
+.advanced-search-form .query-criteria, 
+.advanced-search-form .limit-criteria { margin-bottom:0!important; }
+
+
+#advanced-tips {
+	padding:.5rem; 
+	border:1px solid #ccc; 
+	border-radius:4px;
+	margin-top:2rem; 
+	background-color:#fff1cc;
+}
+#advanced-tips h3 { 
+	font-size:1.8rem; 
+	margin:.5rem;
+}
+
+@media (min-width:768px) {
+
+	.input-criteria { 
+		display:grid;
+		grid-template-columns: 1fr 1fr; 
+		grid-gap:6rem;
+	}
+
+	.limit-criteria-heading { margin-top:0; }
+}

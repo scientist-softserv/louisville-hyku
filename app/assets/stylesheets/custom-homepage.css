@@ -16,11 +16,17 @@
   font-size:2.4rem; 
 }
 
-#content-wrapper #cards a:hover, 
-#content-wrapper #cards a:active,
-#content-wrapper #cards a:focus { 
+#content-wrapper a.inner {
+	color:black;
+	background-color:#ececec;
+}
+
+#content-wrapper a.inner:hover, 
+#content-wrapper a.inner:active,
+#content-wrapper a.inner:focus  { 
   text-decoration:none; 
   background-color:#333;
+  color:white!important;
 }
 
 #cards, #cards>.content, 
@@ -40,13 +46,9 @@
 .s-card h3 {
   font-size:1.4rem; 
   line-height:1.26316;
-  color:#333f48;
   margin: 0 0 0.6rem; 
 } 
 
-#content-wrapper #cards a:hover h3, 
-#content-wrapper #cards a:active h3, 
-#content-wrapper #cards a:focus h3 { color:white; } 
 
 
 .s-card .s-card { 
@@ -74,14 +76,12 @@
 }
 
 .s-card a.inner {
-  background-color: #e2e8ec;
   border:1px solid #dce3e8;
   width:100%;
   display:block;
   position:relative;
   z-index:1;
   border-radius: inherit; 
-  color:#41505c;
   text-decoration:none; 
 }
 

@@ -95,13 +95,9 @@ form.bookmark_toggle { display:none; }
 		text-overflow:unset;
 		overflow:unset;
 	}
-	.catalog-index .metadata dl.dl-horizontal dd { margin-left:0;}
-
-
-	#documents.gallery .document { max-width: 290px; }
-
-
-
+	.catalog-index .metadata dl.dl-horizontal dd { 
+		margin-left:0;
+	}
 }
 
 @media (min-width:980px) {

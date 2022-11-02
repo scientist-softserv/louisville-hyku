@@ -3561,17 +3561,5 @@ button.btn.imageBtn.two-up { display:none; }
 
 	/* UV FOOTER */
 	#uv .searchResults .line { display:block; }
-	.uv .footerPanel .searchPager .controls { 
-		left:unset!important;
-		width:100%; 
-		display:flex; 
-		justify-content:center; 
-	}
-	.uv .footerPanel .searchResults .label.right { left:2000!important; }
-
-	.uv .footerPanel .searchResults .placeMarkerDetails {
-		z-index:300;
-		margin-top:0; 
-	}
 
 }

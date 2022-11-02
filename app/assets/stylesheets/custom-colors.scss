@@ -3,14 +3,19 @@
 
 
 
-#content-wrapper a  { 
+#content-wrapper a, 
+#advancedWrap a  { 
     color:#006ef5; 
     text-decoration: none;
   }
 
 #content-wrapper a:hover, 
 #content-wrapper a:active,
-#content-wrapper a:focus { 
+#content-wrapper a:focus, 
+#advancedWrap a:hover, 
+#advancedWrap a:active,
+#advancedWrap a:focus
+ { 
 	text-decoration:underline; 
 }
 
@@ -53,9 +58,9 @@ td.toggle input.active[type=submit]  { outline:1px dotted #333; }
 
   body.public-facing .btn-primary, 
   .btn-primary { 
-     background-color: #ad0000; 
-     color:white;
-     border-color:#9a1220;}
+     background-color: #ad0000!important; 
+     color:white!important;
+     border-color:#9a1220!important;}
 
   #content-wrapper .btn-default { 
     background-color: #777; 
