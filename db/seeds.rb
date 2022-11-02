@@ -50,14 +50,19 @@ Account.find_each do |account|
   Site.instance.save
 end
 
+if ENV['OUTGOING_EMAIL'] && ENV['OUTGOING_PASSWORD']
+  u = User.find_or_create_by(email: ENV['OUTGOING_EMAIL']) do |u|
+    u.password = ENV['OUTGOING_PASSWORD']
+  end
+end
+
 if ENV['INITIAL_ADMIN_EMAIL'] && ENV['INITIAL_ADMIN_PASSWORD']
   u = User.find_or_create_by(email: ENV['INITIAL_ADMIN_EMAIL']) do |u|
     u.password = ENV['INITIAL_ADMIN_PASSWORD']
   end
+  u.add_role(:admin)
+  puts "\n== Finished seeding admin support user"
   u.add_role(:superadmin)
-  Account.find_each do |account|
-    Apartment::Tenant.switch!(account.tenant)
-  end
   puts "\n== Finished seeding the default superadmin user"
 end
 
