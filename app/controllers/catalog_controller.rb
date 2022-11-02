@@ -50,6 +50,18 @@ class CatalogController < ApplicationController
     config.advanced_search[:url_key] ||= 'advanced'
     config.advanced_search[:query_parser] ||= 'dismax'
     config.advanced_search[:form_solr_parameters] ||= {}
+    config.advanced_search[:form_solr_parameters]['facet.field'] ||= %w[member_of_collections_ssim county_sim city_sim neighborhood_sim street_sim region_sim location_sim resource_type_sim media_type_sim rights_statement_tesim publisher_sim]
+    config.advanced_search[:form_solr_parameters]['f.member_of_collections_ssim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.county_sim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.city_sim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.neighborhood_sim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.street_sim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.region_sim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.location_sim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.resource_type_sim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.media_type_sim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.rights_statement_tesim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.publisher_sim.facet.limit'] ||= -1
 
     config.search_builder_class = CustomSearchBuilder
 
@@ -91,6 +103,8 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("city", :facetable), limit: 5
     config.add_facet_field solr_name("neighborhood", :facetable), limit: 5
     config.add_facet_field solr_name("street", :facetable), limit: 5
+    config.add_facet_field solr_name("region", :facetable), limit: 5
+    config.add_facet_field solr_name("location", :facetable), limit: 5
     config.add_facet_field solr_name("decade", :facetable), limit: 5
     config.add_facet_field solr_name("creator", :facetable), limit: 5
     config.add_facet_field solr_name("contributor", :facetable), limit: 5
@@ -99,8 +113,8 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("material", :facetable), limit: 5
     config.add_facet_field solr_name("resource_type", :facetable), limit: 5
     config.add_facet_field solr_name("media_type", :facetable), limit: 5
-
-    # config.add_facet_field solr_name("publisher", :facetable), limit: 5
+    config.add_facet_field solr_name("publisher", :facetable), limit: 5
+    
     # config.add_facet_field solr_name("keyword", :facetable), limit: 5
     # config.add_facet_field 'location_tesim', label: "Location", limit: 5
     # config.add_facet_field solr_name("location", :facetable), limit: 5
@@ -240,7 +254,7 @@ class CatalogController < ApplicationController
     # This one uses all the defaults set by the solr request handler. Which
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
-    config.add_search_field('all_fields', label: 'All Fields', include_in_advanced_search: false, advanced_parse: false) do |field|
+    config.add_search_field('all_fields', label: 'All Fields', include_in_advanced_search: true, advanced_parse: false) do |field|
       all_names = config.show_fields.values.map(&:field).join(" ")
       title_name = solr_name("title", :stored_searchable)
       field.solr_parameters = {
@@ -294,7 +308,7 @@ class CatalogController < ApplicationController
 
     config.add_search_field('description') do |field|
       field.include_in_advanced_search = true
-      field.label = "Abstract or Summary"
+      # field.label = "Abstract or Summary"
       field.solr_parameters = {
         "spellcheck.dictionary": "description"
       }
@@ -306,7 +320,8 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('publisher') do |field|
-      field.include_in_advanced_search = true
+      field.include_in_advanced_search = false
+      field.label = "Repository"
       field.solr_parameters = {
         "spellcheck.dictionary": "publisher"
       }
@@ -318,7 +333,8 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('date_created') do |field|
-      field.include_in_advanced_search = true
+      field.include_in_advanced_search = false
+      field.label = "Date Original"
       field.solr_parameters = {
         "spellcheck.dictionary": "date_created"
       }
@@ -341,8 +357,21 @@ class CatalogController < ApplicationController
       }
     end
 
-    config.add_search_field('language') do |field|
+    config.add_search_field('people_represented') do |field|
       field.include_in_advanced_search = true
+      field.label = "People"
+      field.solr_parameters = {
+        "spellcheck.dictionary": "people_represented"
+      }
+      solr_name = solr_name("people_represented", :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+
+    config.add_search_field('language') do |field|
+      field.include_in_advanced_search = false
       field.solr_parameters = {
         "spellcheck.dictionary": "language"
       }
@@ -354,11 +383,25 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('resource_type') do |field|
-      field.include_in_advanced_search = true
+      field.include_in_advanced_search = false
+      field.include_in_simple_select = false
+      field.label = "Object Type"
       field.solr_parameters = {
         "spellcheck.dictionary": "resource_type"
       }
       solr_name = solr_name("resource_type", :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+
+    config.add_search_field('media_type') do |field|
+      field.include_in_advanced_search = false
+      field.solr_parameters = {
+        "spellcheck.dictionary": "media_type"
+      }
+      solr_name = solr_name("media_type", :stored_searchable)
       field.solr_local_parameters = {
         qf: solr_name,
         pf: solr_name
@@ -371,6 +414,7 @@ class CatalogController < ApplicationController
         "spellcheck.dictionary": "format"
       }
       solr_name = solr_name("format", :stored_searchable)
+      field.include_in_advanced_search = false
       field.solr_local_parameters = {
         qf: solr_name,
         pf: solr_name
@@ -378,7 +422,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('identifier') do |field|
-      field.include_in_advanced_search = true
+      field.include_in_advanced_search = false
       field.solr_parameters = {
         "spellcheck.dictionary": "identifier"
       }
@@ -423,7 +467,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('rights_statement') do |field|
-      field.include_in_advanced_search = true
+      field.include_in_advanced_search = false
       solr_name = solr_name("rights_statement", :stored_searchable)
       field.solr_local_parameters = {
         qf: solr_name,
