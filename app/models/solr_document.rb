@@ -76,6 +76,7 @@ class SolrDocument
   attribute :region, Solr::Array, solr_name('region')
   attribute :related_image, Solr::Array, solr_name('related_image')
   attribute :resource_query, Solr::Array, solr_name('resource_query')
+  attribute :rights_statement, Solr::Array, solr_name('rights_statement')
   attribute :searchable_text, Solr::String, solr_name('searchable_text')
   attribute :series, Solr::Array, solr_name('series')
   attribute :story, Solr::Array, solr_name('story')

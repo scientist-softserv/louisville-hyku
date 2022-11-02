@@ -95,7 +95,7 @@ class Art < ActiveFedora::Base # rubocop:disable Metrics/ClassLength
   property :resource_query,
            predicate: ::RDF::URI.new("https://purl.org/vra/isRelatedTo"),
            multiple: true do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :facetable
   end
 
   # Art Metadata

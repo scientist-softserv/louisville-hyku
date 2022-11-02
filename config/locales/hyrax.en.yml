@@ -1147,6 +1147,7 @@ en:
         license: License
         member_of_collection_ids: Add to collection
         mesh: Subject (MeSH)
+        people_represented: People
         publisher: Repository
         related_url: Related resource
         resource_query: Query
