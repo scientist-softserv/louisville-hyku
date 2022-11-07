@@ -321,6 +321,7 @@ class CatalogController < ApplicationController
 
     config.add_search_field('publisher') do |field|
       field.include_in_advanced_search = false
+      field.include_in_simple_select = false
       field.label = "Repository"
       field.solr_parameters = {
         "spellcheck.dictionary": "publisher"
@@ -384,7 +385,7 @@ class CatalogController < ApplicationController
 
     config.add_search_field('resource_type') do |field|
       field.include_in_advanced_search = false
-      field.include_in_simple_select = false
+      # field.include_in_simple_select = false
       field.label = "Object Type"
       field.solr_parameters = {
         "spellcheck.dictionary": "resource_type"
