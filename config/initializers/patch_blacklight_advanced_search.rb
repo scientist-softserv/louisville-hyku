@@ -12,7 +12,11 @@ class BlacklightAdvancedSearch::QueryParser
                                                                                                   config))
     end
     queries.join(" #{keyword_op} ")
-    return queries if params[:date_start].blank? && params[:date_end].blank?
+
+    # LOUVERRIDE - interrupted advanced boolean search
+    # return queries if params[:date_start].blank? && params[:date_end].blank?
+    return queries.join(" #{keyword_op} ") if params[:date_start].blank? && params[:date_end].blank?
+
     if queries.blank?
       add_date_range_to_queries(params)
     else
