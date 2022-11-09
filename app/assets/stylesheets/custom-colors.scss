@@ -88,6 +88,7 @@ td.toggle input.active[type=submit]  { outline:1px dotted #333; }
     background-color:#ad0000; 
     color:white; 
     border-color:#9a1220;
+    text-decoration:none!important;
   }
 
   #content-wrapper nav.breadcrumb li.active { outline:none; }
