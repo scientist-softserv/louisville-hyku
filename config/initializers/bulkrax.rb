@@ -88,7 +88,7 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
       'tab_heading' => { from: ['tab_heading'] },
       'table_of_contents' => { from: ['table_of_contents'] },
       'technique' => { from: ['technique'], split: ';' },
-      'title' => { from: ['title'], split: ';' },
+      'title' => { from: ['title'] },
       'transcription_translation' => { from: ['transcription_translation'] },
       'type_of_honoree' => { from: ['type_of_honoree'] },
       'volume' => { from: ['volume'] }
