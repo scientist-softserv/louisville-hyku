@@ -270,7 +270,7 @@ HYKU_METADATA_RENDERING_ATTRIBUTES = {
   collection: {},
   collection_information: { html_dl: true },
   publisher: { render_as: :faceted, html_dl: true, label: "Repository" },
-  rights_statement: { render_as: :faceted, html_dl: true },
+  rights_statement: { html_dl: true },
   ordering_information: { html_dl: true },
   license: { render_as: :license, html_dl: true },
   related_url: { render_as: :external_link, html_dl: true, label: "Related resource" },

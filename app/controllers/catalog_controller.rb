@@ -50,7 +50,7 @@ class CatalogController < ApplicationController
     config.advanced_search[:url_key] ||= 'advanced'
     config.advanced_search[:query_parser] ||= 'dismax'
     config.advanced_search[:form_solr_parameters] ||= {}
-    config.advanced_search[:form_solr_parameters]['facet.field'] ||= %w[member_of_collections_ssim county_sim city_sim neighborhood_sim street_sim region_sim location_sim resource_type_sim media_type_sim rights_statement_tesim publisher_sim]
+    config.advanced_search[:form_solr_parameters]['facet.field'] ||= %w[member_of_collections_ssim county_sim city_sim neighborhood_sim street_sim region_sim location_sim resource_type_sim media_type_sim publisher_sim]
     config.advanced_search[:form_solr_parameters]['f.member_of_collections_ssim.facet.limit'] ||= -1
     config.advanced_search[:form_solr_parameters]['f.county_sim.facet.limit'] ||= -1
     config.advanced_search[:form_solr_parameters]['f.city_sim.facet.limit'] ||= -1
@@ -60,7 +60,6 @@ class CatalogController < ApplicationController
     config.advanced_search[:form_solr_parameters]['f.location_sim.facet.limit'] ||= -1
     config.advanced_search[:form_solr_parameters]['f.resource_type_sim.facet.limit'] ||= -1
     config.advanced_search[:form_solr_parameters]['f.media_type_sim.facet.limit'] ||= -1
-    config.advanced_search[:form_solr_parameters]['f.rights_statement_tesim.facet.limit'] ||= -1
     config.advanced_search[:form_solr_parameters]['f.publisher_sim.facet.limit'] ||= -1
 
     config.search_builder_class = CustomSearchBuilder
