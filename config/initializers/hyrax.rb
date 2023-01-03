@@ -238,7 +238,7 @@ HYKU_METADATA_RENDERING_ATTRIBUTES = {
   neighborhood: { render_as: :faceted, html_dl: true },
   city: { render_as: :faceted, html_dl: true },
   county: { render_as: :faceted, html_dl: true },
-  region: { html_dl: true },
+  region: { render_as: :faceted, html_dl: true },
   operating_area: { html_dl: true },
   subject: { render_as: :faceted, html_dl: true },
   style: { render_as: :faceted, html_dl: true },
