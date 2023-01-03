@@ -12,13 +12,13 @@ body.dashboard {
   #header-navbar { background-image: linear-gradient(to bottom,#f9d187,#f7941d); color:white; }
 
 	#content-wrapper .dropdown-menu a:hover { text-decoration:none; }
+  
 	.dropdown-menu i { margin-right:.2rem; }
 
   #header-navbar { 
-	background-color:black; 
-	z-index:2000;
+	  background-color:black; 
+	  z-index:2000;
 	}
-
 
 	#content-wrapper a.btn-primary { 
 		color:white;
@@ -34,18 +34,18 @@ body.dashboard {
   .sidebar .nav-pills > li.active > a:focus, 
   .sidebar .nav-pills > li.active > a:hover { background-color:#505050!important; }
   .sidebar .sidebar-toggle { 
-	line-height:1; 
-	width:3.6rem; 
-	height:3.6rem; 
-	display:flex;
-	align-items:center; 
-	justify-content:center;
-	right:-15px; 
-	}
+	  line-height:1; 
+  	width:3.6rem; 
+  	height:3.6rem; 
+  	display:flex;
+  	align-items:center; 
+  	justify-content:center;
+  	right:-15px; 
+  	}
   .sidebar-toggle .fa { 
-	font-size:3rem; 
-	width:3rem; 
-	}
+	  font-size:3rem; 
+	  width:3rem; 
+	  }
 
   input#check_all { margin-right:6px; }
   a.dropdown-toggle { margin-left:3px; } /* maybe add .check-all before if this interferes elsewhere */
@@ -78,8 +78,8 @@ body.dashboard {
 	.appliedFilter:hover .constraint-value { border-color:#ad0000; }
 	#content-wrapper .appliedFilter:hover .btn-default.remove { background-color:#ad0000; }
 	.btn-sm {
-		padding:.5rem 1rem; 
-		font-size:1.4rem; 
+    padding:.5rem 1rem; 
+    font-size:1.4rem; 
 	}
 	#documents th:nth-of-type(5), 
 	#documents th:nth-of-type(6) { text-align:center; }
@@ -87,6 +87,53 @@ body.dashboard {
 	#content-wrapper .pagination a:hover, 
 	#content-wrapper .pagination a:active, 
 	#content-wrapper .pagination a:focus { color:white; text-decoration:none; }
+
+
+	/* SEARCH BOX */
+
+	form.search-query-form .input-group { display:flex; }
+
+	/* COLLECTIONS */
+
+	.list-filters { 
+		display:flex; 
+		align-items:center; }
+	
+	span.constraints-label, 
+	.list-filters-label,
+ 	form.search-query-form .label, 
+	.visibility-link .label, 
+	.collections-wrapper .collections-list-table td:nth-of-type(5), 
+	.collections-wrapper .collections-list-table td:nth-of-type(6) { 
+		font-size:1.4rem; }
+
+
+	.collections-wrapper .thumbnail-title-wrapper .thumbnail-wrapper { 
+		margin-right:1rem; 
+		overflow:hidden;
+	}
+
+	.edit_collection .input-group { display:flex; }
+
+	input#collection_search, button#collection_submit { height:3.699rem; }
+
+	.collections-wrapper .collections-list-table td:nth-of-type(5) { padding-top:1.6rem; }
+	.visibility-link .label { padding:8px;} 
+
+	form.edit_collection { margin:0; }
+
+	.edit_collection input[type="submit"] { padding:6px 12px; }
+
+	#content-wrapper .view-type-group .btn-default { 
+		color:black;
+		background-color:transparent;
+		border:none;
+		border-radius:0;
+	}
+	#content-wrapper .view-type-group .btn-default.active { box-shadow:none; }
+
+	#content-wrapper .view-type-list { margin-right:1rem; }
+
 }
 
 
@@ -109,18 +156,18 @@ body.staff {
   }
 
   nav.breadcrumb { 
-	border:none; 
-	background-color: transparent; 
+  	border:none; 
+  	background-color: transparent; 
 	}
 
   dl.file-show-details {
-	display:grid; 
-	grid-template-columns: 14rem 1fr; 
-	grid-column-gap:2rem; 
+	  display:grid; 
+	  grid-template-columns: 14rem 1fr; 
+  	grid-column-gap:2rem; 
 	}
   .file-show-term dt { 
-	width:fit-content; 
-	float:none; 
+	  width:fit-content; 
+  	float:none; 
 	}
   .dl-horizontal dd { margin-left:0; }
 

@@ -50,9 +50,12 @@
 }
 
 
-#user_utility_links { display:flex; }
+#user_utility_links { display:flex; align-items:center;}
 
 ul#head-user-actions { list-style-type:none; display:flex; }
+
+.dropdown-header { font-size:1.6rem; }
+
 
 @media (max-width: 767.99px) {
   #logo-col>a>img {display:none; }
@@ -89,7 +92,6 @@ ul#head-user-actions { list-style-type:none; display:flex; }
 
 #header-navbar .dropdown.open .dropdown-menu { z-index: 1001; }
 
-#shared-locale-picker { display:none; }
 
 
 /* NAVBAR  & MASTHEAD */

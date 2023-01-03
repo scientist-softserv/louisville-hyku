@@ -35,6 +35,7 @@
     text-shadow:none;
   }
 
+  .hyrax-pages nav.navbar.navbar-default.navbar-static-top { width:100%; }
 
   .hyrax-pages .image-masthead li:active a { 
     outline: 1px dashed #333;
@@ -72,30 +73,30 @@
     height:1px; 
     margin:-1px; 
     overflow:hidden; 
-    clip:rect(0,0,0,0); 
     border:0; 
    }
-
-  form#search-form-header { margin:.5rem; }
 
   .searchbar-right .form-horizontal .control-label { white-space:nowrap; }
 
 #search-form-header .form-group { 
     display:flex; 
-    justify-content: center; 
+    justify-content: center;
+    margin-top: 3px; 
   }
 
 
-  #search-form-header .input-group {
+  #search-form-header .input-group, 
+  #collection-search-form .input-group {
     margin:0;
     width:40rem;
     display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
   }
 
-  #search-field-header { height:36.84px; }
+  #search-field-header, 
+  button#search-submit-header, 
+  input#collection_search, 
+  #collection_submit { 
+	height:3.699rem; }
 
   .input-group-btn { 
 	height:4.5rem; 
@@ -104,22 +105,54 @@
 
   #advancedWrap a { margin-left:1rem; }
 
+
+
   @media (max-width:450px) {
     #search-form-header .input-group { width:28rem; }
   }
 
   
 
-  @media (max-width: 767.99px) {
+  @media (max-width: 991.99px) {
     .searchbar-right { margin-bottom:1rem; }
     .searchbar-right .form-group { flex-direction: column; }
     .searchbar-right .form-horizontal .control-label { position:absolute; }
     #search-form-header .form-group { align-items:center; }
+    #advancedWrap { text-align:center; }
+    ul.nav.navbar-nav.col-sm-5 { margin-right:0; }
   }
 
 
-@media (min-width:980px) {
+@media (min-width:992px) {
 
-	form#search-form-header { flex-direction:row; }
+
+	nav.navbar.navbar-default.navbar-static-top>.container>.row {
+		display:flex;
+	}
+
+	ul.nav.navbar-nav.col-sm-5 { 
+		display:flex;
+		width:26rem;
+	}
+
+	.searchbar-right.navbar-right.col-sm-7 { width: calc(100% - 26rem);}
+
+	form#search-form-header { 
+		width:100%;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+	}
+
+	#advancedWrap { text-align:center; }
+
+	.navbar-nav>li>a { padding: 1.5rem .75rem; }
+
+	.navbar-static-top .navbar-nav>li>a, 
+	.hyrax-pages .image-masthead .navbar.navbar-default .navbar-nav a {
+		padding-right:0.75rem;
+		padding-left:0.75rem; 
+	}
+	li#nav-home { margin-left:4px; }
+
 }
-
