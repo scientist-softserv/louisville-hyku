@@ -1,4 +1,6 @@
 terms:
+  - id:
+    term:
   - id: Account books
     term: Account books
   - id: Advertisements
@@ -7,6 +9,8 @@ terms:
     term: Albumen prints
   - id: Architectural drawings
     term: Architectural drawings
+  - id: Bird's-eye view prints
+    term: Bird's-eye view prints
   - id: Birthday cards
     term: Birthday cards
   - id: Book covers
@@ -33,10 +37,14 @@ terms:
     term: Cigarette cards
   - id: Collages
     term: Collages
+  - id: Contact prints
+    term: Contact prints
   - id: Contact sheets
     term: Contact sheets
   - id: Digital images
     term: Digital images
+  - id: Documents
+    term: Documents
   - id: Drawings
     term: Drawings
   - id: Dye coupler negatives
@@ -63,6 +71,8 @@ terms:
     term: Illuminated manuscripts
   - id: Illuminations
     term: Illuminations
+  - id: Illustrations
+    term: Illustrations
   - id: Imperial card photographs
     term: Imperial card photographs
   - id: Indexes
@@ -141,6 +151,8 @@ terms:
     term: Screen prints
   - id: Silver printing-out paper prints
     term: Silver printing-out paper prints
+  - id: Site plans
+    term: Site plans
   - id: Slides
     term: Slides
   - id: Sound recordings

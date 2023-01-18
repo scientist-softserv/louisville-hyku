@@ -9,7 +9,7 @@ Hyrax::FileSetDerivativesService.class_eval do
                                                 {
                                                   label: :thumbnail,
                                                   format: 'jpg',
-                                                  size: '165x240',
+                                                  size: '240x180',
                                                   url: derivative_url('thumbnail'),
                                                   layer: 0
                                                 }
