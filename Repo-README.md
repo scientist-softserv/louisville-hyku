@@ -27,7 +27,7 @@ This repository includes additional information on how some contributors may be 
 - Local site:
   - With dory: https://hyku.test
   - Without dory: localhost:3000
-- Staging site: http://lv-hyku-staging.notch8.cloud/
+- Staging site: http://louisville-hyku-staging.notch8.cloud/
 - Production site: https://hyku.library.louisville.edu/
   - The server credentials are in 1Password
 - Solr: http://solr.hyku.test
