@@ -50,7 +50,7 @@ class CatalogController < ApplicationController
     config.advanced_search[:url_key] ||= 'advanced'
     config.advanced_search[:query_parser] ||= 'dismax'
     config.advanced_search[:form_solr_parameters] ||= {}
-    config.advanced_search[:form_solr_parameters]['facet.field'] ||= %w[member_of_collections_ssim county_sim city_sim neighborhood_sim street_sim region_sim location_sim resource_type_sim media_type_sim publisher_sim]
+    config.advanced_search[:form_solr_parameters]['facet.field'] ||= %w[member_of_collections_ssim county_sim city_sim neighborhood_sim street_sim region_sim location_sim resource_type_sim media_type_sim publisher_sim resource_query_sim]
     config.advanced_search[:form_solr_parameters]['f.member_of_collections_ssim.facet.limit'] ||= -1
     config.advanced_search[:form_solr_parameters]['f.county_sim.facet.limit'] ||= -1
     config.advanced_search[:form_solr_parameters]['f.city_sim.facet.limit'] ||= -1
@@ -60,7 +60,7 @@ class CatalogController < ApplicationController
     config.advanced_search[:form_solr_parameters]['f.location_sim.facet.limit'] ||= -1
     config.advanced_search[:form_solr_parameters]['f.resource_type_sim.facet.limit'] ||= -1
     config.advanced_search[:form_solr_parameters]['f.media_type_sim.facet.limit'] ||= -1
-    config.advanced_search[:form_solr_parameters]['f.publisher_sim.facet.limit'] ||= -1
+    config.advanced_search[:form_solr_parameters]['f.resource_query_sim.facet.limit'] ||= -1
 
     config.search_builder_class = CustomSearchBuilder
 
@@ -113,6 +113,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("resource_type", :facetable), limit: 5
     config.add_facet_field solr_name("media_type", :facetable), limit: 5
     config.add_facet_field solr_name("publisher", :facetable), limit: 5
+    config.add_facet_field solr_name("resource_query", :facetable), limit: 5
     
     # config.add_facet_field solr_name("keyword", :facetable), limit: 5
     # config.add_facet_field 'location_tesim', label: "Location", limit: 5
@@ -332,6 +333,20 @@ class CatalogController < ApplicationController
       }
     end
 
+    config.add_search_field('resource_query') do |field|
+      field.include_in_advanced_search = false
+      field.include_in_simple_select = false
+      field.label = "Resource_Query"
+      field.solr_parameters = {
+        "spellcheck.dictionary": "resource_query"
+      }
+      solr_name = solr_name("publisher", :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+
     config.add_search_field('date_created') do |field|
       field.include_in_advanced_search = false
       field.label = "Date Original"
@@ -364,6 +379,19 @@ class CatalogController < ApplicationController
         "spellcheck.dictionary": "people_represented"
       }
       solr_name = solr_name("people_represented", :stored_searchable)
+      field.solr_local_parameters = {
+        qf: solr_name,
+        pf: solr_name
+      }
+    end
+
+    config.add_search_field('story') do |field|
+      field.include_in_advanced_search = true
+      field.label = "Story"
+      field.solr_parameters = {
+        "spellcheck.dictionary": "story"
+      }
+      solr_name = solr_name("story", :stored_searchable)
       field.solr_local_parameters = {
         qf: solr_name,
         pf: solr_name
