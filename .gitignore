@@ -57,7 +57,6 @@ public/uploads
 
 public/assets
 public/universalviewer
-docker-compose.yml
 .DS_Store
 *~undo-tree~
 .env
