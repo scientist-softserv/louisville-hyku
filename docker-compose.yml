@@ -61,7 +61,7 @@ services:
       context: solr
       dockerfile: Dockerfile
     env_file:
-    - .env
+      - .env
     environment:
       - OOM=script
       - VIRTUAL_PORT=8983
