@@ -59,10 +59,9 @@ We distribute two configuration files:
 #### Install Docker
 - Download [Docker Desktop](https://www.docker.com/products/docker-desktop) and log in
 
-#### If this is your first time working in this repo or the Dockerfile has been updated you will need to pull your services first
+#### If this is your first time working in this repo or the Dockerfile has been updated you will need to build your services first
 
 ```bash
-  sc pull
   sc build
   ```
 
