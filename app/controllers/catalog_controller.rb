@@ -31,7 +31,7 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
     # configuration for Blacklight IIIF Content Search
     config.iiif_search = {
-      full_text_field: 'all_text_tsimv',
+      full_text_field: 'all_text_timv',
       object_relation_field: 'is_page_of_ssim',
       supported_params: %w[q page],
       autocomplete_handler: 'iiif_suggest',
@@ -64,7 +64,7 @@ class CatalogController < ApplicationController
       qt: "search",
       rows: 10,
       qf: HYKU_METADATA_RENDERING_ATTRIBUTES.keys.map { |attribute| "#{attribute}_tesim" }
-                                            .join(' ') << " title_tesim description_tesim all_text_tsimv",
+                                            .join(' ') << " title_tesim description_tesim all_text_timv",
       :"hl" => true,
       :"hl.simple.pre" => "<span class='highlight'>",
       :"hl.simple.post" => "</span>",
@@ -144,7 +144,7 @@ class CatalogController < ApplicationController
     # config.add_index_field solr_name("embargo_release_date", :stored_sortable, type: :date), label: "Embargo release date", helper_method: :human_readable_date
     # config.add_index_field solr_name("lease_expiration_date", :stored_sortable, type: :date), label: "Lease expiration date", helper_method: :human_readable_date
     # config.add_index_field solr_name("language", :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name("language", :facetable)
-    config.add_index_field 'all_text_tsimv', highlight: true, helper_method: :render_ocr_snippets
+    config.add_index_field 'all_text_timv', highlight: true, helper_method: :render_ocr_snippets
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     config.add_show_field solr_name("title", :stored_searchable)
@@ -246,7 +246,7 @@ class CatalogController < ApplicationController
       all_names = config.show_fields.values.map(&:field).join(" ")
       title_name = solr_name("title", :stored_searchable)
       field.solr_parameters = {
-        qf: "#{all_names} file_format_tesim title_tesim all_text_tsimv",
+        qf: "#{all_names} file_format_tesim title_tesim all_text_timv",
         pf: title_name.to_s
       }
     end

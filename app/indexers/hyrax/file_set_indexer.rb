@@ -24,7 +24,7 @@ module Hyrax
         solr_doc['file_format_sim']   = file_format
         solr_doc['file_size_lts'] = object.file_size[0]
         # OVERRIDE Hyrax 2.9.1 to make OCR data stored value for display
-        solr_doc['all_text_tsimv'] = object.extracted_text.content if object.extracted_text.present?
+        solr_doc['all_text_timv'] = object.extracted_text.content if object.extracted_text.present?
         solr_doc['height_is'] = Integer(object.height.first) if object.height.present?
         solr_doc['width_is']  = Integer(object.width.first) if object.width.present?
         solr_doc['visibility_ssi'] = object.visibility
