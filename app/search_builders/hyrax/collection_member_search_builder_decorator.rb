@@ -33,6 +33,7 @@ module Hyrax
     def join_for_works_from_files
       "{!join from=#{ActiveFedora.id_field} to=file_set_ids_ssim}#{dismax_query}"
     end
+  end
 end
 
 Hyrax::CollectionMemberSearchBuilder.prepend(Hyrax::CollectionMemberSearchBuilderDecorator)
