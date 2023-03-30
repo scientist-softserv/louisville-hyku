@@ -31,9 +31,8 @@ module Hyrax
 
     # join from file id to work relationship solrized file_set_ids_ssim
     def join_for_works_from_files
-      "{!join from=#{Hyrax.config.id_field} to=file_set_ids_ssim}#{dismax_query}"
+      "{!join from=#{ActiveFedora.id_field} to=file_set_ids_ssim}#{dismax_query}"
     end
-  end
 end
 
 Hyrax::CollectionMemberSearchBuilder.prepend(Hyrax::CollectionMemberSearchBuilderDecorator)
