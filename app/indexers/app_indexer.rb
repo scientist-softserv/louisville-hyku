@@ -30,14 +30,14 @@ class AppIndexer < Hyrax::WorkIndexer
       all_my_children += all_decendent_file_sets(child)
     end
     # enables us to return parents when searching for child metadata
-    all_my_children << o.member_ids
+    all_my_children << o.members.map(&:to_param)
     all_my_children.flatten!.uniq.compact
   end
 
   def ancestor_ids(o)
     a_ids = []
     o.in_works.each do |work|
-      a_ids << work.id
+      a_ids << work.to_param
       a_ids += ancestor_ids(work) if work.is_child
     end
     a_ids

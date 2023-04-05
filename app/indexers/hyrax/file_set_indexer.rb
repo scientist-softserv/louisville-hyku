@@ -52,7 +52,7 @@ module Hyrax
       def ancestor_ids(o)
         a_ids = []
         o.in_works.each do |work|
-          a_ids << work.id
+          a_ids << work.to_param
           a_ids += ancestor_ids(work) if work.is_child
         end
         a_ids
