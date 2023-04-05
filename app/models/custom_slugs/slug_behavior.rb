@@ -31,9 +31,10 @@ module CustomSlugs
     # validate that the identifier creates a unique slug across all classes
     def check_slug
       return if identifier.empty?
+      # TODO: consider if we should change `slug_tesim` to `slug_ssim` so that a strict search is done
       possible_duplicates = ActiveFedora::Base.where(slug_tesim: slug)
       has_duplicates = if new_record?
-                         possible_duplicates.count.positive?
+                         possible_duplicates.any? { |pd| pd.slug == slug }
                        else
                          possible_duplicates.detect { |c| c.id != id }
                        end
