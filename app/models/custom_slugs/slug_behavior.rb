@@ -37,7 +37,7 @@ module CustomSlugs
     # validate that the identifier creates a unique slug across all classes
     def check_slug
       return if identifier.empty?
-      possible_duplicates = exact_slug_match(slug)
+      possible_duplicates = CustomSlugs::SlugBehavior.exact_slug_match(slug)
       has_duplicates = if new_record?
                          possible_duplicates.count.positive?
                        else
