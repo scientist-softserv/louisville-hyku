@@ -25,7 +25,7 @@ module CustomSlugs
   module ActiveFedoraFinderDecorator
     def find(*args)
       # rubocop:disable Rails/FindBy
-      results = where(slug_tesim: args.first).first
+      results = CustomSlugs::SlugBehavior.exact_slug_match(args.first).first
       # rubocop:enable Rails/FindBy
       results = super(*args) if results.blank?
       results

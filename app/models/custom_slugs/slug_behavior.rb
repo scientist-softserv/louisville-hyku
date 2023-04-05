@@ -28,13 +28,18 @@ module CustomSlugs
       results
     end
 
+    def self.exact_slug_match(slug)
+      # TODO: consider if we should change `slug_tesim` to `slug_ssim` so that a strict search is done
+      # and we don't have to add the "select" method
+      ActiveFedora::Base.where(slug_tesim: slug).select { |item| item.slug == slug }
+    end
+
     # validate that the identifier creates a unique slug across all classes
     def check_slug
       return if identifier.empty?
-      # TODO: consider if we should change `slug_tesim` to `slug_ssim` so that a strict search is done
-      possible_duplicates = ActiveFedora::Base.where(slug_tesim: slug)
+      possible_duplicates = exact_slug_match(slug)
       has_duplicates = if new_record?
-                         possible_duplicates.any? { |pd| pd.slug == slug }
+                         possible_duplicates.count.positive?
                        else
                          possible_duplicates.detect { |c| c.id != id }
                        end
