@@ -24,9 +24,7 @@ module CustomSlugs
   # find by slug first, then look by id
   module ActiveFedoraFinderDecorator
     def find(*args)
-      # rubocop:disable Rails/FindBy
       results = CustomSlugs::SlugBehavior.exact_slug_match(args.first).first
-      # rubocop:enable Rails/FindBy
       results = super(*args) if results.blank?
       results
     end
