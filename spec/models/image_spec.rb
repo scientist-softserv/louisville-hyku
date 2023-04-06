@@ -11,7 +11,8 @@ RSpec.describe Image do
   end
 
   describe 'with custom slugs' do
-    let(:this_object) { create(:image) }
+    let!(:this_object) { create(:image) }
+    let(:that_object) { create(:image, identifier: ["#{this_object.identifier.first}s"]) }
 
     include_examples("object includes slugs")
   end
