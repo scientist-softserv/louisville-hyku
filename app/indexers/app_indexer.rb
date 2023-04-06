@@ -23,20 +23,20 @@ class AppIndexer < Hyrax::WorkIndexer
     end
   end
 
-  def all_decendent_file_sets(o)
+  def all_decendent_file_sets(object)
     # enables us to return parents when searching for child OCR
-    all_my_children = o.file_sets.map(&:id)
-    o.ordered_works&.each do |child|
+    all_my_children = object.file_sets.map(&:id)
+    object.ordered_works&.each do |child|
       all_my_children += all_decendent_file_sets(child)
     end
     # enables us to return parents when searching for child metadata
-    all_my_children << o.members.map(&:to_param)
+    all_my_children << object.members.map(&:to_param)
     all_my_children.flatten!.uniq.compact
   end
 
-  def ancestor_ids(o)
+  def ancestor_ids(object)
     a_ids = []
-    o.in_works.each do |work|
+    object.in_works.each do |work|
       a_ids << work.to_param
       a_ids += ancestor_ids(work) if work.is_child
     end
