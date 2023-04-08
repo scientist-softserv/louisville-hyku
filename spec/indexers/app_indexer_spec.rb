@@ -53,18 +53,18 @@ RSpec.describe AppIndexer do
     end
 
     it 'indexes the parent_work custom fields' do
-      expect(solr_document.fetch('is_child_bsi')).to eq parent_work.is_child # PASSED
-      expect(solr_document.fetch('title_ssi')).to eq parent_work.title.first # PASSED
-      expect(solr_document.fetch('identifier_ssi')).to eq parent_work.identifier.first # PASSED
+      expect(solr_document.fetch('is_child_bsi')).to eq parent_work.is_child
+      expect(solr_document.fetch('title_ssi')).to eq parent_work.title.first
+      expect(solr_document.fetch('identifier_ssi')).to eq parent_work.identifier.first
       expected_array = parent_work.members.map(&:to_param)
       expect(solr_document.fetch('file_set_ids_ssim')).to match_array(expected_array)
     end
 
     it 'indexes the childs custom fields' do
-      expect(child_work1_solr_document.fetch('is_page_of_ssim')).to include(parent_work.to_param) # PASSED
-      expect(child_work1_solr_document.fetch('is_child_bsi')).to eq child_work1.is_child # PASSED
+      expect(child_work1_solr_document.fetch('is_page_of_ssim')).to include(parent_work.to_param)
+      expect(child_work1_solr_document.fetch('is_child_bsi')).to eq child_work1.is_child
       expected_array = child_work1.file_sets.map(&:to_param)
-      expect(child_work1_solr_document.fetch('file_set_ids_ssim')).to match_array(expected_array) # PASSED
+      expect(child_work1_solr_document.fetch('file_set_ids_ssim')).to match_array(expected_array)
     end
 
     include_examples("indexes_custom_slugs")
