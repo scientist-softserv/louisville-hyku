@@ -1,14 +1,39 @@
 # frozen_string_literal: true
 
 RSpec.describe AppIndexer do
-  let(:parent_work) { create(:work) }
-  let(:child_work1) { create(:work, is_child: true) }
-  let(:child_work2) { create(:work, is_child: true) }
-  let(:ancestor_ids) { [child_work1.slug || child_work1.id, child_work2.slug || child_work2.id] }
+  let(:file_set1) { create(:file_set, id: '123') }
+  let(:file_set2) { create(:file_set, id: '456') }
+  let(:file_set3) { create(:file_set, id: '789') }
+
+  let(:child_work1) do
+    create(:work, is_child: true).tap do |work|
+      work.ordered_members << file_set1
+      work.save!
+    end
+  end
+
+  let(:child_work2) do
+    create(:work, is_child: true).tap do |work|
+      work.ordered_members << file_set2
+      work.save!
+    end
+  end
+
+  let(:parent_work) do
+    create(:work).tap do |work|
+      work.ordered_members << file_set3
+      work.ordered_members += [child_work1, file_set1]
+      work.ordered_members += [child_work2, file_set2]
+      work.save!
+    end
+  end
+
+  let(:service) { described_class.new(parent_work.reload) }
+  let(:child_work1_solr_document) { AppIndexer.new(child_work1.reload).generate_solr_document }
+  let(:child_work2_solr_document) { AppIndexer.new(child_work2.reload).generate_solr_document }
 
   describe '#generate_solr_document' do
     subject(:solr_document) { service.generate_solr_document }
-    let(:service) { described_class.new(child_work1) }
     let(:account) { create(:account, cname: 'hyky-test.me') }
 
     before do
@@ -20,66 +45,42 @@ RSpec.describe AppIndexer do
         Site.update(account: account)
         parent_work
         child_work1
-        child_work2
       end
-
-      parent_work.ordered_members += [child_work1, child_work2]
-      parent_work.save!
     end
 
-  # PASSED
-    xit "indexer has the account_cname" do
+    it "indexer has the account_cname" do
       expect(solr_document.fetch("account_cname_tesim")).to eq(account.cname)
     end
 
-  # PASSED
-    xit 'indexes child_work1 custom fields' do
-      expect(solr_document['is_child_bsi']).to eq child_work1.is_child # PASSED
-      expect(solr_document['title_ssi']).to eq child_work1.title.first # PASSED
-      expect(solr_document['identifier_ssi']).to eq child_work1.identifier.first # PASSED
+    it 'indexes the parent_work custom fields' do
+      expect(solr_document.fetch('is_child_bsi')).to eq parent_work.is_child # PASSED
+      expect(solr_document.fetch('title_ssi')).to eq parent_work.title.first # PASSED
+      expect(solr_document.fetch('identifier_ssi')).to eq parent_work.identifier.first # PASSED
+      expected_array = parent_work.members.map(&:to_param)
+      expect(solr_document.fetch('file_set_ids_ssim')).to match_array(expected_array)
     end
+
+    it 'indexes the childs custom fields' do
+      expect(child_work1_solr_document.fetch('is_page_of_ssim')).to include(parent_work.to_param) # PASSED
+      expect(child_work1_solr_document.fetch('is_child_bsi')).to eq child_work1.is_child # PASSED
+      expected_array = child_work1.file_sets.map(&:to_param)
+      expect(child_work1_solr_document.fetch('file_set_ids_ssim')).to match_array(expected_array) # PASSED
+    end
+
     include_examples("indexes_custom_slugs")
   end
 
   describe '#all_decendent_file_sets' do
-
-  before do
-    parent_work.ordered_members += [child_work1, child_work2]
-    parent_work.save!
-  end
-
-    # CURRENTLY WORKING ON
     it 'returns an array of all descendant file set ids' do
-      # Create a parent work
-      byebug
-      parent_work = create(:work)
-      # Create two child works and add them to the parent work
-      child_work1 = create(:work, is_child: true)
-      child_work2 = create(:work, in_works: [parent_work], is_child: true)
-      # Create some file sets and add them to the child works
-      file_set1 = create(:file_set)
-      file_set2 = create(:file_set, in_works: [child_work1])
-
-      # Call the all_decendent_file_sets method on the parent work
-      result = all_decendent_file_sets(parent_work)
-
-      # Expect the result to include the ids of the file sets
-      expect(result).to include(file_set1.id, file_set2.id)
+      expected_array = [file_set1.id, file_set2.id, file_set3.id, child_work1.to_param, child_work2.to_param]
+      expect(service.all_decendent_file_sets(parent_work)).to match_array(expected_array)
     end
   end
 
   describe '#ancestor_ids' do
-    # PASSED
-  xit 'returns an array of all ancestor work ids' do
-      expect(ancestor_ids).to contain_exactly(child_work1.slug || child_work1.id, child_work2.slug || child_work2.id)
-    end
-  end
-
-  describe '#to_param' do
-    # PASSED
-    xit 'returns the slug or the id of the work' do
-      expect(child_work1.to_param).to eq(child_work1.slug || child_work1.id)
-      expect(child_work2.to_param).to eq(child_work2.slug || child_work2.id)
+    it 'returns an array of all ancestor work slugs/ids' do
+      expected_array = parent_work.in_works.map(&:to_param)
+      expect(service.ancestor_ids(parent_work)).to match_array(expected_array)
     end
   end
 
