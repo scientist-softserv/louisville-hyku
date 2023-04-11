@@ -91,6 +91,7 @@ group :development do
   gem 'easy_translate'
   gem 'scss_lint', require: false
   gem 'spring', '~> 1.7'
+  gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
