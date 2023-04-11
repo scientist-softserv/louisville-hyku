@@ -57,7 +57,9 @@ RSpec.describe AppIndexer do
       expect(solr_document.fetch('is_child_bsi')).to eq parent_work.is_child
       expect(solr_document.fetch('title_ssi')).to eq parent_work.title.first
       expect(solr_document.fetch('identifier_ssi')).to eq parent_work.identifier.first
+      # rubocop:disable Metrics/LineLength
       expected_array = [file_set1.to_param, file_set2.to_param, file_set3.to_param, child_work1.to_param, child_work2.to_param]
+      # rubocop:enable Metrics/LineLength
       expect(solr_document.fetch('file_set_ids_ssim')).to match_array(expected_array)
     end
 
@@ -70,14 +72,18 @@ RSpec.describe AppIndexer do
 
     describe '#descendent_member_ids_for' do
       it 'returns an array of all descendant file set ids' do
+        # rubocop:disable Metrics/LineLength
         expected_array = [file_set1.to_param, file_set2.to_param, file_set3.to_param, child_work1.to_param, child_work2.to_param]
+        # rubocop:enable Metrics/LineLength
         expect(service.descendent_member_ids_for(parent_work)).to match_array(expected_array)
       end
     end
 
     describe '#ancestor_ids' do
       it 'returns an array of all ancestor slugs/ids' do
+        # rubocop:disable Metrics/LineLength
         expected_array = [file_set1.to_param, file_set2.to_param, file_set3.to_param, child_work1.to_param, child_work2.to_param]
+        # rubocop:enable Metrics/LineLength
         expect(service.ancestor_ids(parent_work)).to match_array(expected_array)
       end
     end
