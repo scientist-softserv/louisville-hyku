@@ -19,27 +19,26 @@ class AppIndexer < Hyrax::WorkIndexer
       solr_doc['title_ssi'] = object.title.first
       solr_doc['identifier_ssi'] = object.identifier.first
       solr_doc['is_page_of_ssim'] = ancestor_ids(object)
-      solr_doc['file_set_ids_ssim'] = all_decendent_file_sets(object)
+      solr_doc['file_set_ids_ssim'] = descendent_member_ids_for(object)
     end
   end
 
-  def all_decendent_file_sets(object)
-    # enables us to return parents when searching for child OCR
-    all_my_children = object.file_sets.map(&:id)
+  def descendent_member_ids_for(object)
+    file_set_ids_array = object.file_sets.map(&:id)
     object.ordered_works&.each do |child|
-      all_my_children += all_decendent_file_sets(child)
+      file_set_ids_array += descendent_member_ids_for(child)
     end
-    # enables us to return parents when searching for child metadata
-    all_my_children << object.members.map(&:to_param)
-    all_my_children.flatten!.uniq.compact
+    file_set_ids_array << object.members.map(&:to_param)
+    file_set_ids_array.flatten.uniq.compact
   end
 
   def ancestor_ids(object)
-    a_ids = []
+    ancestor_ids_array = []
     object.in_works.each do |work|
-      a_ids << work.to_param
-      a_ids += ancestor_ids(work) if work.is_child
+      ancestor_ids_array << work.to_param
+      ancestor_ids_array += ancestor_ids(work) if work.is_child
     end
-    a_ids
+    ancestor_ids_array << object.members.map(&:to_param)
+    ancestor_ids_array.flatten.uniq.compact
   end
 end

@@ -92,6 +92,7 @@ group :development do
   gem 'scss_lint', require: false
   gem 'spring', '~> 1.7'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-commands-rspec'
 end
 
 # Bulkrax
