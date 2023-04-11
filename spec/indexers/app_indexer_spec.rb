@@ -34,6 +34,7 @@ RSpec.describe AppIndexer do
 
   describe '#generate_solr_document' do
     subject(:solr_document) { service.generate_solr_document }
+
     let(:account) { create(:account, cname: 'hyky-test.me') }
 
     before do
