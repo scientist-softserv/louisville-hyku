@@ -12,7 +12,8 @@ RSpec.describe Text do
   end
 
   describe 'with custom slugs' do
-    let(:this_object) { create(:text) }
+    let!(:this_object) { create(:text) }
+    let(:that_object) { create(:text, identifier: ["#{this_object.identifier.first}s"]) }
 
     include_examples("object includes slugs")
   end

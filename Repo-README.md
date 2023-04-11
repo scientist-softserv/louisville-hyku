@@ -27,7 +27,7 @@ This repository includes additional information on how some contributors may be 
 - Local site:
   - With dory: https://hyku.test
   - Without dory: localhost:3000
-- Staging site: http://lv-hyku-staging.notch8.cloud/
+- Staging site: http://louisville-hyku-staging.notch8.cloud/
 - Production site: https://hyku.library.louisville.edu/
   - The server credentials are in 1Password
 - Solr: http://solr.hyku.test
@@ -59,10 +59,9 @@ We distribute two configuration files:
 #### Install Docker
 - Download [Docker Desktop](https://www.docker.com/products/docker-desktop) and log in
 
-#### If this is your first time working in this repo or the Dockerfile has been updated you will need to pull your services first
+#### If this is your first time working in this repo or the Dockerfile has been updated you will need to build your services first
 
 ```bash
-  sc pull
   sc build
   ```
 
