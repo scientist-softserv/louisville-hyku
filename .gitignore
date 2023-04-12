@@ -60,6 +60,5 @@ public/universalviewer
 *~undo-tree~
 .env
 yarn-error.log
-solr/security.json
 .env_dev
 .env_production
