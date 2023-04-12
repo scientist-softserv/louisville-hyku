@@ -55,7 +55,8 @@ module Hyrax
           ancestor_ids_array << work.to_param
           ancestor_ids_array += ancestor_ids(work) if work.is_child
         end
-        ancestor_ids_array << object.file_sets.map(&:to_param)
+
+        # flatten nested array
         ancestor_ids_array.flatten.uniq.compact
       end
 
