@@ -25,12 +25,7 @@ WORKER_IMAGE="${WORKER_IMAGE:-ghcr.io/samvera/hyku/worker}"
 DEPLOY_TAG="${DEPLOY_TAG:-latest}"
 WORKER_TAG="${WORKER_TAG:-$DEPLOY_TAG}"
 
-helm chart pull ghcr.io/samvera/hyrax/hyrax-helm:$CHART_VERSION
-helm chart export ghcr.io/samvera/hyrax/hyrax-helm:$CHART_VERSION
-
-DOLLAR=$ envsubst < ops/gitlab-secret.tmpl.yaml > ops/gitlab-secret.yaml
-kubectl apply -f ops/gitlab-secret.yaml
-
+helm pull --untar oci://ghcr.io/samvera/hyrax/hyrax-helm --version $CHART_VERSION
 helm repo update
 
 helm upgrade \
@@ -40,7 +35,7 @@ helm upgrade \
     --set image.repository="$DEPLOY_IMAGE" \
     --set image.tag="$DEPLOY_TAG" \
     --set worker.image.repository="$WORKER_IMAGE" \
-    --set worker.image.tag="$DEPLOY_TAG" \
+    --set worker.image.tag="$WORKER_TAG" \
     $HELM_EXTRA_ARGS \
     --namespace="$namespace" \
     --create-namespace \
