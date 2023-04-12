@@ -31,7 +31,7 @@ volumes:
     type: "cifs"
     device: "//136.165.112.51/Groups/Digital/HykuImports"
     o: "addr=136.165.112.51,ro,cached"
-    o: "uid=0,username=hyku,password=iuse4rchbtw!,file_mode=0777,dir_mode=0777"
+    o: "uid=0,username=${IMPORT_USER},password=${IMPORT_PASSWORD},file_mode=0777,dir_mode=0777"
 
 networks:
   internal:
