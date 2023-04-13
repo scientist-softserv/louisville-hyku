@@ -1,0 +1,5 @@
+secret:
+  ignored-matches:
+  - match: 97b531e2244187d996bb45082f74f8914c8709136a772e4ac31359ee09a27ea8
+    name: Company Email Password - /Users/rob/Work/Lousiville/louisville-hyku/.env.development
+version: 2
