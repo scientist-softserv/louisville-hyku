@@ -103,7 +103,7 @@ services:
     volumes:
       - fcrepo:/data:cached
       - /home/deploy/Backups/fedora:/media/backups
-     env_file:
+    env_file:
       - .env
     environment:
       - VIRTUAL_PORT=8080
