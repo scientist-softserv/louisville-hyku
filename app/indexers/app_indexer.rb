@@ -24,6 +24,7 @@ class AppIndexer < Hyrax::WorkIndexer
   end
 
   def descendent_member_ids_for(object)
+    # enables us to return parents when searching for child OCR
     file_set_ids_array = object.file_sets.map(&:id)
     object.ordered_works&.each do |child|
       file_set_ids_array += descendent_member_ids_for(child)
