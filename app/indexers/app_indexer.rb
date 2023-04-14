@@ -29,6 +29,7 @@ class AppIndexer < Hyrax::WorkIndexer
     object.ordered_works&.each do |child|
       file_set_ids_array += descendent_member_ids_for(child)
     end
+    # enables us to return parents when searching for child metadata
     file_set_ids_array << object.members.map(&:to_param)
     file_set_ids_array.flatten.uniq.compact
   end
