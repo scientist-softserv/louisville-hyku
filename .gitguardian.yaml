@@ -1,0 +1,9 @@
+secret:
+  ignored-matches:
+  - match: 97b531e2244187d996bb45082f74f8914c8709136a772e4ac31359ee09a27ea8
+    name: Company Email Password - /Users/rob/Work/Lousiville/louisville-hyku/.env.development
+  - match: e436d359b3446fb34fa9ba93e40a7a5db03cb859f1c96ed7ff998cae78696f2f
+    name: Basic Auth String - ops/staging-deploy.tmpl.yaml
+  - match: 4c3d6bc8be527e97d12b21f6401eb31454f0e8fc6648b4126b9e8c13116edde6
+    name: Basic Auth String - ops/staging-deploy.tmpl.yaml
+version: 2

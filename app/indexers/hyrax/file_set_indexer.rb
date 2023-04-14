@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# OVERRIDE: Hyrax 2.9.1 to change all_text_timv to all_text_tsimv
+# OVERRIDE: Hyrax 2.9.1 to change all_text_tsimv to all_text_timv
 # Would like the OCR text to display in search results
 # so it needs to be a stored value
 
@@ -49,13 +49,15 @@ module Hyrax
 
     private
 
-      def ancestor_ids(o)
-        a_ids = []
-        o.in_works.each do |work|
-          a_ids << work.id
-          a_ids += ancestor_ids(work) if work.is_child
+      def ancestor_ids(object)
+        ancestor_ids_array = []
+        object.in_works.each do |work|
+          ancestor_ids_array << work.to_param
+          ancestor_ids_array += ancestor_ids(work) if work.is_child
         end
-        a_ids
+
+        # flatten nested array
+        ancestor_ids_array.flatten.uniq.compact
       end
 
       def digest_from_content
