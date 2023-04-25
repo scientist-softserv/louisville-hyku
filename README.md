@@ -43,7 +43,7 @@ Jump In: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samv
 
 #### Dory
 
-On OS X or Linux we recommend running [Dory](https://github.com/FreedomBen/dory). It acts as a proxy allowing you to access domains locally such as hyku.test or tenant.hyku.test, making multitenant development more straightforward and prevents the need to bind ports locally. Be sure to [adjust your ~/.dory.yml file to support the .test tld](https://github.com/FreedomBen/dory#config-file).  You can still run in development via docker with out Dory. To do so, copy `docker-compose.override-nodory.yml` to `docker-compose.override.yml` before starting doing docker-compose up.  You can then see the application t the loopback domain 'lvh.me:3000'.
+On OS X or Linux we recommend running [Dory](https://github.com/FreedomBen/dory). It acts as a proxy allowing you to access domains locally such as hyku.test or tenant.hyku.test, making multitenant development more straightforward and prevents the need to bind ports locally. Be sure to [adjust your ~/.dory.yml file to support the .test tld](https://github.com/FreedomBen/dory#config-file).  You can still run in development via docker with out Dory. To do so, copy `docker-compose.override-nodory.yml` to `docker-compose.override.yml` before starting doing docker-compose up.  You can then see the application on the loopback domain 'hyku.test'.
 
 ```bash
 gem install dory
@@ -54,8 +54,7 @@ dory up
 
 ```bash
 docker compose build
-docker compose up
-docker compose exec web bundle exec rails db:seed
+docker compose up web
 ```
 
 This command starts the whole stack in individual containers allowing Rails to be started or stopped independent of the other services.  Once that starts (you'll see the line `Passenger core running in multi-application mode.` to indicate a successful boot), you can view your app in a web browser with at either hyku.test or localhost:3000 (see above).  When done `docker-compose stop` shuts down everything.
@@ -67,6 +66,51 @@ The full spec suite can be run in docker locally. There are several ways to do t
 ```bash
 docker compose exec web rake
 ```
+###Troubleshooting
+- Was the Dockerfile changed on your most recent `git pull`? Refer to the instructions above
+- Double check your dory set up
+####Run migrations and seed the database
+You should not need to do any of this manual setup due to the initialize_app step in the docker compose file that will run migrations and seed your database automatically, but in case you need to know how to do this manually you can:
+```bash
+docker compose exec web bash
+bundle exec rails db:create db:schema:load db:migrate db:seed
+```
+Once these are done, you may need to stop and start the containers to ensure the worker container is picking up the database migration.
+
+####Starting Sidekiq on the web container
+- Issue: Sidekiq isn't working (e.g.: importer/exporter status stays stuck at "pending")
+  - Try:
+    ``` bash
+    docker compose exec web bash
+    sidekiq
+    ```
+
+####Assets don't display correctly
+Issue: Assets don't display correctly (e.g. the text on the homepage is all jumbled)
+  - Try:
+    ``` bash
+    docker compose down -v
+    docker compose build
+    docker compose up web
+    ```
+    Then recompile the assets using [these instructions](#access-the-containers)
+
+####No default admin set
+Issue: No default admin set
+  - Try:
+    - make sure you're signed in with the user defined at `ENV['INITIAL_ADMIN_EMAIL']`
+    ``` bash
+    user = User.find_or_create_by(email: ENV['INITIAL_ADMIN_EMAIL'])
+    user.is_superadmin?
+    # if the above returns false, make your user a superadmin
+    # which is what is should have been already because of the seeds
+    user.add_role(:superadmin)
+    ```
+
+####Sidekiq doesn't display its UI page
+You can't access https://hyku.test/sidekiq
+  - Try: comment out the do block around `mount Sidekiq::Web => '/sidekiq'` in routes.rb
+
 
 ### With out Docker
 
