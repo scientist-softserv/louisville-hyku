@@ -22,7 +22,8 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
       upload_group.each do |uploaded_file|
         next if uploaded_file.file_set_uri.present?
         Sidekiq.logger.error("uploaded files block is starting #{Time.now.utc} :: Work ID #{work.id}")
-        actor = Hyrax::Actors::FileSetActor.new(FileSet.create, user)
+        created_file_set = work_attributes[:file_set_id].present? ? FileSet.create(id: work_attributes[:file_set_id]) : FileSet.create
+        actor = Hyrax::Actors::FileSetActor.new(created_file_set, user)
         uploaded_file.update(file_set_uri: actor.file_set.uri)
         actor.file_set.permissions_attributes = work_permissions
         metadata[:is_derived] = uploaded_file.derived?

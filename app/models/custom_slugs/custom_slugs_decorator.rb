@@ -64,7 +64,7 @@ module CustomSlugs
             from_fedora = load_from_fedora(hit['fedora_id_ssi'], cast) if hit['fedora_id_ssi'].present?
             from_fedora = load_from_fedora(hit[ActiveFedora.id_field], cast) if from_fedora.blank?
             yield(from_fedora)
-          rescue Ldp::Gone
+          rescue Ldp::Gone, ActiveFedora::ObjectNotFoundError
             # rubocop:disable Metrics/LineLength
             ActiveFedora::Base.logger.error "Although #{hit[ActiveFedora.id_field]} was found in Solr, it doesn't seem to exist in Fedora. The index is out of synch."
             # rubocop:enable Metrics/LineLength
