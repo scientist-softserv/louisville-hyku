@@ -17,6 +17,12 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
         # rubocop:enable Rails/DynamicFindBy
         return search_by_identifier if attributes[work_identifier].present?
       end
+
+      # TODO: documentation
+      def permitted_attributes
+        permitted_attrs = super
+        permitted_attrs += [:file_set_id]
+      end
     end
   end
 
