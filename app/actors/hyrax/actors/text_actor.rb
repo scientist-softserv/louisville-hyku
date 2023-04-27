@@ -8,7 +8,7 @@ module Hyrax
       # TODO: documentation
       def clean_attributes(attributes)
         clean_attrs = super
-        clean_attrs.except(:file_set_id)
+        clean_attrs.except(:file_set_ids)
       end
     end
   end

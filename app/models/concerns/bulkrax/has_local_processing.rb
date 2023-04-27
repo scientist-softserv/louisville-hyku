@@ -6,9 +6,9 @@ module Bulkrax
     # add any special processing here, for example to reset a metadata property
     # to add a custom property from outside of the import data
     def add_local
-      return if record['file_set_id'].blank?
+      return if record['file_set_ids'].blank?
 
-      self.parsed_metadata['file_set_id'] = record['file_set_id']
+      self.parsed_metadata['file_set_ids'] = record['file_set_ids']
     end
   end
 end
