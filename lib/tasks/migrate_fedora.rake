@@ -3,6 +3,8 @@
 namespace :louisville do
   desc 'Migrate metadata from a simple file Fedora db to a postgres-backed Fedora db without reprocessing files'
   task migrate_fedora: [:environment] do
+    AccountElevator.switch!(Account.first.cname)
+
     Hyrax::CollectionType.find_or_create_default_collection_type
     Hyrax::CollectionType.find_or_create_admin_set_type
 
@@ -23,7 +25,7 @@ namespace :louisville do
       importer = Bulkrax::Importer.find(importer_id)
       importer.entries.find_each do |entry|
         begin
-          if entry.class.to_s.contains?('Collection')
+          if entry.class.to_s.include?('Collection')
             collection_ids << entry.id
             next
           end
@@ -41,8 +43,8 @@ namespace :louisville do
 
     collection_ids.each do |collection_id|
       begin
-        puts "Importing #{entry.class} #{entry.id}"
         entry = Bulkrax::Entry.find(collection_id)
+        puts "Importing #{entry.class} #{entry.id}"
         fedora_id = SolrDocument.find(entry.identifier.truncate(75, omission: '').parameterize.underscore).fedora_id
         entry.raw_metadata['id'] = fedora_id
         entry.save
