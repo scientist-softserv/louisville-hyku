@@ -18,13 +18,14 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
     metadata = visibility_attributes(work_attributes)
     visibility_attributes(work_attributes)
     actors = []
-    file_set_ids = work_attributes[:file_set_ids]
+    file_set_ids_to_restore = work_attributes[:file_set_ids_to_restore]
     uploaded_files.in_groups_of(10, false) do |upload_group|
       upload_group.each do |uploaded_file|
         next if uploaded_file.file_set_uri.present?
         Sidekiq.logger.error("uploaded files block is starting #{Time.now.utc} :: Work ID #{work.id}")
-        created_file_set = if file_set_ids.present?
-                             file_set_id = file_set_ids.shift
+        created_file_set = if file_set_ids_to_restore.present?
+                             # TODO: warn this relies on the order data gets indexed
+                             file_set_id = file_set_ids_to_restore.shift
                              FileSet.create(id: file_set_id)
                            else
                              FileSet.create

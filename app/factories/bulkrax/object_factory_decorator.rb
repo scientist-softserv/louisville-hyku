@@ -21,7 +21,7 @@ if ENV.fetch('HYKU_BULKRAX_ENABLED', false)
       # TODO: documentation
       def permitted_attributes
         permitted_attrs = super
-        permitted_attrs += [:file_set_ids]
+        permitted_attrs += [:file_set_ids_to_restore]
       end
     end
   end

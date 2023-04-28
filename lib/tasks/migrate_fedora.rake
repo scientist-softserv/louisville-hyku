@@ -58,12 +58,12 @@ namespace :louisville do
           slug = entry.identifier.truncate(75, omission: '').parameterize.underscore
           # TODO: Includes child works. This will break if :file_set_ids_ssim is indexed
           # in a different order since AttachFilesToWorkJob#perform calls #shift on them
-          file_set_ids = SolrDocument.find(slug).file_set_ids
-          # file_set_ids is a transient attribute; it does not directly map to any metadata property.
-          # It is custom to this task.
+          file_set_ids_to_restore = SolrDocument.find(slug).file_set_ids
+          # file_set_ids_to_restore is a transient attribute; it does not directly map
+          # to any metadata property. It is custom to this task.
           # Passing an Array of IDs to the Entry's raw_metadata will lead to
           # that record's FileSet children being created with the provided IDs.
-          entry.raw_metadata['file_set_ids'] = file_set_ids
+          entry.raw_metadata['file_set_ids_to_restore'] = file_set_ids_to_restore
           entry.save
           entry.build
         rescue => e # rubocop:disable Style/RescueStandardError
