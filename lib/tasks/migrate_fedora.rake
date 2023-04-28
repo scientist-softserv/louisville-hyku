@@ -46,7 +46,7 @@ namespace :louisville do
           entry.save
           entry.build
         rescue => e # rubocop:disable Style/RescueStandardError
-          errors[entry.id] = e.message
+          errors[entry.id] = "#{e.class} - #{e.message}"
         end
       end
     end
@@ -61,7 +61,7 @@ namespace :louisville do
         entry.save
         entry.build
       rescue => e # rubocop:disable Style/RescueStandardError
-        errors[entry.id] = e.message
+        errors[entry.id] = "#{e.class} - #{e.message}"
       end
     end
 
@@ -70,8 +70,8 @@ namespace :louisville do
     end
 
     if errors.any?
-      error_log = File.open(File.join(Rails.root, 'tmp', 'migrate_fedora_errors.log'), 'w')
-      error_log.puts errors.inspect
+      error_log = File.open(Rails.root.join('tmp', 'migrate_fedora_errors.json'), 'w')
+      error_log.puts errors.to_json
       error_log.close
 
       logger.error '************************************************************'
