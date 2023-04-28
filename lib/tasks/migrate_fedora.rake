@@ -3,8 +3,9 @@
 namespace :louisville do
   desc 'Migrate metadata from a simple file Fedora db to a postgres-backed Fedora db without reprocessing files'
   task migrate_fedora: [:environment] do
-    logger = Logger.new(Rails.root.join('tmp/migrate_fedora.log'))
+    logger = Logger.new(Rails.root.join('tmp', 'migrate_fedora.log'))
 
+    # NOTE: Only works for single tenant Hyku apps
     AccountElevator.switch!(Account.first.cname)
 
     Hyrax::CollectionType.find_or_create_default_collection_type
@@ -15,11 +16,13 @@ namespace :louisville do
     begin
       AdminSet.find_or_create_default_admin_set_id
     rescue ActiveRecord::RecordNotUnique => e
-      logger.debug '************************************************************'
-      logger.debug "Suppressing #{e.class} error since it is expected."
-      logger.debug 'The PermissionTemplate for the default AdminSet already exists, but tries to recreate itself and complains.'
-      logger.debug 'At this point, however, the default AdminSet has been created successfully, which is what we care about.'
-      logger.debug '************************************************************'
+      logger.debug("************************************************************")
+      logger.debug("Suppressing #{e.class} error since it is expected.")
+      logger.debug("The PermissionTemplate for the default AdminSet already exists,")
+      logger.debug("but tries to recreate itself and complains.")
+      logger.debug("At this point, however, the default AdminSet has been created successfully,")
+      logger.debug("which is what we care about.")
+      logger.debug("************************************************************")
     end
 
     errors = {}
@@ -42,7 +45,7 @@ namespace :louisville do
           entry.raw_metadata['file_set_ids'] = file_set_ids
           entry.save
           entry.build
-        rescue => e
+        rescue => e # rubocop:disable Style/RescueStandardError
           errors[entry.id] = e.message
         end
       end
@@ -57,7 +60,7 @@ namespace :louisville do
         entry.raw_metadata['id'] = fedora_id
         entry.save
         entry.build
-      rescue => e
+      rescue => e # rubocop:disable Style/RescueStandardError
         errors[entry.id] = e.message
       end
     end
