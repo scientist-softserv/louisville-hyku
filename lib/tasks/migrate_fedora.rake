@@ -14,6 +14,11 @@ namespace :louisville do
     # Fedora database. It is designed to process Fedora metadata only; no file binary or
     # derivative processing will occur, saving time and system resources. Instead, it will
     # link up the newly created Fedora records with the existing binary and derivative data.
+    #
+    # TODO: Summarize decisions made in this task:
+    #         - Why do we do Collections after all the works and FileSets?
+    #         - Why do we restore the original IDs for Collections and FileSets, but not works?
+    #         - Etc.
 
     logger = Logger.new(Rails.root.join('tmp', 'migrate_fedora.log'))
 
@@ -56,8 +61,10 @@ namespace :louisville do
           # we parse the slug the same way the app does it.
           # @see CustomSlugs::SlugBehavior#set_slug
           slug = entry.identifier.truncate(75, omission: '').parameterize.underscore
-          # TODO: Includes child works. This will break if :file_set_ids_ssim is indexed
-          # in a different order since AttachFilesToWorkJob#perform calls #shift on them
+          # SolrDocument#file_set_ids includes child work IDs. This will break if :file_set_ids_ssim
+          # is indexed in a different order since AttachFilesToWorkJob#perform calls #shift on them.
+          # @see AttachFilesToWorkJob#perform
+          # @see AppIndexer#descendent_member_ids_for
           file_set_ids_to_restore = SolrDocument.find(slug).file_set_ids
           # file_set_ids_to_restore is a transient attribute; it does not directly map
           # to any metadata property. It is custom to this task.
