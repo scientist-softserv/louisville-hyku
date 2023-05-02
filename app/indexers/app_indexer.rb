@@ -23,6 +23,13 @@ class AppIndexer < Hyrax::WorkIndexer
     end
   end
 
+  # lib/tasks/migrate_fedora.rake relies on FileSets being listed first in
+  # these descendents. If #ordered_works were listed above #file_sets, for
+  # example, that task would fail to restore FileSets without
+  # reprocessing their files.
+  #
+  # @see lib/tasks/migrate_fedora.rake
+  # @see AttachFilesToWorkJob#perform
   def descendent_member_ids_for(object)
     # enables us to return parents when searching for child OCR
     file_set_ids_array = object.file_sets.map(&:id)

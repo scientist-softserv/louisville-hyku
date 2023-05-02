@@ -101,23 +101,20 @@ services:
       - /home/deploy/Backups/fedora:/media/backups
     env_file:
       - .env
-    environment:
-      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/jdbc-postgresql/repository.json" -Dfcrepo.postgresql.host=db -Dfcrepo.postgresql.username=${DB_USER} -Dfcrepo.postgresql.password=${DB_PASSWORD:-hyku} -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/fcrepo.binary.directory" -Djava.io.tmpdir="/data/tmp"
     expose:
       - 8080
     ports:
       - 127.0.0.1:8080:8080
     networks:
       internal:
+    depends_on:
+      initialize_fedora_db:
+        condition: service_completed_successfully
 
   db:
     image: postgres:11.1
     env_file:
       - .env
-    environment:
-      - POSTGRES_DB=${DATABASE_NAME}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_USER=${DATABASE_USER}
     volumes:
       - db:/var/lib/postgresql/data
     networks:
@@ -181,6 +178,14 @@ services:
         chown -R app:app /app/samvera/hyrax-webapp/public/assets &&
         chown -R app:app /app/samvera/hyrax-webapp/tmp/cache
         chown -R app:app /app/samvera/hyrax-webapp/db/schema.rb
+
+  initialize_fedora_db:
+    <<: *app
+    entrypoint: ["sh", "-x", "-c"]
+    command: ./bin/create-fcrepo-pg-db.sh
+    depends_on:
+      db:
+        condition: service_started
 
   initialize_app:
     <<: *app
