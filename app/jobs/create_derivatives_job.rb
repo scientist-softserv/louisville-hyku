@@ -1,3 +1,7 @@
+# OVERRIDE Hyrax v2.9.6 Short-circuit derivative creation for Fedora migration
+# @see lib/tasks/migrate_fedora.rake
+# TODO: Delete this file after Fedora data migration
+
 class CreateDerivativesJob < Hyrax::ApplicationJob
   queue_as Hyrax.config.ingest_queue_name
 
@@ -7,11 +11,13 @@ class CreateDerivativesJob < Hyrax::ApplicationJob
   def perform(file_set, file_id, filepath = nil)
     return if file_set.video? && !Hyrax.config.enable_ffmpeg
 
+    # OVERRIDE BEGIN
     path = Hyrax::DerivativePath.derivative_path_for_reference(file_set, 'thumbnail')
     if File.exist?(path)
       file_set.parent.update_index if parent_needs_reindex?(file_set)
       return
     end
+    # OVERRIDE END
 
     filename = Hyrax::WorkingDirectory.find_or_retrieve(file_id, file_set.id, filepath)
 
