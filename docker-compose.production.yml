@@ -176,7 +176,7 @@ services:
       - >
         chown -R app:app /app/samvera/hyrax-webapp/public/uploads &&
         chown -R app:app /app/samvera/hyrax-webapp/public/assets &&
-        chown -R app:app /app/samvera/hyrax-webapp/tmp/cache
+        chown -R app:app /app/samvera/hyrax-webapp/tmp/cache &&
         chown -R app:app /app/samvera/hyrax-webapp/db/schema.rb
 
   initialize_fedora_db:
