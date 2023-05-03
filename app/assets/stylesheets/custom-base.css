@@ -10,6 +10,8 @@ body { margin-bottom:0; }
 nav.navbar.navbar-default.navbar-static-top > .container > .row { margin-top:-1px; }
 nav li.active { outline: 1px dotted white; }
 
+/* hide language change option */
+#shared-locale-picker { display:none; }
 
 
 /* override ruby gem which displays text "Too many items, can not select all." ADA issues */
@@ -30,11 +32,15 @@ nav li.active { outline: 1px dotted white; }
 
 #canary-tool-tip { display:none; }
 
+nav.navbar.navbar-default.navbar-static-top { width:100%; }
+
 
 @media (min-width:1200px) { 
 	#header-navbar .container, 
 	nav.navbar-static-top .container, 
 	#content-wrapper.container { width:100%; }
+
+	.hyrax-contact_form #content-wrapper.container { width:1170px;}
 
 	div#content-wrapper.container { padding:0 8rem 4rem; }
 

@@ -136,7 +136,7 @@ class CatalogController < ApplicationController
     config.add_index_field solr_name("searchable_text", :stored_searchable), itemprop: 'searchable_text', label: 'Searchable Text', helper_method: :iconify_auto_link
     # config.add_index_field solr_name("keyword", :stored_searchable), itemprop: 'keywords', link_to_search: solr_name("keyword", :facetable)
     config.add_index_field solr_name("date_created", :stored_searchable), itemprop: 'dateCreated'
-    config.add_index_field solr_name("subject", :stored_searchable), itemprop: 'subject', link_to_search: solr_name("subject", :facetable)
+    # config.add_index_field solr_name("subject", :stored_searchable), itemprop: 'subject', link_to_search: solr_name("subject", :facetable)
     # config.add_index_field solr_name("decade", :stored_searchable), itemprop: 'decade', link_to_search: solr_name("decade", :facetable)
     # config.add_index_field solr_name("creator", :stored_searchable), itemprop: 'creator', link_to_search: solr_name("creator", :facetable)
     # config.add_index_field solr_name("contributor", :stored_searchable), itemprop: 'contributor', link_to_search: solr_name("contributor", :facetable)

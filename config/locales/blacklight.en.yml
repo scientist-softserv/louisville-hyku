@@ -1,6 +1,6 @@
 en:
   blacklight:
-    application_name: 'Hyku'
+    application_name: 'University of Louisville Digital Collections'
     search:
       fields:
         facet:
@@ -87,7 +87,10 @@ en:
           style_tesim: Style
           technique_tesim: Technique
           title_tesim: Title
-
+      page_title:
+          title: 'Search Page'
+          constraint: '%{label}: %{value}'
+          many_constraint_values: '%{values} selected'
     bookmarks:
       title: 'Bookmarks'
       page_title: 'Bookmarks - %{application_name}'

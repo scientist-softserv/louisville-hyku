@@ -1,6 +1,12 @@
 @charset "utf-8";
 /* CSS Document  custom-colors.scss */
 
+/* LINKS */
+a:focus,
+.dropdown-toggle:focus { 
+	outline:2px dotted #333; 
+	outline-offset: 2px;
+}
 
 
 #content-wrapper a, 
@@ -25,14 +31,6 @@
 	text-decoration:none; 
 }
 
-
-#content-wrapper a:focus, 
-.btn:active, 
-.facets-toggle:active, 
-td.toggle input[type=submit]:active, 
-.btn.active, 
-.active.facets-toggle, 
-td.toggle input.active[type=submit]  { outline:1px dotted #333; } 
 
 
 
@@ -91,6 +89,7 @@ td.toggle input.active[type=submit]  { outline:1px dotted #333; }
     text-decoration:none!important;
   }
 
+
   #content-wrapper nav.breadcrumb li.active { outline:none; }
   
   
@@ -148,6 +147,7 @@ td.toggle input.active[type=submit]  { outline:1px dotted #333; }
 }
 
 
+
 /* SORT, PER PAGE, AND VIEW TYPE */
 
 body.public-facing #sort-dropdown .dropdown-toggle, 
@@ -166,6 +166,7 @@ body.staff #per_page-dropdown .dropdown-toggle {
   }
 
 #sortAndPerPage .btn-group.open button.btn.btn-default.dropdown-toggle .caret { color:white; }
+
 
   #sortAndPerPage .view-type a.active .glyphicon { color:#333; }
 
@@ -221,7 +222,6 @@ body.staff .pagination li.disabled a  { color:#777; }
   color: #555;
 }
 
-
   
   /* HEADER */
   
@@ -245,7 +245,9 @@ body.public-facing .image-masthead .navbar,
 .navbar-static-top .navbar-nav > li > a, 
 .hyrax-pages .image-masthead .navbar.navbar-default .navbar-nav a, 
   .image-masthead .navbar.navbar-default .navbar-nav a,
-  .navbar-default .navbar-nav > li > a { 
+  .navbar-default .navbar-nav > li > a, 
+body.public-facing .image-masthead .navbar .navbar-nav a
+ { 
     color:#333;
     text-transform:none;
     text-shadow:unset;
@@ -385,6 +387,10 @@ footer a:hover { background-color:#ad0000; color:white; text-decoration:none; }
 
 
 
+/* FORM */
+.form-control { border:1px solid #333; }
+
+
 
   #appliedParams { 
     border-bottom:1px solid #e5e5e5; 
@@ -401,16 +407,13 @@ footer a:hover { background-color:#ad0000; color:white; text-decoration:none; }
 	text-decoration:none; 
 	}
 
+
   .panel-heading:focus { outline-offset: .25rem; }
   .panel-heading a:focus {outline-offset: 1.2rem; }
 
-
-
-  
-  @media (max-width:767.99px) {
-  }
-  @media (min-width:768px) { 
- 
-  }
+footer a:focus { 
+	outline: 1px dotted white;
+	color:white!important;
+}
 
 
