@@ -94,6 +94,8 @@ extraEnvVars: &envVars
     value: postgres
   - name: FCREPO_BASE_PATH
     value: /louisville
+  - name: FCREPO_DB
+    value: fcrepo
   - name: FCREPO_HOST
     value: fcrepo.staging-fcrepo.svc.cluster.local:8080
   - name: FCREPO_PATH
@@ -102,10 +104,18 @@ extraEnvVars: &envVars
     value: http://fcrepo.staging-fcrepo.svc.cluster.local:8080/rest
   - name: IN_DOCKER
     value: "true"
+  - name: JAVA_OPTIONS
+    value: -Dfcrepo.postgresql.host=$DATABASE_HOST -Dfcrepo.postgresql.database=$FCREPO_DB -Dfcrepo.postgresql.port=5432 -Dfcrepo.postgresql.username=$DATABASE_USER -Dfcrepo.postgresql.password=$DATABASE_PASSWORD -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
   - name: LD_LIBRARY_PATH
     value: /app/fits/tools/mediainfo/linux
   - name: PASSENGER_APP_ENV
     value: production
+  - name: POSTGRES_DB
+    value: $DATABASE_NAME
+  - name: POSTGRES_PASSWORD
+    value: $DATABASE_PASSWORD
+  - name: POSTGRES_USER
+    value: $DATABASE_USER
   - name: RAILS_CACHE_STORE_URL
     value: redis://:$REDIS_PASSWORD@louisville-hyku-staging-redis-master:6379/louisville
   - name: RAILS_ENV
