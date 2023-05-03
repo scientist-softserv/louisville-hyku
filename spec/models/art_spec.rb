@@ -12,7 +12,8 @@ RSpec.describe Art do
   end
 
   describe 'with custom slugs' do
-    let(:this_object) { create(:art) }
+    let!(:this_object) { create(:art) }
+    let(:that_object) { create(:art, identifier: ["#{this_object.identifier.first}s"]) }
 
     include_examples("object includes slugs")
   end

@@ -14,7 +14,8 @@ RSpec.describe Collection do
   end
 
   describe 'with custom slugs' do
-    let(:this_object) { create(:collection) }
+    let!(:this_object) { create(:collection) }
+    let(:that_object) { create(:collection, identifier: ["#{this_object.identifier.first}s"]) }
 
     include_examples("object includes slugs")
   end
