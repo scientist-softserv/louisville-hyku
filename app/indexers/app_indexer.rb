@@ -19,27 +19,35 @@ class AppIndexer < Hyrax::WorkIndexer
       solr_doc['title_ssi'] = object.title.first
       solr_doc['identifier_ssi'] = object.identifier.first
       solr_doc['is_page_of_ssim'] = ancestor_ids(object)
-      solr_doc['file_set_ids_ssim'] = all_decendent_file_sets(object)
+      solr_doc['file_set_ids_ssim'] = descendent_member_ids_for(object)
     end
   end
 
-  def all_decendent_file_sets(o)
+  # lib/tasks/migrate_fedora.rake relies on FileSets being listed first in
+  # these descendents. If #ordered_works were listed above #file_sets, for
+  # example, that task would fail to restore FileSets without
+  # reprocessing their files.
+  #
+  # @see lib/tasks/migrate_fedora.rake
+  # @see AttachFilesToWorkJob#perform
+  def descendent_member_ids_for(object)
     # enables us to return parents when searching for child OCR
-    all_my_children = o.file_sets.map(&:id)
-    o.ordered_works&.each do |child|
-      all_my_children += all_decendent_file_sets(child)
+    file_set_ids_array = object.file_sets.map(&:id)
+    object.ordered_works&.each do |child|
+      file_set_ids_array += descendent_member_ids_for(child)
     end
     # enables us to return parents when searching for child metadata
-    all_my_children << o.member_ids
-    all_my_children.flatten!.uniq.compact
+    file_set_ids_array << object.members.map(&:to_param)
+    file_set_ids_array.flatten.uniq.compact
   end
 
-  def ancestor_ids(o)
-    a_ids = []
-    o.in_works.each do |work|
-      a_ids << work.id
-      a_ids += ancestor_ids(work) if work.is_child
+  def ancestor_ids(object)
+    ancestor_ids_array = []
+    object.in_works.each do |work|
+      ancestor_ids_array << work.to_param
+      ancestor_ids_array += ancestor_ids(work) if work.is_child
     end
-    a_ids
+    ancestor_ids_array << object.members.map(&:to_param)
+    ancestor_ids_array.flatten.uniq.compact
   end
 end

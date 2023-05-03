@@ -18,11 +18,25 @@ class AttachFilesToWorkJob < Hyrax::ApplicationJob
     metadata = visibility_attributes(work_attributes)
     visibility_attributes(work_attributes)
     actors = []
+    file_set_ids_to_restore = work_attributes[:file_set_ids_to_restore]
     uploaded_files.in_groups_of(10, false) do |upload_group|
       upload_group.each do |uploaded_file|
         next if uploaded_file.file_set_uri.present?
         Sidekiq.logger.error("uploaded files block is starting #{Time.now.utc} :: Work ID #{work.id}")
-        actor = Hyrax::Actors::FileSetActor.new(FileSet.create, user)
+        created_file_set = if file_set_ids_to_restore.present?
+                             # Restoring the original FileSet IDs this way is fragile. We currently assume
+                             # the FileSets will be created in the same order their IDs are listed in the
+                             # file_set_ids_to_restore variable, which is why we're simply using #shift.
+                             # But if the data was ever to be indexed in a different order, for example,
+                             # this would not work as intended.
+                             # @see AppIndexer#descendent_member_ids_for
+                             # @see lib/tasks/migrate_fedora.rake
+                             file_set_id = file_set_ids_to_restore.shift
+                             FileSet.create(id: file_set_id)
+                           else
+                             FileSet.create
+                           end
+        actor = Hyrax::Actors::FileSetActor.new(created_file_set, user)
         uploaded_file.update(file_set_uri: actor.file_set.uri)
         actor.file_set.permissions_attributes = work_permissions
         metadata[:is_derived] = uploaded_file.derived?

@@ -6,15 +6,16 @@ x-app: &app
     target: hyku-base
     args:
       - HYKU_BULKRAX_ENABLED=true
-  image: registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}
+    cache_from:
+        - ghcr.io/scientist-softserv/louisville-hyku:${TAG:-latest}
+  image: ghcr.io/scientist-softserv/louisville-hyku:${TAG:-latest}
   env_file:
-    - .env
-  # NOTE: all common env variables moved to .env
+    - .env.development
+  # NOTE: all common env variables moved to .env.development
   volumes:
-    - HykuImports:/media/HykuImports
-    - uploads:/app/samvera/hyrax-webapp/public/uploads:cached
     - assets:/app/samvera/hyrax-webapp/public/assets:cached
     - cache:/app/samvera/hyrax-webapp/tmp/cache:cached
+    - uploads:/app/samvera/hyrax-webapp/public/uploads:cached
     - .:/app/samvera/hyrax-webapp
   networks:
     internal:
@@ -30,12 +31,6 @@ volumes:
   uv:
   zk:
   zoo:
-  HykuImports:
-   driver_opts:
-    type: "cifs"
-    device: "//136.165.112.51/Groups/Digital/HykuImports"
-    o: "addr=136.165.112.51,ro,cached"
-    o: "uid=0,username=hyku,password=iuse4rchbtw!,file_mode=0777,dir_mode=0777"
 
 networks:
   internal:
@@ -44,8 +39,8 @@ services:
   zoo:
     image: zookeeper:3.6.2
     ports:
-      - 127.0.0.1:2181:2181
-      - 127.0.0.1:7001:7000
+      - 2181:2181
+      - 7001:7000
     environment:
       - ZOO_MY_ID=1
       - ZOO_SERVERS=server.1=zoo:2888:3888;2181
@@ -66,12 +61,11 @@ services:
       context: solr
       dockerfile: Dockerfile
     env_file:
-      - .env
+      - .env.development
     environment:
       - OOM=script
       - VIRTUAL_PORT=8983
-      - VIRTUAL_HOST=localhost
-      - SOLR_OPTS=-Dsolr.jetty.request.header.size=65535
+      - VIRTUAL_HOST=solr.hyku.test
     user: root
     command: bash -c "
       chown -R 8983:8983 /var/solr
@@ -79,21 +73,16 @@ services:
       && runuser -u solr -- solr-foreground"
     expose:
       - 8983
-    ports:
-      - 127.0.0.1:8983:8983
     volumes:
       - solr:/var/solr
-      - /home/deploy/hyku/solr/security.json:/var/solr/data/security.json
-      - /home/deploy/hyku/solr/limits.conf:/etc/security/limits.conf
-      - /home/deploy/Backups/solr:/media/backups
     networks:
       internal:
     healthcheck:
-      test: curl -sf http://$$SOLR_ADMIN_USER:$$SOLR_ADMIN_PASSWORD@localhost:8983/solr/admin/cores?action=STATUS || exit 1
+      test: curl -sf http://$$SOLR_ADMIN_USER:$$SOLR_ADMIN_PASSWORD@solr:8983/solr/admin/cores?action=STATUS || exit 1
       start_period: 10s
       interval: 20s
       timeout: 5s
-      retries: 3
+      retries: 6
     depends_on:
       zoo:
         condition: service_healthy
@@ -102,30 +91,26 @@ services:
     image: ghcr.io/samvera/fcrepo4:4.7.5
     volumes:
       - fcrepo:/data:cached
-      - /home/deploy/Backups/fedora:/media/backups
     env_file:
-      - .env
+      - .env.development
     environment:
       - VIRTUAL_PORT=8080
-      - VIRTUAL_HOST=localhost
-      - JAVA_OPTS=${JAVA_OPTS} -Dfcrepo.modeshape.configuration="classpath:/config/file-simple/repository.json" -Dfcrepo.object.directory="/data/objects" -Dfcrepo.binary.directory="/data/binaries"
+      - VIRTUAL_HOST=fcrepo.hyku.test
     expose:
       - 8080
-    ports:
-      - 127.0.0.1:8080:8080
     networks:
       internal:
+    depends_on:
+      initialize_fedora_db:
+        condition: service_completed_successfully
 
   db:
     image: postgres:11.1
     env_file:
-      - .env
+      - .env.development
     environment:
-      - POSTGRES_DB=${DATABASE_NAME}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_USER=${DATABASE_USER}
       - VIRTUAL_PORT=5432
-      - VIRTUAL_HOST=localhost
+      - VIRTUAL_HOST=db.hyku.test
     volumes:
       - db:/var/lib/postgresql/data
     networks:
@@ -136,7 +121,7 @@ services:
     # command: sh -l -c "bundle && yarn install && bundle exec puma -v -b tcp://0.0.0.0:3000"
     environment:
       - VIRTUAL_PORT=3000
-      - VIRTUAL_HOST=.${HYKU_ROOT_HOST}
+      - VIRTUAL_HOST=.hyku.test
       - TMPDIR=/app/samvera/hyrax-webapp/tmp/uploads
     depends_on:
       db:
@@ -157,26 +142,26 @@ services:
         condition: service_started
       initialize_app:
         condition: service_completed_successfully
-
     expose:
       - 3000
-    ports:
-      - 127.0.0.1:3000:3000
 
   worker:
     <<: *app
+    image: ghcr.io/scientist-softserv/louisville-hyku/worker:${TAG:-latest}
     build:
       context: .
       target: hyku-worker
       args:
         - HYKU_BULKRAX_ENABLED=true
       cache_from:
-        - registry.gitlab.com/notch8/louisville-hyku:${TAG:-latest}
-        - registry.gitlab.com/notch8/louisville-hyku/worker:${TAG:-latest}
-    image: registry.gitlab.com/notch8/louisville-hyku/worker:${TAG:-latest}
-    command: bash -l -c "bundle exec sidekiq"
+        - ghcr.io/scientist-softserv/louisville-hyku:${TAG:-latest}
+        - ghcr.io/scientist-softserv/louisville-hyku/worker:${TAG:-latest}
+    # command: bash -l -c "bundle exec sidekiq"
+    command: bundle exec sidekiq
     depends_on:
       check_volumes:
+        condition: service_completed_successfully
+      initialize_app:
         condition: service_completed_successfully
       db:
         condition: service_started
@@ -188,8 +173,6 @@ services:
         condition: service_started
       zoo:
         condition: service_started
-      initialize_app:
-        condition: service_completed_successfully
 
 
 
@@ -203,8 +186,15 @@ services:
       - >
         chown -R app:app /app/samvera/hyrax-webapp/public/uploads &&
         chown -R app:app /app/samvera/hyrax-webapp/public/assets &&
-        chown -R app:app /app/samvera/hyrax-webapp/tmp/cache &&
-        chown -R app:app /app/samvera/hyrax-webapp/db/schema.rb
+        chown -R app:app /app/samvera/hyrax-webapp/tmp/cache
+
+  initialize_fedora_db:
+    <<: *app
+    entrypoint: ["sh", "-x", "-c"]
+    command: ./bin/create-fcrepo-pg-db.sh
+    depends_on:
+      db:
+        condition: service_started
 
   initialize_app:
     <<: *app
@@ -248,4 +238,4 @@ services:
     environment:
       - JAVA_OPTS=-Dwebdriver.chrome.whitelistedIps=
       - VIRTUAL_PORT=7900
-      - VIRTUAL_HOST=localhost
+      - VIRTUAL_HOST=chrome.hyku.test
