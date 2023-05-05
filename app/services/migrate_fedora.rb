@@ -42,9 +42,6 @@ class MigrateFedora
   def migrate!
     logger = Logger.new(Rails.root.join('tmp', 'migrate_fedora.log'))
 
-    # NOTE: Only works for single tenant Hyku apps
-    AccountElevator.switch!(Account.first.cname)
-
     logger.info 'START creating CollectionTypes and default AdminSet'
     Hyrax::CollectionType.find_or_create_default_collection_type
     Hyrax::CollectionType.find_or_create_admin_set_type
@@ -151,7 +148,6 @@ class MigrateFedora
     # step will be run in the above migrate_fedora job, so there is no need to run this
     # step unless you need the relationships quicker.
     # ************************************************************************
-    AccountElevator.switch!(Account.first.cname)
     importer_ids = Bulkrax::Importer.pluck(:id)
     importer_ids.each do |importer_id|
       importer = Bulkrax::Importer.find(importer_id)
