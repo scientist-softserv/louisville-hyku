@@ -39,31 +39,47 @@
 #          accounted for in the Bulkrax Entry will be disconnected. This includes, but
 #          is not limited to, relationships manually added through the UI.
 class MigrateFedora
-  def migrate!
-    logger = Logger.new(Rails.root.join('tmp', 'migrate_fedora.log'))
+  attr_reader :logger, :importer_ids
+  attr_accessor :errors, :collection_entry_ids
 
-    logger.info 'START creating CollectionTypes and default AdminSet'
+  def initialize
+    @logger               = Logger.new(Rails.root.join('tmp', 'migrate_fedora.log'))
+    @importer_ids         = Bulkrax::Importer.pluck(:id)
+    @errors               = {}
+    @collection_entry_ids = []
+  end
+
+  def migrate!
+    create_default_collection_types
+    create_default_admin_set
+    migrate_works
+    migrate_collections
+    restore_relationships
+    handle_errors
+  end
+
+  def create_default_collection_types
+    logger.info 'START creating CollectionTypes'
     Hyrax::CollectionType.find_or_create_default_collection_type
     Hyrax::CollectionType.find_or_create_admin_set_type
+  end
 
+  def create_default_admin_set
+    logger.info 'START creating default AdminSet'
     # NOTE: If you have more than just the Default Admin Set, you'll need to figure out
     #       how to restore the rest of them as well.
-    begin
-      AdminSet.find_or_create_default_admin_set_id
-    rescue ActiveRecord::RecordNotUnique => e
-      logger.debug('************************************************************')
-      logger.debug("Suppressing #{e.class} error since it is expected.")
-      logger.debug('The PermissionTemplate for the default AdminSet already exists,')
-      logger.debug('but tries to recreate itself and complains.')
-      logger.debug('At this point, however, the default AdminSet has been created successfully,')
-      logger.debug('which is what we care about.')
-      logger.debug('************************************************************')
-    end
+    AdminSet.find_or_create_default_admin_set_id
+  rescue ActiveRecord::RecordNotUnique => e
+    logger.debug('************************************************************')
+    logger.debug("Suppressing #{e.class} error since it is expected.")
+    logger.debug('The PermissionTemplate for the default AdminSet already exists,')
+    logger.debug('but tries to recreate itself and complains.')
+    logger.debug('At this point, however, the default AdminSet has been created successfully,')
+    logger.debug('which is what we care about.')
+    logger.debug('************************************************************')
+  end
 
-    errors = {}
-    importer_ids = Bulkrax::Importer.pluck(:id)
-    collection_entry_ids = []
-
+  def migrate_works
     # Use importers to naturally batch records. A benefit to this method is that it
     # all but guarantees all required records will exist when we process relationships.
     importer_ids.each do |importer_id|
@@ -102,7 +118,9 @@ class MigrateFedora
         end
       end
     end
+  end
 
+  def migrate_collections
     logger.info 'START migrating all Collection entries'
     collection_entry_ids.each do |col_entry_id|
       begin
@@ -124,12 +142,16 @@ class MigrateFedora
         logger.warn 'ERROR logged, continuing...'
       end
     end
+  end
 
+  def restore_relationships
     logger.info 'START scheduling relationship jobs for all Importers'
     importer_ids.each_with_index do |importer_id, i|
       Bulkrax::ScheduleRelationshipsJob.set(wait: i.minutes).perform_later(importer_id: importer_id)
     end
+  end
 
+  def handle_errors
     if errors.any?
       error_log = File.open(Rails.root.join('tmp', 'migrate_fedora_errors.json'), 'w')
       error_log.puts errors.to_json
@@ -148,7 +170,6 @@ class MigrateFedora
     # step will be run in the above migrate_fedora job, so there is no need to run this
     # step unless you need the relationships quicker.
     # ************************************************************************
-    importer_ids = Bulkrax::Importer.pluck(:id)
     importer_ids.each do |importer_id|
       importer = Bulkrax::Importer.find(importer_id)
       importer.last_run.parents.each do |parent_id|
