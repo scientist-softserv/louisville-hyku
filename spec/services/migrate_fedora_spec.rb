@@ -4,7 +4,7 @@ RSpec.describe MigrateFedora, type: :service do
   subject(:migrate_fedora_service) { described_class.new }
 
   after do
-    FileUtils.rm('tmp/migrate_fedora.log')
+    FileUtils.rm('tmp/migrate_fedora.log') if File.exist?('tmp/migrate_fedora.log')
   end
 
   describe '#migrate!' do
@@ -99,6 +99,54 @@ RSpec.describe MigrateFedora, type: :service do
       expect { migrate_fedora_service.create_default_admin_set }
         .to change(AdminSet, :count)
         .by(1)
+    end
+  end
+
+  describe '#migrate_works' do
+    let(:collection_entry_1) do
+      Bulkrax::CsvCollectionEntry.find_or_create_by(identifier: 'c1') do |entry|
+        entry.raw_metadata = {}
+      end
+    end
+    let(:work_entry_1) do
+      Bulkrax::CsvEntry.find_or_create_by(identifier: 'w1') do |entry|
+        entry.raw_metadata = {}
+      end
+    end
+    let(:work_entry_2) do
+      Bulkrax::CsvEntry.find_or_create_by(identifier: 'w2') do |entry|
+        entry.raw_metadata = {}
+      end
+    end
+
+    before do
+      entries = [collection_entry_1, work_entry_1, work_entry_2]
+      create(:bulkrax_importer_csv, entries: entries)
+
+      solr_doc = OpenStruct.new(file_set_ids: ['fs1', 'fs2'])
+      allow(SolrDocument).to receive(:find).and_return(solr_doc)
+    end
+
+    it 'does not process collection entries' do
+      expect(collection_entry_1.raw_metadata.key?('file_set_ids_to_restore')).to eq(false)
+      expect(work_entry_1.raw_metadata.key?('file_set_ids_to_restore')).to eq(false)
+      expect(work_entry_2.raw_metadata.key?('file_set_ids_to_restore')).to eq(false)
+
+      migrate_fedora_service.migrate_works
+
+      expect(collection_entry_1.reload.raw_metadata.key?('file_set_ids_to_restore')).to eq(false)
+      expect(work_entry_1.reload.raw_metadata.key?('file_set_ids_to_restore')).to eq(true)
+      expect(work_entry_2.reload.raw_metadata.key?('file_set_ids_to_restore')).to eq(true)
+    end
+
+    it 'adds file set ids into the raw_metadata' do
+      expect(work_entry_1.raw_metadata).to be_blank
+      expect(work_entry_2.raw_metadata).to be_blank
+
+      migrate_fedora_service.migrate_works
+
+      expect(work_entry_1.reload.raw_metadata['file_set_ids_to_restore']).to eq(['fs1', 'fs2'])
+      expect(work_entry_2.reload.raw_metadata['file_set_ids_to_restore']).to eq(['fs1', 'fs2'])
     end
   end
 end
