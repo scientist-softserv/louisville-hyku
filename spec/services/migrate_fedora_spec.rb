@@ -14,6 +14,7 @@ RSpec.describe MigrateFedora, type: :service do
       allow(AdminSet).to receive(:find_or_create_default_admin_set_id)
     end
 
+    # rubocop:disable RSpec/SubjectStub
     it 'calls #create_default_collection_types' do
       expect(migrate_fedora_service).to receive(:create_default_collection_types)
 
@@ -49,19 +50,39 @@ RSpec.describe MigrateFedora, type: :service do
 
       migrate_fedora_service.migrate!
     end
+    # rubocop:enable RSpec/SubjectStub
   end
 
   describe '#initialize' do
-    it 'creates a log file at tmp/migrate_fedora.log' do
-      allow(Hyrax::CollectionType).to receive(:find_or_create_default_collection_type)
-      allow(Hyrax::CollectionType).to receive(:find_or_create_admin_set_type)
-      allow(AdminSet).to receive(:find_or_create_default_admin_set_id)
+    context 'logging' do
+      it 'sets up a logger' do
+        expect(migrate_fedora_service.logger).to be_a(Logger)
+      end
 
-      expect(File.exist?('tmp/migrate_fedora.log')).to eq(false)
+      it 'creates a log file at tmp/migrate_fedora.log' do
+        expect(File.exist?('tmp/migrate_fedora.log')).to eq(false)
 
-      described_class.new
+        described_class.new
 
-      expect(File.exist?('tmp/migrate_fedora.log')).to eq(true)
+        expect(File.exist?('tmp/migrate_fedora.log')).to eq(true)
+      end
+    end
+
+    it 'gets all Bulkrax::Importer IDs' do
+      importer_ids = [499, 567, 999]
+      importer_ids.each do |id|
+        create(:bulkrax_importer_csv, id: id)
+      end
+
+      expect(migrate_fedora_service.importer_ids).to eq(importer_ids)
+    end
+
+    it 'sets up an empty errors hash' do
+      expect(migrate_fedora_service.errors).to eq({})
+    end
+
+    it 'sets up an empty array for collection entry IDs' do
+      expect(migrate_fedora_service.collection_entry_ids).to eq([])
     end
   end
 
