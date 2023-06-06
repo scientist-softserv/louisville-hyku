@@ -15,11 +15,20 @@ module Bulkrax
       @parent_record = ActiveFedora::Base.where(identifier_ssi: parent_identifier).first
       raise StandardError, "Parent #{parent_identifier} does not exist" if parent_record.nil?
 
+      unless parent_record.is_a?(::Collection)
+        parent_dups = parent_record.member_ids - parent_record.member_ids.uniq
+        if parent_dups.length.nonzero?
+          parent_record.members = parent_record.members.uniq
+          #log ids
+        end
+      end
+      
       @child_records = { works: [], collections: [] }
       pending_relationship_ids = []
       child_identifiers.each do |ci|
-        rel = Bulkrax::PendingRelationship.find_by(parent_id: parent_identifier, child_id: ci)
         pending_relationship_ids << rel.id
+        next if parent_record.member_ids.include?(ci)
+        rel = Bulkrax::PendingRelationship.find_by(parent_id: parent_identifier, child_id: ci)
         raise ::StandardError, %("#{rel}" needs either a child or a parent to create a relationship) if rel.child_id.nil? || rel.parent_id.nil?
         child_record = ActiveFedora::Base.where(identifier_ssi: rel.child_id).first
         if child_record
