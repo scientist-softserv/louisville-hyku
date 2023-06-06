@@ -1,3 +1,10 @@
+<%# Add Search Page Number to Title %>
+<% if params.has_key?(:search_field) || params.has_key?(:q) || params.has_key?(:f) %>
+  <% content_for :page_title do %>
+    <% construct_page_title("#{t('blacklight.search.page_title.title')} #{params[:page] if params[:page].present?}") %>
+  <% end %>
+<% end %>
+
 <div id="sidebar" class="<%= sidebar_classes %>">
   <%= render 'search_sidebar' %>
 </div>

@@ -30,9 +30,9 @@
 
       <% if @presenter.collection_type_is_nestable? && @presenter.total_parent_collections > 0 %>
           <div class="hyc-blacklight hyc-bl-title">
-            <h2>
+            <div class="h2">
               <%= t('.parent_collection_header') %> (<%= @presenter.total_parent_collections %>)
-            </h2>
+            </div>
           </div>
 
             
@@ -57,11 +57,11 @@
   <!-- Search results label -->
   <% if @members_count > 0 || @presenter.subcollection_count > 0 %>
     <div class="hyc-blacklight hyc-bl-title">
-      <h2>
+      <div class="h2">
         <% if has_collection_search_parameters? %>
             <%= t('hyrax.dashboard.collections.show.search_results') %>
         <% end %>
-      </h2>
+      </div>
     </div>
   <% end %>
 
@@ -69,7 +69,7 @@
   <!-- Subcollections -->
   <% if @presenter.collection_type_is_nestable? && @subcollection_count > 0 %>
       <div class="hyc-blacklight hyc-bl-title">
-        <h4><%= t('.subcollection_count') %> (<%= @subcollection_count %>)</h4>
+        <div class="h4"><%= t('.subcollection_count') %> (<%= @subcollection_count %>)</div>
       </div>
       <div class="hyc-blacklight hyc-bl-results">
         <%= render 'subcollection_list', collection: @subcollection_docs %>
@@ -79,7 +79,7 @@
   <!-- Works -->
   <% if @members_count > 0 %>
       <div class="hyc-blacklight hyc-bl-title">
-        <h4><%= t('.works_in_collection') %> (<%= @members_count %>)</h4>
+        <div class="h4"><%= t('.works_in_collection') %> (<%= @members_count %>)</div>
       </div>
 
       <div class="hyc-blacklight hyc-bl-sort">

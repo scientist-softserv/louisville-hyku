@@ -21,7 +21,9 @@
           <%= link_to t(:'hyrax.controls.contact'), hyrax.contact_path, aria: current_page?(hyrax.contact_path) ? {current: 'page'} : nil %></li>
       </ul><!-- /.nav -->
       <div class="searchbar-right navbar-right col-sm-7">
-        <%= render partial: 'catalog/search_form' %>
+        <% if !current_page?('/advanced') %>
+          <%= render partial: 'catalog/search_form' %>
+        <% end %>
       </div>
     </div>
   </div>
