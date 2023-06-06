@@ -177,6 +177,7 @@ module CustomSlugs
           .query(query, rows: limit, fl: target_field)
           .flat_map { |x| x.fetch(target_field, nil) }
           .compact
+          .uniq
       end
   end
 
