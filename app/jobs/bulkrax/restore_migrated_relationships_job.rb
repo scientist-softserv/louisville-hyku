@@ -20,8 +20,8 @@ module Bulkrax
       @child_records = { works: [], collections: [] }
       pending_relationship_ids = []
       child_identifiers.each do |ci|
-        pending_relationship_ids << rel.id
         rel = Bulkrax::PendingRelationship.find_by(parent_id: parent_identifier, child_id: ci)
+        pending_relationship_ids << rel.id
         raise ::StandardError, %("#{rel}" needs either a child or a parent to create a relationship) if rel.child_id.nil? || rel.parent_id.nil?
 
         child_record = ActiveFedora::Base.where(identifier_ssi: rel.child_id).first
