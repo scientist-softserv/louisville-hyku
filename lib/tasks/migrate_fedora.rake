@@ -163,4 +163,22 @@ namespace :louisville do
       end
     end
   end
+
+  desc 'Get Bulkrax Importer File names'
+  task get_importer_file_names: [:environment] do
+    # ************************************************************************
+    # This task simply returns the names of all the csv files that have been imported.
+    # ************************************************************************
+    AccountElevator.switch!(Account.first.cname)
+    output = File.open(Rails.root.join('tmp', 'importer_file_names.txt'), "w+")
+    importer_ids = Bulkrax::Importer.pluck(:id)
+    importer_ids.each do |importer_id|
+      puts "processing importer: #{importer_id}"
+      importer = Bulkrax::Importer.find(importer_id)
+      fpath = importer[:parser_fields]['import_file_path'].split('/').last
+      output.write("#{importer_id}:#{importer.name}: #{fpath}")
+    end
+  ensure
+    output.close unless output.nil?
+  end
 end
