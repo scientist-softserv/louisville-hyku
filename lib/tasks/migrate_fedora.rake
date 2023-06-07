@@ -146,4 +146,21 @@ namespace :louisville do
     end
     logger.info 'DONE migrating Fedora'
   end
+
+  desc 'Run Bulkrax Relationships'
+  task run_relationships: [:environment] do
+    # ************************************************************************
+    # This is an optional step that will connect the relationships early if needed. This
+    # step will be run in the above migrate_fedora job, so there is no need to run this
+    # step unless you need the relationships quicker.
+    # ************************************************************************
+    AccountElevator.switch!(Account.first.cname)
+    importer_ids = Bulkrax::Importer.pluck(:id)
+    importer_ids.each do |importer_id|
+      importer = Bulkrax::Importer.find(importer_id)
+      importer.last_run.parents.each do |parent_id|
+        Bulkrax::CreateRelationshipsJob.perform_later(parent_identifier: parent_id, importer_run_id: importer.last_run.id)
+      end
+    end
+  end
 end
