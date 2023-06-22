@@ -174,11 +174,11 @@ namespace :louisville do
 
     collection_entry_ids = []
     sql_query = <<-SQL
-SELECT id FROM bulkrax_entries
-WHERE id IN (
-  SELECT MAX(id) FROM bulkrax_entries
-  GROUP BY identifier
-);
+      SELECT id FROM bulkrax_entries
+      WHERE id IN (
+        SELECT MAX(id) FROM bulkrax_entries
+        GROUP BY identifier
+      );
     SQL
     Bulkrax::Entry.find_by_sql(sql_query).pluck(:id).sort.each do |entry_id|
       recent_entry = Bulkrax::Entry.find(entry_id)
@@ -189,7 +189,7 @@ WHERE id IN (
 
 
         files = sorted_entries.map do |e|
-          e.parsed_metadata["file"] if e.parsed_metadata["file"].present?
+          e.raw_metadata["file"] if e.raw_metadata["file"].present?
         end.flatten.compact.uniq
 
         files.each do |file|
@@ -247,18 +247,18 @@ WHERE id IN (
         work.save! if work.present?
       end
     rescue => e # rubocop:disable Style/RescueStandardError
-      errors[entry.id] = "#{e.class} - #{e.message}"
+      errors[recent_entry.id] = "#{e.class} - #{e.message}"
       logger.warn 'ERROR logged, continuing...'
     end
-    if errors.any?
-      error_log = File.open(Rails.root.join('tmp', 'migration_update_errors.json'), 'w')
-      error_log.puts errors.to_json
-      error_log.close
+    ensure
+      if errors.any?
+        error_log = File.open(Rails.root.join('tmp', 'migration_update_errors.json'), 'w')
+        error_log.puts errors.to_json
+        error_log.close
 
-      logger.error '************************************************************'
-      logger.error 'Errors were detected, check log file: tmp/migration_update_errors.log'
-      logger.error '************************************************************'
-    end
+        logger.error '************************************************************'
+        logger.error 'Errors were detected, check log file: tmp/migration_update_errors.log'
+        logger.error '************************************************************'
+      end
   end
-
 end
