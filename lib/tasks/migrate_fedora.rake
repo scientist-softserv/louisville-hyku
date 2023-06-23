@@ -194,10 +194,10 @@ namespace :louisville do
 
         files.each do |file|
           solr_docs = ActiveFedora::SolrService.query("title_tesim:#{file}")
-          solr_doc = nil
-          solr_docs.each do |doc|
-            solr_doc = doc if doc['title_tesim'] == file
-            break if solr_doc.present?
+          solr_doc = solr_docs.select { |doc| doc['title_tesim'].first == file }.first
+          if solr_doc.blank?
+            logger.warn "no matching solr_doc found with the title #{file}"
+            next
           end
           unless recent_entry.parsed_metadata['file_set_ids_to_restore'].include?(solr_doc.id)
             logger.warn "file_set #{solr_doc.id} found that was not part of the import for entry #{recent_entry.identifier}"
@@ -220,7 +220,7 @@ namespace :louisville do
 
         work = nil
         parents.each do |parent_id|
-          parent = ActiveFedora::Base.find(parent_id)
+          parent = ActiveFedora::Base.find(parent_id.truncate(75, omission: '').parameterize.underscore)
           next unless parent.class.name.include?("Collection") # need to address
 
           work ||= ActiveFedora::Base.find(recent_entry.identifier.truncate(75, omission: '').parameterize.underscore)
@@ -231,7 +231,7 @@ namespace :louisville do
           records_hash = {}
           user = User.first
           children.map! do |child_id|
-            r = ActiveFedora::Base.find(child_id)
+            r = ActiveFedora::Base.find(child_id.truncate(75, omission: '').parameterize.underscore)
             r.class.name.include?("Collection") ? nil : r # address this or nah?
           end.compact!
           children.each_with_index do |child_record, i|
