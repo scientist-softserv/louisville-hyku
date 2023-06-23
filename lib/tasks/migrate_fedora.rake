@@ -163,4 +163,102 @@ namespace :louisville do
       end
     end
   end
+
+  desc "Update Migration"
+  task update_migration: [:environment] do
+    logger = Logger.new(Rails.root.join('tmp', 'migration_update.log'))
+    errors = {}
+    # NOTE: Only works for single tenant Hyku apps
+    AccountElevator.switch!(Account.first.cname)
+
+
+    collection_entry_ids = []
+    sql_query = <<-SQL
+      SELECT id FROM bulkrax_entries
+      WHERE id IN (
+        SELECT MAX(id) FROM bulkrax_entries
+        GROUP BY identifier
+      );
+    SQL
+    Bulkrax::Entry.find_by_sql(sql_query).pluck(:id).sort.each do |entry_id|
+      recent_entry = Bulkrax::Entry.find(entry_id)
+      if recent_entry.is_a?(Bulkrax::CsvCollectionEntry)
+        collection_entry_ids << recent_entry.id
+      else
+        sorted_entries = Bulkrax::Entry.where(identifier: recent_entry.identifier).sort_by(&:id)
+
+
+        files = sorted_entries.map do |e|
+          e.raw_metadata["file"] if e.raw_metadata["file"].present?
+        end.flatten.compact.uniq
+
+        files.each do |file|
+          solr_docs = ActiveFedora::SolrService.query("title_tesim:#{file}")
+          solr_doc = solr_docs.select { |doc| doc['title_tesim'].first == file }.first
+          if solr_doc.blank?
+            logger.warn "no matching solr_doc found with the title #{file}"
+            next
+          end
+          unless recent_entry.parsed_metadata['file_set_ids_to_restore'].include?(solr_doc.id)
+            logger.warn "file_set #{solr_doc.id} found that was not part of the import for entry #{recent_entry.identifier}"
+          end
+        end
+
+        parents = sorted_entries.map do |e|
+          e.parsed_metadata["parents"].presence
+        end.flatten.compact.uniq
+
+        children = sorted_entries.map do |e|
+          e.parsed_metadata["children"].presence
+        end.flatten.compact.uniq
+
+        recent_entry.parsed_metadata.merge!({"parents" => parents}) if parents.present?
+        recent_entry.parsed_metadata.merge!({"children" => parents}) if children.present?
+
+        recent_entry.save
+        recent_entry.build
+
+        work = nil
+        parents.each do |parent_id|
+          parent = ActiveFedora::Base.find(parent_id.truncate(75, omission: '').parameterize.underscore)
+          next unless parent.class.name.include?("Collection") # need to address
+
+          work ||= ActiveFedora::Base.find(recent_entry.identifier.truncate(75, omission: '').parameterize.underscore)
+          work.member_of_collections << parent
+        end
+
+        if children.present?
+          records_hash = {}
+          user = User.first
+          children.map! do |child_id|
+            r = ActiveFedora::Base.find(child_id.truncate(75, omission: '').parameterize.underscore)
+            r.class.name.include?("Collection") ? nil : r # address this or nah?
+          end.compact!
+          children.each_with_index do |child_record, i|
+            records_hash[i] = { id: child_record.id }
+          end
+          attrs = { work_members_attributes: records_hash }
+          work ||= ActiveFedora::Base.find(recent_entry.identifier.truncate(75, omission: '').parameterize.underscore)
+          env = Hyrax::Actors::Environment.new(work, Ability.new(user), attrs)
+
+          Hyrax::CurationConcern.actor.update(env)
+        end
+
+        work.save! if work.present?
+      end
+    rescue => e # rubocop:disable Style/RescueStandardError
+      errors[recent_entry.id] = "#{e.class} - #{e.message}"
+      logger.warn 'ERROR logged, continuing...'
+    end
+    ensure
+      if errors.any?
+        error_log = File.open(Rails.root.join('tmp', 'migration_update_errors.json'), 'w')
+        error_log.puts errors.to_json
+        error_log.close
+
+        logger.error '************************************************************'
+        logger.error 'Errors were detected, check log file: tmp/migration_update_errors.log'
+        logger.error '************************************************************'
+      end
+  end
 end
